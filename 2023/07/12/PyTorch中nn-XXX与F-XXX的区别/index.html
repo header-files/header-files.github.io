@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>勿庸散人</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="勿庸散人">
+  <title>PyTorch中nn.XXX与F.XXX的区别 | 勿庸散人</title>
+  <meta name="keywords" content=" Python , PyTorch , 技巧 ">
+  <meta name="description" content="PyTorch中nn.XXX与F.XXX的区别 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -56,7 +56,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -388,12 +388,77 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-PyTorch中nn-XXX与F-XXX的区别" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%BD%91%E7%AB%99"><span class="toc-text">关于本网站</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol>
+        <h1 class="article-title">PyTorch中nn.XXX与F.XXX的区别</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="深度学习">深度学习</a> > 
+            
+            <a  data-rel="深度学习&lt;---&gt;PyTorch">PyTorch</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">Python</a>
+            
+            <a class="color3">PyTorch</a>
+            
+            <a class="color3">技巧</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-07-12 15:30:29'>2023-07-12 15:25</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:512</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyTorch%E4%B8%ADnn-XXX%E4%B8%8EF-XXX%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">PyTorch中nn.XXX与F.XXX的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nn-XXX%E4%B8%8EF-XXX"><span class="toc-text">nn.XXX与F.XXX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nn-Relu%E4%B8%8EF-relu"><span class="toc-text">nn.Relu与F.relu()</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -406,14 +471,53 @@
     }
 </style>
 </div>
-            <h1 id="关于本网站"><a href="#关于本网站" class="headerlink" title="关于本网站"></a>关于本网站</h1><p>本网站是“勿庸散人”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h1 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h1><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，使用主题<a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a>，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PyTorch中nn-XXX与F-XXX的区别"><a href="#PyTorch中nn-XXX与F-XXX的区别" class="headerlink" title="PyTorch中nn.XXX与F.XXX的区别"></a>PyTorch中nn.XXX与F.XXX的区别</h1><h2 id="nn-XXX与F-XXX"><a href="#nn-XXX与F-XXX" class="headerlink" title="nn.XXX与F.XXX"></a>nn.XXX与F.XXX</h2><p>PyTorch中torch.nn<strong>（以下简写为nn）</strong>中的模块和torch.nn.functional<strong>（以下简写为F）</strong>中的模块都提供了常用的神经网络操作，包括激活函数、损失函数、池化操作等。它们的主要区别如下：</p>
+<ul>
+<li>nn中的模块是以类形式存在的；F中的模块是以函数形式存在的</li>
+<li>nn中的模块是nn.Module的子类，包含可学习参数、可导，在反向传播中可以计算梯度，可以在模型中作为子模块使用；F中的模块是纯函数，没有与之相关联的可学习参数，虽然也可以用于反向传播，但是其梯度需要手动计算</li>
+<li>nn中的模块需要实例化后，将张量作为实例的调用参数；F中的模块直接传递张量作为参数</li>
+<li>nn中的模块可以管理和访问模块的内部参数和状态；F中的函数是纯函数，没有与之相关联的参数或状态，因此无法直接管理和访问函数的内部状态</li>
+</ul>
+<h2 id="nn-Relu与F-relu"><a href="#nn-Relu与F-relu" class="headerlink" title="nn.Relu与F.relu()"></a>nn.Relu与F.relu()</h2><p>以激活函数ReLu为例，在使用激活函数时，有以下两种方式可以使用：</p>
+<pre><code class="python"># 方法一
+nn.ReLU()
+# 方法二
+F.relu(input)
+</code></pre>
+<p>这两种方法都是使用ReLu激活，但使用的场景不一样。</p>
+<ul>
+<li><p>nn.ReLU是一个类，必须实例化后才能使用，一般在<strong>定义网络层</strong>的时候使用</p>
+<pre><code class="python"># nn.ReLU的常用方法
+nn.Sequential(
+            nn.Conv2d(in_channels, out_channels),
+            nn.ReLU(inplace=True)
+        )
+</code></pre>
+</li>
+<li><p>F.relu()是函数调用，一般使用在<strong>foreward()函数</strong>中</p>
+</li>
+<li><p>nn.ReLU只能处理Variable类型的张量；而F.relu()可以处理Tensor和Variable类型的张量</p>
+</li>
+<li><p>nn.ReLU需要额外占用内存用来存储中间结果；而F.relu()则是直接在原张量上进行操作，不需要额外的内存占用</p>
+</li>
+</ul>
+<p>另外：</p>
+<ul>
+<li>当用print()打印输出神经网络时，会输出nn.ReLU()层，而F.relu()是没有输出的</li>
+</ul>
 
-        </article>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
+    </div>
+</article>
+
+
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -435,6 +539,13 @@
 </script>
 
 
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -443,11 +554,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 </body>
