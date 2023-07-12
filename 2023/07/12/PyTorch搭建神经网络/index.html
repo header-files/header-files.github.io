@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PyTorch搭建神经网络 | 勿庸散人</title>
+  <meta name="keywords" content=" Python , PyTorch , 入门 ">
+  <meta name="description" content="PyTorch搭建神经网络 | 勿庸散人">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="勿庸散人">
+<meta property="og:description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-06T12:29:30.000Z">
+<meta property="article:modified_time" content="2023-07-08T07:30:50.866Z">
+<meta property="article:author" content="勿庸散人">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+<script src="/js/custom-iconfont.js?v=1.1.0" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>勿庸散人</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="bilibili"
+               href="https://space.bilibili.com/410432588"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-bilibili"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_41100617"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:header-files@foxmail.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(3)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="读书笔记">
+            <i class="fold iconfont icon-right"></i>
+            读书笔记
+            <small>(1)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="读书笔记&lt;---&gt;诗">
+            
+            诗
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="深度学习">
+            <i class="fold iconfont icon-right"></i>
+            深度学习
+            <small>(1)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="深度学习&lt;---&gt;PyTorch">
+            
+            PyTorch
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="开发工具">
+            <i class="fold iconfont icon-right"></i>
+            开发工具
+            <small>(1)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="开发工具&lt;---&gt;Qt">
+            
+            Qt
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/about">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="3">
+<input type="hidden" id="yelog_site_word_count" value="5.9k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>入门</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>诗</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>唐</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>元稹</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>C++</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Python</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PyTorch</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Qt</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 深度学习 PyTorch "
+           href="/2023/07/12/PyTorch%E6%90%AD%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+           data-tag="Python,PyTorch,入门"
+           data-author="" >
+            <span class="post-title" title="PyTorch搭建神经网络">PyTorch搭建神经网络</span>
+            <span class="post-date" title="2023-07-12 15:00:09">2023/07/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 开发工具 Qt "
+           href="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"
+           data-tag="入门,C++,Qt"
+           data-author="" >
+            <span class="post-title" title="Qt环境安装">Qt环境安装</span>
+            <span class="post-date" title="2023-07-08 15:44:43">2023/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 读书笔记 诗 "
+           href="/2023/07/08/%E7%A6%BB%E6%80%9D%E4%BA%94%E9%A6%96%C2%B7%E5%85%B6%E5%9B%9B/"
+           data-tag="诗,唐,元稹"
+           data-author="" >
+            <span class="post-title" title="离思五首·其四">离思五首·其四</span>
+            <span class="post-date" title="2023-07-08 15:22:21">2023/07/08</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-PyTorch搭建神经网络" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">PyTorch搭建神经网络</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="深度学习">深度学习</a> > 
+            
+            <a  data-rel="深度学习&lt;---&gt;PyTorch">PyTorch</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">Python</a>
+            
+            <a class="color3">PyTorch</a>
+            
+            <a class="color3">入门</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-07-12 15:02:23'>2023-07-12 15:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyTorch%E6%90%AD%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">PyTorch搭建神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B%E2%80%94%E2%80%94LeNet-5"><span class="toc-text">1. 模型简介——LeNet-5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%BE%93%E5%85%A5%E5%B1%82%EF%BC%88Input-layer"><span class="toc-text">1.1 输入层（Input layer)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E5%8D%B7%E7%A7%AF%E5%B1%82C1%EF%BC%88Convolutional-layer-C1%EF%BC%89"><span class="toc-text">1.2卷积层C1（Convolutional layer C1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%8B%E9%87%87%E6%A0%B7%E5%B1%82S2%EF%BC%88Subsampling-layer-S2%EF%BC%89"><span class="toc-text">1.3 下采样层S2（Subsampling layer S2）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8D%B7%E7%A7%AF%E5%B1%82C3%EF%BC%88Convolutional-layer-C3%EF%BC%89"><span class="toc-text">1.4 卷积层C3（Convolutional layer C3）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E4%B8%8B%E9%87%87%E6%A0%B7%E5%B1%82S4%EF%BC%88Subsampling-layer-S4%EF%BC%89"><span class="toc-text">1.5 下采样层S4（Subsampling layer S4）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82C5%EF%BC%88Fully-connected-layer-C5%EF%BC%89"><span class="toc-text">1.6 全连接层C5（Fully connected layer C5）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82F6%EF%BC%88Fully-connected-layer-F6%EF%BC%89"><span class="toc-text">1.7 全连接层F6（Fully connected layer F6）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-%E8%BE%93%E5%87%BA%E5%B1%82%EF%BC%88Output-layer%EF%BC%89"><span class="toc-text">1.8 输出层（Output layer）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E2%80%94%E2%80%94MNIST"><span class="toc-text">2. 数据集简介——MNIST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9A%E4%B9%89%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">3. 定义神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BD%BF%E7%94%A8%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%96%B9%E5%BC%8F"><span class="toc-text">3.1 使用前馈神经网络方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BD%BF%E7%94%A8%E5%BA%8F%E5%88%97%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-text">3.2 使用序列化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%80%BB%E7%BB%93"><span class="toc-text">3.3总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">4. 定义损失函数以及优化器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">5.训练模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9E%8B"><span class="toc-text">6. 测试模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81"><span class="toc-text">7. 整体代码</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-2 i,
+    .toc-level-2 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PyTorch搭建神经网络"><a href="#PyTorch搭建神经网络" class="headerlink" title="PyTorch搭建神经网络"></a>PyTorch搭建神经网络</h1><ul>
+<li>PyTorch版本：1.12.1</li>
+<li><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/index.html">PyTorch官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://pytorch.apachecn.org/#/">PyTorch中文文档</a></li>
+</ul>
+<p>PyTorch中搭建并训练一个神经网络分为以下几步：</p>
+<ol>
+<li>定义神经网络</li>
+<li>定义损失函数以及优化器</li>
+<li>训练：反向传播、梯度下降</li>
+</ol>
+<p>下面以LeNet-5为例，搭建一个卷积神经网络用于手写数字识别。</p>
+<h2 id="1-模型简介——LeNet-5"><a href="#1-模型简介——LeNet-5" class="headerlink" title="1. 模型简介——LeNet-5"></a>1. 模型简介——LeNet-5</h2><p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/726791">LeNet-5</a>是一个经典的深度卷积神经网络，由Yann LeCun在1998年提出用于解决手写数字识别问题。该网络是第一个被广泛应用于数字图像识别的神经网络之一，也是深度学习领域的里程碑之一，被认为是卷积神经网络的起源之一。</p>
+<p>如下图所示，LeNet-5的结构是一个7层的卷积神经网络（不含输入层），其中包括2个卷积层、2个下采样层（池化层）、2个全连接层以及输出层。</p>
+<p><img src="D:/Desktop/pytorch创建卷积网络/1.jpg" alt="1"></p>
+<h3 id="1-1-输入层（Input-layer"><a href="#1-1-输入层（Input-layer" class="headerlink" title="1.1 输入层（Input layer)"></a>1.1 输入层（Input layer)</h3><p>输入层接收大小为 32*32 的灰度手写数字图像，像素灰度值范围为0-255。为了加快训练速度以及提高模型准确性，通常会对输入图像的像素值进行归一化。</p>
+<h3 id="1-2卷积层C1（Convolutional-layer-C1）"><a href="#1-2卷积层C1（Convolutional-layer-C1）" class="headerlink" title="1.2卷积层C1（Convolutional layer C1）"></a>1.2卷积层C1（Convolutional layer C1）</h3><p>卷积层C1含有6个卷积核，每个卷积核的大小为 5*5 ，步长为1，填充为0。卷积层C1产生6个大小为 28*28 的特征图。</p>
+<h3 id="1-3-下采样层S2（Subsampling-layer-S2）"><a href="#1-3-下采样层S2（Subsampling-layer-S2）" class="headerlink" title="1.3 下采样层S2（Subsampling layer S2）"></a>1.3 下采样层S2（Subsampling layer S2）</h3><p>采样层S2采用最大池化（max-pooling）操作，这可以减少特征图的大小从而提高计算效率，并且池化操作对于轻微的位置变化可以保持一定的不变性。池化层每个窗口的大小为 2*2 ，步长为2。池化层S2产生6个大小为 14*14 的特征图。</p>
+<h3 id="1-4-卷积层C3（Convolutional-layer-C3）"><a href="#1-4-卷积层C3（Convolutional-layer-C3）" class="headerlink" title="1.4 卷积层C3（Convolutional layer C3）"></a>1.4 卷积层C3（Convolutional layer C3）</h3><p>卷积层C3包括16个卷积核，每个卷积核的大小为 5*5 ，步长为1，填充为0。卷积层C1产生16个大小为 10*10的特征图。</p>
+<h3 id="1-5-下采样层S4（Subsampling-layer-S4）"><a href="#1-5-下采样层S4（Subsampling-layer-S4）" class="headerlink" title="1.5 下采样层S4（Subsampling layer S4）"></a>1.5 下采样层S4（Subsampling layer S4）</h3><p>下采样层S4采用最大池化操作，每个窗口的大小为 2*2 ，步长为2。池化层S4产生16个大小为 5*5 的特征图。</p>
+<h3 id="1-6-全连接层C5（Fully-connected-layer-C5）"><a href="#1-6-全连接层C5（Fully-connected-layer-C5）" class="headerlink" title="1.6 全连接层C5（Fully connected layer C5）"></a>1.6 全连接层C5（Fully connected layer C5）</h3><p>C5将16个大小为 5*5 的特征图拉成一个长度为400的向量，并通过一个包括120个神经元的全连接层。120是由LeNet-5的设计者根据实验得到的最佳值。</p>
+<h3 id="1-7-全连接层F6（Fully-connected-layer-F6）"><a href="#1-7-全连接层F6（Fully-connected-layer-F6）" class="headerlink" title="1.7 全连接层F6（Fully connected layer F6）"></a>1.7 全连接层F6（Fully connected layer F6）</h3><p>全连接层F6将120个神经元连接到84个神经元。</p>
+<h3 id="1-8-输出层（Output-layer）"><a href="#1-8-输出层（Output-layer）" class="headerlink" title="1.8 输出层（Output layer）"></a>1.8 输出层（Output layer）</h3><p>输出层由10个神经元组成，每个神经元对应0-9的激活值（激活值越大，是该数字的可能性越大）。模型训练时，使用交叉熵损失函数计算输出层与样本真实标签之间的误差，然后通过反向传播算法更新模型的参数（包括卷积核和全连接层）直至模型达到指定效果或者达到指定迭代次数。</p>
+<p><strong>在实际应用中，通常会对LeNet-5进行一些改进，例如增加网络深度、增加卷积核数量、添加正则化等方法，以进一步提高模型的准确性和泛化能力。</strong></p>
+<h2 id="2-数据集简介——MNIST"><a href="#2-数据集简介——MNIST" class="headerlink" title="2. 数据集简介——MNIST"></a>2. 数据集简介——MNIST</h2><p><a target="_blank" rel="noopener" href="http://yann.lecun.com/exdb/mnist/">MNIST</a>是一个手写体数字的图片数据集，包含60,000个训练图像和10,000个测试图像，由美国国家标准与技术研究所（National Institute of Standards and Technology (NIST)）发起整理，一共统计了来自250个不同的人手写数字图片，其中50%是高中生，50%来自人口普查局的工作人员。<strong>数据集中的图像都是灰度图像，大小为 28*28 像素，每个像素点的值为 0 到 255 之间的灰度值</strong>。</p>
+<p>使用torchvision中的datasets可自动下载该数据集：</p>
+<pre><code class="python">train_dataset = torchvision.datasets.MNIST(root=&quot;data/&quot;, train=True, transform=transforms.ToTensor(), download=True)
+test_dataset = torchvision.datasets.MNIST(root=&quot;data/&quot;, train=False, transform=transforms.ToTensor(), download=True)
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><p>root表示将数据集存放在当前目录下的’data’文件夹中。</p>
+</li>
+<li><p>train&#x3D;True表示导入的是训练数据；train&#x3D;False表示导入的是测试数据。</p>
+</li>
+<li><p>transform表示对每个数据进行的变化，这里是将其变为Tensor，Tensor是PyTorch中存储数据的主要格式。</p>
+</li>
+<li><p>download表示是否将数据下载到本地。</p>
+</li>
+</ul>
+<h2 id="3-定义神经网络"><a href="#3-定义神经网络" class="headerlink" title="3. 定义神经网络"></a>3. 定义神经网络</h2><p>PyTorch中主要有以下两种方式定义神经网络</p>
+<h3 id="3-1-使用前馈神经网络方式"><a href="#3-1-使用前馈神经网络方式" class="headerlink" title="3.1 使用前馈神经网络方式"></a>3.1 使用前馈神经网络方式</h3><p>这种方法需要<strong>继承torch.nn.Module</strong>并且<strong>实现__init__()和forward()这两个方法</strong>。其中__init__()可以用于做一些初始化工作，比如定义输入数据、隐藏层、激活函数等；forward()是实现前向传播的核心函数，用于定义神经网络的结构和参数，在前向传播的过程中，输入的数据将按照该函数定义的神经网络结构进行计算并得到最终的输出。</p>
+<pre><code class="python">import torch.nn.functional as F
+from torch import nn
+
+
+class my_CNN(nn.Module):
+    def __init__(self, in_channels):
+        super(my_CNN, self).__init__()
+
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=6, kernel_size=5, stride=1)  # 定义卷积核
+        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)  # 定义最大池化层
+        self.conv2 = nn.Conv2d(in_channels=6, out_channels=16, kernel_size=5, stride=1)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc1 = nn.Linear(in_features=16 * 4 * 4, out_features=120)  # 定义全连接层
+        self.fc2 = nn.Linear(in_features=120, out_features=84)
+        self.fc3 = nn.Linear(in_features=84, out_features=10)
+
+    def forward(self, x):
+        x1 = self.conv1(x)  # 卷积层C1
+        x2 = F.relu(x1)  # 激活函数
+        x3 = self.pool1(x2)  # 下采样层S2
+
+        x4 = self.conv2(x3)  # 卷积层C3
+        x5 = F.relu(x4)
+        x6 = self.pool2(x5)  # 下采样层S4
+
+        x7 = x.reshape(x6.shape[0], -1)  # 二维变成一维，以输入到全连接层
+        x8 = self.fc1(x7)  # 全连接层C5
+        x9 = F.relu(x8)
+        x10 = self.fc2(x9)  # 全连接层F6
+        x11 = F.relu(x10)
+        x12 = self.fc3(x11)  # 输出层
+
+        return x12
+</code></pre>
+<p>代码解释</p>
+<ul>
+<li><p>__init__()：</p>
+<p>定义了用到的卷积核、池化层以及全连接层，其中：</p>
+<ul>
+<li>nn.Conv2d，定义二维卷积核。in_channels，输入通道数量；out_channels，输出通道数量；kernel_size，卷积核大小；stride，卷积时的步长。</li>
+<li>nn.MaxPool2d，定义二维最大池化层。kernel_size，池化的窗口大小；stride，池化时的步长。</li>
+<li>nn.Linear，定义全连接层。in_features，输入数据的大小；out_features，输出数据的大小。</li>
+</ul>
+</li>
+<li><p>forward()：</p>
+<p>__init__()函数中仅仅是定义了各个层，但并未将它们连接起来搭建出一个神经网络，forward()函数的作用就是搭建一个神经网络，使得输入的数据沿着指定的结构进行前向传播：</p>
+<ul>
+<li>forward除了self之外，还接收一个参数x作为输入数据。</li>
+<li>x &#x3D; self.conv1(x)：输入的x经过卷积计算后得到x1，对应于卷积层C1。</li>
+<li>x2 &#x3D; F.relu(x1) ：对卷积后的数据进行ReLU激活操作。</li>
+<li>x3 &#x3D; self.pool1(x2) ：对数据进行池化，对应于下采样层S2。</li>
+<li>……</li>
+<li>与上面类似，数据依次经过卷积层C3、下采样层S4、全连接层C5、全连接层F6以及输出层，从而使输入x沿着指定的路径得到最终的输出。</li>
+</ul>
+<p><strong>注：</strong></p>
+<ul>
+<li><p>为了更好的展示数据如何沿着神经网络进行前向传播，这里对每一层的输出设置了不同的变量命名，实际应用时，可以将x1~x12都写作x，只要不影响前向传播即可。</p>
+</li>
+<li><p>二维卷积以及池化操作得到的是二维的特则图，但全连接层需要一维的数据，因此需要对数据尺寸进行修改，即：</p>
+<pre><code class="python">x7 = x.reshape(x6.shape[0], -1)
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-使用序列化方法"><a href="#3-2-使用序列化方法" class="headerlink" title="3.2 使用序列化方法"></a>3.2 使用序列化方法</h3><p>这种方式使用torch.nn.Sequential方式定义模型，将神经网络以序列的方式进行连接，每个层使用前面层计算的输出作为输入，并且在内部会维护层与层之间的权重矩阵和偏置向量。</p>
+<pre><code class="python">from torch import nn
+
+in_channels = 1
+model = nn.Sequential(
+    nn.Conv2d(in_channels=in_channels, out_channels=6, kernel_size=5, stride=1),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2, stride=2),
+
+    nn.Conv2d(in_channels=6, out_channels=16, kernel_size=5, stride=1),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2, stride=2),
+
+    nn.Flatten(),
+    nn.Linear(in_features=16 * 4 * 4, out_features=120),
+    nn.Linear(in_features=120, out_features=84),
+    nn.Linear(in_features=84, out_features=10)
+)
+</code></pre>
+<h3 id="3-3总结"><a href="#3-3总结" class="headerlink" title="3.3总结"></a>3.3总结</h3><ol>
+<li>第一种可以更好的根据需要搭建网络结构；</li>
+<li>第二种方式网络以序列的方式搭建网络，不适用于复杂网络；</li>
+<li>对于一些复杂的含有重复层的网络，可将两种方式结合使用。序列化方法定义重复层，然后使用第一种方式根据网络结构进行组装。</li>
+</ol>
+<h2 id="4-定义损失函数以及优化器"><a href="#4-定义损失函数以及优化器" class="headerlink" title="4. 定义损失函数以及优化器"></a>4. 定义损失函数以及优化器</h2><ul>
+<li><p>损失函数</p>
+<p>损失函数用于计算真实值和预测值之间的差异。在<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/nn.html#loss-functions">PyTorch官方文档</a>中，给出了可用的损失函数列表。</p>
+<p>这里，我们使用交叉熵损失函数<strong>torch.nn.CrossEntropyLoss()<strong>。</strong>该损失函数内部自动加上了Softmax</strong>，用于解决多分类问题，也可用于解决二分类问题。</p>
+</li>
+<li><p>优化器</p>
+<p>优化器根据损失函数求出的损失，对神经网络的参数进行更新。在<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/optim.html">PyTorch官方文档</a>中，给出了可用的优化器。</p>
+<p>这里，我们使用**torch.optim.Adam()**作为我们的优化器。</p>
+</li>
+</ul>
+<pre><code class="python">from torch import nn, optim
+
+criterion = nn.CrossEntropyLoss()  # 损失函数
+optimizer = optim.Adam(model.parameters())  # 优化器
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>model.parameters()是待优化的参数。</li>
+</ul>
+<h2 id="5-训练模型"><a href="#5-训练模型" class="headerlink" title="5.训练模型"></a>5.训练模型</h2><p>模型的训练主要包括3部分：</p>
+<ul>
+<li>前向传播</li>
+<li>反向传播</li>
+<li>梯度下降</li>
+</ul>
+<p>简单的说就是取出数据，放到模型里面跑一次得到预测值，计算与真实值之间的损失，然后计算梯度，根据梯度更新一次网络。</p>
+<p>代码实现如下：</p>
+<pre><code class="python">device = torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)
+model = my_CNN(1).to(device)  # 加载模型到设备
+
+num_epochs = 100
+for epoch in range(num_epochs):
+    for batch_idx, (data, label) in enumerate(train_loader):
+        data = data.to(device=device)  # 加载数据到设备
+        label = label.to(device=device)
+
+        # 前向传播
+        pre = model(data)
+        loss = criterion(pre, label)
+
+        # 反向传播
+        optimizer.zero_grad()
+        loss.backward()
+
+        # 梯度下降
+        optimizer.step()
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><p>torch.device(‘cuda’ if torch.cuda.is_available() else ‘cpu’)：选择使用GPU或者CPU训练，若电脑有GPU且配置正确，则使用GPU训练，否则使用CPU训练（模型和数据必须都放在GPU或者CPU上）。</p>
+</li>
+<li><p>for epoch in range(num_epochs)：模型训练次数。</p>
+</li>
+<li><p>for batch_idx, (data, label) in enumerate(train_loader)：mini-batch对数据进行小批量训练。</p>
+</li>
+<li><p>前向传播：</p>
+<ul>
+<li>pre &#x3D; model(data)：将数据放入模型中训练。</li>
+<li>loss &#x3D; criterion(pre, label)：通过损失函数得到本次训练的损失。</li>
+</ul>
+</li>
+<li><p>反向传播：</p>
+<ul>
+<li>optimizer.zero_grad()：将梯度归零。训练时通常使用mini-batch方法，<strong>如果不将梯度清零的话，梯度会与上一个batch的梯度相关，因此该函数要写在反向传播和梯度下降之前</strong>。</li>
+<li>loss.backward()：反向传播。计算得到每个参数的梯度。</li>
+</ul>
+</li>
+<li><p>梯度下降</p>
+<p>optimizer.step()：执行一次优化步骤，对参数进行更新。注意：optimizer.step()只负责通过梯度下降对参数进行优化，并不负责产生梯度，梯度是loss.backward()方法产生的。</p>
+</li>
+</ul>
+<h2 id="6-测试模型"><a href="#6-测试模型" class="headerlink" title="6. 测试模型"></a>6. 测试模型</h2><p>模型训练完毕后，可以使用测试集对模型进行测试：</p>
+<pre><code class="python">loss = 0
+
+with torch.no_grad():  # 关闭梯度计算
+    model.eval()  # 评估模式
+    for batch_idx, (data, label) in enumerate(test_loader):
+        data = data.to(device=device)
+        label = label.to(device=device)
+
+        pre = model(data)
+        loss += criterion(pre, label).item()
+
+model.train()  # 训练模式
+loss = loss / len(test_loader.dataset)
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><p>with torch.no_grad()：关闭梯度计算。在训练模型时，需要计算根据反向传播计算梯度以更新参数，但在对验证集或者测试集进行预测时，并不需要更新参数，因此也就不需要计算梯度。因此，为了避免浪费计算资源，在模型评估时最后关闭梯度计算。</p>
+</li>
+<li><p>model.eval()：将模型切换到评估模式。在神经网络中，出于防止过拟合等目的，一般会加入Dropout和Batch Normalization层，在模型训练阶段，根据输入数据的变化，这些层的参数也会发生变化。<strong>在评估模式下，Dropout层会让所有的网络节点都生效，而Batch Normalization层会停止计算和更新均值和方差，直接使用在训练阶段已经学出的均值和方差。</strong></p>
+</li>
+<li><p>model.train()：将模型切换到训练模式。此时Dropout层使网络中的节点以一定概率失效，Batch Normalization层根据输入的数据更新均值和方差。<strong>在将模型切换到评估模式之后，在下一次训练之前必须再切换到训练模式。</strong></p>
+</li>
+<li><p>注意with torch.no_grad()和model.eval()的区别：</p>
+<p>with torch.no_grad()关闭的是梯度计算，和神经网络整体有关；而model.eval()和梯度没有关系，只和Dropout和Batch Normalization这两层有关系。</p>
+</li>
+</ul>
+<h2 id="7-整体代码"><a href="#7-整体代码" class="headerlink" title="7. 整体代码"></a>7. 整体代码</h2><p>以下是最终的代码（使用前馈神经网络的方式定义神经网络）。由于这里仅仅是为了介绍如何搭建一个模型，另外出于篇幅考虑，对于一些细节方面未做具体改进，主要包括以下几点：</p>
+<ul>
+<li>除了训练集和测试集之外，还可以使用验证集评估模型性能以设置早停</li>
+<li>为了得到更好的模型性能，一般会对数据进行归一化</li>
+</ul>
+<pre><code class="python">import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torchvision
+from torch import optim
+from torch.utils.data import DataLoader
+from torchvision import transforms
+
+
+class my_CNN(nn.Module):
+    def __init__(self, in_channels):
+        super(my_CNN, self).__init__()
+
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=6, kernel_size=5, stride=1)  # 定义卷积核
+        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)  # 定义最大池化层
+        self.conv2 = nn.Conv2d(in_channels=6, out_channels=16, kernel_size=5, stride=1)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc1 = nn.Linear(in_features=16 * 4 * 4, out_features=120)  # 定义全连接层
+        self.fc2 = nn.Linear(in_features=120, out_features=84)
+        self.fc3 = nn.Linear(in_features=84, out_features=10)
+
+    def forward(self, x):
+        x = self.conv1(x)  # 卷积层C1
+        x = F.relu(x)  # 激活函数
+        x = self.pool1(x)  # 下采样层S2
+
+        x = self.conv2(x)  # 卷积层C3
+        x = F.relu(x)
+        x = self.pool2(x)  # 下采样层S4
+
+        x = x.reshape(x.shape[0], -1)  # 二维变成一维，以输入到全连接层
+        x = self.fc1(x)  # 全连接层C5
+        x = F.relu(x)
+        x = self.fc2(x)  # 全连接层F6
+        x = F.relu(x)
+        x = self.fc3(x)  # 输出层
+
+        return x
+
+
+def train(model, criterion, optimizer, train_loader, device, num_epochs=200):
+    for epoch in range(num_epochs):
+        for batch_idx, (data, label) in enumerate(train_loader):
+            data = data.to(device=device)  # 加载数据到设备
+            label = label.to(device=device)
+
+            # 前向传播
+            pre = model(data)
+            loss = criterion(pre, label)
+
+            # 反向传播
+            optimizer.zero_grad()
+            loss.backward()
+
+            # 梯度下降
+            optimizer.step()
+
+
+def test(model, criterion, test_loader, device):
+    loss = 0
+
+    with torch.no_grad():  # 关闭梯度计算
+        model.eval()  # 评估模式
+        for batch_idx, (data, label) in enumerate(test_loader):
+            data = data.to(device=device)
+            label = label.to(device=device)
+
+            pre = model(data)
+            loss += criterion(pre, label).item()
+
+    model.train()  # 训练模式
+    loss = loss / len(test_loader.dataset)
+
+    return loss
+
+
+def main():
+    batch_size = 4
+    num_epochs = 200
+
+    train_dataset = torchvision.datasets.MNIST(root=&quot;data/&quot;, train=True, transform=transforms.ToTensor(),
+                                               download=True)  # 下载数据集
+    test_dataset = torchvision.datasets.MNIST(root=&quot;data/&quot;, train=False, transform=transforms.ToTensor(), download=True)
+
+    train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size,
+                              shuffle=True)  # 将数据集(Dataset)自动分成一个个的Batch,以用于批处理
+    test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=True)
+
+    device = torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)  # 选择加载数据的设备，GPU或者CPU
+
+    model = my_CNN(1).to(device)  # 模型和数据应加载到同一种设备上
+    criterion = nn.CrossEntropyLoss()  # 损失函数
+    optimizer = optim.Adam(model.parameters())  # 优化器
+
+    train(model, criterion, optimizer, train_loader, device, num_epochs)
+
+    print(test(model, criterion, test_loader, device))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '406c0d08637fa2b66b91',
+            clientSecret: '14fe1dd28c47773bd293a0273c55e0f9c7479cf9',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2023 勿庸散人
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
