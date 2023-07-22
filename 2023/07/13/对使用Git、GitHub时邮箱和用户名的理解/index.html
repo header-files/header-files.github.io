@@ -127,7 +127,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(5)</small>
+                <small>(6)</small>
             
         </div>
     </li>
@@ -199,7 +199,7 @@
         <div data-rel="开发工具">
             <i class="fold iconfont icon-right"></i>
             开发工具
-            <small>(2)</small>
+            <small>(3)</small>
         </div>
         
             <ul class="sub hide">
@@ -209,7 +209,7 @@
         <div data-rel="开发工具&lt;---&gt;Git">
             
             Git
-            <small>(1)</small>
+            <small>(2)</small>
         </div>
         
     </li>
@@ -262,8 +262,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="5">
-<input type="hidden" id="yelog_site_word_count" value="7.4k">
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="8.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -354,6 +354,15 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 开发工具 Git "
+           href="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/"
+           data-tag="Git,Git技巧"
+           data-author="" >
+            <span class="post-title" title="Git同时配置Gitee和GitHub">Git同时配置Gitee和GitHub</span>
+            <span class="post-date" title="2023-07-22 12:11:30">2023/07/22</span>
+        </a>
         
         
         <a  class="全部文章 开发工具 Git "
@@ -449,7 +458,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-13 11:23:32'>2023-07-13 11:20</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-21 21:04:02'>2023-07-13 11:20</time>
         
     </div>
     <div class="article-meta">
@@ -518,14 +527,14 @@ git config --global user.email &quot;邮箱&quot;
 <li>SSH协议只认机器。当使用SSH操作远程仓库的话，需要使用公钥和私钥对来做权限的认证。</li>
 </ul>
 <p>为了方便操作，一般都是使用SSH协议，当使用SSH协议时，需要在本地电脑上生成公钥和私钥对，然后在GitHub上配置公钥。公钥和私钥对使用如下指令生成：</p>
-<pre><code class="shell">ssh-keygen -t rsa -f id_rsa.github -C&quot;XXX&quot;
+<pre><code class="shell">ssh-keygen -t rsa -f id_rsa.github -C &quot;XXX&quot;
 </code></pre>
 <p>其中：</p>
 <ul>
 <li>-t：指定密钥的类型，密钥的类型有RSA和DSA两种</li>
 <li>rsa：指使用RSA算法</li>
-<li>-f：指定存储秘钥的文件名</li>
-<li>-C：表示提供<strong>一个用于识别这个秘钥的注释，一般填写邮箱地址，但也可以填入其他内容</strong></li>
+<li>-f：指定存储密钥的文件名</li>
+<li>-C：表示提供<strong>一个用于识别这个密钥的注释，一般填写邮箱地址，但也可以填入其他内容</strong></li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li><p>Git配置邮箱和用户名的目的</p>
