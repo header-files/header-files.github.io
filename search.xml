@@ -4,11 +4,98 @@
   
     
     <entry>
+      <title>Java容器3——Map</title>
+      <link href="/2023/07/25/Java%E5%AE%B9%E5%99%A83%E2%80%94%E2%80%94Map/"/>
+      <url>/2023/07/25/Java%E5%AE%B9%E5%99%A83%E2%80%94%E2%80%94Map/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java容器3——Map"><a href="#Java容器3——Map" class="headerlink" title="Java容器3——Map"></a>Java容器3——Map</h1><p>以下内容参考《<a href="https://www.programmercarl.com/other/kstar_baguwen.html">代码随想录知识星球精华（最强⼋股⽂）第三版</a>》整理。</p><h2 id="Map继承关系图"><a href="#Map继承关系图" class="headerlink" title="Map继承关系图"></a>Map继承关系图</h2><p>（该图基于JDK8，仅包含部分类。为了方便查看，部分关系未画出）</p><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A83%E2%80%94%E2%80%94Map/Map.jpg" alt="Map继承关系"></p><h2 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A83%E2%80%94%E2%80%94Map/Map%E6%8E%A5%E5%8F%A3.jpg" alt="Map接口"></p><ul><li>Map是⼀组键值对，键不可重复，值可重复</li><li>常⽤的实现类有：HashMap、TreeMap、HashTable、LinkedHashMap、ConcurrentHashMap等</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程语言 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 容器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java容器2——Collection</title>
+      <link href="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/"/>
+      <url>/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java容器2——Collection"><a href="#Java容器2——Collection" class="headerlink" title="Java容器2——Collection"></a>Java容器2——Collection</h1><p>以下内容参考《<a href="https://www.programmercarl.com/other/kstar_baguwen.html">代码随想录知识星球精华（最强⼋股⽂）第三版</a>》整理。</p><h2 id="Collection继承关系图"><a href="#Collection继承关系图" class="headerlink" title="Collection继承关系图"></a>Collection继承关系图</h2><p>（该图基于JDK8，仅包含部分类。为了方便查看，部分关系未画出）</p><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Collection.jpg" alt="Collection继承关系"></p><h2 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Collection%E6%8E%A5%E5%8F%A3.jpg" alt="Collection接口"></p><ul><li>Collection下的所有实现类都是继承⾃AbstractCollection，该类将基础⽅法 size 和 iterator 抽象化，但是实现了其他的⽅法</li><li>AbstractCollection下派⽣出AbstractList、AbstractSet、AbstractQueue、ArrayQueue</li><li>List下的全部继承⾃AbstractList，List是一个存储有序的集合，允许重复，每个元素都有一个索引</li><li>Set下的继承⾃AbstractSet，Set是一个无需存储的集合，不允许重复</li></ul><p><strong>Java中经常使⽤的语法糖”for each”循环可以与任何实现了Iterable接⼝的对象⼀起⼯作</strong>。<br>Collection通过调用iterator()⽅法返回⼀个Iterator对象，这就是常⽤的迭代器，其中包含hasNext()、next()、remove()、forEachRemaining(Consumer)4个⽅法。</p><p>Iterator()的功能简单，只能单向移动：</p><ol><li>调⽤iterator()⽅法返回⼀个Iterator对象</li><li>第⼀次调⽤Iterator的next()⽅法，返回序列的第⼀个元素。此后每调⽤⼀个next(),会返回序列的下⼀个元素。调⽤next()⽅法前最好先调⽤hasNext()⽅法，判断序列后⾯是否还有元素</li><li>remove()删除上次next()返回的对象，remove()只能在next()之后使⽤，并且⼀个remove()匹配⼀个next()，不能重复调⽤</li><li>使⽤hasNext()判断序列中是否还有元素</li></ol><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/List%E6%8E%A5%E5%8F%A3.jpg" alt="List接口"></p><ul><li>List接⼝常⽤的实现类有<strong>ArrayList、LinkedList</strong></li><li>相比Collection，List多出sort()、get()、listIterator()等⽅法，listIterator返回⼀个链表迭代器</li></ul><p>List有着特殊的迭代器接口ListIterator，该接口继承自Iterator接⼝。ListIterator是⼀个功能更加强⼤的迭代器，Iterator是单向的，但ListIterator是双向的，ListIterator增加了previous()和hasPrevious()⽅法⽤来反向遍历。<strong>注意只能List使⽤ListIterator。</strong></p><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/ListIterator.jpg" alt="ListIterator"></p><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Set%E6%8E%A5%E5%8F%A3.jpg" alt="Set接口"></p><ul><li>Set常⽤的实现类有<strong>HashSet、TreeSet、LinkedHashSet</strong></li></ul><h2 id="Queue接口"><a href="#Queue接口" class="headerlink" title="Queue接口"></a>Queue接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Queue%E6%8E%A5%E5%8F%A3.jpg" alt="Queur接口"></p><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Deque.jpg" alt="Deque"></p><ul><li>Deque接⼝继承⾃Queue,在Deque的基础上更加细化，可以选择从头部或者尾部操作。如果Deque中使⽤Queue的⽅法，⼀定要清楚实现类是从头部还是尾部操作的</li><li><strong>很多实现类既实现类List接⼝，⼜实现类Queue接⼝</strong>，如<strong>LinkedList即实现了List接口又实现了Deque接口（因此LinkedList即可以使用add又可以使用addLast）</strong></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程语言 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 容器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java容器1——概述</title>
+      <link href="/2023/07/25/Java%E5%AE%B9%E5%99%A81%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0/"/>
+      <url>/2023/07/25/Java%E5%AE%B9%E5%99%A81%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java容器1——概述"><a href="#Java容器1——概述" class="headerlink" title="Java容器1——概述"></a>Java容器1——概述</h1><p>Java容器主要分为两大类：</p><ul><li>Collection：一个独立元素的序列，一次存一个元素，是单列集合。Collection又主要包括以下三种：<ul><li>List：存储的元素有序、可重复，是个常用的容器</li><li>Set：存储的元素无序、不可重复，用于数据需要唯一存在的场景</li><li>Queue：存储的元素有序、可重复，可指定存取数据的先后顺序</li></ul></li><li>Map：一组成对的“键值对”对象，一次存一对元素，是双列集合</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程语言 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 容器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>IntelliJ IDEA Diagrams的使用</title>
       <link href="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
       <url>/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
       
-        <content type="html"><![CDATA[<h1 id="IntelliJ-IDEA-Diagrams的使用"><a href="#IntelliJ-IDEA-Diagrams的使用" class="headerlink" title="IntelliJ IDEA Diagrams的使用"></a>IntelliJ IDEA Diagrams的使用</h1><p>最近打算整理一下Java的容器类，需要画出容器类的UML类图。找了一下画UML的软件，感觉都不太满意，正好发现IDEA自带的类图分析插件Diagrams可以画类图，而且使用体验还不错。（<strong>IDEA社区版不支持该功能</strong>）</p><h2 id="设置Diagrams"><a href="#设置Diagrams" class="headerlink" title="设置Diagrams"></a>设置Diagrams</h2><ol><li><p>打开设置界面：<code>File-&gt;Settings</code></p></li><li><p>确保启用Diagrams：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg" alt="1"></p></li><li><p>设置Diagrams：<code>Tools-&gt;Diagrams</code>，在这里可以根据需要对Diagrams做具体的设置，因为我只想看一下类之间的继承关系，所以只对继承做了设置。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg" alt="3"></p></li></ol><h2 id="使用Diagrams"><a href="#使用Diagrams" class="headerlink" title="使用Diagrams"></a>使用Diagrams</h2><h3 id="打开Diagrams"><a href="#打开Diagrams" class="headerlink" title="打开Diagrams"></a>打开Diagrams</h3><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/3.jpg" alt="3">   </p><p>有两种方式可以打开Diagrams，一种是在代码区直接右键选择Diagrams，另一种是在文件的目录树中进入。这里我选择第二种方式，以 <code>LinkedList</code> 为例，在 <code>LinkedList</code> 的文件上右键选择Diagrams，此时有两种选择：</p><ul><li>Show Diagram…：将在代码区新建一个窗口</li><li>Show Diagram Popup…：在当前桌面直接弹出一个缩略图</li></ul><p>这里我选择方法一新建一个窗口，下图中：</p><ul><li><font color='green'>绿色的‘I’是接口</font>，<font color='blue'>蓝色的‘C’是类</font></li><li><font color='green'>绿色虚线是类与接口之间的实现关系</font></li><li><font color='green'>绿色实线是接口之间的继承关系</font></li><li><font color='blue'>蓝色实线是类之间的继承关系</font></li></ul><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/4.gif" alt="4"></p><h3 id="增删类"><a href="#增删类" class="headerlink" title="增删类"></a>增删类</h3><ul><li>添加类：<code>右键-&gt;Content-&gt;Add Class to Diagram</code>（或者在界面中直接按空格）</li><li>删除类：<code>选中类-&gt;右键-&gt;Delete</code>（或者选中类然后按下键盘的Del键）</li></ul><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/add_del.gif" alt="add_del"></p><h3 id="缩放、拖动界面"><a href="#缩放、拖动界面" class="headerlink" title="缩放、拖动界面"></a>缩放、拖动界面</h3><p>按住 <code>Ctrl</code> 键然后滚动<code>鼠标滚轮</code>可以实现缩放当前界面，按住<code>鼠标右键</code>然后拖动鼠标可以移动当前界面，按住 <code>Alt键</code> 出现放大镜。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/5.gif" alt="5"></p><h3 id="Diagrams工具栏介绍"><a href="#Diagrams工具栏介绍" class="headerlink" title="Diagrams工具栏介绍"></a>Diagrams工具栏介绍</h3><p>这里我将工具栏大致分为以下4部分，下面分别介绍：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/6.jpg" alt="6"></p><ol><li><p>第一部分：</p><p>从左到右点击将依次显示：字段、构造函数、成员函数、属性（具有get和set方法）、内部类。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/7.gif" alt="7"></p></li><li><p>第二部分：</p><p>从左到右依次是：显示依赖关系、更改排序、更改可见级别（如只显示public等）、改变显示范围（如项目文件、非项目文件等）、在节点元素之间创建扩展或实现链接。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/8.gif" alt="8"></p></li><li><p>第三部分：</p><p>从左到右依次是：放大、缩小、恢复实际大小、自动适应当前窗口大小。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/9.gif" alt="9"></p></li><li><p>第四部分：</p><p>使用右键快捷菜单“布局”选项中选择的当前布局、缩放到窗口的边缘、复制当前界面到剪切板、单击后鼠标选定的区域将被复制到剪切板、导出Diagrams、刷新当前界面、打开Diagrams设置页面、在浏览器中打开帮助页面。</p></li></ol><h3 id="右键快捷菜单介绍"><a href="#右键快捷菜单介绍" class="headerlink" title="右键快捷菜单介绍"></a>右键快捷菜单介绍</h3><p>选中一个元素然后单击右键将出现以下快捷菜单：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg" alt="10"></p><p>不选择任何元素直接在界面单击右键将出现以下快捷菜单：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/11.jpg" alt="11"></p><p>部分功能已经在上面介绍过了，这里仅介绍部分常用的功能，其他功能可参考<a href="https://www.jetbrains.com/help/idea/2023.1/class-diagram-toolbar-and-context-menu.html#menu">帮助文档</a>：</p><ul><li>Selected Element Actions -&gt; Jump to Source：打开该类的源码</li><li>Show Implementations：显示该类的实现和继承</li><li>Show Parents：显示该类实现或继承谁</li></ul><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/12.gif" alt="12"></p><h2 id="其它插件"><a href="#其它插件" class="headerlink" title="其它插件"></a>其它插件</h2><p>在IntelliJ IDEA的<code>Settings-&gt;Plugins</code>中还可以安装其他的UML类图插件，比如可以安装diagrams，支持直接在IntelliJ IDEA画流程图。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="IntelliJ-IDEA-Diagrams的使用"><a href="#IntelliJ-IDEA-Diagrams的使用" class="headerlink" title="IntelliJ IDEA Diagrams的使用"></a>IntelliJ IDEA Diagrams的使用</h1><p>最近打算整理一下Java的容器类，需要画出容器类的UML类图。找了一下画UML的软件，感觉都不太满意，正好发现IDEA自带的类图分析插件Diagrams可以画类图，而且使用体验还不错。（<strong>IDEA社区版不支持该功能</strong>）</p><h2 id="设置Diagrams"><a href="#设置Diagrams" class="headerlink" title="设置Diagrams"></a>设置Diagrams</h2><ol><li><p>打开设置界面：<code>File-&gt;Settings</code></p></li><li><p>确保启用Diagrams：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg" alt="1"></p></li><li><p>设置Diagrams：<code>Tools-&gt;Diagrams</code>，在这里可以根据需要对Diagrams做具体的设置，因为我只想看一下类之间的继承关系，所以只对继承做了设置。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg" alt="3"></p></li></ol><h2 id="使用Diagrams"><a href="#使用Diagrams" class="headerlink" title="使用Diagrams"></a>使用Diagrams</h2><h3 id="打开Diagrams"><a href="#打开Diagrams" class="headerlink" title="打开Diagrams"></a>打开Diagrams</h3><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/3.jpg" alt="3">   </p><p>有两种方式可以打开Diagrams，一种是在代码区直接右键选择Diagrams，另一种是在文件的目录树中进入。这里我选择第二种方式，以 <code>LinkedList</code> 为例，在 <code>LinkedList</code> 的文件上右键选择Diagrams，此时有两种选择：</p><ul><li>Show Diagram…：将在代码区新建一个窗口</li><li>Show Diagram Popup…：在当前桌面直接弹出一个缩略图</li></ul><p>这里我选择方法一新建一个窗口，下图中：</p><ul><li><font color='green'>绿色的‘I’是接口</font>，<font color='blue'>蓝色的‘C’是类</font></li><li><font color='green'>绿色虚线是类与接口之间的实现关系</font></li><li><font color='green'>绿色实线是接口之间的继承关系</font></li><li><font color='blue'>蓝色实线是类之间的继承关系</font></li></ul><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/4.gif" alt="4"></p><h3 id="增删类"><a href="#增删类" class="headerlink" title="增删类"></a>增删类</h3><ul><li>添加类：<code>右键-&gt;Content-&gt;Add Class to Diagram</code>（或者在界面中直接按空格）</li><li>删除类：<code>选中类-&gt;右键-&gt;Delete</code>（或者选中类然后按下键盘的Del键）</li></ul><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/add_del.gif" alt="add_del"></p><h3 id="缩放、拖动界面"><a href="#缩放、拖动界面" class="headerlink" title="缩放、拖动界面"></a>缩放、拖动界面</h3><p>按住 <code>Ctrl</code> 键然后滚动<code>鼠标滚轮</code>可以实现缩放当前界面，按住<code>鼠标右键</code>然后拖动鼠标可以移动当前界面，按住 <code>Alt键</code> 出现放大镜。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/5.gif" alt="5"></p><h3 id="Diagrams工具栏介绍"><a href="#Diagrams工具栏介绍" class="headerlink" title="Diagrams工具栏介绍"></a>Diagrams工具栏介绍</h3><p>这里我将工具栏大致分为以下4部分，下面分别介绍：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/6.jpg" alt="6"></p><ol><li><p>第一部分：</p><p>从左到右点击将依次显示：字段、构造函数、成员函数、属性（具有get和set方法）、内部类。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/7.gif" alt="7"></p></li><li><p>第二部分：</p><p>从左到右依次是：显示依赖关系、更改排序、更改可见级别（如只显示public等）、改变显示范围（如项目文件、非项目文件等）、在节点元素之间创建扩展或实现链接。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/8.gif" alt="8"></p></li><li><p>第三部分：</p><p>从左到右依次是：放大、缩小、恢复实际大小、自动适应当前窗口大小。</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/9.gif" alt="9"></p></li><li><p>第四部分：</p><p>使用右键快捷菜单“布局”选项中选择的当前布局、缩放到窗口的边缘（类似自动布线？）、复制当前界面到剪切板、单击后鼠标选定的区域将被复制到剪切板、导出Diagrams、刷新当前界面、打开Diagrams设置页面、在浏览器中打开帮助页面。</p></li></ol><h3 id="右键快捷菜单介绍"><a href="#右键快捷菜单介绍" class="headerlink" title="右键快捷菜单介绍"></a>右键快捷菜单介绍</h3><p>选中一个元素然后单击右键将出现以下快捷菜单：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/10.jpg" alt="10"></p><p>不选择任何元素直接在界面单击右键将出现以下快捷菜单：</p><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/11.jpg" alt="11"></p><p>部分功能已经在上面介绍过了，这里仅介绍部分常用的功能，其他功能可参考<a href="https://www.jetbrains.com/help/idea/2023.1/class-diagram-toolbar-and-context-menu.html#menu">帮助文档</a>：</p><ul><li>Selected Element Actions -&gt; Jump to Source：打开该类的源码</li><li>Show Implementations：显示该类的实现和继承</li><li>Show Parents：显示该类实现或继承谁</li></ul><p><img src="/2023/07/24/IntelliJ-IDEA-Diagrams%E7%9A%84%E4%BD%BF%E7%94%A8/12.gif" alt="12"></p><h2 id="其它插件"><a href="#其它插件" class="headerlink" title="其它插件"></a>其它插件</h2><p>在IntelliJ IDEA的<code>Settings-&gt;Plugins</code>中还可以安装其他的UML类图插件，比如可以安装diagrams，支持直接在IntelliJ IDEA画流程图。</p>]]></content>
       
       
       <categories>

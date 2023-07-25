@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Git同时配置Gitee和GitHub | 勿庸散人</title>
-  <meta name="keywords" content=" Git , Git技巧 ">
-  <meta name="description" content="Git同时配置Gitee和GitHub | 勿庸散人">
+  <title>Java容器1——概述 | 勿庸散人</title>
+  <meta name="keywords" content=" Java , 容器 ">
+  <meta name="description" content="Java容器1——概述 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -544,9 +544,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Git同时配置Gitee和GitHub" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java容器1——概述" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Git同时配置Gitee和GitHub</h1>
+        <h1 class="article-title">Java容器1——概述</h1>
     
     <div class="article-meta">
         
@@ -556,9 +556,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开发工具">开发工具</a> > 
+            <a  data-rel="编程语言">编程语言</a> > 
             
-            <a  data-rel="开发工具&lt;---&gt;Git">Git</a>
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
             
         </span>
         
@@ -566,21 +566,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">Git</a>
+            <a class="color5">Java</a>
             
-            <a class="color1">Git技巧</a>
+            <a class="color3">容器</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-22 12:14:11'>2023-07-22 12:11</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-25 09:34:14'>2023-07-25 09:28</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:659</span>
+        <span>字数:136</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -610,7 +610,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub"><span class="toc-text">Git同时配置Gitee和GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E9%82%AE%E7%AE%B1"><span class="toc-text">配置Git用户名和邮箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90SSH-keys"><span class="toc-text">生成SSH keys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%A7%81%E9%92%A5%E5%88%B0ssh-agent%E4%B8%AD"><span class="toc-text">添加私钥到ssh-agent中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5%E5%88%B0%E6%89%98%E7%AE%A1%E7%BD%91%E7%AB%99"><span class="toc-text">添加公钥到托管网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E6%B7%BB%E5%8A%A0%E6%88%90%E5%8A%9F"><span class="toc-text">测试是否添加成功</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%AE%B9%E5%99%A81%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0"><span class="toc-text">Java容器1——概述</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -626,67 +626,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Git同时配置Gitee和GitHub"><a href="#Git同时配置Gitee和GitHub" class="headerlink" title="Git同时配置Gitee和GitHub"></a>Git同时配置Gitee和GitHub</h1><p>注意，以下基本都在 <code>~/.ssh</code> 目录下以及在这个目录下打开的Git Bash窗口中操作，因此打开 <code>~/.ssh</code> 目录及Git Bash窗口后，暂时不要关闭！</p>
-<h2 id="配置Git用户名和邮箱"><a href="#配置Git用户名和邮箱" class="headerlink" title="配置Git用户名和邮箱"></a>配置Git用户名和邮箱</h2><p>首先，为Git设置用户名和邮箱。（若已设置过，则无需设置）</p>
-<pre><code class="shell">git config --global user.name 用户名
-git config --global user.email 邮箱
-</code></pre>
-<h2 id="生成SSH-keys"><a href="#生成SSH-keys" class="headerlink" title="生成SSH keys"></a>生成SSH keys</h2><p>许多Git托管网站（如Gitee和GitHub）都使用SSH协议进行认证，因此为了向Gitee和GitHub提供SSH公钥，必须事先为其生成一份SSH密钥对。这个过程在所有操作系统上都是相似的：</p>
-<ol>
-<li><p>进入存放密钥对的文件夹，SSH密钥对存放在 <code>~/.ssh</code> 目录下。在Windows系统下，安装键盘的 <code>Windows</code> 键和 <code>R</code> 键输入 <code>.ssh</code> 回车即可打开</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/1.jpg" alt="1"></p>
-</li>
-<li><p>生成SSH keys</p>
-<p>在<code>~/.ssh</code> 目录下进入Git Bash，输入下列命令然后一直回车即可：</p>
-<pre><code class="shell">ssh-keygen -t rsa -f id_rsa.gitee -C &quot;gitee&quot;
-ssh-keygen -t rsa -f id_rsa.github -C &quot;github&quot;
-</code></pre>
-<p>参数含义：</p>
+        <h1 id="Java容器1——概述"><a href="#Java容器1——概述" class="headerlink" title="Java容器1——概述"></a>Java容器1——概述</h1><p>Java容器主要分为两大类：</p>
 <ul>
-<li>-t：指定密钥类型，默认是 rsa ，可以省略</li>
-<li>rsa：指使用RSA算法</li>
-<li>-f：指定存储密钥的文件名</li>
-<li>-C：设置注释文字</li>
-</ul>
-<p>若生成成功，则出现</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/2.jpg" alt="2"></p>
-<p>同时，在刚才的 <code>.ssh</code> 文件夹下，将会生成4个新文件：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/3.jpg" alt="3"></p>
-<p>其中：</p>
-<ul>
-<li>id_rsa.xx：私钥</li>
-<li>id_rsa_xx.xx.pub：私钥对应的公钥</li>
+<li>Collection：一个独立元素的序列，一次存一个元素，是单列集合。Collection又主要包括以下三种：<ul>
+<li>List：存储的元素有序、可重复，是个常用的容器</li>
+<li>Set：存储的元素无序、不可重复，用于数据需要唯一存在的场景</li>
+<li>Queue：存储的元素有序、可重复，可指定存取数据的先后顺序</li>
 </ul>
 </li>
-</ol>
-<h2 id="添加私钥到ssh-agent中"><a href="#添加私钥到ssh-agent中" class="headerlink" title="添加私钥到ssh-agent中"></a>添加私钥到ssh-agent中</h2><p>Git默认读取的文件文件名为id_rsa，因此我们需要将生成的密钥添加到ssh-agent中。在刚才打开的Git Bash窗口中输入：</p>
-<pre><code class="shell">ssh-agent bash
-ssh-add ~/.ssh/id_rsa.gitee
-ssh-add ~/.ssh/id_rsa.github
-</code></pre>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>在 <code>~/.ssh</code> 目录下打开 <code>config</code> 文件，若没有则新建一个名为 <code>config</code> 的文件（<strong>注意，这个文件不带扩展名，全面就叫做config</strong>），然后添加以下内容：</p>
-<blockquote>
-<p>#Gitee<br>Host gitee.com<br>HostName gitee.com<br>PreferredAuthentications publickey<br>User git<br>IdentityFile ~&#x2F;.ssh&#x2F;id_rsa.gitee</p>
-<p>#GitHub<br>Host github.com<br>HostName github.com<br>PreferredAuthentications publickey<br>User git<br>IdentityFile ~&#x2F;.ssh&#x2F;id_rsa.github</p>
-</blockquote>
-<h2 id="添加公钥到托管网站"><a href="#添加公钥到托管网站" class="headerlink" title="添加公钥到托管网站"></a>添加公钥到托管网站</h2><ol>
-<li><p>Gitee添加公钥</p>
-<p>登录Gitee，进入 <code>设置</code> ，点击 <code>SSH公钥</code> ，输入“标题”以及“公钥”。Gitee对应的公钥存放在 <code>id_rsa.gitee.pub</code> 文件中，打开全部复制即可：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/4.jpg" alt="4"></p>
-</li>
-<li><p>GitHub添加公钥</p>
-<p>登录GitHub，进入 <code>Settings</code> ，依次点击 <code>SSH and GPG keys</code> -&gt; <code>New SSH key</code> ，输入“Title”以及“Key”。GitHub对应的公钥存放在 <code>id_rsa.github.pub</code> 文件中，打开全部复制即可：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/5.jpg" alt="5"></p>
-</li>
-</ol>
-<h2 id="测试是否添加成功"><a href="#测试是否添加成功" class="headerlink" title="测试是否添加成功"></a>测试是否添加成功</h2><p>依次在Git Bash中输入：</p>
-<pre><code class="shell">ssh -T git@gitee.com # 测试Gitee
-ssh -T git@github.com # 测试GitHub
-</code></pre>
-<p>第一次连接会让输入 <code>yes/no</code> ，输入 <code>yes</code> 即可：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/6.jpg" alt="6"></p>
-<p>出现下面即代表添加成功：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/7.jpg" alt="7"></p>
+<li>Map：一组成对的“键值对”对象，一次存一对元素，是双列集合</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
