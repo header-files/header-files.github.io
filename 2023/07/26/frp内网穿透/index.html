@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Git同时配置Gitee和GitHub | 勿庸散人</title>
-  <meta name="keywords" content=" Git , Git技巧 ">
-  <meta name="description" content="Git同时配置Gitee和GitHub | 勿庸散人">
+  <title>frp内网穿透 | 勿庸散人</title>
+  <meta name="keywords" content=" 百宝箱 ">
+  <meta name="description" content="frp内网穿透 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="frp内网穿透">
 <meta property="og:type" content="article">
@@ -573,9 +573,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Git同时配置Gitee和GitHub" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-frp内网穿透" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Git同时配置Gitee和GitHub</h1>
+        <h1 class="article-title">frp内网穿透</h1>
     
     <div class="article-meta">
         
@@ -585,9 +585,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开发工具">开发工具</a> > 
-            
-            <a  data-rel="开发工具&lt;---&gt;Git">Git</a>
+            <a  data-rel="百宝箱">百宝箱</a>
             
         </span>
         
@@ -595,21 +593,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">Git</a>
-            
-            <a class="color1">Git技巧</a>
+            <a class="color4">百宝箱</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-22 12:14:11'>2023-07-22 12:11</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-26 21:42:34'>2023-07-26 21:40</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:659</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -639,7 +635,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub"><span class="toc-text">Git同时配置Gitee和GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E9%82%AE%E7%AE%B1"><span class="toc-text">配置Git用户名和邮箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90SSH-keys"><span class="toc-text">生成SSH keys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%A7%81%E9%92%A5%E5%88%B0ssh-agent%E4%B8%AD"><span class="toc-text">添加私钥到ssh-agent中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5%E5%88%B0%E6%89%98%E7%AE%A1%E7%BD%91%E7%AB%99"><span class="toc-text">添加公钥到托管网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E6%B7%BB%E5%8A%A0%E6%88%90%E5%8A%9F"><span class="toc-text">测试是否添加成功</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">frp内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#frp%E4%BB%8B%E7%BB%8D"><span class="toc-text">frp介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-text">服务器端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#frps%E9%85%8D%E7%BD%AE"><span class="toc-text">frps配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8frps"><span class="toc-text">启动frps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-text">设置开机自启</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E8%84%91%E7%AB%AF"><span class="toc-text">电脑端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#frpc%E9%85%8D%E7%BD%AE"><span class="toc-text">frpc配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8frpc"><span class="toc-text">启动frpc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E6%A1%8C%E9%9D%A2"><span class="toc-text">设置开机自启桌面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -655,67 +651,113 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Git同时配置Gitee和GitHub"><a href="#Git同时配置Gitee和GitHub" class="headerlink" title="Git同时配置Gitee和GitHub"></a>Git同时配置Gitee和GitHub</h1><p>注意，以下基本都在 <code>~/.ssh</code> 目录下以及在这个目录下打开的Git Bash窗口中操作，因此打开 <code>~/.ssh</code> 目录及Git Bash窗口后，暂时不要关闭！</p>
-<h2 id="配置Git用户名和邮箱"><a href="#配置Git用户名和邮箱" class="headerlink" title="配置Git用户名和邮箱"></a>配置Git用户名和邮箱</h2><p>首先，为Git设置用户名和邮箱。（若已设置过，则无需设置）</p>
-<pre><code class="shell">git config --global user.name 用户名
-git config --global user.email 邮箱
-</code></pre>
-<h2 id="生成SSH-keys"><a href="#生成SSH-keys" class="headerlink" title="生成SSH keys"></a>生成SSH keys</h2><p>许多Git托管网站（如Gitee和GitHub）都使用SSH协议进行认证，因此为了向Gitee和GitHub提供SSH公钥，必须事先为其生成一份SSH密钥对。这个过程在所有操作系统上都是相似的：</p>
+        <h1 id="frp内网穿透"><a href="#frp内网穿透" class="headerlink" title="frp内网穿透"></a>frp内网穿透</h1><p>放假回家需要远程实验室的电脑，虽然可以通过Windows自带的远程功能加VPN访问，但有时电脑会重启，开机后电脑IP地址也就变了。为了确保万无一失，设置了内网穿透，实现通过公网IP访问内网机器的功能。</p>
+<h2 id="frp介绍"><a href="#frp介绍" class="headerlink" title="frp介绍"></a>frp介绍</h2><p>frp是一个开源的内网穿透工具，支持TCP、UDP、HTTP、HTTPS等协议，可以将内网的机器安全、便捷的通过具有公网IP的机器暴露到公网中。<strong>（太过抽象，可以跳过这一部分，直接进入准备工作，配置好之后再回来看就会明白了）</strong></p>
+<ul>
+<li><p>frp项目地址：<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">frp</a></p>
+</li>
+<li><p>frp工作原理</p>
+<p>frp需要一台具有公网IP地址的机器作为服务端，内网中的机器作为客户端。frp包括两部分，frps以及frpc，服务端运行frps，客户端运行frpc，其工作原理如下：</p>
+<ul>
+<li>服务端运行frps，对设置的<strong>主端口</strong>进行监听，等待客户端的连接</li>
+<li>客户端运行frpc，连接到服务端，同时告诉服务端<strong>要监听的端口</strong>和<strong>转发类型</strong></li>
+<li>服务端开启新的进程监听客户端指定的端口</li>
+<li>公网用户连接到服务端的端口（该端口是第二步中客户端指定的端口），服务端将数据转发到客户端</li>
+</ul>
+</li>
+</ul>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>这里我的服务端是一台Linux服务器，客户端是一台Windows电脑。</p>
 <ol>
-<li><p>进入存放密钥对的文件夹，SSH密钥对存放在 <code>~/.ssh</code> 目录下。在Windows系统下，安装键盘的 <code>Windows</code> 键和 <code>R</code> 键输入 <code>.ssh</code> 回车即可打开</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/1.jpg" alt="1"></p>
+<li><p>下载frp：<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">frp下载地址</a></p>
+<p>需要根据对应的操作系统和CPU架构，分别在服务端和客户端下载对应的frp。</p>
 </li>
-<li><p>生成SSH keys</p>
-<p>在<code>~/.ssh</code> 目录下进入Git Bash，输入下列命令然后一直回车即可：</p>
-<pre><code class="shell">ssh-keygen -t rsa -f id_rsa.gitee -C &quot;gitee&quot;
-ssh-keygen -t rsa -f id_rsa.github -C &quot;github&quot;
-</code></pre>
-<p>参数含义：</p>
-<ul>
-<li>-t：指定密钥类型，默认是 rsa ，可以省略</li>
-<li>rsa：指使用RSA算法</li>
-<li>-f：指定存储密钥的文件名</li>
-<li>-C：设置注释文字</li>
-</ul>
-<p>若生成成功，则出现</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/2.jpg" alt="2"></p>
-<p>同时，在刚才的 <code>.ssh</code> 文件夹下，将会生成4个新文件：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/3.jpg" alt="3"></p>
-<p>其中：</p>
-<ul>
-<li>id_rsa.xx：私钥</li>
-<li>id_rsa_xx.xx.pub：私钥对应的公钥</li>
-</ul>
+<li><p>解压frp</p>
+<p>下载解压之后，服务器端保留<strong>frps、frps.ini、LICENSE</strong>这三个文件，电脑保留<strong>frpc、frpc.ini、LICENSE</strong>这三个文件即可。</p>
+</li>
+<li><p>Linux以及Windows需设置防火墙开放对应的端口，根据下面的配置，Linux需开启7000（该端口用于服务端与客户端之间建立联系）以及9000端口（该端口用于公网用户连接内网Windows），Windows需开启3389端口（该端口用于远程桌面）。</p>
 </li>
 </ol>
-<h2 id="添加私钥到ssh-agent中"><a href="#添加私钥到ssh-agent中" class="headerlink" title="添加私钥到ssh-agent中"></a>添加私钥到ssh-agent中</h2><p>Git默认读取的文件文件名为id_rsa，因此我们需要将生成的密钥添加到ssh-agent中。在刚才打开的Git Bash窗口中输入：</p>
-<pre><code class="shell">ssh-agent bash
-ssh-add ~/.ssh/id_rsa.gitee
-ssh-add ~/.ssh/id_rsa.github
+<h2 id="服务器端配置"><a href="#服务器端配置" class="headerlink" title="服务器端配置"></a>服务器端配置</h2><h3 id="frps配置"><a href="#frps配置" class="headerlink" title="frps配置"></a>frps配置</h3><p>打开 <code>frps.ini</code> 文件，输入以下内容：</p>
+<pre><code class="shell">[common]
+bind_port = 7000 # 主端口，可设置为其他端口，客户端将通过该端口与服务端建立通信
+token = thisispassword # 用于身份验证
 </code></pre>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>在 <code>~/.ssh</code> 目录下打开 <code>config</code> 文件，若没有则新建一个名为 <code>config</code> 的文件（<strong>注意，这个文件不带扩展名，全面就叫做config</strong>），然后添加以下内容：</p>
+<h3 id="启动frps"><a href="#启动frps" class="headerlink" title="启动frps"></a>启动frps</h3><p>在解压后的文件夹内输入以下内容：</p>
+<pre><code class="shell">./frps -c ./frps.ini
+</code></pre>
+<h3 id="设置开机自启"><a href="#设置开机自启" class="headerlink" title="设置开机自启"></a>设置开机自启</h3><p>经过以上设置，frps已经在服务器上启动并监听7000端口了，但服务器重启后需要手动启动frps，因此这里再设置一下frps开机自启。</p>
+<ol>
+<li><p>在**&#x2F;lib&#x2F;systemd&#x2F;system** 下面新建一个文件<strong>frps.service</strong>:</p>
+<pre><code class="shell">vim /lib/systemd/system/frps.service
+</code></pre>
+</li>
+<li><p>写入以下内容</p>
+<pre><code class="shell">[Unit]
+Description=frps
+
+[Service]
+Type=simple
+ExecStart=frps所在文件夹/frps -c frps所在文件夹/frps.ini
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+</li>
+<li><p>启动</p>
+<pre><code class="shell">systemctl start frps
+</code></pre>
+</li>
+<li><p>设置开机自启</p>
+<pre><code class="shell">systemctl enable frps
+</code></pre>
+</li>
+</ol>
+<h2 id="电脑端"><a href="#电脑端" class="headerlink" title="电脑端"></a>电脑端</h2><h3 id="frpc配置"><a href="#frpc配置" class="headerlink" title="frpc配置"></a>frpc配置</h3><p>打开frpc.ini文件，输入以下内容：</p>
+<pre><code class="shell">[common]
+server_addr = 服务器的公网IP地址
+server_port = 7000 # frps.ini里面设置的主端口
+token = thisispassword # 与frps.ini里面设置的保持一致
+
+[RDP]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389 # 本地需要映射到服务器上的端口
+remote_port = 9000 # 映射到服务器上的端口
+</code></pre>
+<h3 id="启动frpc"><a href="#启动frpc" class="headerlink" title="启动frpc"></a>启动frpc</h3><p>在 <code>frpc.ini</code> 所在的文件夹进入命令行窗口，输入：</p>
+<pre><code class="shell">./frpc -c ./frpc.ini
+</code></pre>
+<p>启动成功后：</p>
 <blockquote>
-<p>#Gitee<br>Host gitee.com<br>HostName gitee.com<br>PreferredAuthentications publickey<br>User git<br>IdentityFile ~&#x2F;.ssh&#x2F;id_rsa.gitee</p>
-<p>#GitHub<br>Host github.com<br>HostName github.com<br>PreferredAuthentications publickey<br>User git<br>IdentityFile ~&#x2F;.ssh&#x2F;id_rsa.github</p>
+<ol>
+<li>服务器端的7000端口将监听到有个frpc客户端想要与服务器建立连接</li>
+<li>服务器端根据客户端的设置开始监听9000端口</li>
+<li>若此时有台电脑<strong>访问服务器的9000端口</strong>，则根据frp的映射，将实际访问客户端的3389端口也就<strong>是访问Windows电脑的远程</strong></li>
+</ol>
 </blockquote>
-<h2 id="添加公钥到托管网站"><a href="#添加公钥到托管网站" class="headerlink" title="添加公钥到托管网站"></a>添加公钥到托管网站</h2><ol>
-<li><p>Gitee添加公钥</p>
-<p>登录Gitee，进入 <code>设置</code> ，点击 <code>SSH公钥</code> ，输入“标题”以及“公钥”。Gitee对应的公钥存放在 <code>id_rsa.gitee.pub</code> 文件中，打开全部复制即可：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/4.jpg" alt="4"></p>
+<h3 id="设置开机自启桌面"><a href="#设置开机自启桌面" class="headerlink" title="设置开机自启桌面"></a>设置开机自启桌面</h3><p>同样，为了避免手动启动的麻烦，frpc也需要设置开机自启。借助winsw设置Windows下frpc的开机自启：</p>
+<ol>
+<li><p>根据需要<a target="_blank" rel="noopener" href="https://github.com/winsw/winsw/releases">下载winsw-*.exe</a></p>
 </li>
-<li><p>GitHub添加公钥</p>
-<p>登录GitHub，进入 <code>Settings</code> ，依次点击 <code>SSH and GPG keys</code> -&gt; <code>New SSH key</code> ，输入“Title”以及“Key”。GitHub对应的公钥存放在 <code>id_rsa.github.pub</code> 文件中，打开全部复制即可：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/5.jpg" alt="5"></p>
+<li><p>将下载的 <code>winsw-*.exe</code> 放到 <code>frpc</code> 所在的文件夹</p>
+</li>
+<li><p>新建一个名为 <code>winsw.xml</code> 的文件，写入以下内容：</p>
+<pre><code class="xml">&lt;service&gt;
+    &lt;id&gt;frp&lt;/id&gt;
+    &lt;name&gt;frp&lt;/name&gt;
+    &lt;description&gt;frp&lt;/description&gt;
+    &lt;executable&gt;frpc&lt;/executable&gt;
+    &lt;arguments&gt;-c frpc.ini&lt;/arguments&gt;
+    &lt;logmode&gt;reset&lt;/logmode&gt;
+&lt;/service&gt;
+</code></pre>
+</li>
+<li><p>管理员权限打开命令行窗口，进入到 <code>frpc</code> 所在的文件夹，输入以下内容</p>
+<pre><code class="shell">winsw install
+</code></pre>
 </li>
 </ol>
-<h2 id="测试是否添加成功"><a href="#测试是否添加成功" class="headerlink" title="测试是否添加成功"></a>测试是否添加成功</h2><p>依次在Git Bash中输入：</p>
-<pre><code class="shell">ssh -T git@gitee.com # 测试Gitee
-ssh -T git@github.com # 测试GitHub
-</code></pre>
-<p>第一次连接会让输入 <code>yes/no</code> ，输入 <code>yes</code> 即可：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/6.jpg" alt="6"></p>
-<p>出现下面即代表添加成功：</p>
-<p><img src="/2023/07/22/Git%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AEGitee%E5%92%8CGitHub/7.jpg" alt="7"></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>frp还提供了后台管理等功能，具体可参考<a target="_blank" rel="noopener" href="https://gofrp.org/docs/">frp文档</a>。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>

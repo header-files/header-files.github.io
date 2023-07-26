@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>frp内网穿透</title>
+      <link href="/2023/07/26/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+      <url>/2023/07/26/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="frp内网穿透"><a href="#frp内网穿透" class="headerlink" title="frp内网穿透"></a>frp内网穿透</h1><p>放假回家需要远程实验室的电脑，虽然可以通过Windows自带的远程功能加VPN访问，但有时电脑会重启，开机后电脑IP地址也就变了。为了确保万无一失，设置了内网穿透，实现通过公网IP访问内网机器的功能。</p><h2 id="frp介绍"><a href="#frp介绍" class="headerlink" title="frp介绍"></a>frp介绍</h2><p>frp是一个开源的内网穿透工具，支持TCP、UDP、HTTP、HTTPS等协议，可以将内网的机器安全、便捷的通过具有公网IP的机器暴露到公网中。<strong>（太过抽象，可以跳过这一部分，直接进入准备工作，配置好之后再回来看就会明白了）</strong></p><ul><li><p>frp项目地址：<a href="https://github.com/fatedier/frp">frp</a></p></li><li><p>frp工作原理</p><p>frp需要一台具有公网IP地址的机器作为服务端，内网中的机器作为客户端。frp包括两部分，frps以及frpc，服务端运行frps，客户端运行frpc，其工作原理如下：</p><ul><li>服务端运行frps，对设置的<strong>主端口</strong>进行监听，等待客户端的连接</li><li>客户端运行frpc，连接到服务端，同时告诉服务端<strong>要监听的端口</strong>和<strong>转发类型</strong></li><li>服务端开启新的进程监听客户端指定的端口</li><li>公网用户连接到服务端的端口（该端口是第二步中客户端指定的端口），服务端将数据转发到客户端</li></ul></li></ul><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>这里我的服务端是一台Linux服务器，客户端是一台Windows电脑。</p><ol><li><p>下载frp：<a href="https://github.com/fatedier/frp/releases">frp下载地址</a></p><p>需要根据对应的操作系统和CPU架构，分别在服务端和客户端下载对应的frp。</p></li><li><p>解压frp</p><p>下载解压之后，服务器端保留<strong>frps、frps.ini、LICENSE</strong>这三个文件，电脑保留<strong>frpc、frpc.ini、LICENSE</strong>这三个文件即可。</p></li><li><p>Linux以及Windows需设置防火墙开放对应的端口，根据下面的配置，Linux需开启7000（该端口用于服务端与客户端之间建立联系）以及9000端口（该端口用于公网用户连接内网Windows），Windows需开启3389端口（该端口用于远程桌面）。</p></li></ol><h2 id="服务器端配置"><a href="#服务器端配置" class="headerlink" title="服务器端配置"></a>服务器端配置</h2><h3 id="frps配置"><a href="#frps配置" class="headerlink" title="frps配置"></a>frps配置</h3><p>打开 <code>frps.ini</code> 文件，输入以下内容：</p><pre><code class="shell">[common]bind_port = 7000 # 主端口，可设置为其他端口，客户端将通过该端口与服务端建立通信token = thisispassword # 用于身份验证</code></pre><h3 id="启动frps"><a href="#启动frps" class="headerlink" title="启动frps"></a>启动frps</h3><p>在解压后的文件夹内输入以下内容：</p><pre><code class="shell">./frps -c ./frps.ini</code></pre><h3 id="设置开机自启"><a href="#设置开机自启" class="headerlink" title="设置开机自启"></a>设置开机自启</h3><p>经过以上设置，frps已经在服务器上启动并监听7000端口了，但服务器重启后需要手动启动frps，因此这里再设置一下frps开机自启。</p><ol><li><p>在**&#x2F;lib&#x2F;systemd&#x2F;system** 下面新建一个文件<strong>frps.service</strong>:</p><pre><code class="shell">vim /lib/systemd/system/frps.service</code></pre></li><li><p>写入以下内容</p><pre><code class="shell">[Unit]Description=frps[Service]Type=simpleExecStart=frps所在文件夹/frps -c frps所在文件夹/frps.ini[Install]WantedBy=multi-user.target</code></pre></li><li><p>启动</p><pre><code class="shell">systemctl start frps</code></pre></li><li><p>设置开机自启</p><pre><code class="shell">systemctl enable frps</code></pre></li></ol><h2 id="电脑端"><a href="#电脑端" class="headerlink" title="电脑端"></a>电脑端</h2><h3 id="frpc配置"><a href="#frpc配置" class="headerlink" title="frpc配置"></a>frpc配置</h3><p>打开frpc.ini文件，输入以下内容：</p><pre><code class="shell">[common]server_addr = 服务器的公网IP地址server_port = 7000 # frps.ini里面设置的主端口token = thisispassword # 与frps.ini里面设置的保持一致[RDP]type = tcplocal_ip = 127.0.0.1local_port = 3389 # 本地需要映射到服务器上的端口remote_port = 9000 # 映射到服务器上的端口</code></pre><h3 id="启动frpc"><a href="#启动frpc" class="headerlink" title="启动frpc"></a>启动frpc</h3><p>在 <code>frpc.ini</code> 所在的文件夹进入命令行窗口，输入：</p><pre><code class="shell">./frpc -c ./frpc.ini</code></pre><p>启动成功后：</p><blockquote><ol><li>服务器端的7000端口将监听到有个frpc客户端想要与服务器建立连接</li><li>服务器端根据客户端的设置开始监听9000端口</li><li>若此时有台电脑<strong>访问服务器的9000端口</strong>，则根据frp的映射，将实际访问客户端的3389端口也就<strong>是访问Windows电脑的远程</strong></li></ol></blockquote><h3 id="设置开机自启桌面"><a href="#设置开机自启桌面" class="headerlink" title="设置开机自启桌面"></a>设置开机自启桌面</h3><p>同样，为了避免手动启动的麻烦，frpc也需要设置开机自启。借助winsw设置Windows下frpc的开机自启：</p><ol><li><p>根据需要<a href="https://github.com/winsw/winsw/releases">下载winsw-*.exe</a></p></li><li><p>将下载的 <code>winsw-*.exe</code> 放到 <code>frpc</code> 所在的文件夹</p></li><li><p>新建一个名为 <code>winsw.xml</code> 的文件，写入以下内容：</p><pre><code class="xml">&lt;service&gt;    &lt;id&gt;frp&lt;/id&gt;    &lt;name&gt;frp&lt;/name&gt;    &lt;description&gt;frp&lt;/description&gt;    &lt;executable&gt;frpc&lt;/executable&gt;    &lt;arguments&gt;-c frpc.ini&lt;/arguments&gt;    &lt;logmode&gt;reset&lt;/logmode&gt;&lt;/service&gt;</code></pre></li><li><p>管理员权限打开命令行窗口，进入到 <code>frpc</code> 所在的文件夹，输入以下内容</p><pre><code class="shell">winsw install</code></pre></li></ol><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>frp还提供了后台管理等功能，具体可参考<a href="https://gofrp.org/docs/">frp文档</a>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 百宝箱 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 百宝箱 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java容器3——Map</title>
       <link href="/2023/07/25/Java%E5%AE%B9%E5%99%A83%E2%80%94%E2%80%94Map/"/>
       <url>/2023/07/25/Java%E5%AE%B9%E5%99%A83%E2%80%94%E2%80%94Map/</url>
