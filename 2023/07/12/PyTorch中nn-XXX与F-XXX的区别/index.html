@@ -139,7 +139,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(13)</small>
+                <small>(14)</small>
             
         </div>
     </li>
@@ -196,7 +196,7 @@
         <div data-rel="编程语言">
             <i class="fold iconfont icon-right"></i>
             编程语言
-            <small>(5)</small>
+            <small>(6)</small>
         </div>
         
             <ul class="sub hide">
@@ -206,7 +206,7 @@
         <div data-rel="编程语言&lt;---&gt;Java">
             
             Java
-            <small>(5)</small>
+            <small>(6)</small>
         </div>
         
     </li>
@@ -338,8 +338,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="13">
-<input type="hidden" id="yelog_site_word_count" value="14k">
+<input type="hidden" id="yelog_site_posts_number" value="14">
+<input type="hidden" id="yelog_site_word_count" value="14.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -458,6 +458,15 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2023/07/29/Java%E6%B3%9B%E5%9E%8B3%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3/"
+           data-tag="Java,泛型"
+           data-author="" >
+            <span class="post-title" title="Java泛型3——泛型接口">Java泛型3——泛型接口</span>
+            <span class="post-date" title="2023-07-29 15:42:59">2023/07/29</span>
+        </a>
         
         
         <a  class="全部文章 编程语言 Java "
@@ -625,12 +634,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-12 21:02:45'>2023-07-12 15:25</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:47:53'>2023-07-12 15:25</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:512</span>
+        <span>字数:505</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -660,7 +669,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyTorch%E4%B8%ADnn-XXX%E4%B8%8EF-XXX%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">PyTorch中nn.XXX与F.XXX的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nn-XXX%E4%B8%8EF-XXX"><span class="toc-text">nn.XXX与F.XXX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nn-Relu%E4%B8%8EF-relu"><span class="toc-text">nn.Relu与F.relu()</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nn-XXX%E4%B8%8EF-XXX"><span class="toc-text">nn.XXX与F.XXX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nn-Relu%E4%B8%8EF-relu"><span class="toc-text">nn.Relu与F.relu()</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -676,7 +685,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="PyTorch中nn-XXX与F-XXX的区别"><a href="#PyTorch中nn-XXX与F-XXX的区别" class="headerlink" title="PyTorch中nn.XXX与F.XXX的区别"></a>PyTorch中nn.XXX与F.XXX的区别</h1><h2 id="nn-XXX与F-XXX"><a href="#nn-XXX与F-XXX" class="headerlink" title="nn.XXX与F.XXX"></a>nn.XXX与F.XXX</h2><p>PyTorch中torch.nn<strong>（以下简写为nn）</strong>中的模块和torch.nn.functional<strong>（以下简写为F）</strong>中的模块都提供了常用的神经网络操作，包括激活函数、损失函数、池化操作等。它们的主要区别如下：</p>
+        <h2 id="nn-XXX与F-XXX"><a href="#nn-XXX与F-XXX" class="headerlink" title="nn.XXX与F.XXX"></a>nn.XXX与F.XXX</h2><p>PyTorch中torch.nn<strong>（以下简写为nn）</strong>中的模块和torch.nn.functional<strong>（以下简写为F）</strong>中的模块都提供了常用的神经网络操作，包括激活函数、损失函数、池化操作等。它们的主要区别如下：</p>
 <ul>
 <li>nn中的模块是以类形式存在的；F中的模块是以函数形式存在的</li>
 <li>nn中的模块是nn.Module的子类，包含可学习参数、可导，在反向传播中可以计算梯度，可以在模型中作为子模块使用；F中的模块是纯函数，没有与之相关联的可学习参数，虽然也可以用于反向传播，但是其梯度需要手动计算</li>

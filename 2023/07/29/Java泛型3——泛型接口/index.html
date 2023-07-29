@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>离思五首·其四 | 勿庸散人</title>
-  <meta name="keywords" content=" 诗 , 唐 , 元稹 ">
-  <meta name="description" content="离思五首·其四 | 勿庸散人">
+  <title>Java泛型3——泛型接口 | 勿庸散人</title>
+  <meta name="keywords" content=" Java , 泛型 ">
+  <meta name="description" content="Java泛型3——泛型接口 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -603,9 +603,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-离思五首·其四" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java泛型3——泛型接口" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">离思五首·其四</h1>
+        <h1 class="article-title">Java泛型3——泛型接口</h1>
     
     <div class="article-meta">
         
@@ -615,9 +615,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="读书笔记">读书笔记</a> > 
+            <a  data-rel="编程语言">编程语言</a> > 
             
-            <a  data-rel="读书笔记&lt;---&gt;诗">诗</a>
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
             
         </span>
         
@@ -625,23 +625,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">诗</a>
+            <a class="color5">Java</a>
             
-            <a class="color2">唐</a>
-            
-            <a class="color3">元稹</a>
+            <a class="color3">泛型</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-12 15:18:31'>2023-07-08 15:22</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:47:31'>2023-07-29 15:42</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:600</span>
+        <span>字数:725</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -671,7 +669,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-text">定义泛型接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-text">实现泛型接口</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -687,15 +685,98 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <center>离思五首·其四</center>
-<p align="right">元稹【唐】</p>
-<hr>
-<center>曾经沧海难为水，</center>
-<center>除却巫山不是云。</center>
-<center>取次花丛懒回顾，</center>
-<center>半缘修道半缘君。</center>
+        <blockquote>
+<p>注：以下内容基于Java 8，所有代码都已在Java 8环境下测试通过</p>
+</blockquote>
+<p>目录：</p>
+<ul>
+<li><p>Java泛型1——概述</p>
+</li>
+<li><p>Java泛型2——泛型类</p>
+</li>
+<li><p>Java泛型3——泛型接口</p>
+</li>
+<li><p>Java泛型4——泛型方法</p>
+</li>
+<li><p>Java泛型5——泛型擦除</p>
+</li>
+<li><p>Java泛型6——通配符</p>
+</li>
+</ul>
+<h2 id="定义泛型接口"><a href="#定义泛型接口" class="headerlink" title="定义泛型接口"></a>定义泛型接口</h2><p>类似泛型类的定义，泛型接口的定义格式如下：</p>
+<pre><code class="java">interface 接口名 &lt;&gt;&#123;
 
-<p>第一次读到这首诗的时候，因为没读懂“曾经”两个字，所以对前两句半知半解，只觉得后两句写得很妙。后来某一天突然醒悟过来，“曾经”是两个词：曾经经过，这才体会到前两句的韵味。特别是最近想起来这首诗，更是咂摸出一番新的滋味。<br>“领略过沧海的波涛汹涌，别处的水就不值得看了；沉醉过巫山云景的梦幻飘渺，别处的云都不能被叫作云景了；即使从万花丛中走过，也懒得看一眼”如果只读到前三句，可能会是一头雾水，这到底想表达什么意思？为什么别处的水不值得看？为什么别处的云不能被叫作云景？为什么不看一眼身边的花？正当疑问之时，最后一句点名原因“一半是因为我在修道，另一半是因为你呀！”<br>个人认为，这首诗除了前两句的比喻极其绝妙之外，整体结构上也是极具深意的，可以说是含蓄美的极致体现。前三句不明说对你的爱慕，只是说沧海、说巫山云雨、说万花丛，直到最后一句点睛之笔才知道这哪是在说什么沧海云雨，这句句都是在说心上人啊！哪怕到了最后点名原因了，还要再说一句“半缘修道”，可是真的有一半原因是修道吗？恐怕未必，或者说“修道”本身也是“缘君”。这种写法， 层层递进，先是三句描写自己心态的句子，然后自然而然的说出自己为何这样，虽然整体上感觉不到太大的感情波动，但却将思恋之情委婉而又淋漓尽致的表现了出来。<br>如果换成现在，或许就是这样吧：<br>今天的晚霞好美，像一条红绸带从天边垂下；晚饭也很香，炸鸡腿外焦里嫩，咬一口嘎吱响。<br>但是我不想去看晚霞也没心思吃饭。<br>为什么？<br>因为最近很忙很累，嗯，更重要的是，好久不见想你了……</p>
+&#125;
+</code></pre>
+<p>比如，下面这个泛型接口：</p>
+<pre><code class="java">interface TestInterface&lt;T&gt; &#123;
+    T t;//编译时报错，接口中的变量会被隐式的指定为 public static final 变量
+    
+    static void f(T t)&#123;//编译时报错，静态方法不能使用定义泛型接口时使用的泛型标记符
+        
+    &#125;
+    public abstract void print(T t);
+&#125;
+</code></pre>
+<p>泛型接口中的变量会被隐式的指定为 public static final 变量，因此<strong>泛型接口中的变量不可以使用定义泛型接口时使用的泛型标记符</strong>。同样，<strong>接口中的静态方法（Java8开始，接口里可以使用静态方法）也不能使用定义泛型接口时使用的泛型标记符</strong>。</p>
+<h2 id="实现泛型接口"><a href="#实现泛型接口" class="headerlink" title="实现泛型接口"></a>实现泛型接口</h2><p>泛型类也可以继承，任何一个泛型类都可以作为父类或子类。不过泛型类在继承时需要注意以下几点：</p>
+<ol>
+<li><p>类是泛型类，</p>
+<pre><code class="java">interface TestInterface&lt;T&gt; &#123;
+    public abstract void print(T t);
+&#125;
+
+//类中与接口同名的泛型标记符可以传递给接口
+//类的泛型标记符包含接口的泛型标记符
+class TestClass_1&lt;T&gt; implements TestInterface&lt;T&gt; &#123;
+    @Override
+    public void print(T t) &#123;
+        System.out.println(t);
+    &#125;
+&#125;
+class TestClass_2&lt;T, U, V, W&gt; implements TestInterface&lt;T&gt; &#123;
+    @Override
+    public void print(T t) &#123;
+        System.out.println(t);
+    &#125;
+&#125;
+
+//类的泛型标记符不包含接口中的泛型标记符
+class TestClass_3&lt;U, V, W&gt; implements TestInterface&lt;String &gt; &#123;//指明接口泛型参数的数据类型
+    @Override
+    public void print(String s) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成String
+
+    &#125;
+&#125;
+class TestClass_4&lt;U, V, W&gt; implements TestInterface&#123;//未指明接口泛型参数的数据类型，则默认接口泛型参数是Object
+    @Override
+    public void print(Object o) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成Object
+
+    &#125;
+&#125;
+</code></pre>
+</li>
+<li><p>类不是泛型类</p>
+<pre><code class="java">interface TestInterface&lt;T&gt; &#123;
+    public abstract void print(T t);
+&#125;
+
+class TestClass_5 implements TestInterface&lt;String&gt; &#123;//指明接口泛型参数的数据类型
+    @Override
+    public void print(String s) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成String
+
+    &#125;
+&#125;
+
+class TestClass_6 implements TestInterface &#123;//未指明接口泛型参数的数据类型，则默认接口泛型参数是Object
+    @Override
+    public void print(Object o) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成Object
+
+    &#125;
+&#125;
+</code></pre>
+</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
