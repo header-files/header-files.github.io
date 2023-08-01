@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java泛型3——泛型接口 | 勿庸散人</title>
+  <title>Java泛型5——泛型通配符 | 勿庸散人</title>
   <meta name="keywords" content=" Java , 泛型 ">
-  <meta name="description" content="Java泛型3——泛型接口 | 勿庸散人">
+  <meta name="description" content="Java泛型5——泛型通配符 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -621,9 +621,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Java泛型3——泛型接口" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java泛型5——泛型通配符" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java泛型3——泛型接口</h1>
+        <h1 class="article-title">Java泛型5——泛型通配符</h1>
     
     <div class="article-meta">
         
@@ -652,12 +652,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 16:23:03'>2023-07-29 15:42</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-01 10:05:07'>2023-08-01 10:03</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:737</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -687,7 +687,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-text">定义泛型接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="toc-text">实现泛型接口</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="toc-text">什么是通配符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%95%8C%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="toc-text">无界通配符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E7%95%8C%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="toc-text">上界通配符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E7%95%8C%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="toc-text">下界通配符</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -708,93 +708,190 @@
 </blockquote>
 <p>目录：</p>
 <ul>
-<li><p>Java泛型1——概述</p>
+<li>Java泛型1——概述</li>
+<li>Java泛型2——泛型类</li>
+<li>Java泛型3——泛型接口</li>
+<li>Java泛型4——泛型方法</li>
+<li>Java泛型5——泛型通配符</li>
+<li>Java泛型6——类型擦除</li>
+</ul>
+<h2 id="什么是通配符"><a href="#什么是通配符" class="headerlink" title="什么是通配符"></a>什么是通配符</h2><p>在Java中，类与类之间是有继承关系的。例如，<code>Integer</code> 类继承自 <code>Number</code> 类，因此<code>Integer</code> 类的对象可以赋值给 <code>Number</code> 类的引用（即<strong>向上转型</strong>，这是可以实现<strong>多态性</strong>的一个重要因素）。但集合之间没有这种关系，也就是 <code>LinkedList&lt;Integer&gt;</code> 和  <code>LinkedList&lt;Number&gt;</code>之间并没有继承关系，<strong>它们都是<code>LinkedList</code> 类</strong>。因此  <code>LinkedList&lt;Number&gt;</code> 的集合并不能存放<code>Integer</code> 类型的变量（虽然<code>Integer</code> 类继承自 <code>Number</code> 类）。</p>
+<p>比如下面这段代码：</p>
+<pre><code class="java">public class Main &#123;
+    private static void dealTest(Test&lt;Father&gt; test) &#123;
+        System.out.println(test.getClass());
+    &#125;
+
+    public static void main(String[] args) &#123;
+        Test&lt;Father&gt; tesF = new Test&lt;&gt;();
+        Test&lt;Child&gt; testC = new Test&lt;&gt;();
+
+        Main.dealTest(tesF);
+        Main.dealTest(testC);//编译器报错
+    &#125;
+&#125;
+
+class Father &#123;
+
+&#125;
+
+class Child extends Father &#123;
+
+&#125;
+
+class Test&lt;T&gt; &#123;
+
+&#125;
+</code></pre>
+<p>这段代码定义了一个泛型类 <code>Test</code> ，并定义了一个处理该类的静态方法 <code>dealTest()</code>，该类接受一个 <code>Test&lt;Father&gt;</code> 对象作为参数。根据上面的介绍可以知道，虽然<code>Child</code> 是  <code>Father</code> 的子类，但<code>Test&lt;Child&gt;</code> 和 <code>Test&lt;Father&gt;</code> 之间并没有继承关系，因此静态方法 <code>dealTest()</code>不能接受一个 <code>Test&lt;Son&gt;</code> 对象。因此，若想让静态方法 <code>dealTest()</code>处理<code>Test&lt;Son&gt;</code> 对象，还需对其进行重载：</p>
+<pre><code class="java">private static void dealTest(Test&lt;Child&gt; test) &#123;
+    
+&#125;
+</code></pre>
+<p>但这显然违背了多态性的设计理念，而且<strong>这是编译器不允许的做法</strong>。如果能让 <code>dealTest()</code>方法不只接受<code>Test&lt;Father&gt;</code>对象，而是让其接受<code>Test&lt;XXX&gt;</code>对象，其中<strong>XXX代表某一类型内的类型参数</strong>，那么上面这个问题就可以解决了。</p>
+<p>这就是泛型通配符的作用：<strong>泛型通配符用于限制类型参数的范围。</strong></p>
+<p>泛型通配符有 3 种形式：</p>
+<ul>
+<li><?> ：无界通配符</li>
+<li><? extends T> ：有上界的通配符</li>
+<li><? super T> ：有下界的通配符</li>
+</ul>
+<h2 id="无界通配符"><a href="#无界通配符" class="headerlink" title="无界通配符"></a>无界通配符</h2><p>无界通配符：**&lt;?&gt;**，其中 <strong>?</strong> 代表了任意一种数据类型。比如，下面这段代码：</p>
+<pre><code class="java">public class Main &#123;
+    private static void dealTest(Test&lt;?&gt; test) &#123;//?代表可以使用任意一种数据类型
+        System.out.println(test.getClass());
+    &#125;
+
+    public static void main(String[] args) &#123;
+        Test&lt;Father&gt; tesF = new Test&lt;&gt;();
+        Test&lt;Child&gt; testC = new Test&lt;&gt;();
+        Test&lt;Integer&gt; testI = new Test&lt;&gt;();
+
+        Main.dealTest(tesF);
+        Main.dealTest(testC);
+        Main.dealTest(testI);
+    &#125;
+&#125;
+
+class Father &#123;
+
+&#125;
+
+class Child extends Father &#123;
+
+&#125;
+
+class Test&lt;T&gt; &#123;
+
+&#125;
+</code></pre>
+<p>由于使用了无界通配符，<code>dealTest()</code>方法可以接受具有不同泛型参数的泛型类 <code>Test</code>的对象。</p>
+<p>需要注意：</p>
+<ul>
+<li><p>不要混淆 <code>Test&lt;Object&gt;</code>  和  <code>Test&lt;?&gt;</code> ，<code>Object</code> 也是一种数据类型，因此 <strong><code>Test&lt;Object&gt;</code> 代表参数类型只能为<code>Object</code>的<code>Test</code>类</strong>， <code>Test&lt;?&gt;</code>代表参数类型可以是任意数据类型的<code>Test</code>类</p>
 </li>
-<li><p>Java泛型2——泛型类</p>
-</li>
-<li><p>Java泛型3——泛型接口</p>
-</li>
-<li><p>Java泛型4——泛型方法</p>
-</li>
-<li><p>Java泛型5——泛型擦除</p>
-</li>
-<li><p>Java泛型6——通配符</p>
+<li><p><strong>最后不要在实例化泛型类的时候使用无界通配符</strong>，<code>&lt;?&gt;</code> 集合的数据类型是不确定的，因此我们只能往集合中添加<code>null</code>，而且从其中取出的元素也只能赋值给<code>Object</code>对象。</p>
+<pre><code class="java">import java.util.LinkedList;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        LinkedList&lt;?&gt; list = new LinkedList&lt;&gt;();
+
+        list.add(null);
+        list.add(1);//编译器报错，只能放入null
+    &#125;
+&#125;
+</code></pre>
 </li>
 </ul>
-<h2 id="定义泛型接口"><a href="#定义泛型接口" class="headerlink" title="定义泛型接口"></a>定义泛型接口</h2><p>类似泛型类的定义，泛型接口的定义格式如下：</p>
-<pre><code class="java">interface 接口名 &lt;泛型标记符1, 泛型标记符2……&gt; &#123;
+<h2 id="上界通配符"><a href="#上界通配符" class="headerlink" title="上界通配符"></a>上界通配符</h2><p>上界通配符：**&lt;? extends T&gt;<strong>，其中</strong>T** 代表了类型参数的上界。上界通配符将类型参数限制为特定类型<strong>T</strong>及其子类型。比如，<code>&lt;? extends Number&gt;</code>表示类型参数可以是<code>Number</code>以及<code>Number</code>的子类。</p>
+<p>可以使用上界通配符对上面的代码进行改写：</p>
+<pre><code class="java">public class Main &#123;
+    private static void dealTest(Test&lt;? extends Father&gt; test) &#123;//&lt;? extends Father&gt; 代表可以使用 Father 及其子类作为类型参数
+        System.out.println(test.getClass());
+    &#125;
+
+    public static void main(String[] args) &#123;
+        Test&lt;Father&gt; fatherTest = new Test&lt;&gt;();
+        Test&lt;Child&gt; childTest = new Test&lt;&gt;();
+
+        Main.dealTest(fatherTest);
+        Main.dealTest(childTest);
+    &#125;
+&#125;
+
+class Father &#123;
+
+&#125;
+
+class Child extends Father &#123;
+
+&#125;
+
+class Test&lt;T&gt; &#123;
 
 &#125;
 </code></pre>
-<p>比如，下面这个泛型接口：</p>
-<pre><code class="java">interface TestInterface&lt;T&gt; &#123;
-    T t;//编译时报错，接口中的变量会被隐式的指定为 public static final 变量
-    
-    static void f(T t)&#123;//编译时报错，静态方法不能使用定义泛型接口时使用的泛型标记符
-        
-    &#125;
-    public abstract void print(T t);
-&#125;
-</code></pre>
-<p>泛型接口中的变量会被隐式的指定为 public static final 变量，因此<strong>泛型接口中的变量不可以使用定义泛型接口时使用的泛型标记符</strong>。同样，<strong>接口中的静态方法（Java8开始，接口里可以使用静态方法）也不能使用定义泛型接口时使用的泛型标记符</strong>。</p>
-<h2 id="实现泛型接口"><a href="#实现泛型接口" class="headerlink" title="实现泛型接口"></a>实现泛型接口</h2><p>泛型类也可以继承，任何一个泛型类都可以作为父类或子类。不过泛型类在继承时需要注意以下几点：</p>
-<ol>
-<li><p>类是泛型类，</p>
-<pre><code class="java">interface TestInterface&lt;T&gt; &#123;
-    public abstract void print(T t);
-&#125;
+<p>以 <code>LinkedList&lt;? extends Number&gt;</code> 为例，在使用上界通配符的时候需要注意：</p>
+<p> <code>LinkedList&lt;? extends Number&gt;</code> 可以代表 <code>LinkedList&lt;? extends Interger&gt;</code>、 <code>LinkedList&lt;? extends Double&gt;</code>……但是，不能指定 <code>LinkedList&lt;? extends Number&gt;</code>的数据类型。如下：</p>
+<pre><code class="java">import java.util.LinkedList;
 
-//类中与接口同名的泛型标记符可以传递给接口
-//类的泛型标记符包含接口的泛型标记符
-class TestClass_1&lt;T&gt; implements TestInterface&lt;T&gt; &#123;
-    @Override
-    public void print(T t) &#123;
-        System.out.println(t);
-    &#125;
-&#125;
-class TestClass_2&lt;T, U, V, W&gt; implements TestInterface&lt;T&gt; &#123;
-    @Override
-    public void print(T t) &#123;
-        System.out.println(t);
-    &#125;
-&#125;
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        LinkedList&lt;? extends Number&gt; list1 = new LinkedList&lt;Integer&gt;();//编译正确
+        LinkedList&lt;? extends Number&gt; list2 = new LinkedList&lt;Double&gt;();//编译正确
+        LinkedList&lt;? extends Number&gt; list3 = new LinkedList&lt;Object&gt;();//编译器报错，超出上界
 
-//类的泛型标记符不包含接口中的泛型标记符
-class TestClass_3&lt;U, V, W&gt; implements TestInterface&lt;String &gt; &#123;//指明接口泛型参数的数据类型
-    @Override
-    public void print(String s) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成String
+        LinkedList&lt;Number&gt; list4 = new LinkedList&lt;Integer&gt;();//编译器报错
 
-    &#125;
-&#125;
-class TestClass_4&lt;U, V, W&gt; implements TestInterface&#123;//未指明接口泛型参数的数据类型，则默认接口泛型参数是Object
-    @Override
-    public void print(Object o) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成Object
-
+        list1.add(1);//编译器报错
+        list1.add(2.3);//编译器报错
+        list1.add(null);//编译正确
     &#125;
 &#125;
 </code></pre>
-</li>
-<li><p>类不是泛型类</p>
-<pre><code class="java">interface TestInterface&lt;T&gt; &#123;
-    public abstract void print(T t);
-&#125;
+<p>在看上面的代码之前，需要明确一个概念，那就是 <strong><code>LinkedList&lt;? extends Number&gt;</code>表示这个集合可能是 <code>LinkedList&lt;? extends Interger&gt;</code>也可能是 <code>LinkedList&lt;? extends Double&gt;</code>，但它什么都可能是的后果就是它什么也不是，也就是说不能确定它到底是 <code>LinkedList&lt;? extends Interger&gt;</code>还是 <code>LinkedList&lt;? extends Double&gt;</code>或者其他什么集合</strong>，所以也就<strong>不能往里面添加具体类型的元素</strong>，因为不能确定它是什么类型的。但和无界通配符类似，**可以往里面添加<code>null</code>**。</p>
+<h2 id="下界通配符"><a href="#下界通配符" class="headerlink" title="下界通配符"></a>下界通配符</h2><p>下界通配符：**&lt;? super T&gt;<strong>，与上界通配符刚好相反，T代表了类型参数的下界。类似地，下界通配符将类型参数限制为特定类型</strong>T**及其超类。比如，<code>&lt;? extends Integer&gt;</code>表示类型参数可以是<code>Integer</code>以及<code>Integer</code>的超类。</p>
+<p>可以使用下界通配符对上面的代码进行改写：</p>
+<pre><code class="java">public class Main &#123;
+    private static void dealTest(Test&lt;? super Child&gt; test) &#123;//&lt;? super Child&gt; 代表可以使用 Child 及其超类作为类型参数
+        System.out.println(test.getClass());
+    &#125;
 
-class TestClass_5 implements TestInterface&lt;String&gt; &#123;//指明接口泛型参数的数据类型
-    @Override
-    public void print(String s) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成String
+    public static void main(String[] args) &#123;
+        Test&lt;Father&gt; fatherTest = new Test&lt;&gt;();
+        Test&lt;Child&gt; childTest = new Test&lt;&gt;();
 
+        Main.dealTest(fatherTest);
+        Main.dealTest(childTest);
     &#125;
 &#125;
 
-class TestClass_6 implements TestInterface &#123;//未指明接口泛型参数的数据类型，则默认接口泛型参数是Object
-    @Override
-    public void print(Object o) &#123;//注意，接口中使用泛型参数的函数也要做出相应的改变设置成Object
+class Father &#123;
 
+&#125;
+
+class Child extends Father &#123;
+
+&#125;
+
+class Test&lt;T&gt; &#123;
+
+&#125;
+</code></pre>
+<p>带有上界统配符的集合<code>LinkedList&lt;? extends Number&gt;</code>不能添加具体类型的元素，但是<strong>带有下界通配符的集合<code>LinkedList&lt;? super Number&gt;</code>可以添加<code>Number</code>类及其子类的对象，但是不能添加<code>Number</code>类的父类对象</strong>。因为<code>LinkedList&lt;? extends Number&gt;</code>最低也是个<code>LinkedList&lt;Number extends Number&gt;</code>集合，因此至少也能存放<code>Number</code>类对象，所以也可以存放<code>Number</code>子类对象。但是<code>LinkedList&lt;? extends Number&gt;</code>的上限不知道，所以类似于带有上界通配符的集合不能存放具体的数据类型，<code>LinkedList&lt;? extends Number&gt;</code>也不能存放<code>Number</code>父类的对象。</p>
+<pre><code class="java">import java.util.LinkedList;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        LinkedList&lt;? super Number&gt; list1 = new LinkedList&lt;Object&gt;();//编译正确
+        LinkedList&lt;? super Number&gt; list2 = new LinkedList&lt;Integer&gt;();//编译器报错，超出下界
+
+        list1.add(1);//编译正确
+        list1.add((Object) 2.5);//编译器报错，不能存放 Number 类的父类对象
     &#125;
 &#125;
 </code></pre>
-</li>
-</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
