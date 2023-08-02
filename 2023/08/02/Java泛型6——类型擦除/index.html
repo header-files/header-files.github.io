@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>对使用Git、GitHub时邮箱和用户名的理解 | 勿庸散人</title>
-  <meta name="keywords" content=" Git , Git技巧 ">
-  <meta name="description" content="对使用Git、GitHub时邮箱和用户名的理解 | 勿庸散人">
+  <title>Java泛型6——类型擦除 | 勿庸散人</title>
+  <meta name="keywords" content=" Java , 泛型 ">
+  <meta name="description" content="Java泛型6——类型擦除 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -630,9 +630,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-对使用Git、GitHub时邮箱和用户名的理解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java泛型6——类型擦除" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">对使用Git、GitHub时邮箱和用户名的理解</h1>
+        <h1 class="article-title">Java泛型6——类型擦除</h1>
     
     <div class="article-meta">
         
@@ -642,9 +642,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开发工具">开发工具</a> > 
+            <a  data-rel="编程语言">编程语言</a> > 
             
-            <a  data-rel="开发工具&lt;---&gt;Git">Git</a>
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
             
         </span>
         
@@ -652,21 +652,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">Git</a>
+            <a class="color5">Java</a>
             
-            <a class="color1">Git技巧</a>
+            <a class="color3">泛型</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:46:50'>2023-07-13 11:20</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-02 17:42:14'>2023-08-02 17:26</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1k</span>
+        <span>字数:749</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -696,7 +696,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95GitHub%E6%97%B6"><span class="toc-text">登录GitHub时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit%E6%97%B6"><span class="toc-text">配置Git时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AESSH-Key%E6%97%B6"><span class="toc-text">设置SSH Key时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4"><span class="toc-text">1. 什么是类型擦除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">2. 原始类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%97%A0%E9%99%90%E5%AE%9A%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.1 无限定类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%9C%89%E9%99%90%E5%AE%9A%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.2 有限定类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4%E5%8E%9F%E7%90%86"><span class="toc-text">3. 类型擦除原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">4. 类型擦除带来的问题</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -712,54 +712,84 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用Git以及GitHub时会多次用到“邮箱”和“用户名”，这里记录一下它们的区别。</p>
-<h2 id="登录GitHub时"><a href="#登录GitHub时" class="headerlink" title="登录GitHub时"></a>登录GitHub时</h2><p><img src="/2023/07/13/%E5%AF%B9%E4%BD%BF%E7%94%A8Git%E3%80%81GitHub%E6%97%B6%E9%82%AE%E7%AE%B1%E5%92%8C%E7%94%A8%E6%88%B7%E5%90%8D%E7%9A%84%E7%90%86%E8%A7%A3/1.jpg" alt="1"></p>
-<p>这里的用户名或邮箱是<strong>用于登录GitHub</strong>这个网站的。</p>
-<h2 id="配置Git时"><a href="#配置Git时" class="headerlink" title="配置Git时"></a>配置Git时</h2><pre><code class="shell">git config --global user.name &quot;用户名&quot;
-git config --global user.email &quot;邮箱&quot;
+        <blockquote>
+<p>注：以下内容基于Java 8，所有代码都已在Java 8环境下测试通过</p>
+</blockquote>
+<ul>
+<li><a href="/2023/07/28/Java%E6%B3%9B%E5%9E%8B1%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0">Java泛型1——概述</a></li>
+<li><a href="/2023/07/28/Java%E6%B3%9B%E5%9E%8B2%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E7%B1%BB">Java泛型2——泛型类</a></li>
+<li><a href="/2023/07/29/Java%E6%B3%9B%E5%9E%8B3%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3">Java泛型3——泛型接口</a></li>
+<li><a href="/2023/07/29/Java%E6%B3%9B%E5%9E%8B4%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95">Java泛型4——泛型方法</a></li>
+<li><a href="/2023/08/01/Java%E6%B3%9B%E5%9E%8B5%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E9%80%9A%E9%85%8D%E7%AC%A6">Java泛型5——泛型通配符</a></li>
+<li><a href="/2023/08/02/Java%E6%B3%9B%E5%9E%8B6%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4">Java泛型6——类型擦除</a></li>
+</ul>
+<h2 id="1-什么是类型擦除"><a href="#1-什么是类型擦除" class="headerlink" title="1. 什么是类型擦除"></a>1. 什么是类型擦除</h2><p>泛型是在Java 1.5被引进的，但是泛型代码可以和之前的版本兼容，原因就是泛型只存在代码编译阶段，编译后的字节码中（也就是运行时）不包含泛型中的类型信息。<strong>使用泛型时，泛型相关的类型参数信息会在编译时被擦除掉，这个过程被称为类型擦除</strong>。比如：</p>
+<pre><code class="java">import java.util.LinkedList;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        LinkedList&lt;Integer&gt; i = new LinkedList&lt;&gt;();
+        LinkedList&lt;String&gt; s = new LinkedList&lt;&gt;();
+
+        System.out.println(&quot;i:&quot; + i.getClass());
+        System.out.println(&quot;s:&quot; + s.getClass());
+    &#125;
+&#125;
 </code></pre>
-<p>这两条命令是配置 Git 的全局用户名和邮箱，在进行版本控制时用于记录用户身份信息。Git在commit信息中会显示提交人及其邮箱地址，方便追踪提交记录。因此这里的邮箱和用户名是<strong>为了回溯是谁提交的代码</strong>，并不需要一定填写GitHub的用户名和邮箱，甚至是可以随便填写的用户名和邮箱（当然，极其不建议这样做）。</p>
-<p>在使用GitHub时，可能会发现一个bug：虽然提交了commit，但是主页却不显示contributions。这个bug很可能就是在Git配置的邮箱地址与GitHub中的邮箱地址不符合造成的。</p>
-<ul>
-<li>如果本地设定的user.email值与GitHub上的账户的邮件地址相同，GitHub会认定推送代码的操作是账户拥有者自己做的，跟直接登录到GitHub，从网站上修改，是相同的。此时，修改人是一样，就是账户拥有者。</li>
-<li>如果本地设定的user.email值与GitHub不同，也能把代码推送到GitHub（只要密码或者ssh正确），GitHub会记录这次的修改是另一个人做的。</li>
-</ul>
-<h2 id="设置SSH-Key时"><a href="#设置SSH-Key时" class="headerlink" title="设置SSH Key时"></a>设置SSH Key时</h2><p>GitHub通过HTTPS协议（密码）或者SSH验证身份。其中：</p>
-<ul>
-<li>HTTPS协议只认账号。如果使用HTTPS操作远程仓库，则需要使用账号密码来做权限的认证。</li>
-<li>SSH协议只认机器。当使用SSH操作远程仓库的话，需要使用公钥和私钥对来做权限的认证。</li>
-</ul>
-<p>为了方便操作，一般都是使用SSH协议，当使用SSH协议时，需要在本地电脑上生成公钥和私钥对，然后在GitHub上配置公钥。公钥和私钥对使用如下指令生成：</p>
-<pre><code class="shell">ssh-keygen -t rsa -f id_rsa.github -C &quot;XXX&quot;
+<p><img src="/2023/08/02/Java%E6%B3%9B%E5%9E%8B6%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/1.jpg" alt="1"></p>
+<p>从运行结果可以看到，虽然为 <code>i</code> 和 <code>s</code> 指定了不同的类型参数，但在运行时它们实际上是同一种类型（都是 <code>LinkedList</code> ）。这就是类型擦除的作用，在编译时将代码中的类型参数擦除<strong>只保留原始类型</strong>。</p>
+<h2 id="2-原始类型"><a href="#2-原始类型" class="headerlink" title="2. 原始类型"></a>2. 原始类型</h2><p>原始类型是擦除了泛型信息后字节码中的类型，无论何时定义一个泛型类型，相应的原始类型都会被自动地提供。<strong>类型参数信息被擦除只会保留原始类型</strong>。根据是否限定类型，原始类型替换有以下两种情况：</p>
+<h3 id="2-1-无限定类型"><a href="#2-1-无限定类型" class="headerlink" title="2.1 无限定类型"></a>2.1 无限定类型</h3><p>将类型参数替换为<code>Object</code>。例如：</p>
+<pre><code class="jade">class Test&lt;T&gt; &#123;
+    private T value;
+
+    public T getValue() &#123;
+        return value;
+    &#125;
+
+    public void setValue(T value) &#123;
+        this.value = value;
+    &#125;
+&#125;
 </code></pre>
-<p>其中：</p>
+<p>类型擦除后：</p>
+<pre><code class="java">class Test &#123;
+    private Object value;
+
+    public Object getValue() &#123;
+        return value;
+    &#125;
+
+    public void setValue(Object value) &#123;
+        this.value = value;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="2-2-有限定类型"><a href="#2-2-有限定类型" class="headerlink" title="2.2 有限定类型"></a>2.2 有限定类型</h3><p>将类型参数替换为<strong>上限或下限</strong>。例如：</p>
+<pre><code class="java">class Test&lt;T extends Number&gt; &#123;
+    private T value;
+
+&#125;
+</code></pre>
+<p>类型擦除后：</p>
+<pre><code class="java">class Test &#123;
+    private Number value;
+&#125;
+</code></pre>
+<h2 id="3-类型擦除原理"><a href="#3-类型擦除原理" class="headerlink" title="3. 类型擦除原理"></a>3. 类型擦除原理</h2><p>Java在编译时进行泛型的类型擦除，但在进行类型擦除时会将传入的类型参数记录下来。当对被擦除后的泛型对象操作时编译器会<strong>根据记录的类型参数对其进行类型转换</strong>，将其从原始类型转换为未传入的参数类型。</p>
+<h2 id="4-类型擦除带来的问题"><a href="#4-类型擦除带来的问题" class="headerlink" title="4. 类型擦除带来的问题"></a>4. 类型擦除带来的问题</h2><p>主要有以下几点（部分问题在之前已经说过了，如泛型变量不能是基本数据类型，具体内容可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/swadian2008/article/details/100546069">CSDN博客</a>）：</p>
 <ul>
-<li>-t：指定密钥的类型，密钥的类型有RSA和DSA两种</li>
-<li>rsa：指使用RSA算法</li>
-<li>-f：指定存储密钥的文件名</li>
-<li>-C：表示提供<strong>一个用于识别这个密钥的注释，一般填写邮箱地址，但也可以填入其他内容</strong></li>
+<li>引用传递问题</li>
+<li>自动类型转换问题</li>
+<li>类型擦除与多态冲突</li>
+<li>泛型变量不能是基本数据类型</li>
+<li>运行时类型检查异常</li>
+<li>泛型异常捕获</li>
+<li>不能创建泛型类型数组</li>
+<li>不能实例化泛型类型</li>
+<li>类型擦除后的冲突</li>
+<li>不能使用静态域</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li><p>Git配置邮箱和用户名的目的</p>
-<p>作为一个分布式版本控制系统，远程仓库为了跟踪是谁提交的代码，需要提交这提供身份信息：邮箱和用户名。当然，由于这里的用户名和邮箱完全由提交者设置，所以可能会出现提交者随意填写的情况发生。不过，当这种情况发生时，可以通过一些机制查询出真正的提交者。</p>
-</li>
-<li><p>Git配置的邮箱和用户名和GitHub有什么关系</p>
-<ul>
-<li>账号密码和公钥私钥对只做权限的认证，即判断当前用户或机器是否可以向GitHub中的仓库推送代码。但是这两种认证方式不会记录是由谁把代码推送到GitHub中的，所以使用Git在本地配置的邮箱和用户名作为标记用于记录是谁做的推送操作。即：<ul>
-<li>账号密码和公钥私钥对用于认证，即打开GitHub的大门</li>
-<li>Git配置的邮箱和用户名用于记录是谁向GitHub推送的代码，即记录下是谁在GitHub中做的操作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Git和GitHub可不可以配置不同的邮箱和用户名</p>
-<p>可以，但最好还是配置相同的邮箱和用户名。正如上面所说，只有这样，GitHub中才能正确的记录你的操作。另外：</p>
-<ul>
-<li>如果Git配置的邮箱是GitHub中存在的邮箱，则commits里显示的是这个邮箱对应的账号</li>
-<li>如果Git配置的邮箱是一个在GitHub里不存在的邮箱，则commits里显示的是Git配置的用户名</li>
-</ul>
-</li>
-</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>

@@ -139,7 +139,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(16)</small>
+                <small>(17)</small>
             
         </div>
     </li>
@@ -196,7 +196,7 @@
         <div data-rel="编程语言">
             <i class="fold iconfont icon-right"></i>
             编程语言
-            <small>(8)</small>
+            <small>(9)</small>
         </div>
         
             <ul class="sub hide">
@@ -206,7 +206,7 @@
         <div data-rel="编程语言&lt;---&gt;Java">
             
             Java
-            <small>(8)</small>
+            <small>(9)</small>
         </div>
         
     </li>
@@ -338,8 +338,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="16">
-<input type="hidden" id="yelog_site_word_count" value="18.1k">
+<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_word_count" value="19.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -458,6 +458,15 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 编程语言 Java "
+           href="/2023/08/02/Java%E6%B3%9B%E5%9E%8B6%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/"
+           data-tag="Java,泛型"
+           data-author="" >
+            <span class="post-title" title="Java泛型6——类型擦除">Java泛型6——类型擦除</span>
+            <span class="post-date" title="2023-08-02 17:26:23">2023/08/02</span>
+        </a>
         
         
         <a  class="全部文章 编程语言 Java "
@@ -652,7 +661,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:47:21'>2023-07-28 10:06</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-02 17:37:21'>2023-07-28 10:06</time>
         
     </div>
     <div class="article-meta">
@@ -687,7 +696,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">泛型是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">泛型的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">通过泛型实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Object%E5%92%8C%E8%BD%AC%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">通过Object和转型实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B3%9B%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">1. 泛型是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">2. 泛型的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%80%9A%E8%BF%87%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1 通过泛型实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%80%9A%E8%BF%87Object%E5%92%8C%E8%BD%AC%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.2 通过Object和转型实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B0%8F%E7%BB%93"><span class="toc-text">3. 小结</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -708,20 +717,14 @@
 </blockquote>
 <p>目录：</p>
 <ul>
-<li><p>Java泛型1——概述</p>
-</li>
-<li><p><a href="/2023/07/28/Java%E6%B3%9B%E5%9E%8B2%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E7%B1%BB">Java泛型2——泛型类</a></p>
-</li>
-<li><p><a href="/2023/07/29/Java%E6%B3%9B%E5%9E%8B3%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3">Java泛型3——泛型接口</a></p>
-</li>
-<li><p>Java泛型4——泛型方法</p>
-</li>
-<li><p>Java泛型5——泛型擦除</p>
-</li>
-<li><p>Java泛型6——通配符</p>
-</li>
+<li><a href="/2023/07/28/Java%E6%B3%9B%E5%9E%8B1%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0">Java泛型1——概述</a></li>
+<li><a href="/2023/07/28/Java%E6%B3%9B%E5%9E%8B2%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E7%B1%BB">Java泛型2——泛型类</a></li>
+<li><a href="/2023/07/29/Java%E6%B3%9B%E5%9E%8B3%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%8E%A5%E5%8F%A3">Java泛型3——泛型接口</a></li>
+<li><a href="/2023/07/29/Java%E6%B3%9B%E5%9E%8B4%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95">Java泛型4——泛型方法</a></li>
+<li><a href="/2023/08/01/Java%E6%B3%9B%E5%9E%8B5%E2%80%94%E2%80%94%E6%B3%9B%E5%9E%8B%E9%80%9A%E9%85%8D%E7%AC%A6">Java泛型5——泛型通配符</a></li>
+<li><a href="/2023/08/02/Java%E6%B3%9B%E5%9E%8B6%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4">Java泛型6——类型擦除</a></li>
 </ul>
-<h2 id="泛型是什么"><a href="#泛型是什么" class="headerlink" title="泛型是什么"></a>泛型是什么</h2><p>泛型，即<strong>类型参数</strong>，类似于函数中的参数，泛型可以将<strong>类型参数化</strong>。这句话过于抽象，为了便于解释，下面根据个人理解将泛型与函数中的参数做个对比。</p>
+<h2 id="1-泛型是什么"><a href="#1-泛型是什么" class="headerlink" title="1. 泛型是什么"></a>1. 泛型是什么</h2><p>泛型，即<strong>类型参数</strong>，类似于函数中的参数，泛型可以将<strong>类型参数化</strong>。这句话过于抽象，为了便于解释，下面根据个人理解将泛型与函数中的参数做个对比。</p>
 <p>从简单的人手，首先说一下函数参数经历的两个阶段：</p>
 <ul>
 <li><p>函数定义</p>
@@ -742,9 +745,9 @@ testF(1. 2);
 </ul>
 <p>从上面可以看出来，对于函数参数而言：<strong>函数在定义时知道参数的类型和名字，但不知道具体的值，在函数调用时才知道具体的值是多少</strong>。而泛型更进一步，以泛型方法为例，<strong>在定义一个泛型方法时，仅仅知道参数的名字，而参数的类型和具体的值只有在调用函数的时候才能确定！</strong></p>
 <p>另外，与函数参数不同的是，类、接口、函数中都可以加入泛型机制，即为类、接口、函数指定类型参数，分别被叫做<strong>泛型类、泛型接口、泛型函数</strong>。</p>
-<h2 id="泛型的作用"><a href="#泛型的作用" class="headerlink" title="泛型的作用"></a>泛型的作用</h2><p>根据<a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2935">《On Java 8》</a>的描述：“<strong>泛型的主要目的之一就是用来约定集合要存储什么类型的对象，并且通过编译器确保规约得以满足</strong>”。</p>
+<h2 id="2-泛型的作用"><a href="#2-泛型的作用" class="headerlink" title="2. 泛型的作用"></a>2. 泛型的作用</h2><p>根据<a target="_blank" rel="noopener" href="https://www.ituring.com.cn/book/2935">《On Java 8》</a>的描述：“<strong>泛型的主要目的之一就是用来约定集合要存储什么类型的对象，并且通过编译器确保规约得以满足</strong>”。</p>
 <p>Talk is cheap,let me show you the code，假设我们现在有个很简单的需求：需要<strong>用一个集合存放String类型的变量，并将这个集合中的内容打印输出</strong>。使用泛型可以这样写:</p>
-<h3 id="通过泛型实现"><a href="#通过泛型实现" class="headerlink" title="通过泛型实现"></a>通过泛型实现</h3><pre><code class="java">import java.util.LinkedList;
+<h3 id="2-1-通过泛型实现"><a href="#2-1-通过泛型实现" class="headerlink" title="2.1 通过泛型实现"></a>2.1 通过泛型实现</h3><pre><code class="java">import java.util.LinkedList;
 
 public class Main &#123;
     public static void main(String[] args) &#123;
@@ -766,7 +769,7 @@ public class Main &#123;
 <li><code>stringList.add(1);</code>，由于泛型的存在，当<code>stringList</code>试图添加一个非String类型的变量时，编译器会报错（通过编译器确保规约（也就是只能存放String类型变量）得以满足）</li>
 </ol>
 <p>第一点实际展示了如何使用泛型，这再后面还会再详细介绍，先具体说一下第二点：如何理解<strong>通过编译器确保规约得以满足</strong>？在Java中，<strong>Object类是所有类的超类</strong>，通过向下转型，下面这段代码可以实现和上面类似的功能：</p>
-<h3 id="通过Object和转型实现"><a href="#通过Object和转型实现" class="headerlink" title="通过Object和转型实现"></a>通过Object和转型实现</h3><pre><code class="java">import java.util.LinkedList;
+<h3 id="2-2-通过Object和转型实现"><a href="#2-2-通过Object和转型实现" class="headerlink" title="2.2 通过Object和转型实现"></a>2.2 通过Object和转型实现</h3><pre><code class="java">import java.util.LinkedList;
 
 public class Main &#123;
     public static void main(String[] args) &#123;
@@ -787,7 +790,7 @@ public class Main &#123;
 <p>这个错误是由于我们错误的将<code>Integer</code> 类型强制转换为<code>String</code>类型而引起的。</p>
 <p>当然，这个报错我们可以通过<strong>反射机制</strong>避免，但这种错误处理方式太过繁琐，而且会大大降低代码的复用性（若通过泛型，可以很轻松的将功能改为存放并输出<code>Integer</code>类型对象，而使用泛型则需要添加新的判断逻辑）。</p>
 <p>另外，我们不能寄希望于其他人（甚至自己）会一直按照规定调用代码。因此，最好的方式就是<strong>尽可能的在程序编译阶段就将问题暴露出来</strong>，而不是等用户真正使用产品的时候再去修改本不该出现的bug。而泛型就有这个能力：<strong>通过编译器确保规约得以满足</strong>！</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在这篇博客里，简单概述了一下泛型，接下来将分几篇博客分别介绍泛型类、泛型接口、泛型方法等，随着使用的逐渐深入，对泛型将会有更多的了解。</p>
+<h2 id="3-小结"><a href="#3-小结" class="headerlink" title="3. 小结"></a>3. 小结</h2><p>在这篇博客里，简单概述了一下泛型，接下来将分几篇博客分别介绍泛型类、泛型接口、泛型方法等，随着使用的逐渐深入，对泛型将会有更多的了解。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
