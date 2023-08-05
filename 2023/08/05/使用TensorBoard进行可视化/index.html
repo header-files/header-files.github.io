@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java容器2——Collection | 勿庸散人</title>
-  <meta name="keywords" content=" Java , 容器 ">
-  <meta name="description" content="Java容器2——Collection | 勿庸散人">
+  <title>使用TensorBoard进行可视化 | 勿庸散人</title>
+  <meta name="keywords" content=" Python , TensorBoard ">
+  <meta name="description" content="使用TensorBoard进行可视化 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -671,9 +671,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Java容器2——Collection" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-使用TensorBoard进行可视化" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java容器2——Collection</h1>
+        <h1 class="article-title">使用TensorBoard进行可视化</h1>
     
     <div class="article-meta">
         
@@ -683,9 +683,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="编程语言">编程语言</a> > 
-            
-            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
+            <a  data-rel="深度学习">深度学习</a>
             
         </span>
         
@@ -693,21 +691,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">Java</a>
+            <a class="color2">Python</a>
             
-            <a class="color3">容器</a>
+            <a class="color2">TensorBoard</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:47:40'>2023-07-25 09:31</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-05 21:47:38'>2023-08-05 21:44</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:539</span>
+        <span>字数:2.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -737,7 +735,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="toc-text">Collection继承关系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection%E6%8E%A5%E5%8F%A3"><span class="toc-text">Collection接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List%E6%8E%A5%E5%8F%A3"><span class="toc-text">List接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set%E6%8E%A5%E5%8F%A3"><span class="toc-text">Set接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Queue%E6%8E%A5%E5%8F%A3"><span class="toc-text">Queue接口</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-TensorBoard%E4%BB%8B%E7%BB%8D"><span class="toc-text">1. TensorBoard介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%A3%E7%A0%81%E4%B8%AD%E8%AE%BE%E7%BD%AETensorBoard"><span class="toc-text">2. 代码中设置TensorBoard</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-TensorFlow%E4%B8%AD%E8%AE%BE%E7%BD%AE"><span class="toc-text">2.1 TensorFlow中设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-text">2.1.1 使用说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.1.2 代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-PyTorch%E4%B8%AD%E8%AE%BE%E7%BD%AE"><span class="toc-text">2.2 PyTorch中设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-text">2.2.1 使用说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">2.2.2 代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">3. 可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E5%90%88%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-text">4. 配合远程服务器使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">4.1 端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Xshell%E5%BB%BA%E7%AB%8B%E9%9A%A7%E9%81%93"><span class="toc-text">4.2 Xshell建立隧道</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -753,41 +751,268 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>以下内容参考《<a target="_blank" rel="noopener" href="https://www.programmercarl.com/other/kstar_baguwen.html">代码随想录知识星球精华（最强⼋股⽂）第三版</a>》整理。</p>
-<h2 id="Collection继承关系图"><a href="#Collection继承关系图" class="headerlink" title="Collection继承关系图"></a>Collection继承关系图</h2><p>（该图基于JDK8，仅包含部分类。为了方便查看，部分关系未画出）</p>
-<p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Collection.jpg" alt="Collection继承关系"></p>
-<h2 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Collection%E6%8E%A5%E5%8F%A3.jpg" alt="Collection接口"></p>
-<ul>
-<li>Collection下的所有实现类都是继承⾃AbstractCollection，该类将基础⽅法 size 和 iterator 抽象化，但是实现了其他的⽅法</li>
-<li>AbstractCollection下派⽣出AbstractList、AbstractSet、AbstractQueue、ArrayQueue</li>
-<li>List下的全部继承⾃AbstractList，List是一个存储有序的集合，允许重复，每个元素都有一个索引</li>
-<li>Set下的继承⾃AbstractSet，Set是一个无需存储的集合，不允许重复</li>
-</ul>
-<p><strong>Java中经常使⽤的语法糖”for each”循环可以与任何实现了Iterable接⼝的对象⼀起⼯作</strong>。<br>Collection通过调用iterator()⽅法返回⼀个Iterator对象，这就是常⽤的迭代器，其中包含hasNext()、next()、remove()、forEachRemaining(Consumer)4个⽅法。</p>
-<p>Iterator()的功能简单，只能单向移动：</p>
+        <h2 id="1-TensorBoard介绍"><a href="#1-TensorBoard介绍" class="headerlink" title="1. TensorBoard介绍"></a>1. TensorBoard介绍</h2><p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/tensorboard?hl=zh-cn">TensorBoard</a>是TensorFlow推出的可视化工具，可以可视化模型结构、跟踪并以表格形式显示模型指标。</p>
+<p>TensorBoard的使用包括两个步骤：</p>
 <ol>
-<li>调⽤iterator()⽅法返回⼀个Iterator对象</li>
-<li>第⼀次调⽤Iterator的next()⽅法，返回序列的第⼀个元素。此后每调⽤⼀个next(),会返回序列的下⼀个元素。调⽤next()⽅法前最好先调⽤hasNext()⽅法，判断序列后⾯是否还有元素</li>
-<li>remove()删除上次next()返回的对象，remove()只能在next()之后使⽤，并且⼀个remove()匹配⼀个next()，不能重复调⽤</li>
-<li>使⽤hasNext()判断序列中是否还有元素</li>
+<li>在代码中设置TensorBoard，在训练的过程中将会根据设置产生日志文件</li>
+<li>在浏览器中可视化该日志文件，查看网络结构、loss的变化情况等</li>
 </ol>
-<h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/List%E6%8E%A5%E5%8F%A3.jpg" alt="List接口"></p>
-<ul>
-<li>List接⼝常⽤的实现类有<strong>ArrayList、LinkedList</strong></li>
-<li>相比Collection，List多出sort()、get()、listIterator()等⽅法，listIterator返回⼀个链表迭代器</li>
+<p>下面以 <code>LeNet-5</code> 为例，介绍如何在TensorFlow和PyTorch中配置TensorBoard。</p>
+<h2 id="2-代码中设置TensorBoard"><a href="#2-代码中设置TensorBoard" class="headerlink" title="2. 代码中设置TensorBoard"></a>2. 代码中设置TensorBoard</h2><h3 id="2-1-TensorFlow中设置"><a href="#2-1-TensorFlow中设置" class="headerlink" title="2.1 TensorFlow中设置"></a>2.1 TensorFlow中设置</h3><h4 id="2-1-1-使用说明"><a href="#2-1-1-使用说明" class="headerlink" title="2.1.1 使用说明"></a>2.1.1 使用说明</h4><p>在TensorFlow通过两个简单步骤即可使用TensorBoard（更多的功能可参考<a target="_blank" rel="noopener" href="https://www.tensorflow.org/tensorboard/get_started?hl=zh-cn">官方文档</a>）。</p>
+<ol>
+<li><p><code>tensorboard_callback = keras.callbacks.TensorBoard(log_dir=&#39;logs/tf&#39;)</code> ：初始化日志文件。其中，<code>log_dir</code> 是日志文件的存放位置</p>
+</li>
+<li><p><code>model.fit(callbacks=[tensorboard_callback])</code> ：设置回调函数，在模型训练期间将会调用 <code>tensorboard_callback</code> 从而向日志文件中写入数据</p>
+<p>注意：</p>
+<p><strong>日志文件的绝对路径中不能包含中文</strong>！</p>
+</li>
+</ol>
+<h4 id="2-1-2-代码实现"><a href="#2-1-2-代码实现" class="headerlink" title="2.1.2 代码实现"></a>2.1.2 代码实现</h4><p><code>LeNet-5</code> 的搭建可参考<a href="/2023/08/05/TensorFlow%E6%90%AD%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">TensorFlow搭建神经网络</a></p>
+<pre><code class="python">import time
+
+import tensorflow as tf
+from keras import datasets
+from keras import layers
+from tensorflow import keras
+
+
+def my_model(input_shape):
+    # 首先，创建一个输入节点
+    inputs = keras.Input(input_shape)
+
+    # 搭建神经网络
+    x = layers.Conv2D(filters=6, kernel_size=(5, 5), strides=(1, 1), activation=&#39;relu&#39;)(inputs)
+    x = layers.AveragePooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+    x = layers.Conv2D(filters=16, kernel_size=(5, 5), strides=(1, 1), activation=&#39;relu&#39;)(x)
+    x = layers.AveragePooling2D(pool_size=(2, 2), strides=(2, 2))(x)
+
+    x = layers.Flatten()(x)
+
+    x = layers.Dense(units=16 * 4 * 4, activation=&#39;relu&#39;)(x)
+    x = layers.Dense(units=120, activation=&#39;relu&#39;)(x)
+
+    # 输出层
+    outputs = layers.Dense(units=10, activation=&#39;softmax&#39;)(x)
+
+    model = keras.Model(inputs=inputs, outputs=outputs)
+
+    return model
+
+
+(train_images, train_labels), (test_images, test_labels) = datasets.mnist.load_data()
+
+train_images = tf.reshape(train_images, (train_images.shape[0], train_images.shape[1], train_images.shape[2], 1))
+train_images = tf.cast(train_images, tf.float32)
+
+test_images = tf.reshape(test_images, (test_images.shape[0], test_images.shape[1], test_images.shape[2], 1))
+test_images = tf.cast(test_images, tf.float32)
+
+model = my_model(train_images.shape[1:])
+
+loss = keras.losses.SparseCategoricalCrossentropy()
+optimizer = keras.optimizers.SGD(0.0001)
+model.compile(loss=loss, optimizer=keras.optimizers.SGD(0.00001))
+
+# 初始化日志文件
+tensorboard_callback = keras.callbacks.TensorBoard(
+    log_dir=&#39;logs/tf/&#39; + time.strftime(&#39;%m-%d-%H-%M&#39;, time.localtime(time.time())))
+
+# 在训练过程中设置回调
+model.fit(train_images, train_labels, validation_split=0.3, epochs=1000, batch_size=20,
+          callbacks=[tensorboard_callback])
+
+pre_labels = model.predict(test_images)
+</code></pre>
+<h3 id="2-2-PyTorch中设置"><a href="#2-2-PyTorch中设置" class="headerlink" title="2.2 PyTorch中设置"></a>2.2 PyTorch中设置</h3><h4 id="2-2-1-使用说明"><a href="#2-2-1-使用说明" class="headerlink" title="2.2.1 使用说明"></a>2.2.1 使用说明</h4><p>PyTorch1.1之后添加了TensorBoard，在PyTorch中使用TensorBoard主要有3个步骤（具体信息可查看其<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensorboard.html#torch.utils.tensorboard.writer.SummaryWriter.__init__">官方文档</a>）：</p>
+<ol>
+<li><code>SummaryWriter</code> ：创建一个日志文件，主要有以下两个参数：<ul>
+<li><code>log_dir</code> ：保存日志文件的目录，默认值为 <code>runs/当前日期时间</code> （<strong>存放的路径中不能包含中文</strong>！）</li>
+<li><code>comment</code> ： <code>log_dir</code> 取默认值时添加到 <code>log_dir</code> 后面的后缀，当设置了 <code>log_dir</code>  时，该值无效</li>
 </ul>
-<p>List有着特殊的迭代器接口ListIterator，该接口继承自Iterator接⼝。ListIterator是⼀个功能更加强⼤的迭代器，Iterator是单向的，但ListIterator是双向的，ListIterator增加了previous()和hasPrevious()⽅法⽤来反向遍历。<strong>注意只能List使⽤ListIterator。</strong></p>
-<p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/ListIterator.jpg" alt="ListIterator"></p>
-<h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Set%E6%8E%A5%E5%8F%A3.jpg" alt="Set接口"></p>
-<ul>
-<li>Set常⽤的实现类有<strong>HashSet、TreeSet、LinkedHashSet</strong></li>
+</li>
+<li><code>add_XXX</code>： 向创建好的日志文件里面添加数据，常用的有：<ul>
+<li><code>add_graph</code> ：添加GRAPHS，其中存放了网络结构。有以下两个常用参数：<ul>
+<li><code>model</code> ：模型</li>
+<li><code>input_to_model</code> ：模型的输入数据</li>
 </ul>
-<h2 id="Queue接口"><a href="#Queue接口" class="headerlink" title="Queue接口"></a>Queue接口</h2><p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Queue%E6%8E%A5%E5%8F%A3.jpg" alt="Queur接口"></p>
-<p><img src="/2023/07/25/Java%E5%AE%B9%E5%99%A82%E2%80%94%E2%80%94Collection/Deque.jpg" alt="Deque"></p>
-<ul>
-<li>Deque接⼝继承⾃Queue,在Deque的基础上更加细化，可以选择从头部或者尾部操作。如果Deque中使⽤Queue的⽅法，⼀定要清楚实现类是从头部还是尾部操作的</li>
-<li><strong>很多实现类既实现类List接⼝，⼜实现类Queue接⼝</strong>，如<strong>LinkedList即实现了List接口又实现了Deque接口（因此LinkedList即可以使用add又可以使用addLast）</strong></li>
+</li>
+<li><code>add_scalar</code> ： 添加SCALARS，其中可以存放折线图数据用于显示训练过程中的损失值变化情况。有以下三个常用参数：<ul>
+<li><code>tag</code> ：折线图的标签。指定tag时，加入 <code>/</code> 分割，<strong>可将多个折线图放在一个tag下</strong>，如 ：<code>tag=train/loss, tag=train/map</code>，此时train下面会有loss和map两个折线图</li>
+<li><code>scalar_value</code> ：折线图纵轴的值，一般是loss、准确率等数据</li>
+<li><code>global_step</code> ：折线图的横轴，一般是epoch</li>
 </ul>
+</li>
+<li><code>add_scalars</code> ：在一张折线图中同时绘制多个数据，有以下三个常用参数：<ul>
+<li><code>main_tag,</code> ：与 <code>add_scalar</code> 中的 <code>tag</code> 用法一样</li>
+<li><code>tag_scalar_dict</code> ：纵轴的值，因为是多个数据，需要以字典形式传入（具体看下面代码实现）</li>
+<li><code>global_step</code> ：与 <code>add_scalar</code> 中的 <code>global_setp</code> 用法一样</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>close</code>：结束log写入，一般用在训练结束后</li>
+</ol>
+<p>类似于操作文件，<code>SummaryWriter</code> 也可以和 <code>with</code> 一起使用，此时可以不需显示调用 <code>close</code> ，如：</p>
+<pre><code class="python">writer = SummaryWriter()
+# 写入数据……
+writer.close()
+
+#上面的代码等价于下面
+
+with SummaryWriter() as w:
+    # 写入数据……
+</code></pre>
+<h4 id="2-2-2-代码实现"><a href="#2-2-2-代码实现" class="headerlink" title="2.2.2 代码实现"></a>2.2.2 代码实现</h4><p><code>LeNet-5</code> 的搭建可参考<a href="/2023/07/12/PyTorch%E6%90%AD%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">PyTorch搭建神经网络</a></p>
+<pre><code class="python">import time
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torchvision
+from sklearn.metrics import classification_report
+from torch import optim
+from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
+from torchvision import transforms
+from tqdm import tqdm
+
+
+class LeNet(nn.Module):
+    def __init__(self, in_channels):
+        super(LeNet, self).__init__()
+
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=6, kernel_size=5, stride=1)
+        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.conv2 = nn.Conv2d(in_channels=6, out_channels=16, kernel_size=5, stride=1)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc1 = nn.Linear(in_features=16 * 4 * 4, out_features=120)
+        self.fc2 = nn.Linear(in_features=120, out_features=84)
+        self.fc3 = nn.Linear(in_features=84, out_features=10)
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = self.pool1(x)
+
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = self.pool2(x)
+
+        x = x.reshape(x.shape[0], -1)
+        x = self.fc1(x)
+        x = F.relu(x)
+        x = self.fc2(x)
+        x = F.relu(x)
+        x = self.fc3(x)
+
+        return x
+
+
+def main():
+    batch_size = 8
+    num_epochs = 10
+
+    train_dataset = torchvision.datasets.MNIST(root=&quot;data/&quot;, train=True, transform=transforms.ToTensor(),
+                                               download=True)
+    val_dataset = torchvision.datasets.MNIST(root=&quot;data/&quot;, train=False, transform=transforms.ToTensor(), download=True)
+
+    train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size,
+                              shuffle=True)
+    val_loader = DataLoader(dataset=val_dataset, batch_size=batch_size, shuffle=True)
+
+    device = torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)
+
+    model = LeNet(1).to(device)
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(model.parameters())
+
+    writer = SummaryWriter(
+        &#39;logs/pt/&#39; + time.strftime(&#39;%m-%d-%H-%M&#39;, time.localtime(time.time())))  # 设置了存放位置，此时即使设置了 comment 也不起作用
+    writer.add_graph(model, torch.randn(1, 1, 28, 28))  # 先写入模型结构
+
+    for epoch in tqdm(range(num_epochs)):
+        train_loss = 0
+        val_loss = 0
+
+        accuracy = 0
+        macro_avg_f1 = 0
+        weighted_avg_f1 = 0
+
+        # 训练模型
+        for batch_idx, (data, label) in enumerate(train_loader):
+            data = data.to(device=device)
+            label = label.to(device=device)
+
+            pre = model(data)
+            loss = criterion(pre, label)
+            train_loss = (train_loss * batch_idx + loss) / (batch_idx + 1)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+        # 评估模型
+        with torch.no_grad():
+            model.eval()
+            for batch_idx, (data, label) in enumerate(val_loader):
+                data = data.to(device=device)
+                label = label.to(device=device)
+
+                pre = model(data)
+
+                loss = criterion(pre, label).item()
+                val_loss = (val_loss * batch_idx + loss) / (batch_idx + 1)
+
+                pre = torch.argmax(pre, dim=1)
+                score = classification_report(pre, label, output_dict=True)
+
+                accuracy = (accuracy * batch_idx + score[&#39;accuracy&#39;]) / (batch_idx + 1)
+                macro_avg_f1 = (macro_avg_f1 * batch_idx + score[&#39;macro avg&#39;][&#39;f1-score&#39;]) / (batch_idx + 1)
+                weighted_avg_f1 = (weighted_avg_f1 * batch_idx + score[&#39;weighted avg&#39;][&#39;f1-score&#39;]) / (batch_idx + 1)
+
+            model.train()
+
+        writer.add_scalar(&#39;val/accuracy&#39;, accuracy, epoch)  # 在一个 tag 下面添加多个折线图
+        writer.add_scalar(&#39;val/macro avg-f1&#39;, macro_avg_f1, epoch)
+        writer.add_scalar(&#39;val/weighted avg-f1&#39;, weighted_avg_f1, epoch)
+
+        writer.add_scalars(&#39;loss&#39;, &#123;&#39;train_loss&#39;: train_loss, &#39;val_loss&#39;: val_loss&#125;, epoch)  # 一个折线图里面显示多个数据
+
+    writer.close()  # 训练结束，不再写入数据，关闭writer
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+<h2 id="3-可视化"><a href="#3-可视化" class="headerlink" title="3. 可视化"></a>3. 可视化</h2><p>注意，这里如果直接输入tensorboard使用的是系统python环境里面的tensorboard，因此，<strong>务必确保系统python环境中已安装了tensorboard</strong>。</p>
+<p>打开 <code>log</code> 所在的文件夹，在该文件夹下打开命令行窗口（1.在路径显示框中输入 <code>cmd</code> 然后回车即可打开 或者 2. 在文件夹中按住 <code>Shift</code> 键同时右击鼠标然后选择‘在此处打开Powershell窗口’），输入：</p>
+<pre><code class="shell">tensorboard --logdir=.\logs --port=6007
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>–logdir：存放日志文件的文件夹</li>
+<li>–port：端口号，默认是6006</li>
+</ul>
+<p>若正常，将显示以下信息：</p>
+<p><img src="/2023/08/05/%E4%BD%BF%E7%94%A8TensorBoard%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96/1.jpg" alt="1"></p>
+<p>打开浏览器，在地址栏中输入：<strong>localhost:6007</strong>（端口号要和上面保持一致）。即可看到可视化的效果，点击不同的标签可查看不同数据</p>
+<p><img src="/2023/08/05/%E4%BD%BF%E7%94%A8TensorBoard%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96/2.jpg" alt="2"></p>
+<h2 id="4-配合远程服务器使用"><a href="#4-配合远程服务器使用" class="headerlink" title="4. 配合远程服务器使用"></a>4. 配合远程服务器使用</h2><p>上面的代码和浏览器都在同一个电脑上，有时需要在服务器上跑代码，这时候要想在自己的电脑浏览器上可视化TensorBoard，可以按照下面的方式：</p>
+<h3 id="4-1-端口转发"><a href="#4-1-端口转发" class="headerlink" title="4.1 端口转发"></a>4.1 端口转发</h3><p>在电脑命令行窗口输入：</p>
+<pre><code class="shell">ssh -L 6008:127.0.0.1:6007 服务器用户名@服务器IP地址 -p 22
+</code></pre>
+<p>这将在连接服务器的同时将服务器上的 <strong>6007</strong> 端口转发到本地的 <strong>6008</strong> 端口。</p>
+<p>成功连接服务器后，按照上面讲的可视化的方法在服务器对应的目录下输入：</p>
+<pre><code class="shell">tensorboard --logdir=日志文件的存放路径 --port=6007
+</code></pre>
+<p>成功启动后，在电脑的浏览器中输入：<strong>localhost:6008</strong> 。这里用到了两个端口号，一个是服务器上tensorboard使用的端口号 6007 ，一个是本地转发以及浏览器使用的端口号 6008 ，注意区分。</p>
+<h3 id="4-2-Xshell建立隧道"><a href="#4-2-Xshell建立隧道" class="headerlink" title="4.2 Xshell建立隧道"></a>4.2 Xshell建立隧道</h3><p>在Xshell中选择需要设置的会话，然后右键选择属性，进行如下设置</p>
+<p><img src="/2023/08/05/%E4%BD%BF%E7%94%A8TensorBoard%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96/3.jpg" alt="3"></p>
+<p><img src="/2023/08/05/%E4%BD%BF%E7%94%A8TensorBoard%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96/4.jpg" alt="4"></p>
+<p>设置完之后连接服务器，在服务器对应的目录下输入：</p>
+<pre><code class="shell">tensorboard --logdir=日志文件的存放路径 --port=6007
+</code></pre>
+<p>成功启动后，在电脑的浏览器中输入：<strong>localhost:6008</strong> 。这里用到了两个端口号，一个是服务器上tensorboard使用的端口号 6007 ，一个是浏览器使用的端口号 6008 ，注意区分。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
