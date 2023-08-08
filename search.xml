@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>计算机视觉应用方向</title>
+      <link href="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/"/>
+      <url>/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/</url>
+      
+        <content type="html"><![CDATA[<p>计算机视觉可以大致有以下几个方向（更详细的可以参考<a href="https://paperswithcode.com/sota">papers with code</a>）：</p><ul><li>图像分类</li><li>目标检测</li><li>图像分割</li><li>图像生成</li><li>风格迁移</li><li>超分辨率</li></ul><h2 id="1-图像分类"><a href="#1-图像分类" class="headerlink" title="1. 图像分类"></a>1. 图像分类</h2><p>图像分类是是视觉识别中的一项基本任务，目的是<strong>分辨整个图像并将其分类</strong>。</p><p><img src="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB.jpg" alt="图像分类"></p><h3 id="1-1-常用数据集"><a href="#1-1-常用数据集" class="headerlink" title="1.1 常用数据集"></a>1.1 常用数据集</h3><ul><li><a href="http://yann.lecun.com/exdb/mnist/">MNIST</a>：手写数字数据集，包含 60000 张训练集和 10000 张测试集</li><li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>：包含飞机、汽车、鸟、猫等10个类别，每个类别包含 5000 张训练图像和 1000 张测试图像</li><li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-100</a>：包含 100 个类，每个类别有 500 张训练图像和 100 张测试图像</li></ul><h2 id="2-目标检测"><a href="#2-目标检测" class="headerlink" title="2. 目标检测"></a>2. 目标检测</h2><p>目标检测的目的是<strong>找到并识别图像中的物体</strong>。如下图所示，一张图中包含多个物体，目标检测的任务是识别图像中不同物体的位置和边界，并将对象分类为各自的类别。</p><p><img src="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B.jpg" alt="目标检测"></p><h3 id="2-1-常用数据集"><a href="#2-1-常用数据集" class="headerlink" title="2.1 常用数据集"></a>2.1 常用数据集</h3><ul><li><a href="https://cocodataset.org/#home">COCO</a></li><li><a href="http://host.robots.ox.ac.uk/pascal/VOC/">VOC</a></li></ul><h3 id="2-2-常用方法"><a href="#2-2-常用方法" class="headerlink" title="2.2 常用方法"></a>2.2 常用方法</h3><ul><li>one-state（优先考虑速度）：YOLO、SSD、Retina Net……</li><li>two-state（优先考虑精度）：R-CNN、Fast R-CNN、Faster R-CNN、Mask R-CNN……</li></ul><h2 id="3-图像分割"><a href="#3-图像分割" class="headerlink" title="3.图像分割"></a>3.图像分割</h2><p>基于目标检测，不仅需要检测出图像中存在的物体，还需要<strong>将图像中检测到的物体分割出来</strong>。<br>主要有以下三种：</p><ul><li>语义分割：在像素级别上的分类，将<strong>属于同一类的像素归为一类</strong></li><li>实例分割：分割出每个实例物体，<strong>将属于同一个体的像素归为一类</strong>，比如对图片中的多只狗都分割出来，并识别出来它们是不同的个体，而不仅仅是简单的对其进行分类为狗</li><li>全景分割：可以表示为语义分割和实例分割的组合，其中图像中<strong>每个实例都被分割并预测其身份</strong></li></ul><p><img src="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2.jpg" alt="语义分割和实例分割"></p><h3 id="3-1-常用数据集"><a href="#3-1-常用数据集" class="headerlink" title="3.1 常用数据集"></a>3.1 常用数据集</h3><ul><li><a href="https://cocodataset.org/#home">COCO</a></li><li><a href="http://host.robots.ox.ac.uk/pascal/VOC/">VOC</a></li></ul><h3 id="3-2-常用方法"><a href="#3-2-常用方法" class="headerlink" title="3.2 常用方法"></a>3.2 常用方法</h3><ul><li>语义分割：FCN、U-Net、Mask R-CNN……</li><li>实例分割：R-CNN、Faster R-CNN、Mask R-CNN</li></ul><blockquote><p>注：</p><ul><li><p>图像分类重在分类，解决“是什么”的问题；</p></li><li><p>检测解决“在哪里，是什么”的问题；</p></li><li><p>分割解决“每一个像素属于哪个类别或物体”的问题。</p></li></ul></blockquote><h2 id="4-图像生成"><a href="#4-图像生成" class="headerlink" title="4. 图像生成"></a>4. 图像生成</h2><p>根据已有图片生成新的图片。</p><p><img src="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90.jpg" alt="图像生成"></p><h2 id="5-风格迁移"><a href="#5-风格迁移" class="headerlink" title="5. 风格迁移"></a>5. 风格迁移</h2><p>将图像A的图像风格作用到图像B上，生成新的图片即符合A的风格又保留了B的内容。</p><p><img src="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB.png" alt="风格迁移"></p><h2 id="6-超分辨率"><a href="#6-超分辨率" class="headerlink" title="6. 超分辨率"></a>6. 超分辨率</h2><p>提高原始图像的分辨率，从低分辨率图片中生成丢失的高频细节来提高图像或视频的分辨率。目标是生成比输入图像分辨率更高的输出图像，同时保留原始内容和结构。</p><p><img src="/2023/08/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%BA%94%E7%94%A8%E6%96%B9%E5%90%91/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87.jpg" alt="超分辨率"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> CV基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CV基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用TensorBoard进行可视化</title>
       <link href="/2023/08/05/%E4%BD%BF%E7%94%A8TensorBoard%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
       <url>/2023/08/05/%E4%BD%BF%E7%94%A8TensorBoard%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
@@ -14,6 +41,8 @@
       <categories>
           
           <category> 深度学习 </category>
+          
+          <category> 可视化 </category>
           
       </categories>
       
