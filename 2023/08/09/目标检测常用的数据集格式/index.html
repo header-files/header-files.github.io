@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Qt环境安装 | 勿庸散人</title>
-  <meta name="keywords" content=" C++ , Qt入门 ">
-  <meta name="description" content="Qt环境安装 | 勿庸散人">
+  <title>目标检测常用的数据集格式 | 勿庸散人</title>
+  <meta name="keywords" content=" CV基础 , 目标检测 ">
+  <meta name="description" content="目标检测常用的数据集格式 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -746,9 +746,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Qt环境安装" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-目标检测常用的数据集格式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Qt环境安装</h1>
+        <h1 class="article-title">目标检测常用的数据集格式</h1>
     
     <div class="article-meta">
         
@@ -758,9 +758,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开发工具">开发工具</a> > 
+            <a  data-rel="计算机视觉">计算机视觉</a> > 
             
-            <a  data-rel="开发工具&lt;---&gt;Qt">Qt</a>
+            <a  data-rel="计算机视觉&lt;---&gt;CV基础">CV基础</a>
             
         </span>
         
@@ -768,21 +768,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">C++</a>
+            <a class="color5">CV基础</a>
             
-            <a class="color5">Qt入门</a>
+            <a class="color5">目标检测</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:47:59'>2023-07-08 15:44</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-09 15:06:17'>2023-08-09 14:50</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -812,7 +812,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDQt"><span class="toc-text">下载Qt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qt%E8%B5%84%E6%BA%90%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-text">Qt资源下载地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Qt5-12-12%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-text">Qt5.12.12下载地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Qt"><span class="toc-text">安装Qt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F"><span class="toc-text">创建快捷方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9CHello-World%E2%80%9D%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AAQt%E5%BA%94%E7%94%A8"><span class="toc-text">“Hello World”之第一个Qt应用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-voc%E6%A0%BC%E5%BC%8F"><span class="toc-text">1. voc格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">1.1 文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6"><span class="toc-text">1.2 标注文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-coco%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. coco格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">2.1 文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6"><span class="toc-text">2.2 标注文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-yolo%E6%A0%BC%E5%BC%8F"><span class="toc-text">3. yolo格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">3.1 文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6"><span class="toc-text">3.2 标注文件</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -828,155 +828,219 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="下载Qt"><a href="#下载Qt" class="headerlink" title="下载Qt"></a>下载Qt</h2><h3 id="Qt资源下载地址"><a href="#Qt资源下载地址" class="headerlink" title="Qt资源下载地址"></a>Qt资源下载地址</h3><p> <a target="_blank" rel="noopener" href="https://download.qt.io/archive">https://download.qt.io/archive</a></p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png" alt="1"></p>
-<p>其中：</p>
+        <p>在目标检测领域，有三种常用的数据集：</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据集</th>
+<th align="center">标注文件格式</th>
+<th align="left">bbox格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://host.robots.ox.ac.uk/pascal/VOC/">voc</a></td>
+<td align="center">xml</td>
+<td align="left">xmin, ymin, xmax, ymax:<br />bbox左上角(xmin, ymin)和右下角(xmax, ymax)的坐标</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://cocodataset.org/#home">coco</a></td>
+<td align="center">json</td>
+<td align="left">x, y, w, h:<br />bbox左上角坐标(x, y)以及宽(w)和高(h)</td>
+</tr>
+<tr>
+<td align="center">yolo</td>
+<td align="center">txt</td>
+<td align="left">xcenter, ycenter, w, h:<br />bbox的中心x坐标(xcenter)、y坐标(ycenter)以及宽度(w)和高度(h)<br />xcenter, w相对图片实际宽度W做了归一化，即：xcenter&#x2F;W, w&#x2F;W <br />ycenter, h相对图片图片高度H做了归一化，即：ycenter&#x2F;H, h&#x2F;H</td>
+</tr>
+</tbody></table>
+<h2 id="1-voc格式"><a href="#1-voc格式" class="headerlink" title="1. voc格式"></a>1. voc格式</h2><h3 id="1-1-文件结构"><a href="#1-1-文件结构" class="headerlink" title="1.1 文件结构"></a>1.1 文件结构</h3><p>该文件结构指的是从 <a target="_blank" rel="noopener" href="http://host.robots.ox.ac.uk/pascal/VOC/">voc 官网</a>下载的数据的文件结构（不同年份的数据集略有不同，但结构大致相同）。</p>
+<blockquote>
+<p>VOCdevkit # 根目录</p>
 <ul>
-<li><p>qtcreator文件夹下存放的是不同版本的qtcreator，Qt Creator是一个用于Qt开发的轻量级跨平台集成开发环境</p>
+<li>VOCXXXX # 不同年份的数据集，目前有 2005 年到 2012 年的<ul>
+<li>Annotations # 存放 xml 格式的标注文件，与 JPEGImages 下的图片一一对应，每个 xml 文件都描述一张图片的信息</li>
+<li>ImageSets # 存放的是 txt 文件，文件中每一行包含一张图片的名称以及 ±1 表示正负样本<ul>
+<li>Layout # 可用于检测人体部位的数据（train.txt 用于训练的图片、trainval.txt用于训练和验证的图片合集、val.txt 用于验证的图片，下同）</li>
+<li>Main # <strong>可用于目标检测的数据</strong></li>
+<li>Segmentation # 可用于图像分割的数据</li>
+</ul>
 </li>
-<li><p>qt文件夹下存放的是不同版本的qt，Qt是一个跨平台的C++应用程序开发框架</p>
+<li>JPEGImages # 存放图片</li>
+<li>SegmentationClass # 存放按照类别分割的图片，可用于语义分割</li>
+<li>SegmentationObject # 存放按照个体分割的图片，可用于实例分割</li>
+</ul>
 </li>
 </ul>
-<p>Qt从5.0版本开始自带Qt Creator，因此，若安装5.0以前版本的Qt需要再单独安装Qt Creator。我安装的是5.12.12，自带Qt Creator，因此不需要再单独安装。</p>
-<h3 id="Qt5-12-12下载地址"><a href="#Qt5-12-12下载地址" class="headerlink" title="Qt5.12.12下载地址"></a>Qt5.12.12下载地址</h3><p><a target="_blank" rel="noopener" href="https://download.qt.io/archive/qt/5.12/5.12.12](https://download.qt.io/archive/qt/5.12/5.12.12)">https://download.qt.io/archive/qt/5.12/5.12.12](https://download.qt.io/archive/qt/5.12/5.12.12)</a></p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png" alt="2"></p>
-<p>其中：</p>
+</blockquote>
+<h3 id="1-2-标注文件"><a href="#1-2-标注文件" class="headerlink" title="1.2 标注文件"></a>1.2 标注文件</h3><p>voc格式的数据集使用 xml 文件标注图片及其bbox信息，一张图片对应个xml文件，以 Main 中其中一个xml文件的部分内容为例：</p>
+<pre><code class="xml">&lt;annotation&gt;
+    &lt;folder&gt;VOC2007&lt;/folder&gt;  &lt;!--图片所在文件夹（实际用不到）--&gt;
+    &lt;filename&gt;000005.jpg&lt;/filename&gt; &lt;!--图片文件名--&gt;
+
+    &lt;source&gt; &lt;!--图片来源--&gt;
+        &lt;database&gt;The VOC2007 Database&lt;/database&gt;
+        &lt;annotation&gt;PASCAL VOC2007&lt;/annotation&gt;
+        &lt;image&gt;flickr&lt;/image&gt;
+        &lt;flickrid&gt;325991873&lt;/flickrid&gt;
+    &lt;/source&gt;
+
+    &lt;owner&gt; &lt;!--图片拥有者--&gt;
+        &lt;flickrid&gt;archintent louisville&lt;/flickrid&gt;
+        &lt;name&gt;?&lt;/name&gt;
+    &lt;/owner&gt;
+
+    &lt;size&gt; &lt;!--图片宽度、高度、通道数量--&gt;
+        &lt;width&gt;500&lt;/width&gt;
+        &lt;height&gt;375&lt;/height&gt;
+        &lt;depth&gt;3&lt;/depth&gt;
+    &lt;/size&gt;
+
+    &lt;segmented&gt;0&lt;/segmented&gt; &lt;!--是否用于分割--&gt;
+
+    &lt;object&gt; &lt;!--标注目标1--&gt;
+        &lt;name&gt;chair&lt;/name&gt; &lt;!--物体类别--&gt;
+        &lt;pose&gt;Rear&lt;/pose&gt; &lt;!--拍摄角度： front, rear, left, right, unspecified--&gt;
+        &lt;truncated&gt;0&lt;/truncated&gt; &lt;!--目标是否被截断--&gt;
+        &lt;difficult&gt;0&lt;/difficult&gt; &lt;!--检测难易程度--&gt;
+        &lt;bndbox&gt; &lt;!--标注目标1的 bbox--&gt;
+            &lt;xmin&gt;263&lt;/xmin&gt;
+            &lt;ymin&gt;211&lt;/ymin&gt;
+            &lt;xmax&gt;324&lt;/xmax&gt;
+            &lt;ymax&gt;339&lt;/ymax&gt;
+        &lt;/bndbox&gt;
+    &lt;/object&gt;
+
+    &lt;object&gt; &lt;!--标注目标2的 bbox--&gt;
+        &lt;name&gt;chair&lt;/name&gt;
+        &lt;pose&gt;Unspecified&lt;/pose&gt;
+        &lt;truncated&gt;0&lt;/truncated&gt;
+        &lt;difficult&gt;0&lt;/difficult&gt;
+        &lt;bndbox&gt;
+            &lt;xmin&gt;165&lt;/xmin&gt;
+            &lt;ymin&gt;264&lt;/ymin&gt;
+            &lt;xmax&gt;253&lt;/xmax&gt;
+            &lt;ymax&gt;372&lt;/ymax&gt;
+        &lt;/bndbox&gt;
+    &lt;/object&gt;
+
+    &lt;!--其余标注信息结构同上--&gt;
+&lt;/annotation&gt;
+</code></pre>
+<h2 id="2-coco格式"><a href="#2-coco格式" class="headerlink" title="2. coco格式"></a>2. coco格式</h2><h3 id="2-1-文件结构"><a href="#2-1-文件结构" class="headerlink" title="2.1 文件结构"></a>2.1 文件结构</h3><p>该文件结构指的是从 <a target="_blank" rel="noopener" href="https://cocodataset.org/#home">coco 官网</a>下载的数据的文件结构。</p>
+<blockquote>
 <ul>
-<li>.exe是Windows平台下的安装包</li>
-<li>.dmg是Mac平台下的安装包</li>
-<li>.run是Linux平台下的安装包</li>
+<li>annotations_XXXX # 存放 json 格式的标注文件，一个 json 文件里面包含了多张图片的相关信息<ul>
+<li>annotations<ul>
+<li>caption_xxxx.json # 存储图像标注用于描述图像</li>
+<li>instances_xxxx.json # <strong>用于目标检测的标注信息</strong></li>
+<li>person_keypoints_xxxx.json # 目标上的关键点信息</li>
 </ul>
-<p>点击对应平台下的安装包下载即可。若网页访问速度慢，可访问国内镜像网站：</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/qtproject/archive">中国科学技术大学Qt镜像</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/qt/archive">上海交通大学Qt镜像</a></p>
-</li>
-</ul>
-<h2 id="安装Qt"><a href="#安装Qt" class="headerlink" title="安装Qt"></a>安装Qt</h2><p>以Windows平台下安装Qt 5.12.12为例，打开安装包：</p>
-<ol>
-<li><p>填写账号</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png" alt="3"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png" alt="4"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png" alt="5"></p>
-</li>
-<li><p>选择安装路径（不要带中文）</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png" alt="6"></p>
-</li>
-<li><p>选择组件，其中：</p>
-<ul>
-<li><p>MSVC：Microsoft Visual C++ Compiler，微软的VC编译器</p>
-</li>
-<li><p>MinGW：Minimalist GNU for Window，将GCC编译器和GNU Binutils移植到Windows平台下的产物，它是一些头文件和使用 GNU 工具集导入库的集合，允许用户在没有第三方 dll 的情况下生成本地的 Windows 程序</p>
-<p><strong><font color="#0000dd">注：</font></strong></p>
-<p><strong><font color="#0000dd">MSVC 和 MingGW 都是很好用的工具，但兼容并不好，比如某项目使用了 MingGW 编译，那么它所链接的库也必须是 MingGW 编译而成。 一般来说，如果仅在 Windows 平台开发，选择 MSVC，可以使用大量的第三方库；如果有跨平台需求，选择 MingGW。</font></strong></p>
-<p><strong><font color="#0000dd">由于两个版本的Qt配置方式完全不同。因此在网上搜配置方法的时候，要加上MSVC或者MinGW这样的关键字搜索。</font></strong></p>
-</li>
-<li><p>UWP：属于 MSVC 编译器生成的 Qt 库，用于开发通用 Windows 平台的应用程序</p>
-</li>
-<li><p>Android：用于 Android 应用开发的 Qt 库</p>
-</li>
-<li><p>Sources：源码包，添加后可以使用源码调试功能</p>
-</li>
-<li><p>Qt Charts：二维图表模块，用于绘制柱状图、饼图、曲线图等常用二维图表</p>
-</li>
-<li><p>Qt Data Visualization：三维数据图表模块，用于数据的三维显示，如散点的三维空间分布、三维曲面等。</p>
-</li>
-</ul>
-<ul>
-<li>Qt Purchasing：用于处理 Android、iOS 和 macOS 上的应用内购买的跨平台 API</li>
-<li>Qt Virtual Keyboard：Qt Quick 虚拟键盘</li>
-<li>Qt WebEngine：集成了Google Chromium Web，充分利用了整个 Qt 图形堆栈集成，允许原生 Qt 控件与 Web 内容和 OpenGL 着色器的无缝混合和叠加</li>
-<li>Qt Network Authorization：Qt 网络授权是一个附加库，它使 Qt 应用程序能够使用不同的 Web 身份验证系统</li>
-<li>Qt WebGL Streaming Plugin：一个 Qt Platform Abstraction 插件，它通过网络将 Qt Quick &amp; Qt OpenGL 应用程序流式传输到支持 WebGL 的浏览器。</li>
-<li><del>Qt Script (Deprecated)：脚本模块，已弃用</del></li>
-</ul>
-<p>Tools 节点下的工具：</p>
-<ul>
-<li><p>Qt Creator：Qt5.0版本以上集成的轻量级跨平台集成开发环境（5.0以下需要单独安装）</p>
-</li>
-<li><p>CDB Debugger Support：控制台调试器，是 MSVC 在 Qt 的原生调试器，由于MSVC 只有编译器，如果选择它，则需要勾选；如选择 MinGW 则不需要，MinGW 中有 GDB调试器</p>
-</li>
-<li><p>MingGW ：这里的 MingGW 是用来交叉编译的，在一个平台上生成另一个平台上的可执行代码</p>
-</li>
-<li><p>Strawberry Perl：Perl 语言工具</p>
-<p>根据个人需要，我选择了以下组件（若不确定选哪个，可以全选）</p>
 </li>
 </ul>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png" alt="7"></p>
 </li>
-<li><p>许可协议</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png" alt="8"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png" alt="9"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png" alt="10"></p>
-</li>
-<li><p>等待安装完成</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/11.png" alt="11"></p>
-</li>
-<li><p>安装完成</p>
-</li>
-</ol>
-<p>   <img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/12.png" alt="12"></p>
-<h2 id="创建快捷方式"><a href="#创建快捷方式" class="headerlink" title="创建快捷方式"></a>创建快捷方式</h2><p>安装好后的Qt Creator未在桌面创建快捷方式，可以使用以下方式创建：</p>
-<ol>
-<li><p>打开“开始菜单”，找到安装好的“Qt Creator”，然后“右键”-&gt;“更多”-&gt;“打开文件位置”</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/13.jpg" alt="13"></p>
-</li>
-<li><p>在“Qt Creator”上右键，然后”发送到”-&gt;“桌面快捷方式”</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/14.jpg" alt="14"></p>
-</li>
-</ol>
-<h2 id="“Hello-World”之第一个Qt应用"><a href="#“Hello-World”之第一个Qt应用" class="headerlink" title="“Hello World”之第一个Qt应用"></a>“Hello World”之第一个Qt应用</h2><ol>
-<li><p>打开Qt Creator，“文件”-&gt;“新建文件或项目”</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/15.png" alt="15"></p>
-</li>
-<li><p>选择模板，部分选项如下：</p>
-<ul>
-<li>Qt Widgets Application，支持桌面平台的GUI 界面应用程序</li>
-<li>Qt Console Application，控制台应用程序，无 GUI 界面</li>
-<li>Application（Qt Quick），创建可部署的 Qt Quick 2 应用程序。Qt Quick 是 Qt 支持的一套 GUI 开发架构，其界面设计采用 QML 语言，程序架构采用 C++ 语言。利用 Qt Quick 可以设计非常炫的用户界面，一般用于移动设备或嵌入式设备上无边框的应用程序的设计</li>
+<li>trainXXX # 存放训练集图片</li>
+<li>valXXXX # 存放验证集图片</li>
 </ul>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/16.png" alt="16"></p>
-</li>
-<li><p>工程路径，注意路径及工程名字不能含有空格或中文</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/17.png" alt="17"></p>
-</li>
-<li><p>选择构建系统，其中：</p>
+</blockquote>
+<h3 id="2-2-标注文件"><a href="#2-2-标注文件" class="headerlink" title="2.2 标注文件"></a>2.2 标注文件</h3><p>coco格式的数据集使用 json 文件标注图片及其 bbox 信息，与voc格式一张图片对应一个xml文件不同，coco格式中一个 json 文件里面存放了若干张图片的信息。以 instances_xxxx.json 中的部分内容为例：</p>
+<pre><code class="json">&#123;
+    &quot;info&quot;: &#123; #数据集描述信息
+        &quot;description&quot;: &quot;COCO 2017 Dataset&quot;, # 数据集描述
+        &quot;url&quot;: &quot;http://cocodataset.org&quot;, # 数据集地址
+        &quot;version&quot;: &quot;1.0&quot;, # 数据集版本
+        &quot;year&quot;: 2017, # 数据集年份
+        &quot;contributor&quot;: &quot;COCO Consortium&quot;, # 数据集提供者
+        &quot;date_created&quot;: &quot;2017/09/01&quot; # 数据集创建日期
+    &#125;,
+    &quot;licenses&quot;: [ # 许可协议
+        &#123;
+            &quot;url&quot;: &quot;http://creativecommons.org/licenses/by-nc-sa/2.0/&quot;, # 协议链接
+            &quot;id&quot;: 1, # 协议 id ，下面将会用到
+            &quot;name&quot;: &quot;Attribution-NonCommercial-ShareAlike License&quot; # 协议名称
+        &#125;
+        # 其他许可协议格式同上
+    ],
+    &quot;images&quot;: [ # 图片信息
+        &#123;
+            &quot;license&quot;: 4, # 使用的许可协议
+            &quot;file_name&quot;: &quot;000000397133.jpg&quot;, # 图片文件名
+            &quot;coco_url&quot;: &quot;http://images.cocodataset.org/val2017/000000397133.jpg&quot;, # 图片在 coco 上的url
+            &quot;height&quot;: 427, # 图片高度
+            &quot;width&quot;: 640, # 图片宽度
+            &quot;date_captured&quot;: &quot;2013-11-14 17:02:52&quot;, # 图片获取日期
+            &quot;flickr_url&quot;: &quot;http://farm7.staticflickr.com/6116/6255196340_da26cf2c9e_z.jpg&quot;, 图片在 flickr 上的url
+            &quot;id&quot;: 397133 # 图片 id
+        &#125;
+        # 其他图片信息格式同上
+    ],
+    &quot;annotations&quot;: [ # 标注信息
+        &#123;
+            &quot;segmentation&quot;: [ # 实例分割时的边界点坐标[x1, y1, x2, y2 …… xn, yn]
+                [
+                    510.66,
+                    423.01,
+                    ……,
+                    510.45,
+                    423.01
+                ]
+            ],
+            &quot;area&quot;: 702.1057499999998, # 区域面积
+            &quot;iscrowd&quot;: 0, # 目标是否被遮盖
+            &quot;image_id&quot;: 289343, # 标注所在的图片的 id 编号（与上面 images 中的对应）
+            &quot;bbox&quot;: [ # bbox框 [左上角x, 左上角y, 宽度, 高度]
+                473.07,
+                395.93,
+                38.65,
+                28.67
+            ],
+            &quot;category_id&quot;: 18, # 被标注物体对应的类别 id 编号（与下面 categories 中的对应）
+            &quot;id&quot;: 1768 # 该标注的 id 编号（唯一）
+        &#125;
+        # 其他标注信息格式同上
+    ],
+    &quot;categories&quot;: [ # 类别描述
+        &#123;
+            &quot;supercategory&quot;: &quot;person&quot;, # 该类别所属的大类
+            &quot;id&quot;: 1, # 类别 id 编号
+            &quot;name&quot;: &quot;person&quot; # 类别名字
+        &#125;
+        # 其他标注信息格式同上
+    ]
+&#125;
+</code></pre>
+<h2 id="3-yolo格式"><a href="#3-yolo格式" class="headerlink" title="3. yolo格式"></a>3. yolo格式</h2><h3 id="3-1-文件结构"><a href="#3-1-文件结构" class="headerlink" title="3.1 文件结构"></a>3.1 文件结构</h3><p>使用yolo时，默认的文件结构如下（不同数据集会略有不同，但结构大致相同）：</p>
+<blockquote>
+<p>XXXX # 根目录，视使用的数据集决定</p>
 <ul>
-<li>qmake，为 Qt 量身打造的，使用起来非常方便</li>
-<li>cmake，使用上不如qmake简单直接，但复杂换来的是强大的功能</li>
-<li>Qbs ，号称下一代构建工具</li>
+<li>images # 存放图片，已划分为训练集、验证集、测试集（部分数据集无测试集）<ul>
+<li>train</li>
+<li>val</li>
+<li>test</li>
 </ul>
-<p>对简单的Qt工程，采用 qmake；对复杂度超过 qmake 处理能力的，采用 cmake。这里我选择qmake。</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/18.png" alt="18"></p>
 </li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/19.png" alt="19"></p>
+<li>labels # 存放的是 txt 文件，每个txt文件对应一张图片，文件中每一行包含一个bbox的相关信息<ul>
+<li>train</li>
+<li>val</li>
+<li>test</li>
+</ul>
 </li>
-<li><p>翻译文件，用于国际化，暂时不用设置，默认即可</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/20.png" alt="20"></p>
-</li>
-<li><p>选择构建套件，这里我选择MinGW 64-bit，不同构建套件的区别见上面“安装Qt”中的“选择组件”步骤</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/21.png" alt="21"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/22.png" alt="22"></p>
-</li>
-<li><p>打开 .ui 文件</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/23.png" alt="23"></p>
-</li>
-<li><p>在“Display Widgets”下拖一个“Label”到中间，在其中填入“Hello World”，并在右侧修改宽度</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/24.png" alt="24"></p>
-</li>
-<li><p>点击左下角的“绿色三角形”运行程序</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/25.png" alt="25"></p>
-</li>
-<li><p>程序运行成果，显示GUI界面</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/26.png" alt="26"></p>
-</li>
-</ol>
+</ul>
+</blockquote>
+<h3 id="3-2-标注文件"><a href="#3-2-标注文件" class="headerlink" title="3.2 标注文件"></a>3.2 标注文件</h3><p>yolo格式的数据集使用 txt 文件标注图片bbox信息，一张图片对应一个txt文件，txt文件中的每一行都标注了一个bbox的相关信息。标注格式如下：</p>
+<blockquote>
+<p>&lt;类别索引&gt; &lt;bbox的中心x坐标&gt; &lt;bbox的中心y坐标&gt; &lt;bbox的宽度&gt; &lt;bbox的高度&gt;</p>
+</blockquote>
+<ul>
+<li>信息之间以空格分割</li>
+<li>bbox的中心xy坐标以及宽度、高度都相对于图片的实际宽度W和高度H做了归一化</li>
+</ul>
+<p>以其中一个txt文件的部分内容为例：</p>
+<pre><code>45 0.479492 0.688771 0.955609 0.5955
+# 标注目标1的 bbox的类别索引是45，中心x坐标是0.479492， 中心y坐标是0.688771， 宽度是0.955609， 高度是0.5955
+45 0.736516 0.247188 0.498875 0.476417
+# 标注目标2的 bbox
+# 其余标注信息结构同上
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
