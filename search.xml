@@ -4,6 +4,122 @@
   
     
     <entry>
+      <title>yolo源码注释4——yolo.py</title>
+      <link href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py/"/>
+      <url>/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>代码基于yolov5 v6.0</p></blockquote><p>目录：</p><ul><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">yolo源码注释1——文件结构</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释2——数据集配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释3——模型配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py">yolo源码注释4——yolo-py</a></li></ul><p>yolo.py 用于搭建 yolov5 的网络模型，主要包含 3 部分：</p><ul><li>Detect：Detect 层</li><li>Model：搭建网络</li><li>parse_model：根据配置实例化模块</li></ul><p>Model（仅注释了 init 函数）：</p><pre><code class="python">class Model(nn.Module):    # YOLOv5 model    def __init__(self, cfg=&#39;yolov5s.yaml&#39;, ch=3, nc=None, anchors=None):  # model, input channels, number of classes        super().__init__()        if isinstance(cfg, dict):            self.yaml = cfg  # model dict        else:  # is *.yaml            import yaml            self.yaml_file = Path(cfg).name            with open(cfg, encoding=&#39;ascii&#39;, errors=&#39;ignore&#39;) as f:                self.yaml = yaml.safe_load(f)        # Define model        ch = self.yaml[&#39;ch&#39;] = self.yaml.get(&#39;ch&#39;, ch)  # input channels        if nc and nc != self.yaml[&#39;nc&#39;]:            LOGGER.info(f&quot;Overriding model.yaml nc=&#123;self.yaml[&#39;nc&#39;]&#125; with nc=&#123;nc&#125;&quot;)            self.yaml[&#39;nc&#39;] = nc  # override yaml value        if anchors:            LOGGER.info(f&#39;Overriding model.yaml anchors with anchors=&#123;anchors&#125;&#39;)            self.yaml[&#39;anchors&#39;] = round(anchors)  # override yaml value        # 根据配置搭建网络        self.model, self.save = parse_model(deepcopy(self.yaml), ch=[ch])        self.names = [str(i) for i in range(self.yaml[&#39;nc&#39;])]  # default names        self.inplace = self.yaml.get(&#39;inplace&#39;, True)        # 计算生成 anchors 时的步长        m = self.model[-1]  # Detect()        if isinstance(m, Detect):            s = 256  # 2x min stride            m.inplace = self.inplace            m.stride = torch.tensor([s / x.shape[-2] for x in self.forward(torch.zeros(1, ch, s, s))])  # forward            check_anchor_order(m)  # must be in pixel-space (not grid-space)            m.anchors /= m.stride.view(-1, 1, 1)            self.stride = m.stride            self._initialize_biases()  # only run once        # Init weights, biases        initialize_weights(self)        self.info()        LOGGER.info(&#39;&#39;)</code></pre><p>parse_model：</p><pre><code class="python">def parse_model(d, ch):  # model_dict, input_channels(3)    LOGGER.info(f&quot;\n&#123;&#39;&#39;:&gt;3&#125;&#123;&#39;from&#39;:&gt;18&#125;&#123;&#39;n&#39;:&gt;3&#125;&#123;&#39;params&#39;:&gt;10&#125;  &#123;&#39;module&#39;:&lt;40&#125;&#123;&#39;arguments&#39;:&lt;30&#125;&quot;)    anchors, nc, gd, gw = d[&#39;anchors&#39;], d[&#39;nc&#39;], d[&#39;depth_multiple&#39;], d[&#39;width_multiple&#39;]    na = (len(anchors[0]) // 2) if isinstance(anchors, list) else anchors  # number of anchors    no = na * (nc + 5)  # number of outputs = anchors * (classes + 5)    # layers： 保存每一层的结构    # save： 记录 from 不是 -1 的层，即需要多个输入的层如 Concat 和 Detect 层    # c2: 当前层输出的特征图数量    layers, save, c2 = [], [], ch[-1]  # layers, savelist, ch out    for i, (f, n, m, args) in enumerate(            d[&#39;backbone&#39;] + d[&#39;head&#39;]):  # from:-1, number:1, module:&#39;Conv&#39;, args:[64, 6, 2, 2]        m = eval(m) if isinstance(m, str) else m  # eval strings, m:&lt;class &#39;models.common.Conv&#39;&gt;        # 数字、列表直接放入args[i]，字符串通过 eval 函数变成模块        for j, a in enumerate(args):            try:                args[j] = eval(a) if isinstance(a, str) else a  # eval strings, [64, 6, 2, 2]            except NameError:                pass        # 对数量大于1的模块和 depth_multiple 相乘然后四舍五入        n = n_ = max(round(n * gd), 1) if n &gt; 1 else n  # depth gain        # 实例化 ymal 文件中的每个模块        if m in (Conv, GhostConv, Bottleneck, GhostBottleneck, SPP, SPPF, DWConv, MixConv2d, Focus, CrossConv,                 BottleneckCSP, C3, C3TR, C3SPP, C3Ghost,SE, FSM):            c1, c2 = ch[f], args[0]  # 输入特征图数量（f指向的层的输出特征图数量），输出特征图数量            # 如果输出层的特征图数量不等于 no (Detect输出层)            # 则将输出图的特征图数量乘 width_multiple ，并调整为 8 的倍数            if c2 != no:  # if not output                c2 = make_divisible(c2 * gw, 8)            args = [c1, c2, *args[1:]]  # 默认参数格式：[输入， 输出， 其他参数……]            # 参数有特殊格式要求的模块            if m in [BottleneckCSP, C3, C3TR, C3Ghost, CSPStage]:                args.insert(2, n)  # number of repeats                n = 1        elif m is nn.BatchNorm2d:            args = [ch[f]]        elif m is Concat:            c2 = sum(ch[x] for x in f)        elif m is Detect:            args.append([ch[x] for x in f])            if isinstance(args[1], int):  # number of anchors                args[1] = [list(range(args[1] * 2))] * len(f)        elif m is Contract:            c2 = ch[f] * args[0] ** 2        elif m is Expand:            c2 = ch[f] // args[0] ** 2        else:            c2 = ch[f]        m_ = nn.Sequential(*(m(*args) for _ in range(n))) if n &gt; 1 else m(*args)  # module        t = str(m)[8:-2].replace(&#39;__main__.&#39;, &#39;&#39;)  # module type        np = sum(x.numel() for x in m_.parameters())  # number params        m_.i, m_.f, m_.type, m_.np = i, f, t, np  # attach index, &#39;from&#39; index, type, number params        LOGGER.info(f&#39;&#123;i:&gt;3&#125;&#123;str(f):&gt;18&#125;&#123;n_:&gt;3&#125;&#123;np:10.0f&#125;  &#123;t:&lt;40&#125;&#123;str(args):&lt;30&#125;&#39;)  # print        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist        layers.append(m_)        if i == 0:            ch = []        ch.append(c2)    return nn.Sequential(*layers), sorted(save)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> 目标检测 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 目标检测 </tag>
+            
+            <tag> yolo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>yolo源码注释3——模型配置文件</title>
+      <link href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
+      <url>/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>代码基于yolov5 v6.0</p></blockquote><p>目录：</p><ul><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">yolo源码注释1——文件结构</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释2——数据集配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释3——模型配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py">yolo源码注释4——yolo-py</a></li></ul><p>模型配置文件一般放在 <code>models</code> 文件夹下的 <code>XXX.yaml</code> 文件中，以 <code>yolov5s.yaml</code> 为例：</p><pre><code class="yaml"># YOLOv5 🚀 by Ultralytics, GPL-3.0 license# Parametersnc: 80  # 类别个数，一定要与使用的数据集保持一致depth_multiple: 0.33  # 深度倍数，对数量大于1个模块进行数量控制，具体看 yolo.py 中的 parse_model 函数width_multiple: 0.50  # 宽度倍数，卷积操作中控制卷积核数量，具体看 yolo.py 中的 parse_model 函数# 检测框的大小anchors:  - [ 10,13, 16,30, 33,23 ]  # P3/8 检测小目标的三个检测框尺寸  - [ 30,61, 62,45, 59,119 ]  # P4/16 检测中等目标的三个检测框尺寸  - [ 116,90, 156,198, 373,326 ]  # P5/32 检测大目标的三个检测框尺寸# 1. P3 代表浅层的特征图，浅层的特征图较大包含更多的小目标# 2. P5 代表深层的特则图，深层的特征图较小包含更多的大目标# 3. YOLOv5 根据工程经验得到了这3组anchors，可以用于大多数数据集# 4. 在源代码中是针对 coco 数据集使用 K++ 算法求解出的大、中、小三种大小检测框# 5. 如果需要修改检测框大小，建议也是用 K++ 算法进行求解# YOLOv5 v6.0 backbone# 主干网络使用的模块，用于特征提取，可以替换为其他特征提取网络# 由于没有分neck模块，故spp写在了backbone部分backbone:  # 模块格式如下：[from, number, module, args]  # form： 当前的输入来自哪一层的输出， -1 表示上一层  # number： 当前模块的理论重复次数，当该值大于 1 时，与 depth_multiple 共同决定实际重复次数  # module： 模块名字，通过这个类名去 common.py 中寻找相应的类，进行模块化的搭建网络  # args： 搭建模块需要的参数，具体看 common.py 中对应的类的要求  [ [ -1, 1, Conv, [ 64, 6, 2, 2 ] ],  # 0-P1/2，模块编号为0    [ -1, 1, Conv, [ 128, 3, 2 ] ],  # 1-P2/4    [ -1, 3, C3, [ 128 ] ],    [ -1, 1, Conv, [ 256, 3, 2 ] ],  # 3-P3/8    [ -1, 6, C3, [ 256 ] ],    [ -1, 1, Conv, [ 512, 3, 2 ] ],  # 5-P4/16    [ -1, 9, C3, [ 512 ] ],    [ -1, 1, Conv, [ 1024, 3, 2 ] ],  # 7-P5/32    [ -1, 3, C3, [ 1024 ] ],    [ -1, 1, SPPF, [ 1024, 5 ] ],  # 9，模块编号为0  ]# YOLOv5 v6.0 head# 参数解释同backbone# 没有区分neck模块，所以head部分包含了PANet+Detect部分head:  [ [ -1, 1, Conv, [ 512, 1, 1 ] ],    [ -1, 1, nn.Upsample, [ None, 2, &#39;nearest&#39; ] ],    [ [ -1, 6 ], 1, Concat, [ 1 ] ],  # cat backbone 接受两层的输出作为输入：[ -1, 6 ] 表示上一层以及编号为 6 的层    [ -1, 3, C3, [ 512, False ] ],  # 13，模块编号为13    [ -1, 1, Conv, [ 256, 1, 1 ] ],    [ -1, 1, nn.Upsample, [ None, 2, &#39;nearest&#39; ] ],    [ [ -1, 4 ], 1, Concat, [ 1 ] ],  # cat backbone P3    [ -1, 3, C3, [ 256, False ] ],  # 17 (P3/8-small)    [ -1, 1, Conv, [ 256, 3, 2 ] ],    [ [ -1, 15 ], 1, Concat, [ 1 ] ],  # cat head P4    [ -1, 3, C3, [ 512, False ] ],  # 20 (P4/16-medium)    [ -1, 1, Conv, [ 512, 3, 2 ] ],    [ [ -1, 11 ], 1, Concat, [ 1 ] ],  # cat head P5    [ -1, 3, C3, [ 1024, False ] ],  # 23 (P5/32-large)    [ [ 18, 21, 24 ], 1, Detect, [ nc, anchors ] ],  # Detect(P3, P4, P5)  ]</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> 目标检测 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 目标检测 </tag>
+            
+            <tag> yolo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>yolo源码注释2——数据集配置文件</title>
+      <link href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
+      <url>/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>代码基于yolov5 v6.0</p></blockquote><p>目录：</p><ul><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">yolo源码注释1——文件结构</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释2——数据集配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释3——模型配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py">yolo源码注释4——yolo-py</a></li></ul><p>数据集配置文件一般放在 <code>data</code> 文件夹下的 <code>XXX.yaml</code> 文件中，格式如下：</p><pre><code class="yaml">path: # 数据集存放路径train: # 训练集图片存放路径val: # 验证集图片存放路径test: # 测试集存放路径（可不设置，如 coco128.yaml 就未设置）nc: # 目标检测中的类别数量names: # 列表，依次存放了类别的名字（数量要和 nc 匹配）download: # 下载数据集的脚本（如 Argoverse.yaml 中）或者数据集的下载链接（如 coco.yaml 中），也可不设置</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> 目标检测 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 目标检测 </tag>
+            
+            <tag> yolo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>yolo源码注释1——文件结构</title>
+      <link href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/"/>
+      <url>/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>代码基于yolov5 v6.0</p></blockquote><p>目录：</p><ul><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">yolo源码注释1——文件结构</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释2——数据集配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释3——模型配置文件</a></li><li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py">yolo源码注释4——yolo-py</a></li></ul><blockquote><ul><li>datasets # 用于存放数据集的默认文件夹</li><li>yolov5<ul><li>data # 模型训练的超参数配置文件以及数据集配置文件<ul><li>hyps # 存放超参数配置文件（yaml格式）<ul><li>hyp.scratch-high.yaml：适用于较大的模型结构，如 yolol</li><li>hyp.scratch-low.yaml：适用于较小的模型结构，如 yolos</li><li>hyp.scratch-med.yaml：适用于中等模型结构，如 yolom</li></ul></li><li>images # 存放了官方提供的两张测试图片：bus.jpg 和 zidane.jpg</li><li>scripts # 用于下载数据集以及权重文件的shell脚本<ul><li>download_weight.sh：下载权重文件</li><li>get_coco.sh：下载 coco 数据集</li><li>get_coco128.sh：下载 coco128 数据集</li></ul></li><li>XXX.yaml：各种数据集的配置文件，如 coco.yaml 是 coco 数据集的配置文件</li></ul></li><li>models # 搭建模型的相关配置文件及代码<ul><li>hub # 存放各版本网络模型的配置文件<ul><li>anchors.yaml：coco 数据集的默认 anchor</li><li>yolovX-XXX.yaml：模型配置文件</li></ul></li><li>common.py：用于搭建网络的模块，如Conv、DWConv、TransformerLayer等</li><li>experimental.py：实验性质的代码，其中一些模块是近几年提出来的，如CrossConv、Sum等，yolov5的作者尝试将其融合进yolov5中</li><li>tf.py：TensorFlow版本的yolov5代码</li><li>yolo.py：主要用于搭建yolov5的网络模型</li><li>yolov5X.yaml：yolov5的模型配置文件</li></ul></li><li>runs #运行过程中产生的文件夹，每运行一次都会生成一个名为 expN 的文件夹（N代表运行次数）<ul><li>detect # 运行 detect.py 产生的图片，图片中标注出识别到的物体及其概率</li><li>train # 运行 train.py 产生的文件<ul><li>weights # 权重（包括训练出的最好权重 best.pt 以及上次训练的权重 last.pt）</li><li>confusion_matrix.png：混淆矩阵</li><li>F1_curve.png：F1 score 与置信度之间的关系</li><li>hyp.yaml：超参数记录文件</li><li>labels.jpg：包含四张子图，从左上到右下分别是每个类别的个数、标注的 bbox、标注的bbox的中心点坐标热图、bbox的宽高热图</li><li>labels_correlogram.jpg：预测框的宽高以及中心坐标热图</li><li>opt.yaml：模型记录文件</li><li>P_curve.png：准确率与置信度之间的关系</li><li>PR_curve.png：精准率与召回率之间的关系</li><li>R_curve.png：精准率与置信度之间的关系</li><li>results.csv：模型训练过程中的指标，如损失函数、准确率等</li><li>results.png：训练集以及验证集在验证过程中的损失函数、mAP等指标的曲线</li><li>train_bathN.jpg：训练集图像（带bbox）</li><li>val_batchN_labels.jpg：验证集图像（带bbox）</li><li>val_batchN_pred.jpg：验证集图像（带预测框）</li></ul></li></ul></li><li>utils # 通用的工具类函数<ul><li>aws：恢复中断训练相关</li><li>docker：docker配置相关</li><li>flash_rest_api：flask接口相关</li><li>google_app_engine：google app相关</li><li>loggers：日志打印（包括TensorBoard）</li><li>activations.py：激活函数</li><li>augmentations.py：图像增强</li><li>autoanchor.py：自动生成 anchor</li><li>autobatch.py：自动生成 batch size</li><li>benchmarks.py：评估模型的推理速度以及分析内存占用</li><li>callbacks.py：主要是 logger 的回调函数</li><li>datasets.py：配置 dataloader 和 datasets</li><li>downloads.py：下载数据集</li><li>general.py：通用函数</li><li>loss.py：损失函数</li><li>metrics.py：模型验证指标</li><li>plots.py：绘制损失函数等的曲线、bbox等</li><li>torch_utils.py：其他一些通用函数</li></ul></li><li>detect.py：将训练好的模型用于图片、视频等进行目标检测</li><li>export.py：导出模型</li><li>hubconf.py：pytorch hub 相关，用于定义和管理模型的预训练权重和配置信息</li><li>train.py：训练模型</li><li>val.py：验证模型，评估模型性能</li></ul></li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> 目标检测 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 目标检测 </tag>
+            
+            <tag> yolo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>目标检测常用的数据集格式</title>
       <link href="/2023/08/09/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%BC%E5%BC%8F/"/>
       <url>/2023/08/09/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%BC%E5%BC%8F/</url>
@@ -22,9 +138,9 @@
       
         <tags>
             
-            <tag> CV基础 </tag>
-            
             <tag> 目标检测 </tag>
+            
+            <tag> CV基础 </tag>
             
         </tags>
       

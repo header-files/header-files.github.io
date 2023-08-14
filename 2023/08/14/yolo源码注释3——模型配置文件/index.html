@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Qt环境安装 | 勿庸散人</title>
-  <meta name="keywords" content=" C++ , Qt入门 ">
-  <meta name="description" content="Qt环境安装 | 勿庸散人">
+  <title>yolo源码注释3——模型配置文件 | 勿庸散人</title>
+  <meta name="keywords" content=" 目标检测 , yolo ">
+  <meta name="description" content="yolo源码注释3——模型配置文件 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -801,9 +801,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Qt环境安装" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-yolo源码注释3——模型配置文件" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Qt环境安装</h1>
+        <h1 class="article-title">yolo源码注释3——模型配置文件</h1>
     
     <div class="article-meta">
         
@@ -813,9 +813,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开发工具">开发工具</a> > 
+            <a  data-rel="计算机视觉">计算机视觉</a> > 
             
-            <a  data-rel="开发工具&lt;---&gt;Qt">Qt</a>
+            <a  data-rel="计算机视觉&lt;---&gt;目标检测">目标检测</a>
             
         </span>
         
@@ -823,21 +823,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">C++</a>
+            <a class="color5">目标检测</a>
             
-            <a class="color5">Qt入门</a>
+            <a class="color5">yolo</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:47:59'>2023-07-08 15:44</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-14 20:19:04'>2023-08-14 19:48</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.4k</span>
+        <span>字数:787</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -867,7 +867,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDQt"><span class="toc-text">下载Qt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qt%E8%B5%84%E6%BA%90%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-text">Qt资源下载地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Qt5-12-12%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-text">Qt5.12.12下载地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Qt"><span class="toc-text">安装Qt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F"><span class="toc-text">创建快捷方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9CHello-World%E2%80%9D%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AAQt%E5%BA%94%E7%94%A8"><span class="toc-text">“Hello World”之第一个Qt应用</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -883,155 +883,85 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="下载Qt"><a href="#下载Qt" class="headerlink" title="下载Qt"></a>下载Qt</h2><h3 id="Qt资源下载地址"><a href="#Qt资源下载地址" class="headerlink" title="Qt资源下载地址"></a>Qt资源下载地址</h3><p> <a target="_blank" rel="noopener" href="https://download.qt.io/archive">https://download.qt.io/archive</a></p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png" alt="1"></p>
-<p>其中：</p>
+        <blockquote>
+<p>代码基于yolov5 v6.0</p>
+</blockquote>
+<p>目录：</p>
 <ul>
-<li><p>qtcreator文件夹下存放的是不同版本的qtcreator，Qt Creator是一个用于Qt开发的轻量级跨平台集成开发环境</p>
-</li>
-<li><p>qt文件夹下存放的是不同版本的qt，Qt是一个跨平台的C++应用程序开发框架</p>
-</li>
+<li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A1%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">yolo源码注释1——文件结构</a></li>
+<li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A2%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释2——数据集配置文件</a></li>
+<li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A3%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">yolo源码注释3——模型配置文件</a></li>
+<li><a href="/2023/08/14/yolo%E6%BA%90%E7%A0%81%E6%B3%A8%E9%87%8A4%E2%80%94%E2%80%94yolo-py">yolo源码注释4——yolo-py</a></li>
 </ul>
-<p>Qt从5.0版本开始自带Qt Creator，因此，若安装5.0以前版本的Qt需要再单独安装Qt Creator。我安装的是5.12.12，自带Qt Creator，因此不需要再单独安装。</p>
-<h3 id="Qt5-12-12下载地址"><a href="#Qt5-12-12下载地址" class="headerlink" title="Qt5.12.12下载地址"></a>Qt5.12.12下载地址</h3><p><a target="_blank" rel="noopener" href="https://download.qt.io/archive/qt/5.12/5.12.12](https://download.qt.io/archive/qt/5.12/5.12.12)">https://download.qt.io/archive/qt/5.12/5.12.12](https://download.qt.io/archive/qt/5.12/5.12.12)</a></p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png" alt="2"></p>
-<p>其中：</p>
-<ul>
-<li>.exe是Windows平台下的安装包</li>
-<li>.dmg是Mac平台下的安装包</li>
-<li>.run是Linux平台下的安装包</li>
-</ul>
-<p>点击对应平台下的安装包下载即可。若网页访问速度慢，可访问国内镜像网站：</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/qtproject/archive">中国科学技术大学Qt镜像</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/qt/archive">上海交通大学Qt镜像</a></p>
-</li>
-</ul>
-<h2 id="安装Qt"><a href="#安装Qt" class="headerlink" title="安装Qt"></a>安装Qt</h2><p>以Windows平台下安装Qt 5.12.12为例，打开安装包：</p>
-<ol>
-<li><p>填写账号</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png" alt="3"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png" alt="4"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png" alt="5"></p>
-</li>
-<li><p>选择安装路径（不要带中文）</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png" alt="6"></p>
-</li>
-<li><p>选择组件，其中：</p>
-<ul>
-<li><p>MSVC：Microsoft Visual C++ Compiler，微软的VC编译器</p>
-</li>
-<li><p>MinGW：Minimalist GNU for Window，将GCC编译器和GNU Binutils移植到Windows平台下的产物，它是一些头文件和使用 GNU 工具集导入库的集合，允许用户在没有第三方 dll 的情况下生成本地的 Windows 程序</p>
-<p><strong><font color="#0000dd">注：</font></strong></p>
-<p><strong><font color="#0000dd">MSVC 和 MingGW 都是很好用的工具，但兼容并不好，比如某项目使用了 MingGW 编译，那么它所链接的库也必须是 MingGW 编译而成。 一般来说，如果仅在 Windows 平台开发，选择 MSVC，可以使用大量的第三方库；如果有跨平台需求，选择 MingGW。</font></strong></p>
-<p><strong><font color="#0000dd">由于两个版本的Qt配置方式完全不同。因此在网上搜配置方法的时候，要加上MSVC或者MinGW这样的关键字搜索。</font></strong></p>
-</li>
-<li><p>UWP：属于 MSVC 编译器生成的 Qt 库，用于开发通用 Windows 平台的应用程序</p>
-</li>
-<li><p>Android：用于 Android 应用开发的 Qt 库</p>
-</li>
-<li><p>Sources：源码包，添加后可以使用源码调试功能</p>
-</li>
-<li><p>Qt Charts：二维图表模块，用于绘制柱状图、饼图、曲线图等常用二维图表</p>
-</li>
-<li><p>Qt Data Visualization：三维数据图表模块，用于数据的三维显示，如散点的三维空间分布、三维曲面等。</p>
-</li>
-</ul>
-<ul>
-<li>Qt Purchasing：用于处理 Android、iOS 和 macOS 上的应用内购买的跨平台 API</li>
-<li>Qt Virtual Keyboard：Qt Quick 虚拟键盘</li>
-<li>Qt WebEngine：集成了Google Chromium Web，充分利用了整个 Qt 图形堆栈集成，允许原生 Qt 控件与 Web 内容和 OpenGL 着色器的无缝混合和叠加</li>
-<li>Qt Network Authorization：Qt 网络授权是一个附加库，它使 Qt 应用程序能够使用不同的 Web 身份验证系统</li>
-<li>Qt WebGL Streaming Plugin：一个 Qt Platform Abstraction 插件，它通过网络将 Qt Quick &amp; Qt OpenGL 应用程序流式传输到支持 WebGL 的浏览器。</li>
-<li><del>Qt Script (Deprecated)：脚本模块，已弃用</del></li>
-</ul>
-<p>Tools 节点下的工具：</p>
-<ul>
-<li><p>Qt Creator：Qt5.0版本以上集成的轻量级跨平台集成开发环境（5.0以下需要单独安装）</p>
-</li>
-<li><p>CDB Debugger Support：控制台调试器，是 MSVC 在 Qt 的原生调试器，由于MSVC 只有编译器，如果选择它，则需要勾选；如选择 MinGW 则不需要，MinGW 中有 GDB调试器</p>
-</li>
-<li><p>MingGW ：这里的 MingGW 是用来交叉编译的，在一个平台上生成另一个平台上的可执行代码</p>
-</li>
-<li><p>Strawberry Perl：Perl 语言工具</p>
-<p>根据个人需要，我选择了以下组件（若不确定选哪个，可以全选）</p>
-</li>
-</ul>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png" alt="7"></p>
-</li>
-<li><p>许可协议</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png" alt="8"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png" alt="9"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png" alt="10"></p>
-</li>
-<li><p>等待安装完成</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/11.png" alt="11"></p>
-</li>
-<li><p>安装完成</p>
-</li>
-</ol>
-<p>   <img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/12.png" alt="12"></p>
-<h2 id="创建快捷方式"><a href="#创建快捷方式" class="headerlink" title="创建快捷方式"></a>创建快捷方式</h2><p>安装好后的Qt Creator未在桌面创建快捷方式，可以使用以下方式创建：</p>
-<ol>
-<li><p>打开“开始菜单”，找到安装好的“Qt Creator”，然后“右键”-&gt;“更多”-&gt;“打开文件位置”</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/13.jpg" alt="13"></p>
-</li>
-<li><p>在“Qt Creator”上右键，然后”发送到”-&gt;“桌面快捷方式”</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/14.jpg" alt="14"></p>
-</li>
-</ol>
-<h2 id="“Hello-World”之第一个Qt应用"><a href="#“Hello-World”之第一个Qt应用" class="headerlink" title="“Hello World”之第一个Qt应用"></a>“Hello World”之第一个Qt应用</h2><ol>
-<li><p>打开Qt Creator，“文件”-&gt;“新建文件或项目”</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/15.png" alt="15"></p>
-</li>
-<li><p>选择模板，部分选项如下：</p>
-<ul>
-<li>Qt Widgets Application，支持桌面平台的GUI 界面应用程序</li>
-<li>Qt Console Application，控制台应用程序，无 GUI 界面</li>
-<li>Application（Qt Quick），创建可部署的 Qt Quick 2 应用程序。Qt Quick 是 Qt 支持的一套 GUI 开发架构，其界面设计采用 QML 语言，程序架构采用 C++ 语言。利用 Qt Quick 可以设计非常炫的用户界面，一般用于移动设备或嵌入式设备上无边框的应用程序的设计</li>
-</ul>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/16.png" alt="16"></p>
-</li>
-<li><p>工程路径，注意路径及工程名字不能含有空格或中文</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/17.png" alt="17"></p>
-</li>
-<li><p>选择构建系统，其中：</p>
-<ul>
-<li>qmake，为 Qt 量身打造的，使用起来非常方便</li>
-<li>cmake，使用上不如qmake简单直接，但复杂换来的是强大的功能</li>
-<li>Qbs ，号称下一代构建工具</li>
-</ul>
-<p>对简单的Qt工程，采用 qmake；对复杂度超过 qmake 处理能力的，采用 cmake。这里我选择qmake。</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/18.png" alt="18"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/19.png" alt="19"></p>
-</li>
-<li><p>翻译文件，用于国际化，暂时不用设置，默认即可</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/20.png" alt="20"></p>
-</li>
-<li><p>选择构建套件，这里我选择MinGW 64-bit，不同构建套件的区别见上面“安装Qt”中的“选择组件”步骤</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/21.png" alt="21"></p>
-</li>
-<li><p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/22.png" alt="22"></p>
-</li>
-<li><p>打开 .ui 文件</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/23.png" alt="23"></p>
-</li>
-<li><p>在“Display Widgets”下拖一个“Label”到中间，在其中填入“Hello World”，并在右侧修改宽度</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/24.png" alt="24"></p>
-</li>
-<li><p>点击左下角的“绿色三角形”运行程序</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/25.png" alt="25"></p>
-</li>
-<li><p>程序运行成果，显示GUI界面</p>
-<p><img src="/2023/07/08/Qt%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/26.png" alt="26"></p>
-</li>
-</ol>
+<p>模型配置文件一般放在 <code>models</code> 文件夹下的 <code>XXX.yaml</code> 文件中，以 <code>yolov5s.yaml</code> 为例：</p>
+<pre><code class="yaml"># YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+
+# Parameters
+nc: 80  # 类别个数，一定要与使用的数据集保持一致
+
+depth_multiple: 0.33  # 深度倍数，对数量大于1个模块进行数量控制，具体看 yolo.py 中的 parse_model 函数
+width_multiple: 0.50  # 宽度倍数，卷积操作中控制卷积核数量，具体看 yolo.py 中的 parse_model 函数
+
+
+# 检测框的大小
+anchors:
+  - [ 10,13, 16,30, 33,23 ]  # P3/8 检测小目标的三个检测框尺寸
+  - [ 30,61, 62,45, 59,119 ]  # P4/16 检测中等目标的三个检测框尺寸
+  - [ 116,90, 156,198, 373,326 ]  # P5/32 检测大目标的三个检测框尺寸
+# 1. P3 代表浅层的特征图，浅层的特征图较大包含更多的小目标
+# 2. P5 代表深层的特则图，深层的特征图较小包含更多的大目标
+# 3. YOLOv5 根据工程经验得到了这3组anchors，可以用于大多数数据集
+# 4. 在源代码中是针对 coco 数据集使用 K++ 算法求解出的大、中、小三种大小检测框
+# 5. 如果需要修改检测框大小，建议也是用 K++ 算法进行求解
+
+
+# YOLOv5 v6.0 backbone
+# 主干网络使用的模块，用于特征提取，可以替换为其他特征提取网络
+# 由于没有分neck模块，故spp写在了backbone部分
+backbone:
+  # 模块格式如下：[from, number, module, args]
+  # form： 当前的输入来自哪一层的输出， -1 表示上一层
+  # number： 当前模块的理论重复次数，当该值大于 1 时，与 depth_multiple 共同决定实际重复次数
+  # module： 模块名字，通过这个类名去 common.py 中寻找相应的类，进行模块化的搭建网络
+  # args： 搭建模块需要的参数，具体看 common.py 中对应的类的要求
+  [ [ -1, 1, Conv, [ 64, 6, 2, 2 ] ],  # 0-P1/2，模块编号为0
+    [ -1, 1, Conv, [ 128, 3, 2 ] ],  # 1-P2/4
+    [ -1, 3, C3, [ 128 ] ],
+    [ -1, 1, Conv, [ 256, 3, 2 ] ],  # 3-P3/8
+    [ -1, 6, C3, [ 256 ] ],
+    [ -1, 1, Conv, [ 512, 3, 2 ] ],  # 5-P4/16
+    [ -1, 9, C3, [ 512 ] ],
+    [ -1, 1, Conv, [ 1024, 3, 2 ] ],  # 7-P5/32
+    [ -1, 3, C3, [ 1024 ] ],
+    [ -1, 1, SPPF, [ 1024, 5 ] ],  # 9，模块编号为0
+  ]
+
+# YOLOv5 v6.0 head
+# 参数解释同backbone
+# 没有区分neck模块，所以head部分包含了PANet+Detect部分
+head:
+  [ [ -1, 1, Conv, [ 512, 1, 1 ] ],
+    [ -1, 1, nn.Upsample, [ None, 2, &#39;nearest&#39; ] ],
+    [ [ -1, 6 ], 1, Concat, [ 1 ] ],  # cat backbone 接受两层的输出作为输入：[ -1, 6 ] 表示上一层以及编号为 6 的层
+    [ -1, 3, C3, [ 512, False ] ],  # 13，模块编号为13
+
+    [ -1, 1, Conv, [ 256, 1, 1 ] ],
+    [ -1, 1, nn.Upsample, [ None, 2, &#39;nearest&#39; ] ],
+    [ [ -1, 4 ], 1, Concat, [ 1 ] ],  # cat backbone P3
+    [ -1, 3, C3, [ 256, False ] ],  # 17 (P3/8-small)
+
+    [ -1, 1, Conv, [ 256, 3, 2 ] ],
+    [ [ -1, 15 ], 1, Concat, [ 1 ] ],  # cat head P4
+    [ -1, 3, C3, [ 512, False ] ],  # 20 (P4/16-medium)
+
+
+    [ -1, 1, Conv, [ 512, 3, 2 ] ],
+    [ [ -1, 11 ], 1, Concat, [ 1 ] ],  # cat head P5
+    [ -1, 3, C3, [ 1024, False ] ],  # 23 (P5/32-large)
+
+    [ [ 18, 21, 24 ], 1, Detect, [ nc, anchors ] ],  # Detect(P3, P4, P5)
+  ]
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
