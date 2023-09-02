@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>对使用Git、GitHub时邮箱和用户名的理解 | 勿庸散人</title>
-  <meta name="keywords" content=" Git , Git技巧 ">
-  <meta name="description" content="对使用Git、GitHub时邮箱和用户名的理解 | 勿庸散人">
+  <title>Java8新特性1——函数式接口&amp;lambda表达式 | 勿庸散人</title>
+  <meta name="keywords" content=" Java , Java8新特性 ">
+  <meta name="description" content="Java8新特性1——函数式接口&amp;lambda表达式 | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -814,9 +814,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-对使用Git、GitHub时邮箱和用户名的理解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java8新特性1——函数式接口&amp;lambda表达式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">对使用Git、GitHub时邮箱和用户名的理解</h1>
+        <h1 class="article-title">Java8新特性1——函数式接口&amp;lambda表达式</h1>
     
     <div class="article-meta">
         
@@ -826,9 +826,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开发工具">开发工具</a> > 
+            <a  data-rel="编程语言">编程语言</a> > 
             
-            <a  data-rel="开发工具&lt;---&gt;Git">Git</a>
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
             
         </span>
         
@@ -836,21 +836,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">Git</a>
+            <a class="color5">Java</a>
             
-            <a class="color1">Git技巧</a>
+            <a class="color4">Java8新特性</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-29 15:46:50'>2023-07-13 11:20</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-02 10:48:48'>2023-09-02 10:45</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1k</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -880,7 +880,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95GitHub%E6%97%B6"><span class="toc-text">登录GitHub时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit%E6%97%B6"><span class="toc-text">配置Git时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AESSH-Key%E6%97%B6"><span class="toc-text">设置SSH Key时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. 函数式接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">2. lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%9C%E7%94%A8"><span class="toc-text">2.1 lambda表达式作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="toc-text">2.2 lambda表达式语法格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E7%B2%BE%E7%AE%80"><span class="toc-text">2.3 lambda表达式的精简</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">2.4 变量作用域</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -896,54 +896,170 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用Git以及GitHub时会多次用到“邮箱”和“用户名”，这里记录一下它们的区别。</p>
-<h2 id="登录GitHub时"><a href="#登录GitHub时" class="headerlink" title="登录GitHub时"></a>登录GitHub时</h2><p><img src="/2023/07/13/%E5%AF%B9%E4%BD%BF%E7%94%A8Git%E3%80%81GitHub%E6%97%B6%E9%82%AE%E7%AE%B1%E5%92%8C%E7%94%A8%E6%88%B7%E5%90%8D%E7%9A%84%E7%90%86%E8%A7%A3/1.jpg" alt="1"></p>
-<p>这里的用户名或邮箱是<strong>用于登录GitHub</strong>这个网站的。</p>
-<h2 id="配置Git时"><a href="#配置Git时" class="headerlink" title="配置Git时"></a>配置Git时</h2><pre><code class="shell">git config --global user.name &quot;用户名&quot;
-git config --global user.email &quot;邮箱&quot;
+        <blockquote>
+<p>注：以下内容基于Java 8，所有代码都已在Java 8环境下测试通过</p>
+</blockquote>
+<p>目录：</p>
+<ul>
+<li><a href="/2023/09/02/Java8%E6%96%B0%E7%89%B9%E6%80%A71%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F">Java8新特性1——函数式接口&amp;lambda表达式</a></li>
+<li>方法引用</li>
+<li>Stream</li>
+</ul>
+<h2 id="1-函数式接口"><a href="#1-函数式接口" class="headerlink" title="1. 函数式接口"></a>1. 函数式接口</h2><p>如果在一个接口中，<strong>有且只有一个抽象方法</strong>，则该接口被称为函数式接口。如：</p>
+<pre><code class="java">interface Test &#123;
+    public void test();
+&#125;
 </code></pre>
-<p>这两条命令是配置 Git 的全局用户名和邮箱，在进行版本控制时用于记录用户身份信息。Git在commit信息中会显示提交人及其邮箱地址，方便追踪提交记录。因此这里的邮箱和用户名是<strong>为了回溯是谁提交的代码</strong>，并不需要一定填写GitHub的用户名和邮箱，甚至是可以随便填写的用户名和邮箱（当然，极其不建议这样做）。</p>
-<p>在使用GitHub时，可能会发现一个bug：虽然提交了commit，但是主页却不显示contributions。这个bug很可能就是在Git配置的邮箱地址与GitHub中的邮箱地址不符合造成的。</p>
-<ul>
-<li>如果本地设定的user.email值与GitHub上的账户的邮件地址相同，GitHub会认定推送代码的操作是账户拥有者自己做的，跟直接登录到GitHub，从网站上修改，是相同的。此时，修改人是一样，就是账户拥有者。</li>
-<li>如果本地设定的user.email值与GitHub不同，也能把代码推送到GitHub（只要密码或者ssh正确），GitHub会记录这次的修改是另一个人做的。</li>
-</ul>
-<h2 id="设置SSH-Key时"><a href="#设置SSH-Key时" class="headerlink" title="设置SSH Key时"></a>设置SSH Key时</h2><p>GitHub通过HTTPS协议（密码）或者SSH验证身份。其中：</p>
-<ul>
-<li>HTTPS协议只认账号。如果使用HTTPS操作远程仓库，则需要使用账号密码来做权限的认证。</li>
-<li>SSH协议只认机器。当使用SSH操作远程仓库的话，需要使用公钥和私钥对来做权限的认证。</li>
-</ul>
-<p>为了方便操作，一般都是使用SSH协议，当使用SSH协议时，需要在本地电脑上生成公钥和私钥对，然后在GitHub上配置公钥。公钥和私钥对使用如下指令生成：</p>
-<pre><code class="shell">ssh-keygen -t rsa -f id_rsa.github -C &quot;XXX&quot;
+<p>注：</p>
+<p>可以在接口前使用 <code>@FunctionalInterface</code> 注解，判断这个接口是否是⼀个函数式接口。如：</p>
+<pre><code class="java">@FunctionalInterface
+interface Test1 &#123;//有且仅有一个抽象方法，是函数式接口
+    void test();
+&#125;
+
+@FunctionalInterface
+interface Test2 &#123;//有且仅有一个抽象方法，是函数式接口
+    void test();
+
+    default void f() &#123;
+    &#125;
+&#125;
+
+@FunctionalInterface
+interface Test3 &#123;//没有抽象方法，不是函数式接口，编译器报错
+&#125;
+
+@FunctionalInterface
+interface Test4 &#123;//有多个抽象方法，不是函数式接口，编译器报错
+    void test1();
+
+    void test2();
+&#125;
+</code></pre>
+<h2 id="2-lambda表达式"><a href="#2-lambda表达式" class="headerlink" title="2. lambda表达式"></a>2. lambda表达式</h2><h3 id="2-1-lambda表达式作用"><a href="#2-1-lambda表达式作用" class="headerlink" title="2.1 lambda表达式作用"></a>2.1 lambda表达式作用</h3><p><strong>lambda表达式是一个匿名函数，用于简化函数式接口的实现</strong>。</p>
+<p>在Java中，接口不能实例化，但接口对象可以指向实现类对象。当没有实现类对象时，可以通过匿名类的方式，如：</p>
+<pre><code class="java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        Test test = new Test() &#123;
+            @Override
+            public void f() &#123;
+                System.out.println(&quot;使用匿名函数的方式实现了函数式接口&quot;);
+            &#125;
+        &#125;;
+        test.f();
+    &#125;
+&#125;
+
+@FunctionalInterface
+interface Test &#123;
+    void f();
+&#125;
+</code></pre>
+<p>使用匿名类的方式代码不是很简洁，因此引入了lambda表达式，如：</p>
+<pre><code class="java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        Test test = () -&gt; System.out.println(&quot;使用lambda表达式的方式实现了函数式接口&quot;);
+        test.f();
+    &#125;
+&#125;
+
+@FunctionalInterface
+interface Test &#123;
+    public void f();
+&#125;
+</code></pre>
+<h3 id="2-2-lambda表达式语法格式"><a href="#2-2-lambda表达式语法格式" class="headerlink" title="2.2 lambda表达式语法格式"></a>2.2 lambda表达式语法格式</h3><p>lambda表达式的格式如下：</p>
+<pre><code class="java">(参数1, 参数2, ……) -&gt; &#123;
+    方法体;
+&#125;
 </code></pre>
 <p>其中：</p>
 <ul>
-<li>-t：指定密钥的类型，密钥的类型有RSA和DSA两种</li>
-<li>rsa：指使用RSA算法</li>
-<li>-f：指定存储密钥的文件名</li>
-<li>-C：表示提供<strong>一个用于识别这个密钥的注释，一般填写邮箱地址，但也可以填入其他内容</strong></li>
+<li>参数要求和函数式接口中抽象方法的参数一致（包括数量和类型以及顺序）</li>
+<li>如果函数式接口中抽象方法有返回值，则实现的时候也需要返回值</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li><p>Git配置邮箱和用户名的目的</p>
-<p>作为一个分布式版本控制系统，远程仓库为了跟踪是谁提交的代码，需要提交这提供身份信息：邮箱和用户名。当然，由于这里的用户名和邮箱完全由提交者设置，所以可能会出现提交者随意填写的情况发生。不过，当这种情况发生时，可以通过一些机制查询出真正的提交者。</p>
-</li>
-<li><p>Git配置的邮箱和用户名和GitHub有什么关系</p>
+<pre><code class="java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        Test test = (int x, int y) -&gt; &#123;//参数、返回值与函数式接口中抽象方法一致
+            return x + y;
+        &#125;;
+        test.add(1, 2);
+    &#125;
+&#125;
+
+@FunctionalInterface
+interface Test &#123;
+    int add(int x, int y);
+&#125;
+</code></pre>
+<h3 id="2-3-lambda表达式的精简"><a href="#2-3-lambda表达式的精简" class="headerlink" title="2.3 lambda表达式的精简"></a>2.3 lambda表达式的精简</h3><ul>
+<li><p>参数精简</p>
 <ul>
-<li>账号密码和公钥私钥对只做权限的认证，即判断当前用户或机器是否可以向GitHub中的仓库推送代码。但是这两种认证方式不会记录是由谁把代码推送到GitHub中的，所以使用Git在本地配置的邮箱和用户名作为标记用于记录是谁做的推送操作。即：<ul>
-<li>账号密码和公钥私钥对用于认证，即打开GitHub的大门</li>
-<li>Git配置的邮箱和用户名用于记录是谁向GitHub推送的代码，即记录下是谁在GitHub中做的操作</li>
+<li>参数类型可以省略，若省略一个类型参数，则所有的类型参数都要省略</li>
+<li>若只有一个参数，则小括号可以省略</li>
+<li>若参数为0或者多于1个，则小括号不可以省略</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p>Git和GitHub可不可以配置不同的邮箱和用户名</p>
-<p>可以，但最好还是配置相同的邮箱和用户名。正如上面所说，只有这样，GitHub中才能正确的记录你的操作。另外：</p>
+<li><p>方法体精简</p>
 <ul>
-<li>如果Git配置的邮箱是GitHub中存在的邮箱，则commits里显示的是这个邮箱对应的账号</li>
-<li>如果Git配置的邮箱是一个在GitHub里不存在的邮箱，则commits里显示的是Git配置的用户名</li>
+<li>若方法体中只有一行代码，则花括号可以省略</li>
+<li>若方法体中只有一行代码且是return语句，则在省略大括号的时候还需要去掉return关键字</li>
+<li>若方法体中有多行代码或者使用了return语句，则大括号不可以省略</li>
 </ul>
-</li>
+<pre><code class="java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        //只有一个参数，省略了小括号
+        //只有一条return语句，省略了花括号即return关键字
+        Test test = x -&gt; Math.exp(x);
+
+        test.exp(1);
+    &#125;
+&#125;
+
+@FunctionalInterface
+interface Test &#123;
+    double exp(double x);
+&#125;
+</code></pre>
+<h3 id="2-4-变量作用域"><a href="#2-4-变量作用域" class="headerlink" title="2.4 变量作用域"></a>2.4 变量作用域</h3><ol>
+<li>lambda表达式只可以访问外部变量，但不能修改外部变量</li>
+<li>lambda表达式访问的外部变量一般都是声明为 final 的，但也可以不用声明为 final ，但该变量在声明后不能被修改</li>
+<li>lambda表达式中不允许声明一个与局部变量同名的<strong>参数</strong>或局部变量</li>
 </ol>
+<pre><code class="java">public class Main &#123;
+    static final int a = 0;
+
+    public static void main(String[] args) &#123;
+        final int num1 = 10;
+        int num2 = 20;
+
+        //num2 = 40; //声明后不能被修改
+        Test test1 = x -&gt; &#123;
+            System.out.println(num1);//可以访问外部被声明为 final 的变量
+            System.out.println(num2);//可以访问外部的普通变量
+
+            //num1 = 20;//只能访问，不能修改
+            //num2 = 20;//只能访问，不能修改
+
+            //int num1 = 20;//不允许声明一个与局部变量同名的局部变量
+            return Math.exp(x);
+        &#125;;
+        //num2 = 40; //声明后不能被修改
+
+        test1.exp(1);
+
+        //不允许声明一个与局部变量同名的参数
+        //Test test2 = num1 -&gt; Math.exp(num1);
+    &#125;
+&#125;
+
+@FunctionalInterface
+interface Test &#123;
+    double exp(double x);
+&#125;
+</code></pre>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
