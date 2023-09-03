@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Java8新特性2——方法引用</title>
+      <link href="/2023/09/03/Java8%E6%96%B0%E7%89%B9%E6%80%A72%E2%80%94%E2%80%94%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/"/>
+      <url>/2023/09/03/Java8%E6%96%B0%E7%89%B9%E6%80%A72%E2%80%94%E2%80%94%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>注：以下内容基于Java 8，所有代码都已在Java 8环境下测试通过</p></blockquote><p>目录：</p><ul><li><a href="/2023/09/02/Java8%E6%96%B0%E7%89%B9%E6%80%A71%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F">Java8新特性1——函数式接口&amp;lambda表达式</a></li><li><a href="/2023/09/03/Java8%E6%96%B0%E7%89%B9%E6%80%A72%E2%80%94%E2%80%94%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8">Java8新特性2——方法引用</a></li><li>Stream</li></ul><h2 id="1-方法引用"><a href="#1-方法引用" class="headerlink" title="1. 方法引用"></a>1. 方法引用</h2><p>方法引用提供了<strong>一种替代 lambda 表达式的语法</strong>，允许以更简洁的方式使用 lambda 表达式，特别是在需要传递方法或者函数作为参数时。</p><p><strong>方法引用本质是 lambda 表达式的语法糖，如果一个 lambda 表达式仅仅是调用了另外一个方法，此时可用方法引用替换此 lambda 表达式</strong>。</p><p>方法引用仅仅是简化了 lambda 表达式的写法，因此方法引用并不能脱离 lambda 表达式单独使用。</p><h2 id="2-使用方法"><a href="#2-使用方法" class="headerlink" title="2. 使用方法"></a>2. 使用方法</h2><p>方法引用使用引用运算符 <code>::</code> 指向一个方法，有以下几种常见写法：</p><ul><li>引用构造函数</li><li>引用静态方法</li><li>引用成员函数</li><li>引用某个类型的任意对象的实例方法</li></ul><h2 id="3-引用构造函数"><a href="#3-引用构造函数" class="headerlink" title="3. 引用构造函数"></a>3. 引用构造函数</h2><p>分为构造器引用和数组构造函数引用。</p><h3 id="3-1-构造器引用"><a href="#3-1-构造器引用" class="headerlink" title="3.1 构造器引用"></a>3.1 构造器引用</h3><p>语法格式： </p><blockquote><p>类名::new</p></blockquote><p>如：</p><blockquote><p>lambda表达式：</p><p>() -&gt; new String()</p></blockquote><p>等价于</p><blockquote><p>构造器引用</p><p>String::new</p></blockquote><p>使用示例：</p><pre><code class="java">public class Main &#123;    public static void main(String[] args) &#123;        MyInterface myClassLambda = (x) -&gt; new MyClass(x);//lambda 表达式        myClassLambda.f(10);        MyInterface myClassFunction = MyClass::new;//方法引用        myClassFunction.f(20);    &#125;&#125;class MyClass &#123;    /**     * 参数：整型     * 返回值：MyClass类型     */    MyClass(int arg) &#123;        System.out.println(&quot;有参构造器，参数是&quot; + arg);    &#125;&#125;@FunctionalInterfaceinterface MyInterface &#123;    /**     * 参数：整型     * 返回值：MyClass类型     */    MyClass f(int a);&#125;</code></pre><h3 id="3-2-数组构造函数引用"><a href="#3-2-数组构造函数引用" class="headerlink" title="3.2 数组构造函数引用"></a>3.2 数组构造函数引用</h3><p>语法格式： </p><blockquote><p>数据类型[]::new</p></blockquote><p>如：</p><blockquote><p>lambda表达式：</p><p>() -&gt; new int[]</p></blockquote><p>等价于</p><blockquote><p>数组构造函数引用</p><p>int[]::new</p></blockquote><p>使用示例：</p><pre><code class="java">import java.util.function.IntFunction;public class Main &#123;    public static void main(String[] args) &#123;        IntFunction&lt;int[]&gt; intArrayLambda = (len) -&gt; new int[len];//lambda 表达式        intArrayLambda.apply(10);        IntFunction&lt;int[]&gt; intFunction = int[]::new;//方法引用        intFunction.apply(10);    &#125;&#125;</code></pre><p>注：<code>IntFunction</code> 是 Java 内置的函数式接口，可用于创建泛型数组。</p><h2 id="4-引用静态方法"><a href="#4-引用静态方法" class="headerlink" title="4.引用静态方法"></a>4.引用静态方法</h2><p>语法格式： </p><blockquote><p>类名::静态方法名</p></blockquote><p>如：</p><blockquote><p>lambda表达式：</p><p>(x) -&gt; Math.sin(x)</p></blockquote><p>等价于</p><blockquote><p>方法引用</p><p>Math::sin</p></blockquote><p>使用示例：</p><pre><code class="java">public class Main &#123;    public static void main(String[] args) &#123;        MyInterface sinLambda = (x) -&gt; Math.sin(x);//lambda 表达式        MyInterface sinFunction = Math::sin;//方法引用        System.out.println(sinLambda.sin(1.2));        System.out.println(sinFunction.sin(1.2));    &#125;&#125;@FunctionalInterfaceinterface MyInterface &#123;    double sin(double x);&#125;</code></pre><h2 id="5-引用成员函数"><a href="#5-引用成员函数" class="headerlink" title="5. 引用成员函数"></a>5. 引用成员函数</h2><p>可以分为以下三种：</p><ul><li>使用对象</li><li>使用 super 关键字（引用超类）</li><li>使用 this 关键字</li></ul><p>以 this 关键字为例，另外两种类似</p><p>语法格式： </p><blockquote><p>this::成员函数名</p></blockquote><p>如：</p><blockquote><p>lambda表达式：</p><p>(s) -&gt; this.fun(s)</p></blockquote><p>等价于</p><blockquote><p>方法引用</p><p>this::fun</p></blockquote><p>使用示例：</p><pre><code class="java">public class Main extends Father &#123;    public static void main(String[] args) &#123;        new Main().test();    &#125;    private void test() &#123;        //lambda 表达式        MyInterface lambda1 = (s) -&gt; new Main().fun(s);        MyInterface lambda2 = (s) -&gt; super.fun(s);        MyInterface lambda3 = (s) -&gt; this.fun(s);        lambda1.f(&quot;lambda1&quot;);        lambda2.f(&quot;lambda2&quot;);        lambda3.f(&quot;lambda3&quot;);        //方法引用        MyInterface function1 = new Main()::fun;        MyInterface function2 = super::fun;        MyInterface function3 = this::fun;        function1.f(&quot;function1&quot;);        function2.f(&quot;function2&quot;);        function3.f(&quot;function3&quot;);    &#125;    void fun(String s) &#123;        System.out.println(&quot;调用子类中的 fun:&quot; + s);    &#125;&#125;class Father &#123;    void fun(String s) &#123;        System.out.println(&quot;调用父类中的 fun:&quot; + s);    &#125;&#125;@FunctionalInterfaceinterface MyInterface &#123;    void f(String s);&#125;</code></pre><h2 id="6-引用某个类型的任意对象的实例方法"><a href="#6-引用某个类型的任意对象的实例方法" class="headerlink" title="6. 引用某个类型的任意对象的实例方法"></a>6. 引用某个类型的任意对象的实例方法</h2><p>使用示例：</p><pre><code>import java.util.Arrays;public class Main &#123;    public static void main(String[] args) &#123;        String[] strings = &#123;&quot;abc&quot;, &quot;ghi&quot;, &quot;def&quot;&#125;;        Arrays.sort(strings, String::compareToIgnoreCase);        for (String s : strings) &#123;            System.out.println(s);        &#125;    &#125;&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程语言 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Java8新特性 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java8新特性1——函数式接口&amp;lambda表达式</title>
       <link href="/2023/09/02/Java8%E6%96%B0%E7%89%B9%E6%80%A71%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&amp;lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
       <url>/2023/09/02/Java8%E6%96%B0%E7%89%B9%E6%80%A71%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&amp;lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
