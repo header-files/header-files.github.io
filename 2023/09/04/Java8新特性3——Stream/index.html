@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>关于 | 勿庸散人</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="关于 | 勿庸散人">
+  <title>Java8新特性3——Stream | 勿庸散人</title>
+  <meta name="keywords" content=" Java , Java8新特性 ">
+  <meta name="description" content="Java8新特性3——Stream | 勿庸散人">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。  路漫漫其修远兮，吾将上下而求索。">
 <meta property="og:type" content="website">
@@ -832,24 +832,43 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-Java8新特性3——Stream" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">关于</h1>
+        <h1 class="article-title">Java8新特性3——Stream</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="编程语言">编程语言</a> > 
+            
+            <a  data-rel="编程语言&lt;---&gt;Java">Java</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Java</a>
+            
+            <a class="color4">Java8新特性</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-08 15:30:50'>2023-07-06 20:29</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-04 19:23:52'>2023-09-04 19:21</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:49</span>
+        <span>字数:1.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -879,7 +898,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Stream"><span class="toc-text">1. Stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BAStream"><span class="toc-text">2. 创建Stream</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%80%9A%E8%BF%87%E9%9B%86%E5%90%88%E5%88%9B%E5%BB%BA"><span class="toc-text">2.1 通过集合创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%80%9A%E8%BF%87%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA"><span class="toc-text">2.2 通过数组创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8Stream%E7%9A%84%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA"><span class="toc-text">2.3 直接使用Stream的静态方法创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"><span class="toc-text">2.4 通过文件创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E4%B8%B2%E8%A1%8C%E6%B5%81%E4%B8%8E%E5%B9%B6%E8%A1%8C%E6%B5%81%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="toc-text">2.5 串行流与并行流相互转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%93%8D%E4%BD%9CStream"><span class="toc-text">3. 操作Stream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="toc-text">4. 代码实例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -895,10 +914,222 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><del>年近而立，而一无所成。虽鬓未斑斑但已觉前程渺渺，实难自知，索性就不介绍自己了吧。</del></p>
-<blockquote>
-<p>路漫漫其修远兮，吾将上下而求索。</p>
+        <blockquote>
+<p>注：以下内容基于Java 8，所有代码都已在Java 8环境下测试通过</p>
 </blockquote>
+<p>目录：</p>
+<ul>
+<li><a href="/2023/09/02/Java8%E6%96%B0%E7%89%B9%E6%80%A71%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3&lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F">Java8新特性1——函数式接口&amp;lambda表达式</a></li>
+<li><a href="/2023/09/03/Java8%E6%96%B0%E7%89%B9%E6%80%A72%E2%80%94%E2%80%94%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8">Java8新特性2——方法引用</a></li>
+<li><a href="/2023/09/04/Java8%E6%96%B0%E7%89%B9%E6%80%A73%E2%80%94%E2%80%94Stream">Java8新特性3——Stream</a></li>
+</ul>
+<h2 id="1-Stream"><a href="#1-Stream" class="headerlink" title="1. Stream"></a>1. Stream</h2><p><code>Stream（流）</code> 是一个来自数据源的元素队列并支持聚合操作</p>
+<ul>
+<li>元素：特定类型的对象，形成一个队列</li>
+<li>数据源：流的来源。可以是集合、数组等</li>
+<li>聚合操作：类似SQL语句一样的操作</li>
+</ul>
+<p><code>Stream</code>  是 Java8 中处理集合的关键抽象概念，它可以指定对集合进行的操作，可以执行非常复杂的查找、筛选、过滤、排序、聚合和映射数据等操作。通过配合 <code>Lambda</code> ，<code>Stream</code> 方便的操作集合（Collection）。也可以使用 Stream API 来并行执行操作。简而言之，Stream API 提供了一种高效且易于使用的处理数据的方式。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li><p>不仅支持串行操作，还支持并行操作，简化了编写并行程序的过程</p>
+</li>
+<li><p>不是数据结构，不会保存数据（类似工厂的流水线，只对产品进行加工而不会储存产品）</p>
+</li>
+<li><p>惰性求值，流在<strong>中间操作</strong>过程中，只是对操作进行了记录，并不会立即执行，等到执行<strong>终端操作</strong>的时候才会进行实际的计算</p>
+</li>
+</ul>
+<p><strong>使用流程：</strong></p>
+<ol>
+<li>创建流</li>
+<li>操作流（分为中间操作和终端操作）</li>
+</ol>
+<p>从支持数据处理操作的源生成元素序列.数据源可以是集合,数组或IO资源。</p>
+<p>从操作角度来看,流与集合是不同的. 流不存储数据值; 流的目的是处理数据,它是关于算法与计算的。</p>
+<p>如果把集合作为流的数据源,创建流时不会导致数据流动; 如果流的终止操作需要值时,流会从集合中获取值; 流只使用一次。</p>
+<p>流中心思想是延迟计算,流直到需要时才计算值。</p>
+<h2 id="2-创建Stream"><a href="#2-创建Stream" class="headerlink" title="2. 创建Stream"></a>2. 创建Stream</h2><p>主要有以下几种方式创建Stream。</p>
+<h3 id="2-1-通过集合创建"><a href="#2-1-通过集合创建" class="headerlink" title="2.1 通过集合创建"></a>2.1 通过集合创建</h3><pre><code class="java">import java.util.ArrayList;
+import java.util.stream.Stream;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        list.add(-1);
+        list.add(1);
+
+        Stream&lt;Integer&gt; listStream = list.stream();//通过集合创建串行流
+        Stream&lt;Integer&gt; parallelListStream = list.parallelStream();//通过集合创建并行流
+    &#125;
+&#125;
+</code></pre>
+<p>串行流在处理时，由一个线程按照顺序对其执行操作；而并行流在处理时，可以由多个线程对流并行操作，可以加快处理的速度。</p>
+<h3 id="2-2-通过数组创建"><a href="#2-2-通过数组创建" class="headerlink" title="2.2 通过数组创建"></a>2.2 通过数组创建</h3><pre><code class="java">import java.util.Arrays;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        int[] intArr = &#123;0, 1, 2&#125;;
+        double[] doubleArr = &#123;1.1, 2.2, 3.3&#125;;
+
+        IntStream intStream = Arrays.stream(intArr);//从 int 数组创建数值流
+        DoubleStream doubleStream = Arrays.stream(doubleArr);//从 double 数组创建数值流
+    &#125;
+&#125;
+</code></pre>
+<p>该方法生成的是<strong>数值流</strong>（ <code>IntStream</code> 、<code>DoubleStream</code> ），使用数值流可以避免计算过程中的拆箱装箱从而提高性能。</p>
+<p>Stream API提供了 <code>mapToInt</code>、 <code>mapToDouble</code>、 <code>mapToLong</code> 三种方式将对象流（Stream）转换成对应的数值流，同时提供了 <code>boxed</code> 方法将数值流转换为对象流：</p>
+<pre><code class="java">import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        list.add(-1);
+        list.add(1);
+
+        Stream&lt;Integer&gt; listStream = list.stream();//通过集合创建流
+
+        IntStream intStream = listStream.mapToInt(Math::abs);//将流转换为数值流
+
+        Stream&lt;Integer&gt; stream = intStream.boxed();//将数值流转换为流
+    &#125;
+&#125;
+</code></pre>
+<h3 id="2-3-直接使用Stream的静态方法创建"><a href="#2-3-直接使用Stream的静态方法创建" class="headerlink" title="2.3 直接使用Stream的静态方法创建"></a>2.3 直接使用Stream的静态方法创建</h3><p>主要有以下三种：</p>
+<ul>
+<li><code>of()</code> ：将任意对象转换成 Stream<ul>
+<li>参数：<ol>
+<li><code>T... values</code> ：用于创建流的数据</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><code>iterator()</code> ：流迭代器，会一直迭代下去生成无限流，因此一般要结合 <code>limit</code> 方法指定流中元素的数量防止一直迭代<ul>
+<li>参数：<ol>
+<li><code>seed</code> ：初始元素</li>
+<li><code>f</code> ：函数，前一个元素使用该函数生成新的元素</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><code>generator()</code> ：流生成器，根据参数生成无限流，一般要结合 <code>limit</code> 方法指定流中元素的数量防止一直迭代<ul>
+<li>参数：<ol>
+<li><code>s</code>：实现 <code>Supplier</code>函数式接口 ，为流提供值</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">import java.util.stream.Stream;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        Stream&lt;Integer&gt; stream1 = Stream.of(0, 1, 2);//将 int 转换成 Stream
+        Stream&lt;int[]&gt; stream2 = Stream.of(new int[]&#123;0, 1, 2&#125;);//将 int 数组转换成 Stream
+
+        /**
+         * 生成偶数
+         * limit(8) 表示只生成 8 个
+         */
+        Stream&lt;Integer&gt; stream3 = Stream.iterate(0, (x) -&gt; x + 2).limit(8);
+
+
+        /**
+         * 生成字符串
+         * limit(3) 表示只生成 3 个
+         */
+        Stream&lt;String&gt; stream4 = Stream.generate(() -&gt; &quot;Hello World&quot;).limit(3);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="2-4-通过文件创建"><a href="#2-4-通过文件创建" class="headerlink" title="2.4 通过文件创建"></a>2.4 通过文件创建</h3><pre><code class="java">import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            Stream&lt;String&gt; fileStream = Files.lines(Paths.get(&quot;data.txt&quot;), Charset.defaultCharset());
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>得到的 <code>Stream</code> 是文件中的每一行。</p>
+<h3 id="2-5-串行流与并行流相互转换"><a href="#2-5-串行流与并行流相互转换" class="headerlink" title="2.5 串行流与并行流相互转换"></a>2.5 串行流与并行流相互转换</h3><p>除了可以直接通过集合创建并行流，还可以通过 <code>parallel()</code> 把顺序流转换成并行流。</p>
+<pre><code class="java">import java.util.ArrayList;
+import java.util.stream.Stream;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        list.add(-1);
+        list.add(1);
+
+        Stream&lt;Integer&gt; listStream = list.stream();//通过集合创建串行流
+        Stream&lt;Integer&gt; parallelListStream = list.parallelStream();//通过集合直接创建并行流
+
+        Stream&lt;Integer&gt; parallelListStream1 = listStream.parallel();//将串行流转换成并行流
+
+        Stream&lt;Integer&gt; listStream1 = parallelListStream1.sequential();//将并行流转换成串行流
+    &#125;
+&#125;
+</code></pre>
+<h2 id="3-操作Stream"><a href="#3-操作Stream" class="headerlink" title="3. 操作Stream"></a>3. 操作Stream</h2><p>Stream的操作大致可以分为中间操作和终端操作两类。</p>
+<ul>
+<li>中间操作：对Stream中的数据进行转换、过滤、排序等操作，每次操作都返回一个新的Stream，可以有多个中间操作。可分为无状态操作和有状态操作<ul>
+<li>无状态操作：元素的处理不受之前元素的影响</li>
+<li>有状态操作：该操作只有拿到所有元素之后才可以继续</li>
+</ul>
+</li>
+<li>终端操作：对每个流只能进行一次终端操作，终端操作结束后流无法再次使用，终端操作会产生一个新的集合或值。可分为短路操作和非短路操作：<ul>
+<li>短路操作：遇到某些符合条件的元素直接得到最终结果</li>
+<li>非短路操作：必须处理完所有元素才能得到最终结果</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">操作类型</th>
+<th align="center">常用API</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">无状态操作</td>
+<td align="center">unordered()、peek()、map()、mapToInt()、mapToLong()、mapToDouble()、filter()、filterMap()、filterMapToInt()、filterMapToLong()、filterMapToDouble()</td>
+</tr>
+<tr>
+<td align="center">有状态操作</td>
+<td align="center">limit()、distinct()、sorted()、skip()</td>
+</tr>
+<tr>
+<td align="center">短路操作</td>
+<td align="center">anyMatch()、allMatch()、findFirst()、findAny()、、</td>
+</tr>
+<tr>
+<td align="center">非短路操作</td>
+<td align="center">forEach()、forEachOrdered()、toArray()、reduce()、collect()、max()、min()、count()、forEachOrdered()</td>
+</tr>
+</tbody></table>
+<h2 id="4-代码实例"><a href="#4-代码实例" class="headerlink" title="4. 代码实例"></a>4. 代码实例</h2><pre><code class="java">import java.util.stream.Stream;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        Stream&lt;Integer&gt; stream = Stream.iterate(0, (x) -&gt; x + 1).limit(20);//从 0 开始生成 20 个整数
+        stream = stream.filter(x -&gt; x &gt; 10)//过滤出大于10的数
+                .map(x -&gt; x - 20);//将过滤出的数减 20
+
+        stream.forEachOrdered(System.out::println);//遍历输出
+    &#125;
+&#125;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至header-files@foxmail.com。 </span>
