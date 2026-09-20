@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>二、LLM 能力与局限 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent ">
+  <meta name="description" content="二、LLM 能力与局限 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(11)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(11)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="67k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-二、LLM-能力与局限" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">二、LLM 能力与局限</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;LLM简介">LLM简介</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-09 10:39</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81LLM-%E7%9A%84%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B"><span class="toc-text">01、LLM 的核心能力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%AF%AD%E8%A8%80%E7%90%86%E8%A7%A3%EF%BC%9A%E6%9C%80%E8%A2%AB%E4%BD%8E%E4%BC%B0%E7%9A%84%E5%9F%BA%E7%A1%80%E8%83%BD%E5%8A%9B"><span class="toc-text">1.1 语言理解：最被低估的基础能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%9F%A5%E8%AF%86%E8%83%BD%E5%8A%9B%EF%BC%9A%E5%8E%8B%E7%BC%A9%E7%9A%84%E7%BB%9F%E8%AE%A1%E8%A1%A8%E7%A4%BA%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">1.2 知识能力：压缩的统计表示，而不是数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%EF%BC%9A%E8%A7%84%E6%A8%A1%E3%80%81%E8%AE%AD%E7%BB%83%E6%96%B9%E5%BC%8F%E4%B8%8E%E6%8E%A8%E7%90%86%E9%98%B6%E6%AE%B5%E8%AE%A1%E7%AE%97"><span class="toc-text">1.3 推理能力：规模、训练方式与推理阶段计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E7%94%9F%E6%88%90%E8%83%BD%E5%8A%9B%EF%BC%9A%E4%B8%8E%E7%94%9F%E4%BF%B1%E6%9D%A5%E7%9A%84%E5%A4%A9%E8%B5%8B"><span class="toc-text">1.4 生成能力：与生俱来的天赋</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81LLM-%E7%9A%84%E5%A4%A9%E7%84%B6%E9%99%90%E5%88%B6"><span class="toc-text">02、LLM 的天然限制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%B9%BB%E8%A7%89%EF%BC%9A%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E7%9A%84%E5%BF%85%E7%84%B6%E5%89%AF%E4%BA%A7%E5%93%81"><span class="toc-text">2.1 幻觉：概率生成的必然副产品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%BC%BA%E5%B0%91%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E6%84%9F%E7%9F%A5%E8%83%BD%E5%8A%9B"><span class="toc-text">2.2 缺少真实世界感知能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%B8%8A%E4%B8%8B%E6%96%87%E9%99%90%E5%88%B6%EF%BC%9A%E7%AA%97%E5%8F%A3%E5%BE%88%E5%A4%A7%EF%BC%8C%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%89%E9%99%90"><span class="toc-text">2.3 上下文限制：窗口很大，注意力有限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E7%BC%BA%E5%B0%91%E8%87%AA%E4%B8%BB%E6%89%A7%E8%A1%8C%E8%83%BD%E5%8A%9B"><span class="toc-text">2.4 缺少自主执行能力</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81LLM-%E7%9A%84%E8%83%BD%E5%8A%9B%E8%BE%B9%E7%95%8C"><span class="toc-text">03、LLM 的能力边界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-Tool%E3%80%81RAG%E3%80%81Memory-%E5%92%8C-Agent"><span class="toc-text">04、为什么需要 Tool、RAG、Memory 和 Agent</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>大语言模型并不“知道”任何事，它只是在极其高维的概率空间里，为你生成一段最可能出现的文本。这个本质同时决定了它的强大与脆弱：它能写出优雅的代码、做出缜密的推理，也会一本正经地引用一篇从未存在的论文。理解这对矛盾，是理解一切 AI 应用架构的起点。</p>
+</blockquote>
+<p>过去几年，我们见证了 LLM 从“能对话的玩具”进化为“能干活的同事”。但一个诡异的现象始终存在：同一个模型，上一分钟还能解出复杂的数学题，下一分钟就开始编造 API。很多人把这归结为“模型还不够好”，但真正的原因藏得更深——这些错误不是 bug，而是 LLM 工作原理的必然副产品。</p>
+<p>这篇文章尝试系统性地回答一个问题：<strong>为什么 LLM 看起来很聪明，但又经常犯错？</strong> 以及由此延伸出的下一个问题：为什么几乎所有的 LLM 应用，最终都走向了 Tool、RAG、Memory 和 Agent 架构的增强路线？</p>
+<h2 id="01、LLM-的核心能力"><a href="#01、LLM-的核心能力" class="headerlink" title="01、LLM 的核心能力"></a>01、LLM 的核心能力</h2><p>在讨论局限之前，先把“能力”这件事说清楚。LLM 的能力大致可以归为四类：语言理解、知识、推理和生成。这四者相互交织，共同构成了我们对“聪明”的直觉感受。</p>
+<h3 id="1-1-语言理解：最被低估的基础能力"><a href="#1-1-语言理解：最被低估的基础能力" class="headerlink" title="1.1 语言理解：最被低估的基础能力"></a>1.1 语言理解：最被低估的基础能力</h3><p>LLM 首先是一个语言理解机器。经过海量语料的预训练，模型对自然语言（以及代码、公式这类高度结构化的“语言”）形成了远超规则系统和传统 NLP 管线的理解力。具体体现在：</p>
+<ul>
+<li><strong>意图识别</strong>：用户说“帮我把这坨数据整理下”，模型能准确判断出这是一个数据清洗请求，而不依赖任何关键词匹配。</li>
+<li><strong>信息抽取</strong>：从一段非结构化文本中抽取实体、关系、时间、金额，传统方案需要标注数据训练专用模型，LLM 用一个 prompt 就能完成大半。</li>
+<li><strong>分类</strong>：情感分析、内容审核、工单路由，这些任务在 LLM 出现之前是 NLP 工程师的主战场，如今一个通用模型的 zero-shot 表现就能接近甚至超过微调过的小模型。</li>
+<li><strong>总结</strong>：长文本摘要、会议纪要、多文档合并，这是 LLM 最早被规模化商用的场景之一。</li>
+</ul>
+<p>这项能力的本质，是模型在预训练中学会了语言的“深层结构”——不是语法规则，而是语义的分布规律。这也是为什么 LLM 对措辞模糊、表达不规范的真实用户输入有极强的容忍度。</p>
+<h3 id="1-2-知识能力：压缩的统计表示，而不是数据库"><a href="#1-2-知识能力：压缩的统计表示，而不是数据库" class="headerlink" title="1.2 知识能力：压缩的统计表示，而不是数据库"></a>1.2 知识能力：压缩的统计表示，而不是数据库</h3><p>很多人把 LLM 理解为“一个装满了互联网的数据库”，这个隐喻是错的，而且错得很有害。</p>
+<p>预训练确实让模型“见过”海量知识：维基百科、技术文档、论文、代码仓库。这些知识经过训练被压缩进模型参数，形成一种<strong>隐式的统计表示</strong>。当你问“TCP 三次握手的第二步是什么”，模型并不是去查询某张表，而是激活参数空间中与这个问题分布最匹配的区域，然后逐 token 生成答案。</p>
+<p>这个机制带来三个直接后果：</p>
+<ul>
+<li><strong>知识的覆盖面惊人</strong>，因为训练语料的覆盖面惊人。通用常识、主流技术、经典理论，模型基本都“见过”。</li>
+<li><strong>知识的精度不可保证</strong>。压缩是有损的。低频、长尾、新近的知识，在参数中的表示是模糊的，生成时就可能失真。</li>
+<li><strong>知识有截止时间</strong>。模型只知道训练数据截止点之前的世界。它不知道上周发布的库版本、不知道今天的价格、不知道你的公司上个月改了什么流程。</li>
+</ul>
+<p>所以更准确的图景是：</p>
+<pre><code>数据库查询：  精确 → 命中 → 返回事实
+LLM 知识：   压缩 → 激活 → 生成&quot;最像答案的文本&quot;
+</code></pre>
+<p>前者保证正确性，后者保证流畅性。当两者冲突时，LLM 天然站在流畅性这一边——这是后面所有幻觉问题的根源。</p>
+<h3 id="1-3-推理能力：规模、训练方式与推理阶段计算"><a href="#1-3-推理能力：规模、训练方式与推理阶段计算" class="headerlink" title="1.3 推理能力：规模、训练方式与推理阶段计算"></a>1.3 推理能力：规模、训练方式与推理阶段计算</h3><p>推理是 LLM 最令人惊讶的能力，因为预训练的目标里从来没有“教会模型推理”这一项。推理能力是涌现出来的，并且受三个因素影响：</p>
+<ul>
+<li><strong>模型规模</strong>。参数量从数十亿跨越到数千亿的过程中，多步推理的任务表现出现了显著的跃迁。小模型在需要维护长链条中间状态的任务上几乎不可用，而大模型能够稳定地走完推理链。</li>
+<li><strong>训练方式</strong>。后训练阶段的强化学习（无论是基于人工反馈还是基于可验证奖励）显著改善了模型“怎么想”的能力。而基于思维链的推理模型，通过在训练中鼓励模型先展开完整的推理过程再作答，把“中间步骤的质量”变成了优化目标，在数学和代码这类可验证任务上取得了大幅提升。</li>
+<li><strong>推理阶段计算</strong>。这是推理模型的核心洞察：与其把所有算力花在训练时，不如允许模型在回答时“多想一会儿”。同一个模型，允许它生成数千 token 的推理过程后再给答案，其表现往往显著优于要求它直接作答。算力在这里变成了一个可以在推理时弹性调用的资源。</li>
+</ul>
+<p>具体的推理形态包括：</p>
+<ul>
+<li><strong>多步推理</strong>：把一个复杂问题拆成可顺序处理的子问题。</li>
+<li><strong>逻辑推理</strong>：条件判断、蕴含关系、反事实分析。</li>
+<li><strong>数学推理</strong>：从算术到竞赛级证明，推理模型在这条线上进步最快，因为它可验证、可训练。</li>
+<li><strong>代码推理</strong>：代码本身是一种强制逻辑严密的表达形式，模型通过生成并执行代码来“外包”精确计算，也是工具使用的雏形。</li>
+</ul>
+<p>需要警惕的是：LLM 的推理是“统计意义上的近似推理”，它没有形式化系统（如定理证明器）的可靠性保证。它在常见推理模式上很强，在需要严格符号演算或罕见推理路径的场景中依然会摔跤。</p>
+<h3 id="1-4-生成能力：与生俱来的天赋"><a href="#1-4-生成能力：与生俱来的天赋" class="headerlink" title="1.4 生成能力：与生俱来的天赋"></a>1.4 生成能力：与生俱来的天赋</h3><p>如果说前三项能力都有传统技术的影子，生成能力则是 LLM 的“出厂设置”——毕竟，它的训练目标就是预测下一个 token。</p>
+<ul>
+<li><strong>文本生成</strong>：从营销文案到技术方案，从邮件到报告，风格可控、质量稳定。</li>
+<li><strong>代码生成</strong>：这是当前 LLM 商业化最成功的领域。理解需求、生成实现、解释代码、补全片段，模型在开发工作流中的渗透率持续攀升。</li>
+<li><strong>内容改写</strong>：翻译、润色、调整语气、转换格式（把需求文档改成测试用例），改写任务因为“输入约束了输出空间”，恰恰落在模型最擅长的区间。</li>
+<li><strong>创意生成</strong>：头脑风暴、命名、故事、方案变体。生成多样性的能力使 LLM 成为了极佳的“创意放大器”。</li>
+</ul>
+<p>值得注意的是，生成能力是一把双刃剑：模型被训练为“总是要生成点什么”，这种倾向在创意场景是优点，在事实场景就是幻觉的温床。它很少说“我不知道”。</p>
+<h2 id="02、LLM-的天然限制"><a href="#02、LLM-的天然限制" class="headerlink" title="02、LLM 的天然限制"></a>02、LLM 的天然限制</h2><p>理解了能力来源，限制就不难推导了。LLM 的四个天然限制——幻觉、无感知、上下文有限、不能自主行动——每一个都直接源自它的底层机制。</p>
+<h3 id="2-1-幻觉：概率生成的必然副产品"><a href="#2-1-幻觉：概率生成的必然副产品" class="headerlink" title="2.1 幻觉：概率生成的必然副产品"></a>2.1 幻觉：概率生成的必然副产品</h3><p>幻觉是 LLM 被诟病最多的问题，但严格说，它不是“故障”，而是机制的自然结果。</p>
+<p><strong>为什么会产生幻觉？</strong></p>
+<p>因为 LLM 的训练目标是生成“合理”的文本——即在当前上下文下概率上最连贯的续写——而不是生成“事实正确”的文本。这两个目标在大多数情况下重合（毕竟训练数据里事实正确的句子占多数），但在知识模糊区，模型会毫不犹豫地用“看起来对”填补“真的对”。</p>
+<p>典型症状包括：</p>
+<pre><code>不存在的 API：      模型一本正经地调用一个从未存在过的库函数
+不存在的论文：       编造标题、作者、年份俱全、但查无此文的引用
+看起来能跑的错误代码：逻辑通顺、结构工整，但在细节处悄然出错
+</code></pre>
+<p>关键在于：从模型内部的视角，生成一段流畅的假引用和生成一段流畅的真引用，<strong>没有本质区别</strong>。它没有内置的“事实校验层”。</p>
+<p><strong>解决方向</strong></p>
+<p>既然幻觉无法从模型内部根除，工程上的思路就是引入外部约束：</p>
+<ul>
+<li><strong>RAG（检索增强生成）</strong>：回答前先检索真实文档，让模型基于给定材料作答，把“回忆”变成“阅读理解”。这是当前对知识型幻觉最有效的缓解手段。</li>
+<li><strong>Tool Calling</strong>：把需要精确事实的任务（查价格、查库存、算数值）交给确定性工具，模型只负责决定何时调用、如何组织结果。</li>
+<li><strong>Verification</strong>：生成后增加校验环节——单元测试验证代码、搜索引擎验证引用、第二个模型交叉检查结论。</li>
+<li><strong>Agent Feedback Loop</strong>：把“生成 → 检验 → 修正”做成循环，让错误暴露在环境反馈中而不是交付给用户。</li>
+</ul>
+<p>这些方案的共同哲学是：<strong>放弃让模型单独保证正确性，转而用架构保证</strong>。</p>
+<h3 id="2-2-缺少真实世界感知能力"><a href="#2-2-缺少真实世界感知能力" class="headerlink" title="2.2 缺少真实世界感知能力"></a>2.2 缺少真实世界感知能力</h3><p>LLM 是一个封闭系统。训练完成后，它对世界的全部认知就凝固在了参数里。它不知道：</p>
+<ul>
+<li><strong>当前系统状态</strong>：磁盘还剩多少空间、服务是否健康、某个任务跑到哪一步了。</li>
+<li><strong>实时数据</strong>：今天的股价、此刻的天气、刚刚发布的新闻、用户五分钟前的操作。</li>
+<li><strong>用户环境</strong>：你装了哪些软件、你的代码库长什么样、你的组织有什么特殊约定。</li>
+</ul>
+<p>这不是知识截止时间的问题——即使把模型重新训练到今天早上，它依然不知道“此刻”的任何状态。静态的参数无法感知动态的世界。</p>
+<p>要弥补这个缺口，唯一的路径是组合：</p>
+<pre><code>LLM（推理与决策）
+  + Tool（获取状态与执行动作）
+  + Environment（提供反馈与约束）
+</code></pre>
+<p>这恰恰是 Agent 概念诞生的直接原因。Agent 的本质，就是给一个只会“想”的模型装上“看”和“做”的能力。没有工具的 LLM 是一个博学的顾问，有工具的 LLM 才可能成为一个能干活的执行者。</p>
+<h3 id="2-3-上下文限制：窗口很大，注意力有限"><a href="#2-3-上下文限制：窗口很大，注意力有限" class="headerlink" title="2.3 上下文限制：窗口很大，注意力有限"></a>2.3 上下文限制：窗口很大，注意力有限</h3><p>上下文窗口是 LLM 的“工作记忆”。近年来窗口大小从 2K、8K 一路扩展到百万级 token，看起来问题已经解决。但实践揭示了更微妙的困难：</p>
+<ul>
+<li><strong>Token 有上限</strong>。无论窗口多大，总存在装不下的场景：整个代码库、全部历史对话、完整的客户档案。</li>
+<li><strong>信息越多，注意力越分散</strong>。上下文不是均匀的容器，注意力机制对位置敏感。相关材料淹没在无关细节中时，模型的表现会下降。</li>
+<li><strong>长上下文不等于有效利用</strong>。“能塞进去”和“能用好”是两回事。研究表明，当关键信息位于长上下文中部时，模型的召回能力会显著衰减——这是著名的 lost in the middle 现象。</li>
+</ul>
+<p>针对这个限制，工程界发展出了一整套方法：</p>
+<ul>
+<li><strong>Context Engineering</strong>：精心设计每次送入模型的内容——什么该进上下文、以什么顺序、什么粒度。</li>
+<li><strong>Memory</strong>：把历史信息沉淀为结构化的外部记忆，按需检索进入上下文，而不是无限堆砌完整历史。</li>
+<li><strong>RAG</strong>：本质上也是上下文管理——用检索决定“哪些知识此刻值得被模型看见”。</li>
+</ul>
+<p>核心思想是一致的：<strong>与其扩大窗口，不如管理注意力</strong>。</p>
+<h3 id="2-4-缺少自主执行能力"><a href="#2-4-缺少自主执行能力" class="headerlink" title="2.4 缺少自主执行能力"></a>2.4 缺少自主执行能力</h3><p>一个普通的 LLM，无论多强大，其运行模式是一个固定的单轮管线：</p>
+<pre><code>输入 → 输出
+</code></pre>
+<p>它不规划、不行动、不观察结果、不修正方向。你问它一个问题，它给出一个回答，然后对话结束。哪怕回答里包含一个完美的计划，这个计划也不会自己被执行。</p>
+<p>而真实任务的完成，需要的是一个闭环：</p>
+<pre><code>输入
+ ↓
+规划（把目标拆成步骤）
+ ↓
+行动（执行当前步骤）
+ ↓
+观察（获取行动结果与环境反馈）
+ ↓
+调整（根据反馈修正计划）
+ ↓
+（循环，直到任务完成）
+</code></pre>
+<p>这个“规划 → 行动 → 观察 → 调整”的循环，就是 Agent 的核心控制流。LLM 在这个循环中扮演“大脑”的角色——负责理解目标、制定计划、解读反馈、做出决策——但循环本身，是架构赋予的。</p>
+<p>单次生成的 LLM 像一位只能回答一次问题的专家；Agent 架构则给了这位专家双手、眼睛和持续工作的时间。</p>
+<h2 id="03、LLM-的能力边界"><a href="#03、LLM-的能力边界" class="headerlink" title="03、LLM 的能力边界"></a>03、LLM 的能力边界</h2><p>把上面的能力和限制放到一起，可以画出一幅清晰的能力地图。</p>
+<p><strong>LLM 适合做什么：</strong></p>
+<ul>
+<li><strong>信息处理</strong>：抽取、总结、分类、改写——凡是“理解非结构化信息并转换形态”的任务，LLM 都是一流选手。</li>
+<li><strong>推理辅助</strong>：方案设计、问题拆解、决策支持。作为“思维伙伴”，LLM 的广度和速度远超人类，但结论需要人来把关。</li>
+<li><strong>内容生成</strong>：文案、文档、创意、草稿。生成质量的上限高、速度快、成本可控。</li>
+<li><strong>代码辅助</strong>：编写、解释、重构、测试代码。代码任务可验证、可迭代，天然契合 LLM 的能力模型。</li>
+<li><strong>知识问答</strong>：对训练数据覆盖充分、精度要求不苛刻的通用知识，LLM 是极佳的入口。</li>
+</ul>
+<p><strong>LLM 不适合直接做什么：</strong></p>
+<ul>
+<li><strong>无监督执行高风险任务</strong>：删除数据、发送对外消息、执行资金操作——幻觉叠加不可逆操作，等于灾难。高风险动作必须有人审批或有多层校验。</li>
+<li><strong>保证事实正确</strong>：模型无法对自己不知道的事给出可靠信号。“它说得很有把握”和“它说得对”之间没有必然联系。</li>
+<li><strong>替代业务系统</strong>：LLM 的调用有成本、有延迟、有波动，事务性、一致性、确定性要求高的场景，传统系统依然是正确答案。<strong>LLM 应该是业务系统的调用者和编排者，而不是业务系统本身。</strong></li>
+</ul>
+<p>这张边界图的实际含义是：<strong>LLM 的最佳定位是“系统中负责理解、推理和生成的那一层”，而不是整个系统</strong>。它的能力足够颠覆，但前提是把它放在正确的位置上。</p>
+<h2 id="04、为什么需要-Tool、RAG、Memory-和-Agent"><a href="#04、为什么需要-Tool、RAG、Memory-和-Agent" class="headerlink" title="04、为什么需要 Tool、RAG、Memory 和 Agent"></a>04、为什么需要 Tool、RAG、Memory 和 Agent</h2><p>现在可以正面回答文章开头的问题了。逐一对照四个天然限制，增强架构的每一块拼图都能找到对应的位置：</p>
+<ul>
+<li><strong>Tool 对应“缺少感知与执行”</strong>：工具让模型读到实时状态、执行真实操作，把封闭的推理系统接入开放的环境。</li>
+<li><strong>RAG 对应“知识限制与幻觉”</strong>：检索把模型的回答从“参数里的模糊记忆”切换为“外部文档的精确引用”，让知识可以被更新、被溯源。</li>
+<li><strong>Memory 对应“上下文限制”</strong>：外部记忆把跨会话、长周期的信息沉淀下来，按需注入上下文，突破工作记忆的容量天花板。</li>
+<li><strong>Agent 对应“缺少自主执行”</strong>：规划-行动-观察-调整的闭环，把单轮的“生成器”变成多轮的“任务完成者”，也给了幻觉暴露和被纠正的机会。</li>
+</ul>
+<p>这不是巧合，而是一条清晰的工程逻辑链：</p>
+<blockquote>
+<p>LLM 的四个天然限制，恰好由四类增强技术逐一化解；这些技术组合起来，就是当代 AI 应用的标准架构。</p>
+</blockquote>
+<p>所以，回到那个核心问题——为什么 LLM 看起来很聪明，但又经常犯错？</p>
+<p>因为“聪明”和“犯错”来自同一个源头：一个基于概率的、以生成为目标的、压缩了世界知识的神经网络。它的聪明来自于概率分布对语言和推理规律的深刻捕捉，它的犯错来自于同一机制对精确事实和真实状态的天然无感。你无法只保留前者而剔除后者。</p>
+<p>成熟的工程实践从不幻想“等一个不出错的模型”，而是坦然接受这个边界，用工具补感知、用检索补知识、用记忆补窗口、用架构补闭环。<strong>LLM 提供智能，架构提供可靠性</strong>——这就是这个时代 AI 应用的基本配方。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

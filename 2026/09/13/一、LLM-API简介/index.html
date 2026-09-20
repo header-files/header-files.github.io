@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>一、LLM API简介 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent ">
+  <meta name="description" content="一、LLM API简介 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(11)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(11)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="67k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-一、LLM-API简介" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">一、LLM API简介</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;大模型API">大模型API</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-13 15:47</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-LLM-API"><span class="toc-text">01、什么是 LLM API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8E%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB"><span class="toc-text">1.1　应用程序与模型之间的调用关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%B8%80%E6%AC%A1%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">1.2　一次模型调用的基本流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-API-%E4%B8%8E%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">1.3　API 与直接运行模型的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81LLM-API-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">02、LLM API 的基本结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Endpoint"><span class="toc-text">2.1　Endpoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Authentication"><span class="toc-text">2.2　Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Headers"><span class="toc-text">2.3　Headers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Request"><span class="toc-text">2.4　Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-Response"><span class="toc-text">2.5　Response</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E5%B8%B8%E8%A7%81%E5%8F%82%E6%95%B0"><span class="toc-text">2.6　常见参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-Response-%E4%B8%AD%E7%9A%84-Token-%E4%B8%8E-Usage"><span class="toc-text">2.7　Response 中的 Token 与 Usage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%BB%8E-Completion-%E5%88%B0-Chat-API"><span class="toc-text">03、从 Completion 到 Chat API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Completion-API-%E8%A1%A5%E5%85%A8%E6%96%87%E6%9C%AC"><span class="toc-text">3.1　Completion API:补全文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Chat-Completion-API-%E6%B6%88%E6%81%AF%E6%95%B0%E7%BB%84"><span class="toc-text">3.2　Chat Completion API:消息数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%B8%89%E7%A7%8D-Message-%E8%A7%92%E8%89%B2"><span class="toc-text">3.3　三种 Message 角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E%E2%80%9D%E8%A1%A5%E5%85%A8%E6%96%87%E6%9C%AC%E2%80%9D%E5%8F%91%E5%B1%95%E5%88%B0%E2%80%9D%E5%AF%B9%E8%AF%9D%E6%B6%88%E6%81%AF%E2%80%9D"><span class="toc-text">3.4　为什么从”补全文本”发展到”对话消息”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-Chat-API-%E5%AF%B9-Agent-%E5%BA%94%E7%94%A8%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">3.5　Chat API 对 Agent 应用的影响</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81Streaming"><span class="toc-text">04、Streaming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%9D%9E%E6%B5%81%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-text">4.1　非流式调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%B5%81%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-text">4.2　流式调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-SSE-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">4.3　SSE 基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-Token-%E5%A2%9E%E9%87%8F%E8%BF%94%E5%9B%9E"><span class="toc-text">4.4　Token 增量返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E6%B5%81%E5%BC%8F%E5%9C%A8-Chat-Agent-%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">4.5　流式在 Chat &#x2F; Agent 中的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E6%B5%81%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%BC%82%E5%B8%B8%E4%B8%8E%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80"><span class="toc-text">4.6　流式下的异常与连接断开</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81Structured-Output"><span class="toc-text">05、Structured Output</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">5.1　为什么需要结构化输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-JSON-Mode"><span class="toc-text">5.2　JSON Mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-JSON-Schema"><span class="toc-text">5.3　JSON Schema</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-Structured-Output"><span class="toc-text">5.4　Structured Output</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E4%B8%8E-Agent-%E7%8A%B6%E6%80%81%E3%80%81Tool-Calling-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">5.5　与 Agent 状态、Tool Calling 的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81Tool-Calling"><span class="toc-text">06、Tool Calling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-Tool-Calling-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">6.1　Tool Calling 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Tool-Schema"><span class="toc-text">6.2　Tool Schema</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E5%86%B3%E5%AE%9A%E8%B0%83%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">6.3　模型如何决定调用工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%AE%8C%E6%95%B4%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">6.4　完整调用流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E4%B8%8E%E4%BC%A0%E7%BB%9F-Function-Calling-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">6.5　与传统 Function Calling 的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E5%A4%9A%E6%A8%A1%E6%80%81-API"><span class="toc-text">07、多模态 API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-Text"><span class="toc-text">7.1　Text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-Image"><span class="toc-text">7.2　Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-Audio"><span class="toc-text">7.3　Audio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-Video"><span class="toc-text">7.4　Video</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-%E5%A4%9A%E6%A8%A1%E6%80%81%E8%BE%93%E5%85%A5%E7%9A%84-API-%E8%A1%A8%E8%BE%BE%E6%96%B9%E5%BC%8F"><span class="toc-text">7.5　多模态输入的 API 表达方式</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>LLM 是一团概率分布,API 才是产品。当模型被装进一个 HTTP 接口,它就不再只是研究者的玩具,而是任何应用都能调用的能力。所有上层应用——聊天机器人、RAG、Agent、代码助手——都站在这个抽象层之上。</p>
+</blockquote>
+<p>对一个要落地的大模型应用来说,真正决定开发体验的从来不是模型论文里那几个数字,而是你每天打交道的接口长什么样、字段怎么填、流怎么接、结构化怎么约束、工具怎么调、多模态怎么塞。把 LLM API 当作一门”网络协议”去理解它,会比把它当作一个玄学的”黑盒”实用得多。</p>
+<h2 id="01、什么是-LLM-API"><a href="#01、什么是-LLM-API" class="headerlink" title="01、什么是 LLM API"></a>01、什么是 LLM API</h2><p>LLM API(大语言模型应用程序接口)是模型对外暴露的一组网络端点。它接受结构化请求,返回模型生成的结果,中间把”加载权重、分词、推理、采样、解码”这些细节全部藏掉。对调用方来说,它就是一行 HTTP 请求加一段 JSON 响应。</p>
+<h3 id="1-1-应用程序与模型之间的调用关系"><a href="#1-1-应用程序与模型之间的调用关系" class="headerlink" title="1.1　应用程序与模型之间的调用关系"></a>1.1　应用程序与模型之间的调用关系</h3><p>整个调用关系可以简化成三层:</p>
+<ul>
+<li><strong>应用层</strong>:发起请求的客户端,可以是 Web 前端、移动端、后台服务,甚至是另一台服务器上的脚本。</li>
+<li><strong>协议层</strong>:HTTP&#x2F;HTTPS + JSON(少数厂商支持 gRPC 或 SSE),负责传输和编码。</li>
+<li><strong>推理层</strong>:API 网关背后的模型推理集群,负责实际跑模型。</li>
+</ul>
+<p>应用层完全不需要知道推理层用了多少张卡、模型是 7B 还是 70B、用的是 vLLM 还是 TGI。它只看到一个能产出文字的函数。</p>
+<h3 id="1-2-一次模型调用的基本流程"><a href="#1-2-一次模型调用的基本流程" class="headerlink" title="1.2　一次模型调用的基本流程"></a>1.2　一次模型调用的基本流程</h3><p>非流式一次调用大致走过这些步骤:</p>
+<pre><code>[Client]
+  │  1. 构造 JSON,加上 Authorization 头
+  ▼
+[API Gateway]
+  │  2. 鉴权、限流、配额检查
+  ▼
+[Scheduler]
+  │  3. 选一个空闲的 worker,准备 KV cache 上下文
+  ▼
+[Inference Worker]
+  │  4. prefill(把 prompt 跑一遍,初始化 KV cache)
+  │  5. decode(自回归生成 token)
+  ▼
+[Postprocess]
+  │  6. 采样、停止条件判断、计算 usage
+  ▼
+[Client]
+     7. 收到完整 JSON 响应
+</code></pre>
+<p>流式调用则在第 5、6 步之间每生成一个(或几个)token 就往回推一段,直到触发 stop 条件或到达 max_tokens。</p>
+<h3 id="1-3-API-与直接运行模型的区别"><a href="#1-3-API-与直接运行模型的区别" class="headerlink" title="1.3　API 与直接运行模型的区别"></a>1.3　API 与直接运行模型的区别</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>API 调用</th>
+<th>本地运行模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运维</td>
+<td>无需关心 GPU、显存、并发</td>
+<td>需要 vLLM&#x2F;SGLang&#x2F;TGI 等推理框架</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>按 token 计费,边际稳定</td>
+<td>固定硬件 + 电费,量大便宜</td>
+</tr>
+<tr>
+<td>弹性</td>
+<td>自动扩缩容,突发流量可扛</td>
+<td>需要自己处理排队、扩缩容</td>
+</tr>
+<tr>
+<td>数据合规</td>
+<td>数据离开本机</td>
+<td>数据不出域</td>
+</tr>
+<tr>
+<td>定制化</td>
+<td>受限于厂商开放的能力</td>
+<td>可以微调、换底座、改采样策略</td>
+</tr>
+<tr>
+<td>模型升级</td>
+<td>厂商灰度推送,不可控</td>
+<td>需要手动拉权重、热加载</td>
+</tr>
+</tbody></table>
+<p>什么时候选 API、什么时候本地部署,本质上是一个”成本-合规-控制力”的三角权衡。Agent 时代大多数团队都从 API 起步,等量起来再考虑私有部署。</p>
+<h2 id="02、LLM-API-的基本结构"><a href="#02、LLM-API-的基本结构" class="headerlink" title="02、LLM API 的基本结构"></a>02、LLM API 的基本结构</h2><p>不管 OpenAI、Anthropic、Google、DeepSeek 还是开源生态里那些 OpenAI 兼容接口,一次 LLM API 调用的”骨架”基本一致。下面以最常见的 Chat Completion 风格为例拆解。</p>
+<h3 id="2-1-Endpoint"><a href="#2-1-Endpoint" class="headerlink" title="2.1　Endpoint"></a>2.1　Endpoint</h3><p>每个厂商有自己的基础 URL 和路径:</p>
+<pre><code>POST https://api.openai.com/v1/chat/completions
+POST https://api.anthropic.com/v1/messages
+POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent
+POST https://api.deepseek.com/chat/completions
+</code></pre>
+<p>路径命名风格不一,但都遵循 RESTful 思路:一个模型族对应一组端点,操作类型(对话、补全、embedding、图片生成)分开。</p>
+<h3 id="2-2-Authentication"><a href="#2-2-Authentication" class="headerlink" title="2.2　Authentication"></a>2.2　Authentication</h3><p>主流三种:</p>
+<ul>
+<li><strong>Bearer Token</strong>:<code>Authorization: Bearer sk-xxx</code>,OpenAI 风格。</li>
+<li><strong>自定义 Header</strong>:<code>x-api-key: sk-ant-xxx</code>,Anthropic 风格。</li>
+<li><strong>OAuth 2.0</strong>:企业级场景,通过 token endpoint 换短期 token。</li>
+</ul>
+<h3 id="2-3-Headers"><a href="#2-3-Headers" class="headerlink" title="2.3　Headers"></a>2.3　Headers</h3><p>请求侧常见头部:</p>
+<ul>
+<li><code>Content-Type: application/json</code></li>
+<li><code>Authorization: Bearer &lt;KEY&gt;</code> 或 <code>x-api-key: &lt;KEY&gt;</code></li>
+<li><code>x-request-id</code>:链路追踪 ID,方便排查日志</li>
+<li>厂商特定头部,例如 Anthropic 的 <code>anthropic-version: 2023-06-01</code></li>
+</ul>
+<p>响应侧常见头部:</p>
+<ul>
+<li><code>x-ratelimit-remaining-requests</code></li>
+<li><code>x-ratelimit-remaining-tokens</code></li>
+<li><code>x-request-id</code>(回显请求 ID)</li>
+<li><code>retry-after</code>(被限流时)</li>
+</ul>
+<h3 id="2-4-Request"><a href="#2-4-Request" class="headerlink" title="2.4　Request"></a>2.4　Request</h3><p>Chat Completion 风格的请求体:</p>
+<pre><code class="language-json">{
+  &quot;model&quot;: &quot;gpt-4o&quot;,
+  &quot;messages&quot;: [
+    {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a concise assistant.&quot;},
+    {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Explain KV cache in one sentence.&quot;}
+  ],
+  &quot;temperature&quot;: 0.7,
+  &quot;max_tokens&quot;: 200,
+  &quot;top_p&quot;: 0.9,
+  &quot;stream&quot;: false
+}
+</code></pre>
+<p>字段含义下一节统一拆,核心点:请求就是”模型标识 + 一组消息 + 一些旋钮”。</p>
+<h3 id="2-5-Response"><a href="#2-5-Response" class="headerlink" title="2.5　Response"></a>2.5　Response</h3><p>非流式响应体:</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;chatcmpl-AbCdEf&quot;,
+  &quot;object&quot;: &quot;chat.completion&quot;,
+  &quot;created&quot;: 1737100000,
+  &quot;model&quot;: &quot;gpt-4o-2024-08-06&quot;,
+  &quot;choices&quot;: [
+    {
+      &quot;index&quot;: 0,
+      &quot;message&quot;: {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;...&quot;},
+      &quot;finish_reason&quot;: &quot;stop&quot;
+    }
+  ],
+  &quot;usage&quot;: {
+    &quot;prompt_tokens&quot;: 24,
+    &quot;completion_tokens&quot;: 18,
+    &quot;total_tokens&quot;: 42
+  }
+}
+</code></pre>
+<p><code>choices</code> 是结果数组,默认只返回一个(由 <code>n</code> 控制);<code>finish_reason</code> 告诉你是自然停止、长度截断还是触发了工具调用。</p>
+<h3 id="2-6-常见参数"><a href="#2-6-常见参数" class="headerlink" title="2.6　常见参数"></a>2.6　常见参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>model</code></td>
+<td>模型标识符,如 <code>gpt-4o</code>、<code>claude-3-5-sonnet</code>、<code>deepseek-chat</code></td>
+</tr>
+<tr>
+<td><code>messages</code> &#x2F; <code>input</code></td>
+<td>对话历史,Chat API 用数组,Anthropic 用 <code>messages</code>,Google 用 <code>contents</code></td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>采样温度,0 接近确定性贪心,1 是默认分布</td>
+</tr>
+<tr>
+<td><code>max_tokens</code></td>
+<td>限制最大输出长度,超过会截断并标 <code>finish_reason=length</code></td>
+</tr>
+<tr>
+<td><code>top_p</code></td>
+<td>nucleus sampling,从累积概率达到 p 的最小集合里采样</td>
+</tr>
+<tr>
+<td><code>top_k</code></td>
+<td>只保留概率最高的 k 个 token 后采样(Anthropic、Llama API 暴露)</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>停止序列,模型遇到该字符串即终止生成</td>
+</tr>
+<tr>
+<td><code>frequency_penalty</code> &#x2F; <code>presence_penalty</code></td>
+<td>抑制重复,OpenAI 风格</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>一次返回多少个候选 completion</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>指定随机种子,试图让结果尽量可复现(不能 100% 复现)</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>是否开启流式返回</td>
+</tr>
+<tr>
+<td><code>tools</code> &#x2F; <code>functions</code></td>
+<td>工具描述,详见后文 Tool Calling 一节</td>
+</tr>
+<tr>
+<td><code>response_format</code></td>
+<td>结构化输出约束,详见后文 Structured Output 一节</td>
+</tr>
+</tbody></table>
+<h3 id="2-7-Response-中的-Token-与-Usage"><a href="#2-7-Response-中的-Token-与-Usage" class="headerlink" title="2.7　Response 中的 Token 与 Usage"></a>2.7　Response 中的 Token 与 Usage</h3><p>Token 是模型处理的最小单元,大致对应一个常见的词片段或一个汉字。<code>usage</code> 字段是计费依据:</p>
+<ul>
+<li><code>prompt_tokens</code>:你这次 prompt 消耗的 token,按 prompt 单价</li>
+<li><code>completion_tokens</code>:模型输出消耗的 token,通常按比 prompt 贵的单价</li>
+<li><code>total_tokens</code>:两者之和</li>
+</ul>
+<p>Agent 类应用一定要在请求侧把 <code>usage</code> 累加,这是成本监控的基础。没有 usage 数据,你就是闭着眼睛烧钱。</p>
+<h2 id="03、从-Completion-到-Chat-API"><a href="#03、从-Completion-到-Chat-API" class="headerlink" title="03、从 Completion 到 Chat API"></a>03、从 Completion 到 Chat API</h2><h3 id="3-1-Completion-API-补全文本"><a href="#3-1-Completion-API-补全文本" class="headerlink" title="3.1　Completion API:补全文本"></a>3.1　Completion API:补全文本</h3><p>最早期的 LLM API 是”补全”(Completion),给定一段 prompt,模型往后续写:</p>
+<pre><code class="language-json">{
+  &quot;model&quot;: &quot;gpt-3.5-turbo-instruct&quot;,
+  &quot;prompt&quot;: &quot;Translate the following sentence to French:\nHello, world.\n\nFrench:&quot;,
+  &quot;max_tokens&quot;: 20,
+  &quot;temperature&quot;: 0
+}
+</code></pre>
+<p>模型返回:<code>&quot;Bonjour, le monde.&quot;</code>。它本质上是一个”文本接龙”接口,适合翻译、补全代码片段、写开头,但不太适合多轮对话。</p>
+<h3 id="3-2-Chat-Completion-API-消息数组"><a href="#3-2-Chat-Completion-API-消息数组" class="headerlink" title="3.2　Chat Completion API:消息数组"></a>3.2　Chat Completion API:消息数组</h3><p>Chat Completion 把输入从”一段文本”换成”一组消息”:</p>
+<pre><code class="language-json">{
+  &quot;model&quot;: &quot;gpt-4o&quot;,
+  &quot;messages&quot;: [
+    {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a translator.&quot;},
+    {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello, world.&quot;},
+    {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Bonjour, le monde.&quot;},
+    {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Now translate: Goodbye.&quot;}
+  ]
+}
+</code></pre>
+<p>模型根据整段对话历史生成下一条 assistant 消息。请求和响应的语义都从”补全”变成了”对话中的一轮”。</p>
+<h3 id="3-3-三种-Message-角色"><a href="#3-3-三种-Message-角色" class="headerlink" title="3.3　三种 Message 角色"></a>3.3　三种 Message 角色</h3><p>虽然各厂商命名略有差异,但核心都是三类:</p>
+<ul>
+<li><strong>System</strong>:设定模型人格、行为约束、上下文背景。多数情况下作为”系统级指令”对待,优先级高于 user。</li>
+<li><strong>User</strong>:用户输入,可能含多模态内容(文本、图片、音频等)。</li>
+<li><strong>Assistant</strong>:模型历史回复。在多轮对话里要把上一轮的 assistant 消息原样塞回去,模型才知道自己说过什么。</li>
+</ul>
+<p>Anthropic 多了一个 <code>role: assistant</code> 里的 tool_use &#x2F; tool_result 区分;Google 的 <code>contents</code> 把 system 提示当作第一条 user 消息的特殊前缀。这些差异在跨厂商迁移时一定要小心。</p>
+<h3 id="3-4-为什么从”补全文本”发展到”对话消息”"><a href="#3-4-为什么从”补全文本”发展到”对话消息”" class="headerlink" title="3.4　为什么从”补全文本”发展到”对话消息”"></a>3.4　为什么从”补全文本”发展到”对话消息”</h3><p>迁移不是营销,是工程上绕不开的几件事:</p>
+<ul>
+<li><strong>多轮上下文管理</strong>。Completion 要自己拼接多轮历史,容易出错;Chat API 把多轮结构化到 messages 数组里。</li>
+<li><strong>角色分离</strong>。System 角色让指令遵循更稳定,user 和 assistant 角色天然分离。</li>
+<li><strong>对齐数据更多</strong>。RLHF 阶段大量数据是 Chat 格式,Chat API 能更稳定地释放模型对齐能力。</li>
+<li><strong>配套能力可扩展</strong>。Tool Calling、Structured Output、function calling 这些都是建立在”消息”这个抽象上的。</li>
+</ul>
+<h3 id="3-5-Chat-API-对-Agent-应用的影响"><a href="#3-5-Chat-API-对-Agent-应用的影响" class="headerlink" title="3.5　Chat API 对 Agent 应用的影响"></a>3.5　Chat API 对 Agent 应用的影响</h3><p>Chat API 是 Agent 的天然状态机:</p>
+<ul>
+<li>一条 user 消息是触发器</li>
+<li>一条 assistant 消息是模型决策(可能包含 tool_calls)</li>
+<li>一条 tool 消息是工具执行结果</li>
+<li>System 消息是 Agent 的行为契约</li>
+</ul>
+<p>LangGraph、AutoGen、Agno 这些框架内部的状态机本质上都是在维护一个 messages 列表,然后反复把它塞给 Chat API。理解了这一点,后续所有 Agent 框架的源码都看得懂一半。</p>
+<h2 id="04、Streaming"><a href="#04、Streaming" class="headerlink" title="04、Streaming"></a>04、Streaming</h2><h3 id="4-1-非流式调用"><a href="#4-1-非流式调用" class="headerlink" title="4.1　非流式调用"></a>4.1　非流式调用</h3><p>默认模式。客户端发完请求,等服务端生成完全部 token 才拿到完整响应:</p>
+<pre><code class="language-python">response = client.chat.completions.create(
+    model=&quot;gpt-4o&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Write a short poem about spring.&quot;}],
+    stream=False,
+)
+print(response.choices[0].message.content)
+</code></pre>
+<p>短回答问题不大,一旦输出几百上千字,用户就要面对一段尴尬的”读秒”。</p>
+<h3 id="4-2-流式调用"><a href="#4-2-流式调用" class="headerlink" title="4.2　流式调用"></a>4.2　流式调用</h3><p>把 <code>stream=True</code> 打开,模型每生成一个(或几个)token 就往客户端推一段:</p>
+<pre><code class="language-python">stream = client.chat.completions.create(
+    model=&quot;gpt-4o&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Write a short poem about spring.&quot;}],
+    stream=True,
+)
+for chunk in stream:
+    delta = chunk.choices[0].delta.content or &quot;&quot;
+    print(delta, end=&quot;&quot;, flush=True)
+</code></pre>
+<p><code>delta</code> 是这一段新增的文本,客户端拼起来就是完整回答。首 token 延迟可以压到几百毫秒,用户体验上立刻从”等结果”变成”边看边出”。</p>
+<h3 id="4-3-SSE-基本原理"><a href="#4-3-SSE-基本原理" class="headerlink" title="4.3　SSE 基本原理"></a>4.3　SSE 基本原理</h3><p>主流厂商流式接口都走 SSE(Server-Sent Events),本质是 HTTP 长连接 + <code>text/event-stream</code> 内容类型。服务端持续推送形如这样的数据:</p>
+<pre><code>data: {&quot;id&quot;:&quot;chatcmpl-AbCdEf&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;choices&quot;:[{&quot;delta&quot;:{&quot;content&quot;:&quot;春&quot;}}]}
+
+data: {&quot;choices&quot;:[{&quot;delta&quot;:{&quot;content&quot;:&quot;风&quot;}}]}
+
+data: {&quot;choices&quot;:[{&quot;delta&quot;:{&quot;content&quot;:&quot;拂&quot;}}]}
+
+data: [DONE]
+</code></pre>
+<p>每条 <code>data:</code> 行是一个独立的事件,客户端用 EventSource API 或自己按换行解析。流结束标志通常是 <code>[DONE]</code> 或者 <code>finish_reason</code> 不为 null 的最后一条 chunk。</p>
+<p>Anthropic 同样走 SSE,但事件类型更细分(<code>message_start</code>、<code>content_block_delta</code>、<code>message_stop</code>),分别对应生命周期阶段。</p>
+<h3 id="4-4-Token-增量返回"><a href="#4-4-Token-增量返回" class="headerlink" title="4.4　Token 增量返回"></a>4.4　Token 增量返回</h3><p>流式响应的每条 chunk 只含”增量”——这一小段时间新增的 token 或工具调用片段。客户端有两种消费模式:</p>
+<ul>
+<li><strong>只拼接文本</strong>:把 <code>delta.content</code> 累积成最终回答,用于聊天界面。</li>
+<li><strong>解析中间状态</strong>:tool_calls 在流式下是分段到达的,name 先到、参数 JSON 字符串后到,需要做增量 JSON 解析,直到收到完整的 arguments 才能执行工具。</li>
+</ul>
+<p>后一种是 Agent 框架的痛点之一,这也是 Structured Output 越来越重要的原因。</p>
+<h3 id="4-5-流式在-Chat-Agent-中的作用"><a href="#4-5-流式在-Chat-Agent-中的作用" class="headerlink" title="4.5　流式在 Chat &#x2F; Agent 中的作用"></a>4.5　流式在 Chat &#x2F; Agent 中的作用</h3><ul>
+<li><strong>Chat UX</strong>:打字机效果让人感觉”在思考”,显著降低感知延迟。</li>
+<li><strong>Agent 提前决策</strong>:模型刚生成 tool_call 就触发工具,不必等整段回答结束。</li>
+<li><strong>长输出场景</strong>:几千字的文档生成、流式字幕、IDE 代码补全都依赖流式。</li>
+<li><strong>可中断</strong>:用户随时取消,已经花的钱不会浪费。</li>
+</ul>
+<h3 id="4-6-流式下的异常与连接断开"><a href="#4-6-流式下的异常与连接断开" class="headerlink" title="4.6　流式下的异常与连接断开"></a>4.6　流式下的异常与连接断开</h3><p>流式不是”免费的延迟优化”,它带来了一堆边角问题:</p>
+<ul>
+<li><strong>超时检测</strong>:没有”生成完毕”的明确信号,客户端要用 idle timeout(比如 30 秒没新 chunk 就报警)。</li>
+<li><strong>断连重试</strong>:多数厂商不支持断点续传,只能整段重发。对长输出成本压力大。</li>
+<li><strong>部分响应处理</strong>:已收到的 chunk 要保留,不能因报错就全清掉。</li>
+<li><strong>错误传递</strong>:流式错误通常以特殊 SSE event(如 Anthropic 的 <code>event: error</code>)或 HTTP 非 200 状态码呈现,需要单独捕获。</li>
+<li><strong>代理与网关</strong>:Nginx、CDN 默认可能缓存或缓冲 SSE 响应,要么关闭 buffering,要么直接走支持 streaming 的网关。</li>
+</ul>
+<h2 id="05、Structured-Output"><a href="#05、Structured-Output" class="headerlink" title="05、Structured Output"></a>05、Structured Output</h2><h3 id="5-1-为什么需要结构化输出"><a href="#5-1-为什么需要结构化输出" class="headerlink" title="5.1　为什么需要结构化输出"></a>5.1　为什么需要结构化输出</h3><p>Agent 系统的下游消费方通常是代码,不是人:</p>
+<ul>
+<li>工作流引擎需要 <code>{&quot;action&quot;: &quot;search&quot;, &quot;query&quot;: &quot;...&quot;}</code> 这种结构</li>
+<li>前端表单需要 <code>{&quot;title&quot;: &quot;...&quot;, &quot;fields&quot;: [...]}</code> 这种结构</li>
+<li>数据库写入需要字段类型严格匹配的 record</li>
+</ul>
+<p>如果模型返回一段自然语言,Agent 还要再调一次 LLM 抽取,既慢又贵又脆。结构化输出就是让模型”一次返回就能直接被代码消化”。</p>
+<h3 id="5-2-JSON-Mode"><a href="#5-2-JSON-Mode" class="headerlink" title="5.2　JSON Mode"></a>5.2　JSON Mode</h3><p>最基础的约束:保证模型输出是合法 JSON。OpenAI 的写法:</p>
+<pre><code class="language-json">{
+  &quot;response_format&quot;: {&quot;type&quot;: &quot;json_object&quot;}
+}
+</code></pre>
+<p>模型被引导输出 JSON,但字段名、类型、嵌套结构都不保证。适合”我知道我要 JSON,但具体长什么样我自己解析”。</p>
+<h3 id="5-3-JSON-Schema"><a href="#5-3-JSON-Schema" class="headerlink" title="5.3　JSON Schema"></a>5.3　JSON Schema</h3><p>用 JSON Schema 描述字段类型、必填项、enum:</p>
+<pre><code class="language-json">{
+  &quot;response_format&quot;: {
+    &quot;type&quot;: &quot;json_schema&quot;,
+    &quot;json_schema&quot;: {
+      &quot;name&quot;: &quot;extract&quot;,
+      &quot;schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;},
+          &quot;tags&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;string&quot;}},
+          &quot;score&quot;: {&quot;type&quot;: &quot;number&quot;, &quot;minimum&quot;: 0, &quot;maximum&quot;: 1}
+        },
+        &quot;required&quot;: [&quot;title&quot;, &quot;tags&quot;],
+        &quot;additionalProperties&quot;: false
+      }
+    }
+  }
+}
+</code></pre>
+<p>大部分厂商在这一步会用 prompt 工程 + 输出过滤来近似满足 schema,严格度有限。</p>
+<h3 id="5-4-Structured-Output"><a href="#5-4-Structured-Output" class="headerlink" title="5.4　Structured Output"></a>5.4　Structured Output</h3><p>OpenAI 在 2024 年推出的”约束解码”能力:在解码阶段把不合法的 token 概率置零,保证模型输出<strong>严格</strong>符合 schema,而不是”看起来像”。</p>
+<p>Anthropic 没有专门的 Structured Output ,但 <code>tool use</code> 能做同样的事——把”我想让模型产出的结构化对象”伪装成一个 tool,模型只要返回 tool_use 块,就等于产出了结构化数据。</p>
+<p>Google Gemini 通过 <code>responseSchema</code> 字段提供类似 JSON Schema 的约束。</p>
+<h3 id="5-5-与-Agent-状态、Tool-Calling-的关系"><a href="#5-5-与-Agent-状态、Tool-Calling-的关系" class="headerlink" title="5.5　与 Agent 状态、Tool Calling 的关系"></a>5.5　与 Agent 状态、Tool Calling 的关系</h3><ul>
+<li>Tool Calling 是 Structured Output 的<strong>超集</strong>:工具调用本身就是一种”结构化输出”</li>
+<li>同一个约束解码技术既可以约束 JSON,也可以约束 tool_calls</li>
+<li>Agent 框架(比如 Instructor、Pydantic AI、LangChain 的 with_structured_output)大量依赖 Structured Output,把模型输出直接映射成 Pydantic &#x2F; Zod 对象</li>
+</ul>
+<p>工程上有一个经验法则:<strong>任何模型输出会被代码消费的环节,都应当走 Structured Output,不要让代码再调一次 LLM 解析自然语言</strong>。</p>
+<h2 id="06、Tool-Calling"><a href="#06、Tool-Calling" class="headerlink" title="06、Tool Calling"></a>06、Tool Calling</h2><h3 id="6-1-Tool-Calling-是什么"><a href="#6-1-Tool-Calling-是什么" class="headerlink" title="6.1　Tool Calling 是什么"></a>6.1　Tool Calling 是什么</h3><p>让模型在对话中”决定调用外部工具”,而不是直接给自然语言回答。模型输出形如:</p>
+<pre><code class="language-json">{
+  &quot;choices&quot;: [
+    {
+      &quot;message&quot;: {
+        &quot;role&quot;: &quot;assistant&quot;,
+        &quot;content&quot;: null,
+        &quot;tool_calls&quot;: [
+          {
+            &quot;id&quot;: &quot;call_001&quot;,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;function&quot;: {
+              &quot;name&quot;: &quot;get_weather&quot;,
+              &quot;arguments&quot;: &quot;{\&quot;city\&quot;: \&quot;Hangzhou\&quot;}&quot;
+            }
+          }
+        ]
+      },
+      &quot;finish_reason&quot;: &quot;tool_calls&quot;
+    }
+  ]
+}
+</code></pre>
+<p>应用看到 <code>finish_reason=tool_calls</code> 就知道这次不能把 content 直接给用户,得先去执行工具。</p>
+<h3 id="6-2-Tool-Schema"><a href="#6-2-Tool-Schema" class="headerlink" title="6.2　Tool Schema"></a>6.2　Tool Schema</h3><p>每个工具用 JSON Schema 描述:</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;function&quot;,
+  &quot;function&quot;: {
+    &quot;name&quot;: &quot;get_weather&quot;,
+    &quot;description&quot;: &quot;Get current weather for a given city.&quot;,
+    &quot;parameters&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;city&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;City name&quot;},
+        &quot;unit&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;celsius&quot;, &quot;fahrenheit&quot;], &quot;default&quot;: &quot;celsius&quot;}
+      },
+      &quot;required&quot;: [&quot;city&quot;]
+    }
+  }
+}
+</code></pre>
+<p><code>description</code> 至关重要——模型靠它判断何时调用。写得含糊的工具永远不会被调到,写得清楚的工具几乎总能被正确使用。</p>
+<h3 id="6-3-模型如何决定调用工具"><a href="#6-3-模型如何决定调用工具" class="headerlink" title="6.3　模型如何决定调用工具"></a>6.3　模型如何决定调用工具</h3><p>模型在推理阶段面对工具列表,大致遵循这样的决策:</p>
+<ul>
+<li>把 tools 转成”系统约束”,插入上下文</li>
+<li>模型在生成每个 token 时,实际在”该输出文本”和”该输出 tool_call”之间做选择</li>
+<li>一旦决定调用,就进入 tool_call 生成模式,依次产出 name、参数 JSON</li>
+</ul>
+<p>背后是训练阶段加入了大量 function calling 数据,使模型对工具 schema 有”语义级”理解,而不是简单关键词匹配。这也是为什么工具描述要写得像文档,不能像变量名。</p>
+<h3 id="6-4-完整调用流程"><a href="#6-4-完整调用流程" class="headerlink" title="6.4　完整调用流程"></a>6.4　完整调用流程</h3><p>以”杭州今天天气怎么样”为例:</p>
+<pre><code>1. 应用构造 messages + tools,请求模型
+2. 模型返回 finish_reason=tool_calls,function=get_weather,args={&quot;city&quot;:&quot;Hangzhou&quot;}
+3. 应用执行工具(查天气 API),拿到 {&quot;temp&quot;: 28, &quot;condition&quot;: &quot;sunny&quot;}
+4. 应用把结果以 role:&quot;tool&quot; 追加到 messages,tool_call_id 对齐
+5. 应用再次请求模型
+6. 模型整理回复:&quot;杭州今天 28°C,晴天。&quot;
+</code></pre>
+<p>整个过程中 messages 数组不断增长,模型在”是否调用工具”和”是否直接回答”之间反复决策。这就是 ReAct &#x2F; Function Agent 的最朴素形态。</p>
+<h3 id="6-5-与传统-Function-Calling-的关系"><a href="#6-5-与传统-Function-Calling-的关系" class="headerlink" title="6.5　与传统 Function Calling 的关系"></a>6.5　与传统 Function Calling 的关系</h3><p>“Function Calling”是 OpenAI 2023 年的命名,”Tool Calling”是 2024 年更通用的说法(支持多模态工具、并行调用、工具结果直接回传等)。本质上同一类能力,不同厂商命名习惯不同:</p>
+<ul>
+<li>OpenAI:<code>tool_calls</code>、<code>tool</code> role</li>
+<li>Anthropic:<code>tool_use</code> content block、<code>tool_result</code> content block</li>
+<li>Google:<code>functionCall</code>、<code>functionResponse</code></li>
+</ul>
+<p>理解其中之一,其它厂商的文档基本都能直接读。</p>
+<h2 id="07、多模态-API"><a href="#07、多模态-API" class="headerlink" title="07、多模态 API"></a>07、多模态 API</h2><h3 id="7-1-Text"><a href="#7-1-Text" class="headerlink" title="7.1　Text"></a>7.1　Text</h3><p>最基础的一类,字符串 message,前面所有例子都是。</p>
+<h3 id="7-2-Image"><a href="#7-2-Image" class="headerlink" title="7.2　Image"></a>7.2　Image</h3><p>主流支持三种输入方式:</p>
+<ul>
+<li><strong>公网 URL</strong>:模型厂商自己去拉,简单但有公网访问与数据合规风险。</li>
+<li><strong>File ID</strong>:先调厂商的上传接口得到 <code>file_id</code>,再在消息里引用,适合大文件复用。</li>
+<li><strong>Base64 内联</strong>:小图直接编码进请求体,体积大,不推荐大图。</li>
+</ul>
+<p>OpenAI 风格的 image 输入:</p>
+<pre><code class="language-json">{
+  &quot;role&quot;: &quot;user&quot;,
+  &quot;content&quot;: [
+    {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;What&#39;s in this image?&quot;},
+    {&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: &quot;https://...&quot;}}
+  ]
+}
+</code></pre>
+<p>GPT-4o、Claude 3.5、Gemini 1.5&#x2F;2.0 等都支持 image 输入。</p>
+<h3 id="7-3-Audio"><a href="#7-3-Audio" class="headerlink" title="7.3　Audio"></a>7.3　Audio</h3><p>两类用法:</p>
+<ul>
+<li><strong>转写</strong>:Whisper 系列,把语音转成文字,接口和 Chat Completion 是分开的。</li>
+<li><strong>多模态对话</strong>:部分模型(GPT-4o audio、Gemini)支持把音频作为对话输入的一部分,直接出文字或音频回复。</li>
+</ul>
+<h3 id="7-4-Video"><a href="#7-4-Video" class="headerlink" title="7.4　Video"></a>7.4　Video</h3><p>直接传视频流仍是少数派。主流做法:</p>
+<ul>
+<li>服务端抽帧,把若干帧作为 image 输入</li>
+<li>Google Gemini 系列原生支持 video 输入(传 base64 或 File API)</li>
+</ul>
+<p>OpenAI 当前主流路径仍是”自己抽帧 → image 输入”,而不是传视频文件。</p>
+<h3 id="7-5-多模态输入的-API-表达方式"><a href="#7-5-多模态输入的-API-表达方式" class="headerlink" title="7.5　多模态输入的 API 表达方式"></a>7.5　多模态输入的 API 表达方式</h3><p>三种主流表达:</p>
+<ul>
+<li><strong>多 content block</strong>:OpenAI 风格,同一 message 内 <code>type</code> 区分 text&#x2F;image&#x2F;audio。</li>
+<li><strong>inline_data</strong>:Google 风格,<code>inline_data: {mime_type, data}</code>。</li>
+<li><strong>附件引用</strong>:先 upload 拿 ID,再在消息里引用。</li>
+</ul>
+<p>跨厂商迁移时,这种 schema 差异是最容易踩坑的地方。多数 Agent 框架用统一的 <code>HumanMessage([...])</code> 接口屏蔽底层差异。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

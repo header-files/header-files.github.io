@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>四、Anthropic API | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent ">
+  <meta name="description" content="四、Anthropic API | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(11)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(11)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="67k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-四、Anthropic-API" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">四、Anthropic API</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;大模型API">大模型API</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-18 14:26</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81Anthropic-API-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">01、Anthropic API 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81messages-%E4%B8%8E-content-%E5%88%86%E5%9D%97"><span class="toc-text">02、messages 与 content 分块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%B6%88%E6%81%AF%E7%BB%93%E6%9E%84"><span class="toc-text">2.1　消息结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%BE%93%E5%85%A5%E5%88%86%E5%9D%97%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.2　输入分块类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-tool-result-%E7%9A%84%E5%86%85%E5%AE%B9%E5%BD%A2%E6%80%81"><span class="toc-text">2.3　tool_result 的内容形态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E6%A0%B8%E5%BF%83%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">03、核心请求参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E5%B7%A5%E5%85%B7%E4%B8%8E%E6%A8%A1%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="toc-text">04、工具与模型相关参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E9%9D%9E%E6%B5%81%E5%BC%8F%E5%93%8D%E5%BA%94"><span class="toc-text">05、非流式响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E9%A1%B6%E5%B1%82%E5%AD%97%E6%AE%B5"><span class="toc-text">5.1　顶层字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-stop-reason-%E7%9A%84%E5%8F%96%E5%80%BC"><span class="toc-text">5.2　stop_reason 的取值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-usage-%E7%BB%93%E6%9E%84"><span class="toc-text">5.3　usage 结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E6%B5%81%E5%BC%8F%E5%93%8D%E5%BA%94"><span class="toc-text">06、流式响应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7%E4%B8%8E-Agent-Loop"><span class="toc-text">07、客户端工具与 Agent Loop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B7%A5%E5%85%B7"><span class="toc-text">08、服务端工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#09%E3%80%81%E8%BF%9B%E9%98%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">09、进阶机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%BC%93%E5%AD%98"><span class="toc-text">9.1　提示词缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E-token-%E8%AE%A1%E6%95%B0"><span class="toc-text">9.2　批处理与 token 计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">9.3　结构化输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86"><span class="toc-text">9.4　上下文管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BB%A3%E9%99%85%E5%B7%AE%E5%BC%82%E4%B8%8E%E8%BF%81%E7%A7%BB%E6%B3%A8%E6%84%8F"><span class="toc-text">10、模型代际差异与迁移注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E3%80%81%E4%B8%8E-OpenAI-%E4%B8%A4%E7%A7%8D%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AF%B9%E7%85%A7"><span class="toc-text">11、与 OpenAI 两种协议的对照</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Anthropic 的 Messages API 有一个别的对话协议很少见的特征：协议骨架极其稳定，挂在骨架上的能力却随模型代际快速更替。写这类文章最容易犯的错，就是把某一代模型的高级能力当成协议本身——读者照着调，轻则行为不符，重则直接 400。</p>
+</blockquote>
+<p>前两篇拆解了 OpenAI 的 Chat Completions 与 Responses API，这一篇切到 Anthropic 的 Messages API。它是 Claude 系列模型的核心 HTTP 接口，端点是 <code>POST /v1/messages</code>，和 Chat Completions 一样负责接收对话上下文、生成模型的下一条消息；两者的差异集中在消息结构、工具调用、推理配置、缓存与服务端工具的设计取向，而不是能力的一一对应。</p>
+<h2 id="01、Anthropic-API-是什么"><a href="#01、Anthropic-API-是什么" class="headerlink" title="01、Anthropic API 是什么"></a>01、Anthropic API 是什么</h2><p>Anthropic API 的核心端点族如下：</p>
+<table>
+<thead>
+<tr>
+<th>端点</th>
+<th>方法</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/v1/messages</code></td>
+<td>POST</td>
+<td>生成一条消息，核心接口</td>
+</tr>
+<tr>
+<td><code>/v1/messages/count_tokens</code></td>
+<td>POST</td>
+<td>预估输入 token 数</td>
+</tr>
+<tr>
+<td><code>/v1/messages/batches</code></td>
+<td>POST</td>
+<td>提交批量任务（离线处理，通常按标准价格约 50% 计费，具体以当期定价文档为准）</td>
+</tr>
+<tr>
+<td><code>/v1/models</code></td>
+<td>GET</td>
+<td>模型列表</td>
+</tr>
+</tbody></table>
+<p>鉴权用 <code>x-api-key</code> 头；协议版本走 <code>anthropic-version</code> 头，未正式发布的能力走 <code>anthropic-beta</code> 头。一次最简单的调用：</p>
+<pre><code class="language-bash">curl https://api.anthropic.com/v1/messages \
+  -H &quot;content-type: application/json&quot; \
+  -H &quot;x-api-key: $ANTHROPIC_API_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -d &#39;{
+    &quot;model&quot;: &quot;claude-&lt;model-id&gt;&quot;,
+    &quot;max_tokens&quot;: 1024,
+    &quot;system&quot;: &quot;你是一个严谨的技术助手。&quot;,
+    &quot;messages&quot;: [
+      {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;什么是 SSE？&quot;}
+    ]
+  }&#39;
+</code></pre>
+<p>示例里的模型 ID 用占位符表示，实际取值形如 <code>claude-sonnet-4-5</code> 这样的 <code>claude-&lt;family&gt;-&lt;version&gt;</code> 结构，具体可用型号、以及哪些型号仍在服务期内，以当期模型列表为准——Claude 的模型迭代与退役节奏都很快，把型号写死在代码或文档里都不划算。</p>
+<h2 id="02、messages-与-content-分块"><a href="#02、messages-与-content-分块" class="headerlink" title="02、messages 与 content 分块"></a>02、messages 与 content 分块</h2><h3 id="2-1-消息结构"><a href="#2-1-消息结构" class="headerlink" title="2.1　消息结构"></a>2.1　消息结构</h3><p><code>messages</code> 是数组，每个元素有 <code>role</code> 和 <code>content</code>。<code>content</code> 有两种形态：纯字符串是“单个 text 分块”的语法糖，正式写法是分块数组。</p>
+<pre><code class="language-json">{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;你好&quot;}
+{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;你好&quot;}]}
+</code></pre>
+<p>角色规则不要理解得太死。<code>messages</code> 主要由 <code>user</code> 和 <code>assistant</code> 两种对话角色组成，典型历史是从 <code>user</code> 开始、以 <code>assistant</code> 结尾的交替结构；工具调用历史通过 <code>tool_use</code> &#x2F; <code>tool_result</code> content block 表达——<code>assistant</code> 消息里可以带 <code>tool_use</code> 块，紧随其后的 <code>user</code> 消息携带对应的 <code>tool_result</code> 块，这会让实际结构比简单的角色交替复杂得多。另外，当前部分模型支持在对话中间插入 <code>system</code> message——它与顶级 <code>system</code> 具有相同的系统指令级别，但<strong>这不是 Messages API 的通用角色规则</strong>：是否支持、以及允许出现在哪些位置，都取决于目标模型，而它无论如何都不能作为 <code>messages</code> 的第一条消息（通常需要跟在 <code>user</code> turn 之后，或跟在服务端工具结果之后）。写代码时按“对话历史”的思路组织，比按“必须严格交替”的教条去拼要安全。</p>
+<p>多轮对话由客户端维护完整历史并整体重发，这是无状态接口的通用做法，和 Chat Completions 一致。系统提示通常放在顶级 <code>system</code> 参数，支持字符串或带 <code>cache_control</code> 的 text 分块数组。</p>
+<p>需要提醒的是，<code>assistant</code> 消息<strong>预填</strong>（prefill）<strong>在 Claude 4.6 及之后的模型上不再支持，会返回 400</strong>。prefill 指的是在<strong>最后一条</strong> <code>assistant</code> 消息里预先放入部分输出内容，让模型从这段内容之后接着生成——例如最后两条消息是 <code>user: &quot;返回 JSON&quot;</code> 与 <code>assistant: &quot;{&quot;</code>，模型就会从 <code>{</code> 之后续写。它常被用来逼出固定格式，官方推荐的替代方案是结构化输出或系统提示。这类代际差异集中列在第 10 章。</p>
+<h3 id="2-2-输入分块类型"><a href="#2-2-输入分块类型" class="headerlink" title="2.2　输入分块类型"></a>2.2　输入分块类型</h3><p>content 数组的每个块都有 <code>type</code> 字段。分块模型是 Messages API 最有辨识度的设计，但要注意：<strong>“一切皆分块”是针对响应与富内容输入的设计概括，不等于请求侧每处都必须写成数组</strong>——纯文本仍然可以用字符串简写。</p>
+<p>另外，content block 的类型是按能力逐步扩展的：下面这张表列的是理解 Messages API 时最常见、最重要的一组类型，<strong>并不构成当前 API 的完整枚举</strong>。新能力（例如工具检索相关的分块）会持续加入新 <code>type</code>，写解析逻辑时对未知类型保持宽容，比穷举枚举更可靠。</p>
+<table>
+<thead>
+<tr>
+<th>分块类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>text</code></td>
+<td>文本，可带 <code>citations</code> 与 <code>cache_control</code></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>图片，<code>source</code> 支持 base64 与 URL，<code>transformations</code> 可做预处理</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>PDF 等文档，支持页级缓存</td>
+</tr>
+<tr>
+<td><code>search_result</code></td>
+<td>搜索结果内容块，承载搜索结果及引用信息，具体产生方式取决于搜索能力</td>
+</tr>
+<tr>
+<td><code>thinking</code> &#x2F; <code>redacted_thinking</code></td>
+<td>思考块与加密思考块，是否出现、是否必须回传取决于模型与思考模式</td>
+</tr>
+<tr>
+<td><code>tool_use</code></td>
+<td>模型发起的工具调用（回传历史时出现）</td>
+</tr>
+<tr>
+<td><code>tool_result</code></td>
+<td>客户端回传的工具执行结果</td>
+</tr>
+<tr>
+<td><code>server_tool_use</code></td>
+<td>服务端工具的调用记录</td>
+</tr>
+<tr>
+<td>各类服务端工具结果块</td>
+<td><code>web_search_tool_result</code>、<code>web_fetch_tool_result</code>、<code>code_execution_tool_result</code>、<code>mcp_tool_result</code> 等</td>
+</tr>
+<tr>
+<td><code>container_upload</code></td>
+<td>向代码执行容器上传文件（<code>file_id</code> 来自 Files API）</td>
+</tr>
+<tr>
+<td><code>compaction</code></td>
+<td>上下文压缩块，包含压缩摘要及需原样回传的元数据</td>
+</tr>
+</tbody></table>
+<p>关于 thinking 块的回传：<strong>对支持 extended thinking 且要求回传思考历史的模型</strong>，此前响应中的 thinking &#x2F; redacted_thinking 块需要按 API 要求保留并原样回传，其中的 <code>signature</code> 字段尤其不能修改，改一个字符就会触发 <code>invalid_request_error</code>。但这不是全模型通用的永久约束——采用 adaptive thinking 的后续模型，思考块的出现方式、是否返回正文明文、以及多轮如何续接，规则都不同。不要把它当成 Messages API 的固定条款去记忆。</p>
+<h3 id="2-3-tool-result-的内容形态"><a href="#2-3-tool-result-的内容形态" class="headerlink" title="2.3　tool_result 的内容形态"></a>2.3　tool_result 的内容形态</h3><p><code>tool_result</code> 块的 <code>content</code> 可以是字符串、text 分块数组或 image 分块数组，因此工具结果里可以直接嵌图片。</p>
+<h2 id="03、核心请求参数"><a href="#03、核心请求参数" class="headerlink" title="03、核心请求参数"></a>03、核心请求参数</h2><p>这些参数构成请求骨架，在 Anthropic 模型的各代之间基本保持稳定：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>model</code></td>
+<td>模型 ID，格式形如 <code>claude-&lt;family&gt;-&lt;version&gt;</code>，可用值见当期模型列表</td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td>输入消息数组</td>
+</tr>
+<tr>
+<td><code>max_tokens</code></td>
+<td>最大生成 token 数，<strong>必填</strong></td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td>顶级系统提示，字符串或 text 分块数组；不占角色位（部分模型另支持对话中间的 <code>system</code> message，属模型相关能力）</td>
+</tr>
+<tr>
+<td><code>stop_sequences</code></td>
+<td>自定义停止字符串数组，对应 Chat Completions 的 <code>stop</code></td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>是否走 SSE 流式（见第 06 章）</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td><code>{user_id}</code> 等元信息，用于滥用归因</td>
+</tr>
+</tbody></table>
+<p>工具相关参数（<code>tools</code>、<code>tool_choice</code>）虽然是最常用的能力之一，但具体支持哪些工具类型、<code>tool_choice</code> 的行为细节一直在演进，因此归入下一章与模型能力一起讨论。</p>
+<p>采样参数是这一节最需要标版本的一块：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>temperature</code></td>
+<td>取值范围 0.0～1.0（上限低于 OpenAI 的 2.0），在较早的模型代际上默认值为 1.0</td>
+</tr>
+<tr>
+<td><code>top_p</code></td>
+<td>核采样，与 <code>temperature</code> 建议只改一个</td>
+</tr>
+<tr>
+<td><code>top_k</code></td>
+<td>只从概率前 K 的 token 中采样，这是 Messages API 相对 OpenAI 协议的独有项</td>
+</tr>
+</tbody></table>
+<p>这三个参数已经逐步进入 deprecated 状态，而且<strong>各自的兼容规则并不相同</strong>：例如 Claude Opus 4.6 之后发布的模型不再支持设置 <code>top_k</code>，<code>temperature</code>、<code>top_p</code> 也受到更严格的限制，不同参数能接受什么值各有说法。官方给出的迁移建议是不传这组参数，改用提示词引导行为。写兼容多代模型的代码时，采样参数应当做成可配置开关，而不是硬编码进请求体——<strong>具体规则应以目标模型的 API Reference 为准</strong>。</p>
+<p>顺带对照 Chat Completions 的采样面板：Messages API 没有 <code>presence_penalty</code>、<code>frequency_penalty</code>、<code>logit_bias</code>、<code>logprobs</code>、<code>seed</code>，也不支持 <code>n &gt; 1</code> 的多候选并行采样。对采样自由度的收窄是刻意设计，而非能力缺失。</p>
+<h2 id="04、工具与模型相关参数"><a href="#04、工具与模型相关参数" class="headerlink" title="04、工具与模型相关参数"></a>04、工具与模型相关参数</h2><p>先看工具这层。工具是 Messages API 的核心能力，但工具是客户端工具还是服务端工具、有哪些服务端工具可用、<code>tool_choice</code> 支持哪些取值，都在随模型代际和发布节奏演进，所以它和下面的模型相关参数放在同一章。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>设计意图</th>
+<th>版本提示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tools</code></td>
+<td>工具定义数组；客户端工具与内置服务端工具都在这里声明，MCP 工具也通过其中的 <code>mcp_toolset</code> 配置（连接信息在 <code>mcp_servers</code>）</td>
+<td>可用工具类型随代际增加，见第 07、08 章</td>
+</tr>
+<tr>
+<td><code>tool_choice</code></td>
+<td><code>{type}</code> 对象，决定工具使用策略</td>
+<td>取值与行为随代际演进，见第 07 章</td>
+</tr>
+<tr>
+<td><code>mcp_servers</code></td>
+<td>声明远程 MCP Server 的连接信息；MCP 工具还需通过 <code>tools</code> 中的 <code>mcp_toolset</code> 配置</td>
+<td>MCP Connector 当前为 Beta；面向远程 HTTP Server，不支持本地 STDIO</td>
+</tr>
+<tr>
+<td><code>thinking</code></td>
+<td>控制模型的思考（推理）行为</td>
+<td>配置形态已随代际更替，见第 10 章</td>
+</tr>
+<tr>
+<td><code>output_config</code></td>
+<td>输出配置，如 <code>effort</code>（推理力度）、<code>format</code>（输出格式）；部分新能力还会扩展其他字段</td>
+<td>字段集合较新，各子字段的可用性与启用方式（部分需 beta 头）请以目标模型和当期 API 文档为准</td>
+</tr>
+<tr>
+<td><code>output_format</code></td>
+<td>结构化输出 schema</td>
+<td>已标记废弃，迁往 <code>output_config.format</code></td>
+</tr>
+<tr>
+<td><code>speed</code></td>
+<td>推理加速档位（如 <code>standard</code> &#x2F; <code>fast</code>），加速档按溢价计费</td>
+<td>仅部分模型支持，不支持的组合会在创建请求时被拒</td>
+</tr>
+<tr>
+<td><code>cache_control</code></td>
+<td>提示词缓存标记</td>
+<td>有顶级自动与分块级显式两套用法，见 9.1</td>
+</tr>
+<tr>
+<td><code>context_management</code></td>
+<td>上下文管理配置，如按策略清理历史工具结果</td>
+<td>请求级可选配置，不是默认行为；当前为 Beta</td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td>代码执行容器 ID，跨请求复用沙箱</td>
+<td>需配合服务端代码执行工具使用</td>
+</tr>
+</tbody></table>
+<p><strong>这些参数不是协议固定组成部分</strong>：它们的可用性、取值集合、甚至是否存在，都会随模型代际和 API 版本变化，使用前应查对应模型的官方文档。</p>
+<p>一条工程建议：把这组参数集中到配置层，并在启动时按模型做能力探测（或发一次最小请求验证），不要在业务代码里散落硬编码。模型升级时，最常被破坏的就是这里。</p>
+<h2 id="05、非流式响应"><a href="#05、非流式响应" class="headerlink" title="05、非流式响应"></a>05、非流式响应</h2><h3 id="5-1-顶层字段"><a href="#5-1-顶层字段" class="headerlink" title="5.1　顶层字段"></a>5.1　顶层字段</h3><pre><code class="language-json">{
+  &quot;id&quot;: &quot;msg_01Xy...&quot;,
+  &quot;type&quot;: &quot;message&quot;,
+  &quot;role&quot;: &quot;assistant&quot;,
+  &quot;model&quot;: &quot;claude-&lt;model-id&gt;&quot;,
+  &quot;content&quot;: [
+    {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;SSE 是服务器向浏览器单向推送...&quot;}
+  ],
+  &quot;stop_reason&quot;: &quot;end_turn&quot;,
+  &quot;stop_sequence&quot;: null,
+  &quot;usage&quot;: {
+    &quot;input_tokens&quot;: 25,
+    &quot;output_tokens&quot;: 281,
+    &quot;cache_creation_input_tokens&quot;: 0,
+    &quot;cache_read_input_tokens&quot;: 0
+  }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>消息 ID，<code>msg_</code> 前缀</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>恒为 <code>message</code></td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>恒为 <code>assistant</code></td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>实际处理该请求的模型</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td><strong>分块数组</strong>，即便纯文本也是 <code>[{type: &quot;text&quot;}]</code>，不会退化为字符串</td>
+</tr>
+<tr>
+<td><code>stop_reason</code></td>
+<td>停止原因，见 5.2</td>
+</tr>
+<tr>
+<td><code>stop_sequence</code></td>
+<td>命中的自定义停止串，未命中为 <code>null</code></td>
+</tr>
+<tr>
+<td><code>usage</code></td>
+<td>token 用量，见 5.3</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-stop-reason-的取值"><a href="#5-2-stop-reason-的取值" class="headerlink" title="5.2　stop_reason 的取值"></a>5.2　stop_reason 的取值</h3><table>
+<thead>
+<tr>
+<th>取值</th>
+<th>语义</th>
+<th>工程处置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>end_turn</code></td>
+<td>模型自然说完</td>
+<td>正常结束</td>
+</tr>
+<tr>
+<td><code>max_tokens</code></td>
+<td>触达 <code>max_tokens</code> 上限</td>
+<td>截断告警，考虑加预算</td>
+</tr>
+<tr>
+<td><code>stop_sequence</code></td>
+<td>命中 <code>stop_sequences</code></td>
+<td>主动截断，属预期行为</td>
+</tr>
+<tr>
+<td><code>tool_use</code></td>
+<td>模型要调工具，输入在 content 里</td>
+<td>解析 <code>tool_use</code> 块，执行后回传</td>
+</tr>
+<tr>
+<td><code>pause_turn</code></td>
+<td>服务端工具轮转中需要继续</td>
+<td>把中间态原样发回续跑</td>
+</tr>
+<tr>
+<td><code>refusal</code></td>
+<td>模型拒答</td>
+<td>结合 <code>stop_details</code> 判断原因，不要盲目重试</td>
+</tr>
+<tr>
+<td><code>model_context_window_exceeded</code></td>
+<td>达到模型上下文窗口上限</td>
+<td>压缩或裁剪历史后重试</td>
+</tr>
+</tbody></table>
+<p>这是当前 API Reference 定义的一组取值。之所以仍然建议留一个兼容分支：枚举会随模型能力与 API 特性增长，下一个小版本就可能多出一个值。工程上应当把 <code>stop_reason</code> 处理成<strong>带默认分支的 switch</strong>——遇到未知值走保守路径（记录原始响应、暂停自动重试），而不是让未识别的值落进 <code>else</code> 被当成正常结束。</p>
+<h3 id="5-3-usage-结构"><a href="#5-3-usage-结构" class="headerlink" title="5.3　usage 结构"></a>5.3　usage 结构</h3><p><code>usage</code> 至少包含 <code>input_tokens</code> 与 <code>output_tokens</code>；启用提示词缓存后会出现 <code>cache_creation_input_tokens</code>（本次写入缓存的 token）与 <code>cache_read_input_tokens</code>（命中缓存的部分），并可能细分为 <code>cache_creation.ephemeral_5m_input_tokens</code> &#x2F; <code>ephemeral_1h_input_tokens</code> 等子字段。使用服务端工具时还可能追加 <code>server_tool_use</code> 计数（如网页搜索次数）。</p>
+<p><code>usage</code> 是<strong>会增长的结构</strong>：每上线一类新能力，通常就在这里追加计数项。解析时按“取用已知字段 + 容忍未知字段”的方式写，不要做严格结构校验。</p>
+<h2 id="06、流式响应"><a href="#06、流式响应" class="headerlink" title="06、流式响应"></a>06、流式响应</h2><p>设 <code>stream: true</code> 后走 SSE。Messages API 的流不是“每个数据行都是一份响应快照”，而是<strong>带明确 <code>event</code> 类型的结构化事件流</strong>，分为消息、内容块、块内增量三个层级：</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>语义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>message_start</code></td>
+<td>响应骨架（含空的 content 与初始 usage）</td>
+</tr>
+<tr>
+<td><code>content_block_start</code></td>
+<td>某个内容块开始（带 <code>index</code>）</td>
+</tr>
+<tr>
+<td><code>content_block_delta</code></td>
+<td>块内增量，见下表</td>
+</tr>
+<tr>
+<td><code>content_block_stop</code></td>
+<td>某个内容块结束</td>
+</tr>
+<tr>
+<td><code>message_delta</code></td>
+<td>收尾信息：<code>stop_reason</code>、<code>stop_sequence</code>、累积 <code>usage.output_tokens</code></td>
+</tr>
+<tr>
+<td><code>message_stop</code></td>
+<td>整个响应结束</td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>心跳保活</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>流中途出错（如过载）</td>
+</tr>
+</tbody></table>
+<p><code>content_block_delta</code> 的 <code>delta.type</code> 常见四种：<code>text_delta</code>（文本增量）、<code>input_json_delta</code>（工具入参的 JSON 分片，字段为 <code>partial_json</code>）、<code>thinking_delta</code>（思考文本增量）、<code>signature_delta</code>（思考块签名，通常在块末尾补发）。</p>
+<p>一次完整的事件序列：</p>
+<pre><code class="language-text">event: message_start
+data: {&quot;type&quot;: &quot;message_start&quot;, &quot;message&quot;: {...}}
+
+event: content_block_start
+data: {&quot;type&quot;: &quot;content_block_start&quot;, &quot;index&quot;: 0, &quot;content_block&quot;: {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;&quot;}}
+
+event: content_block_delta
+data: {&quot;type&quot;: &quot;content_block_delta&quot;, &quot;index&quot;: 0, &quot;delta&quot;: {&quot;type&quot;: &quot;text_delta&quot;, &quot;text&quot;: &quot;SSE&quot;}}
+
+event: content_block_stop
+data: {&quot;type&quot;: &quot;content_block_stop&quot;, &quot;index&quot;: 0}
+
+event: message_delta
+data: {&quot;type&quot;: &quot;message_delta&quot;, &quot;delta&quot;: {&quot;stop_reason&quot;: &quot;end_turn&quot;}, &quot;usage&quot;: {&quot;output_tokens&quot;: 15}}
+
+event: message_stop
+data: {&quot;type&quot;: &quot;message_stop&quot;}
+</code></pre>
+<p>拼接规则三步：</p>
+<ol>
+<li>按 <code>index</code> 归组内容块：<code>content_block_start</code> 建立块，<code>content_block_stop</code> 收尾</li>
+<li>块内按 delta 类型分别处理：<code>text_delta</code> &#x2F; <code>thinking_delta</code> 直接字符串拼接；<code>input_json_delta</code> 先把 <code>partial_json</code> 分片拼成完整字符串，再整体做一次 JSON 解析</li>
+<li><code>signature_delta</code> 用于补齐思考块签名，需要多轮续接时随块一起保存</li>
+</ol>
+<p>工具调用的流式分片靠块自身的 <code>id</code> 关联，多个 <code>tool_use</code> 块各占一个 <code>index</code>，不需要在同一个块内再按子索引切片。</p>
+<p>与 Chat Completions 的差异，准确的说法是<strong>协议结构层面</strong>的：Chat Completions 的常见做法是把每个增量包成一条 <code>data: {...}</code> 的 chunk，调用方从 <code>choices[0].delta</code> 里取增量；Messages API 则把事件类型显式写在 <code>event:</code> 行上，并进一步区分消息级、内容块级与增量级三种事件。后者对多块内容（文本 + 思考 + 工具调用混排）的表达更精确，代价是客户端要写一个更完整的 event handler 状态机。</p>
+<h2 id="07、客户端工具与-Agent-Loop"><a href="#07、客户端工具与-Agent-Loop" class="headerlink" title="07、客户端工具与 Agent Loop"></a>07、客户端工具与 Agent Loop</h2><p>自定义工具的定义字段与 OpenAI 的 JSON Schema 思路一致，字段名不同：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;get_stock_price&quot;,
+  &quot;description&quot;: &quot;查询某只股票的当前价格。&quot;,
+  &quot;input_schema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {&quot;ticker&quot;: {&quot;type&quot;: &quot;string&quot;}},
+    &quot;required&quot;: [&quot;ticker&quot;]
+  }
+}
+</code></pre>
+<p>一次完整的工具往返：</p>
+<ol>
+<li>请求携带 <code>tools</code>，模型返回 <code>stop_reason: &quot;tool_use&quot;</code>，content 中出现 <code>{type: &quot;tool_use&quot;, id, name, input}</code></li>
+<li>客户端按 <code>input</code> 执行真实逻辑</li>
+<li>下一轮请求把 assistant 历史（含 <code>tool_use</code> 块）一并带上，并追加一条 user 消息，其 content 为 <code>{&quot;type&quot;: &quot;tool_result&quot;, &quot;tool_use_id&quot;: 同一个 id, &quot;content&quot;: &quot;…&quot;}</code></li>
+<li>模型基于结果给出最终回答</li>
+</ol>
+<p>几个实践细节：<code>tool_result</code> 可加 <code>is_error: true</code> 标记失败，让模型有机会自我纠正；<strong>并行工具调用默认是允许的</strong>——同一个 assistant turn 里可以出现多个 <code>tool_use</code> 块，对应的多个 <code>tool_result</code> 则放在<strong>同一条</strong> user 消息的 content 数组里；<code>tool_choice</code> 是 <code>{type}</code> 对象，协议层定义了 <code>auto</code>（默认，模型自行决定）&#x2F; <code>any</code>（必须使用某个工具）&#x2F; <code>tool</code>（必须使用指定工具，附 <code>name</code>）&#x2F; <code>none</code>（禁用工具）四种策略，并可在前三种上带 <code>disable_parallel_tool_use: true</code> 关闭并行工具调用——注意这个字段名是 Anthropic 自己的命名，与 OpenAI 协议的 <code>parallel_tool_calls</code> 不是同一个写法，照搬会直接报错。不过<strong>协议里定义了四种取值，不等于每个模型都支持全部四种</strong>：例如部分新模型只接受 <code>auto</code> 与 <code>none</code>，传 <code>any</code> 或 <code>tool</code> 会返回 400。这正是本文反复强调的那条原则——字段存在，不代表该模型具备该字段的全部能力，强制工具调用前要确认目标模型的支持范围。</p>
+<p>这里要特别点明一层关系：<strong>Tool Use 本身只是协议层的工具调用机制，真正形成 Agent Loop 的，是客户端反复执行“模型响应 → 工具执行 → 结果回传 → 模型继续响应”的循环。</strong> 协议负责让这个循环的每一跳都有明确结构（<code>tool_use</code> 与 <code>tool_result</code> 通过 <code>id</code> 精确配对），而循环的控制权、终止条件、失败重试、上下文裁剪全部在客户端。理解了这点，就能理解为什么同一个 Messages API 之上，既能搭出几十行的简单 Agent，也能搭出复杂的长程任务框架——差异全在循环怎么写。</p>
+<h2 id="08、服务端工具"><a href="#08、服务端工具" class="headerlink" title="08、服务端工具"></a>08、服务端工具</h2><p>服务端工具是 Messages API 与传统客户端工具调用方式的重要区别之一：工具执行主要由 Anthropic 服务端完成，调用方通常不需要自己实现这些工具。但调用方<strong>并非只拿到最终文本</strong>——服务端工具的往返会以 <code>server_tool_use</code> 与对应的结果块记录在响应里，中途还可能出现 <code>pause_turn</code> 这类中间状态，此时需要把暂停的 assistant 消息原样发回继续执行。协议把工具执行托管了，但状态推进仍要客户端参与。</p>
+<p>方向性的能力清单如下：</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>能力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>网页搜索</td>
+<td>服务端检索并返回带引用的结果</td>
+</tr>
+<tr>
+<td>网页抓取</td>
+<td>抓取指定 URL 的内容</td>
+</tr>
+<tr>
+<td>代码执行 &#x2F; bash</td>
+<td>在沙箱中执行代码与命令，可配合 <code>container</code> 复用环境</td>
+</tr>
+<tr>
+<td>计算机操作</td>
+<td>截屏、移动鼠标、键盘输入的桌面自动化</td>
+</tr>
+<tr>
+<td>文本编辑</td>
+<td>文件查看与编辑</td>
+</tr>
+<tr>
+<td>MCP 连接器</td>
+<td>接入远程 MCP Server 的工具，需 <code>mcp_servers</code> 与 <code>tools</code> 两部分配合（当前为 Beta）</td>
+</tr>
+</tbody></table>
+<p>声明入口并不完全相同：客户端自定义工具与 Anthropic 内置的部分服务端工具通过 <code>tools</code> 声明；MCP 连接器则需要两部分配合——<code>mcp_servers</code> 声明远程 MCP Server 的连接信息，<code>tools</code> 中的 <code>mcp_toolset</code> 配置要启用哪些 MCP 工具。它们最终都会汇入同一套工具调用流程，但请求配置的入口要分清楚，不能一律往一个字段里塞。另一个区别在结果回传——服务端工具的往返由 <code>server_tool_use</code> 与对应的 result 块记录，客户端要能识别 <code>pause_turn</code> 并续跑。</p>
+<p>MCP 连接器还有一条容易踩的限制：它面向<strong>远程</strong> MCP Server，要求 Server 通过 HTTP 暴露（传输方式支持 Streamable HTTP 与 SSE），<strong>不能直接连接本地 STDIO 类型的 Server</strong>。想把本地的 MCP 服务接进来，需要先自行把它以 HTTP 形式暴露出去。该能力当前为 Beta，具体支持范围以当期文档为准。</p>
+<p><strong>关于版本号：</strong> 服务端工具采用版本化 <code>type</code> 标识（形如 <code>web_search_&lt;日期&gt;</code>、<code>code_execution_&lt;日期&gt;</code>），目的是在工具行为演进时保持向后兼容。具体版本号会随时间增加与淘汰，本文不写死任何版本——请以当期官方文档中该工具的 <code>type</code> 为准。工程上建议把工具类型抽成常量集中管理，升级时只改一处。</p>
+<h2 id="09、进阶机制"><a href="#09、进阶机制" class="headerlink" title="09、进阶机制"></a>09、进阶机制</h2><h3 id="9-1-提示词缓存"><a href="#9-1-提示词缓存" class="headerlink" title="9.1　提示词缓存"></a>9.1　提示词缓存</h3><p>在 system、messages 或 tools 的<strong>分块级</strong>加缓存标记（<code>cache_control</code>，<code>type: &quot;ephemeral&quot;</code>，可指定 TTL），即可把前缀缓存下来供后续请求复用。较新的 API 版本还提供顶级 <code>cache_control</code> 参数，用于自动选择请求中可缓存的位置。两者的语义不同：<strong>分块级是显式断点，顶级是自动推断</strong>，使用时应按当前官方 Prompt Caching 文档选择对应方式，而不是自行组合。</p>
+<p>缓存计费与标准输入 token 不同：缓存写入和缓存命中采用不同的计价倍率。具体倍率随模型与官方定价调整，应以当期价格文档为准，不要写进代码常量或当成协议固定规则。缓存断点数量也存在上限（同以当期文档为准），实践上应把断点打在变化频率最低的前缀上——通常是长系统提示与工具定义，而不是逐轮都在变的历史消息。</p>
+<h3 id="9-2-批处理与-token-计数"><a href="#9-2-批处理与-token-计数" class="headerlink" title="9.2　批处理与 token 计数"></a>9.2　批处理与 token 计数</h3><p><code>/v1/messages/batches</code> 提交离线批量任务，适合不要求低延迟的评估、标注、批生成场景；当前官方定价为标准 API 价格的 50% 折扣，具体以当期定价文档为准。<code>/v1/messages/count_tokens</code> 在发送前预估输入 token，长上下文场景里用来防超限；注意不同模型的 tokenizer 可能不同，token 计数、成本与上下文预算不能简单跨模型比较。</p>
+<h3 id="9-3-结构化输出"><a href="#9-3-结构化输出" class="headerlink" title="9.3　结构化输出"></a>9.3　结构化输出</h3><p><code>output_config.format</code>（旧字段 <code>output_format</code> 已废弃）用于约束输出结构，替代了过去依赖 assistant 预填（prefill）来引导格式的写法——后者在 Claude 4.6 及之后的模型上不再支持，会返回 400。用 schema 约束格式比用预填诱导更可靠，也让多轮拼接逻辑更简单。</p>
+<h3 id="9-4-上下文管理"><a href="#9-4-上下文管理" class="headerlink" title="9.4　上下文管理"></a>9.4　上下文管理</h3><p><code>context_management</code> 是<strong>请求级的可选 Beta 配置</strong>，不是 Messages API 的默认行为。它允许声明上下文处理策略，例如在长会话中把历史工具结果的明细替换为占位符（如 <code>clear_tool_inputs</code> 一类清理策略），只保留最近若干条完整结果，从机制上对抗上下文膨胀。官方目前把上下文清理（context editing）与压缩（compaction）作为不同能力提供，具体策略集合、启用方式与稳定度都以当期文档为准。</p>
+<p>这与提示词缓存是两个不同的问题：缓存解决重复前缀的<strong>成本</strong>，上下文管理解决长历史占用的<strong>窗口</strong>。一部分原本需要由 Agent 框架自行实现的上下文清理与压缩能力，现在已经可以通过 Messages API 的上下文管理能力实现。</p>
+<h2 id="10、模型代际差异与迁移注意"><a href="#10、模型代际差异与迁移注意" class="headerlink" title="10、模型代际差异与迁移注意"></a>10、模型代际差异与迁移注意</h2><p>这一章是全文的落脚点：<strong>同一份请求代码，换了模型可能就报 400。</strong> 下面把已经发生过的破坏性变更整理成对照表。要注意的是，<strong>新模型之间并不存在一份统一的行为规范</strong>——官方是把这些变更按模型逐个发布的，所以下表右列只描述“部分后续模型中已经出现的变化”，不构成任何单一模型的行为承诺。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>较早模型中的典型方式</th>
+<th>部分后续模型中的变化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>思考配置</td>
+<td><code>thinking: {type: &quot;enabled&quot;, budget_tokens: N}</code> 开启扩展思考</td>
+<td>部分后续模型不再支持该写法，而采用 <code>thinking: {type: &quot;adaptive&quot;}</code>，再通过 <code>output_config.effort</code> 控制整体推理力度；具体默认状态与可用配置取决于目标模型</td>
+</tr>
+<tr>
+<td>思考深度控制</td>
+<td>用 <code>budget_tokens</code> 指定 token 预算</td>
+<td>改为用 <code>effort</code> 档位控制推理力度（如 <code>low</code> &#x2F; <code>medium</code> &#x2F; <code>high</code>，部分模型还提供更高档）；各模型支持的档位范围不同，以目标模型文档为准</td>
+</tr>
+<tr>
+<td>思考默认状态</td>
+<td>需显式配置，配好即生效</td>
+<td>各模型存在差异：部分模型默认不思考、需显式声明启用，部分模型默认采用自适应思考；以具体模型文档为准</td>
+</tr>
+<tr>
+<td>思考内容返回形式</td>
+<td>默认返回思考摘要</td>
+<td>可能返回完整 thinking、摘要，或不返回原始思考正文；取决于模型与 thinking &#x2F; <code>display</code> 配置</td>
+</tr>
+<tr>
+<td>采样参数</td>
+<td><code>temperature</code> &#x2F; <code>top_p</code> &#x2F; <code>top_k</code> 可用</td>
+<td>逐步 deprecated：Claude Opus 4.6 之后发布的模型不再支持 <code>top_k</code>，<code>temperature</code> &#x2F; <code>top_p</code> 的限制更严格；各参数规则不同，以目标模型 API Reference 为准</td>
+</tr>
+<tr>
+<td>assistant 预填</td>
+<td>较早模型可用</td>
+<td>Claude 4.6 及之后的模型不再支持，<strong>返回 400</strong>；改用结构化输出或系统提示</td>
+</tr>
+<tr>
+<td>交错思考（工具调用间推理）</td>
+<td>早期模型可能需要 beta 头显式开启</td>
+<td>新模型的支持方式随代际变化，是否默认启用、是否需要 beta 头，以具体模型文档为准</td>
+</tr>
+<tr>
+<td>token 计数</td>
+<td>按该代 tokenizer 计数</td>
+<td>部分模型更换分词方式后，同一段文本的 token 计数可能与前代不同；不同模型之间的计数、成本与上下文预算也不能简单横向比较</td>
+</tr>
+</tbody></table>
+<p>从这张表里可以观察到一个明显趋势：<strong>Anthropic 正在减少需要调用方手动调节的底层参数，增加由模型自行决定的自适应机制</strong>——把 token 预算这种需要调用方精确估算的旋钮，换成 effort 这种语义档位；把 beta 头开关逐渐变成默认行为。这对调用方是减负，但迁移成本集中在“删参数”而不是“加参数”；而由于变更是按模型逐个落地的，判断某个写法是否可用，唯一可靠的依据是<strong>该模型自己的文档</strong>。</p>
+<p>工程上的三条建议：</p>
+<ol>
+<li><strong>按模型代际分档管理请求模板</strong>，不要用一份 payload 打通所有模型；升级模型时把“参数清理”列为独立一步</li>
+<li><strong>对 400 做分类处理</strong>，区分“参数不被该模型支持”与“请求本身非法”，前者应触发模板切换或降级，而不是无限重试</li>
+<li><strong>文档层面分开写</strong>：协议稳定结构写一份，模型相关能力按代际写差异说明——这正是本文的组织方式</li>
+</ol>
+<h2 id="11、与-OpenAI-两种协议的对照"><a href="#11、与-OpenAI-两种协议的对照" class="headerlink" title="11、与 OpenAI 两种协议的对照"></a>11、与 OpenAI 两种协议的对照</h2><p>这个系列的前两篇分别讲了 Chat Completions 与 Responses API，正好可以和 Messages API 放在一起做三方对照。一句话概括三者的接口设计取向：Chat Completions 以消息列表为核心，输入输出都围绕 <code>messages</code> 展开；Responses API 把输入、输出项、工具、推理统一到更丰富的 typed items 模型里，并支持通过 <code>previous_response_id</code> 等机制做服务端状态续接（它同样有完全无状态的用法）；Messages API 则以 <code>messages</code> + content blocks 为核心，把工具调用、思考、服务端工具等能力逐步扩展到同一套分块结构上。</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Chat Completions</th>
+<th>Responses API</th>
+<th>Messages API</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>端点</td>
+<td><code>/v1/chat/completions</code></td>
+<td><code>/v1/responses</code></td>
+<td><code>/v1/messages</code></td>
+</tr>
+<tr>
+<td>系统提示</td>
+<td><code>system</code> 角色</td>
+<td>顶级 <code>instructions</code></td>
+<td>顶级 <code>system</code> 参数，无角色位（部分模型另支持对话中间的 <code>system</code> message，属模型相关能力）</td>
+</tr>
+<tr>
+<td>必填参数</td>
+<td><code>model</code> + <code>messages</code></td>
+<td><code>model</code> + <code>input</code></td>
+<td><code>model</code> + <code>messages</code> + <code>max_tokens</code></td>
+</tr>
+<tr>
+<td>内容形态</td>
+<td>字符串或分块数组；响应可退化为字符串</td>
+<td>输入为 typed items，输出为 typed output items</td>
+<td>请求侧可用字符串简写，响应侧恒为分块数组</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>无状态，全量重发历史</td>
+<td>可用 <code>previous_response_id</code> 等机制续接</td>
+<td>无状态，全量重发历史；部分工具由服务端执行</td>
+</tr>
+<tr>
+<td>停止串</td>
+<td><code>stop</code></td>
+<td>无对应参数</td>
+<td><code>stop_sequences</code></td>
+</tr>
+<tr>
+<td>采样参数</td>
+<td>temperature &#x2F; top_p &#x2F; penalties &#x2F; seed &#x2F; n &#x2F; logprobs</td>
+<td>temperature &#x2F; top_p 等，收敛了 penalties &#x2F; seed &#x2F; n &#x2F; logprobs</td>
+<td>temperature &#x2F; top_p &#x2F; top_k；无多候选与对数概率；部分后续模型上进一步收紧</td>
+</tr>
+<tr>
+<td>停止原因</td>
+<td><code>finish_reason</code>（含 <code>tool_calls</code>）</td>
+<td><code>status</code> &#x2F; <code>incomplete_details</code> 等状态字段</td>
+<td><code>stop_reason</code>（含 <code>tool_use</code>、<code>pause_turn</code>）</td>
+</tr>
+<tr>
+<td>工具入参</td>
+<td><code>parameters</code>（JSON Schema）</td>
+<td><code>parameters</code>（JSON Schema，扁平函数工具）</td>
+<td><code>input_schema</code>（JSON Schema）</td>
+</tr>
+<tr>
+<td>工具选择</td>
+<td>字符串或 <code>{type}</code> 对象</td>
+<td>字符串或 <code>{type}</code> 对象</td>
+<td>一律 <code>{type}</code> 对象（协议定义四种策略，各模型支持范围不一）</td>
+</tr>
+<tr>
+<td>并行工具开关</td>
+<td><code>parallel_tool_calls</code></td>
+<td><code>parallel_tool_calls</code></td>
+<td><code>disable_parallel_tool_use</code>（<strong>命名相反，布尔语义也相反</strong>）</td>
+</tr>
+<tr>
+<td>流式形态</td>
+<td><code>data:</code> 增量 chunk，增量位于 <code>choices[0].delta</code></td>
+<td>带类型的 SSE 事件流（响应级 &#x2F; 输出项级 &#x2F; 文本增量级）</td>
+<td>带 <code>event:</code> 类型的三层事件流（消息级 &#x2F; 块级 &#x2F; 增量级）</td>
+</tr>
+<tr>
+<td>推理暴露</td>
+<td>由具体模型决定，通常不返回思考正文</td>
+<td>独立的推理项，可跨轮复用</td>
+<td>独立的 thinking 块体系，含签名机制，返回形式与配置和模型相关</td>
+</tr>
+<tr>
+<td>版本管理</td>
+<td>靠模型名与 API 版本</td>
+<td>靠模型名与 API 版本</td>
+<td><code>anthropic-version</code> 头 + <code>anthropic-beta</code> 头</td>
+</tr>
+<tr>
+<td>服务端工具</td>
+<td>无</td>
+<td>内置搜索、文件检索、代码执行、计算机操作、MCP</td>
+<td>内置搜索、抓取、代码执行、计算机操作、MCP</td>
+</tr>
+</tbody></table>
+<p>三个迁移期最容易踩的坑：</p>
+<ul>
+<li><code>max_tokens</code> 在 Messages API 里必填，从 OpenAI 迁过来不填会直接 400</li>
+<li>工具调用历史不能原样搬——Messages API 里工具调用是 assistant content 中的 <code>tool_use</code> 块，工具结果是 user content 中的 <code>tool_result</code> 块，位置与角色都和 OpenAI 的消息结构不同</li>
+<li>并行工具的开关名是 <code>disable_parallel_tool_use</code>（位于 <code>tool_choice</code> 内），与 OpenAI 的 <code>parallel_tool_calls</code> 不仅命名不同，<strong>布尔语义也相反</strong>：Anthropic 用 <code>disable_parallel_tool_use: true</code> 表示禁用并行，OpenAI 用 <code>parallel_tool_calls: false</code> 表示同一件事。这是两个不同协议里的不同字段，从 OpenAI 迁移时不能把参数名原样搬过来，必须重新映射一遍</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

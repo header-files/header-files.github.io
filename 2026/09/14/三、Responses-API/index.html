@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>三、Responses API | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent ">
+  <meta name="description" content="三、Responses API | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(11)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(11)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="67k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-三、Responses-API" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">三、Responses API</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;大模型API">大模型API</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-14 16:31</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-Responses-API"><span class="toc-text">01、为什么需要 Responses API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94"><span class="toc-text">02、请求与响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%AF%B7%E6%B1%82%E4%BD%93%E7%9A%84%E6%A0%B8%E5%BF%83%E5%AD%97%E6%AE%B5"><span class="toc-text">2.1　请求体的核心字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-input%EF%BC%9Atyped-items"><span class="toc-text">2.2　input：typed items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-output%EF%BC%9A%E5%A4%9A%E7%B1%BB%E5%9E%8B-items"><span class="toc-text">2.3　output：多类型 items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%B5%81%E5%BC%8F%EF%BC%9A%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-text">2.4　流式：事件流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7"><span class="toc-text">03、内置工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81Responses-API-%E4%B8%8E-Chat-Completions-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">04、Responses API 与 Chat Completions 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81Responses-API-%E5%AF%B9-Agent-%E5%BA%94%E7%94%A8%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">05、Responses API 对 Agent 应用的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Agent-%E6%A1%86%E6%9E%B6%E7%9A%84%E8%81%8C%E8%B4%A3%E8%A2%AB%E9%83%A8%E5%88%86%E6%9B%BF%E4%BB%A3"><span class="toc-text">5.1　Agent 框架的职责被部分替代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E5%92%8C%E8%B0%83%E8%AF%95%E4%BD%93%E9%AA%8C%E7%9A%84%E8%B7%83%E8%BF%81"><span class="toc-text">5.2　可观测性和调试体验的跃迁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-Agent-%E8%83%BD%E5%8A%9B%E7%9A%84%E4%B8%8A%E9%99%90%E8%A2%AB%E6%8A%AC%E9%AB%98"><span class="toc-text">5.3　Agent 能力的上限被抬高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E4%BB%A3%E4%BB%B7%E4%B8%8E%E9%A3%8E%E9%99%A9"><span class="toc-text">5.4　代价与风险</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%BB%BA%E8%AE%AE"><span class="toc-text">06、工程实战的四个建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%BF%81%E7%A7%BB"><span class="toc-text">6.1　什么时候迁移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7%E7%9A%84%E5%8F%96%E8%88%8D"><span class="toc-text">6.2　内置工具的取舍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E4%B8%8E-Chat-Completions-%E5%85%B1%E5%AD%98"><span class="toc-text">6.3　与 Chat Completions 共存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%85%88%E6%83%B3%E6%B8%85%E6%A5%9A%E7%8A%B6%E6%80%81%E5%BD%92%E5%B1%9E"><span class="toc-text">6.4　先想清楚状态归属</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Chat Completions 是把“模型当成函数调用”，Responses API 是把“模型当成会干活的 Agent”：前者把工具执行、文件检索、上下文状态全部丢给客户端自己管，后者把这些收进协议本身。理解这个定位差异，整篇文档就通了。</p>
+</blockquote>
+<p>Chat Completions 已经成为当前大模型应用中广泛采用的一种对话 API 形式。它以 <code>messages</code> 为核心，通过一次请求生成一次回答；工具调用、历史管理和多轮 Agent 循环，则主要由客户端负责。随着 Agent 应用的发展，模型调用逐渐从“输入一段文本、返回一段文本”变成“理解任务 → 调用工具 → 获取结果 → 继续推理 → 再调用工具 → 最终完成任务”。在这个过程中，仅靠 <code>messages</code>、<code>tool_calls</code> 和客户端循环来表达整个执行过程，会让应用层承担越来越多的状态和编排工作。Responses API 正是在这个背景下出现的。它没有简单地给 Chat Completions 增加几个字段，而是重新定义了请求输入、响应输出、工具调用和流式事件的组织方式，使一次模型调用可以更自然地表达一个包含多种步骤的任务执行过程。</p>
+<h2 id="01、为什么需要-Responses-API"><a href="#01、为什么需要-Responses-API" class="headerlink" title="01、为什么需要 Responses API"></a>01、为什么需要 Responses API</h2><p>先看 Chat Completions 在 Agent 场景下的四个具体痛点，Responses API 的每个设计几乎都能对应回去。</p>
+<p><strong>痛点一：无状态导致每轮都全量重发。</strong> Chat Completions 的 messages 数组要求客户端每次带上完整历史，聊得越久 <code>prompt_tokens</code> 越高，而且多轮工具调用时客户端要自己维护“哪次调用对应哪个结果”。Responses API 用 <code>previous_response_id</code> 解决：客户端只传本次新增的输入，服务端自动续接上一轮的完整上下文。</p>
+<p><strong>痛点二：工具调用是两段式的哑协议。</strong> Chat Completions 里模型返回 <code>tool_calls</code>，客户端执行完再把结果以 <code>role: &quot;tool&quot;</code> 塞回去。整个过程对模型来说只是“消息里多了一条 tool 消息”，协议本身不知道这是一次工具往返。Responses API 把 <code>function_call</code> 和 <code>function_call_output</code> 升级为一等公民的 item 类型，工具往返在协议里有明确语义。</p>
+<p><strong>痛点三：常用能力要自己集成。</strong> 联网搜索、文件检索、代码执行、屏幕操控——这些 Agent 高频能力，Chat Completions 只给了 <code>tools</code> 这个通用插槽，剩下的（接搜索引擎、搭检索系统、跑沙箱）全是客户端的活。Responses API 直接内置了这些工具，声明一下就能用。</p>
+<p><strong>痛点四：流式协议语义太薄。</strong> Chat Completions 的流式响应主要以 <code>chat.completion.chunk</code> 为单位，通过 <code>choices[].delta</code> 表达内容增量；相比之下，Responses API 把响应生命周期、output item、文本增量、工具参数等拆成了更细粒度的事件类型。</p>
+<p>一句话总结：Chat Completions 是“对话补全”的抽象，Responses API 是“任务执行”的抽象。Agent 需要后者。</p>
+<h2 id="02、请求与响应"><a href="#02、请求与响应" class="headerlink" title="02、请求与响应"></a>02、请求与响应</h2><p>Responses API 的调用入口是 <code>POST /v1/responses</code>。整体风格和 Chat Completions 相似——POST 一个 JSON、拿回一个 JSON、可选 SSE 流式——但字段结构差异很大。</p>
+<h3 id="2-1-请求体的核心字段"><a href="#2-1-请求体的核心字段" class="headerlink" title="2.1　请求体的核心字段"></a>2.1　请求体的核心字段</h3><pre><code class="language-json">{
+    &quot;model&quot;: &quot;gpt-4o&quot;,
+    &quot;input&quot;: &quot;北京今天天气怎么样？&quot;,
+    &quot;instructions&quot;: &quot;回答要给出来源，不确定时明确说明。&quot;,
+    &quot;tools&quot;: [
+        {
+            &quot;type&quot;: &quot;web_search&quot;
+        },
+        {
+            &quot;type&quot;: &quot;file_search&quot;,
+            &quot;vector_store_ids&quot;: [
+                &quot;vs_abc123&quot;
+            ]
+        },
+        {
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;name&quot;: &quot;get_weather&quot;,
+            &quot;parameters&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;city&quot;: {
+                        &quot;type&quot;: &quot;string&quot;
+                    }
+                },
+                &quot;required&quot;: [
+                    &quot;city&quot;
+                ]
+            }
+        }
+    ],
+    &quot;previous_response_id&quot;: &quot;resp_9xK…&quot;,
+    &quot;store&quot;: true,
+    &quot;truncation&quot;: &quot;auto&quot;,
+    &quot;temperature&quot;: 0.7,
+    &quot;top_p&quot;: 1,
+    &quot;max_output_tokens&quot;: 2048,
+    &quot;reasoning&quot;: {
+        &quot;effort&quot;: &quot;medium&quot;,
+        &quot;summary&quot;: &quot;auto&quot;
+    },
+    &quot;parallel_tool_calls&quot;: true,
+    &quot;metadata&quot;: {
+        &quot;trace_id&quot;: &quot;trace-7e2b&quot;
+    },
+    &quot;stream&quot;: true
+}
+</code></pre>
+<p>逐个说明：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>model</code></td>
+<td>模型 ID，语义同 Chat Completions</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>输入内容，可以是纯字符串、一个 input item、或 input item 数组（见 2.2）</td>
+</tr>
+<tr>
+<td><code>instructions</code></td>
+<td>替代 system 消息，作为“系统级指令”注入，优先级高于 input 里的用户内容</td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td>工具清单，既可以是自定义 function，也可以是内置工具类型（见 03 节）</td>
+</tr>
+<tr>
+<td><code>previous_response_id</code></td>
+<td>用于将当前 Response 与上一 Response 串联起来。服务端可以根据 response 链继续使用此前的上下文，因此客户端通常不需要再次提交已经包含在链路中的历史输入</td>
+</tr>
+<tr>
+<td><code>store</code></td>
+<td>是否在服务端留存这次响应（配合 <code>previous_response_id</code> 使用时通常要开）</td>
+</tr>
+<tr>
+<td><code>truncation</code></td>
+<td>上下文超长时的策略：<code>auto</code>（自动截断最早的内容）&#x2F; <code>disabled</code>（默认，超长直接报错）</td>
+</tr>
+<tr>
+<td><code>temperature</code> &#x2F; <code>top_p</code></td>
+<td>采样参数，语义同 Chat Completions</td>
+</tr>
+<tr>
+<td><code>max_output_tokens</code></td>
+<td>输出上限（含推理模型的思考 token），对应 Chat Completions 的 <code>max_completion_tokens</code></td>
+</tr>
+<tr>
+<td><code>reasoning</code></td>
+<td>推理模型参数：<code>effort</code>（minimal&#x2F;low&#x2F;medium&#x2F;high）+ <code>summary</code>（是否返回思考摘要）</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>输出格式控制，内含 <code>format</code> 字段（<code>text</code> &#x2F; <code>json_object</code> &#x2F; <code>json_schema</code>），对应 Chat Completions 的 <code>response_format</code></td>
+</tr>
+<tr>
+<td><code>parallel_tool_calls</code></td>
+<td>是否允许一次返回多个工具调用，默认 true</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td>最多 16 组自定义键值对</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>是否走 SSE 事件流</td>
+</tr>
+<tr>
+<td><code>include</code></td>
+<td>指定额外要返回的内容片段，如 <code>reasoning.encrypted_content</code>、<code>file_search_call.results</code></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>终端用户标识</td>
+</tr>
+<tr>
+<td><code>safety_identifier</code></td>
+<td>滥用监测标识</td>
+</tr>
+<tr>
+<td><code>service_tier</code></td>
+<td><code>auto</code> &#x2F; <code>default</code> &#x2F; <code>flex</code></td>
+</tr>
+<tr>
+<td><code>prompt_cache_key</code></td>
+<td>前缀缓存路由提示</td>
+</tr>
+</tbody></table>
+<p>注意几个与 Chat Completions 的命名差异：<code>max_tokens</code> 没了（统一为 <code>max_output_tokens</code>）、<code>response_format</code> 变成了 <code>text.format</code>、<code>system</code> 消息变成了 <code>instructions</code>、<code>presence_penalty</code> &#x2F; <code>frequency_penalty</code> &#x2F; <code>logit_bias</code> &#x2F; <code>seed</code> &#x2F; <code>stop</code> 这组经典采样参数在 Responses API 里<strong>没有对应字段</strong>——这是刻意的：OpenAI 认为这些“微调采样”的旋钮在 Agent 场景里价值有限，收掉了。</p>
+<h3 id="2-2-input：typed-items"><a href="#2-2-input：typed-items" class="headerlink" title="2.2　input：typed items"></a>2.2　input：typed items</h3><p><code>input</code> 不再是简单的 messages 数组，而是<strong>类型化条目（typed items）</strong>&#x7684;列表。每个 item 有 <code>type</code> 字段：</p>
+<table>
+<thead>
+<tr>
+<th>item type</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>message</code></td>
+<td>对话消息，<code>role</code> 可以是 <code>user</code> &#x2F; <code>system</code> &#x2F; <code>developer</code>；<code>content</code> 可以是字符串或多模态数组</td>
+</tr>
+<tr>
+<td><code>function_call</code></td>
+<td>模型发起的一次工具调用（含 <code>call_id</code>、<code>name</code>、<code>arguments</code>）</td>
+</tr>
+<tr>
+<td><code>function_call_output</code></td>
+<td>客户端回填的工具执行结果（含 <code>call_id</code>、<code>output</code>）</td>
+</tr>
+<tr>
+<td><code>reasoning</code></td>
+<td>推理模型的思考过程（含 <code>summary</code> 列表，或加密态的 <code>encrypted_content</code>）</td>
+</tr>
+<tr>
+<td><code>item_reference</code></td>
+<td>引用服务端已存的一个 item，用于跨响应复用</td>
+</tr>
+<tr>
+<td><code>file_search_call</code> &#x2F; <code>web_search_call</code> &#x2F; <code>code_interpreter_call</code> 等</td>
+<td>内置工具的调用记录，可以塞回 input 复现上下文</td>
+</tr>
+</tbody></table>
+<p><code>message</code> 的 content 数组元素类型也换了名字：Chat Completions 用 <code>text</code> &#x2F; <code>image_url</code> &#x2F; <code>input_audio</code> &#x2F; <code>file</code>，Responses API 统一为 <code>input_text</code> &#x2F; <code>input_image</code> &#x2F; <code>input_audio</code> &#x2F; <code>input_file</code>，且 <code>image_url</code> 里支持 <code>image_url</code> 字符串或 <code>file_id</code> 引用已上传文件。</p>
+<p>最关键的差异是 <code>function_call</code> &#x2F; <code>function_call_output</code> &#x2F; <code>reasoning</code> 这三种类型：在 Chat Completions 里它们被“伪装”成消息塞进 messages，在 Responses API 里它们是有明确语义的 item。这意味着客户端可以精确地重放、裁剪、引用任何一次工具往返或思考片段。</p>
+<h3 id="2-3-output：多类型-items"><a href="#2-3-output：多类型-items" class="headerlink" title="2.3　output：多类型 items"></a>2.3　output：多类型 items</h3><p>响应对象的核心字段：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;resp_9xK…&quot;,
+  &quot;object&quot;: &quot;response&quot;,
+  &quot;created_at&quot;: 1726567890,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;model&quot;: &quot;gpt-4o-2024-08-06&quot;,
+  &quot;output&quot;: [
+    {
+      &quot;type&quot;: &quot;reasoning&quot;,
+      &quot;id&quot;: &quot;rs_…&quot;,
+      &quot;summary&quot;: [ { &quot;type&quot;: &quot;summary_text&quot;, &quot;text&quot;: &quot;用户问天气，我需要先查一下。&quot; } ]
+    },
+    {
+      &quot;type&quot;: &quot;web_search_call&quot;,
+      &quot;id&quot;: &quot;ws_…&quot;,
+      &quot;status&quot;: &quot;completed&quot;
+    },
+    {
+      &quot;type&quot;: &quot;message&quot;,
+      &quot;id&quot;: &quot;msg_…&quot;,
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: [ { &quot;type&quot;: &quot;output_text&quot;, &quot;text&quot;: &quot;今天北京 24℃，晴。&quot;, &quot;annotations&quot;: [...] } ]
+    }
+  ],
+  &quot;output_text&quot;: &quot;今天北京 24℃，晴。&quot;,
+  &quot;usage&quot;: { &quot;input_tokens&quot;: 42, &quot;output_tokens&quot;: 18, &quot;total_tokens&quot;: 60 },
+  &quot;error&quot;: null,
+  &quot;incomplete_details&quot;: null,
+  &quot;metadata&quot;: { &quot;trace_id&quot;: &quot;trace-7e2b&quot; }
+}
+</code></pre>
+<p>要点：</p>
+<ul>
+<li><code>object</code> 是 <code>response</code>（不是 <code>chat.completion</code>）；</li>
+<li><code>output</code> 是数组，元素类型有 <code>message</code>、<code>reasoning</code>、<code>function_call</code>、<code>web_search_call</code>、<code>file_search_call</code>、<code>code_interpreter_call</code>、<code>image_generation_call</code>、<code>computer_call</code> 等——内置工具的调用过程会作为独立 item 出现在这里，而不是被折叠成一条消息；</li>
+<li><code>output_text</code> 是 OpenAI 额外提供的<strong>拼接好的纯文本</strong>，等于把 <code>output</code> 里所有 <code>output_text</code> 拼起来，省去客户端遍历；工具调用、纯 reasoning 响应等场景它会是空串，别拿它当唯一判断依据；</li>
+<li><code>status</code> 是状态机：<code>queued</code> &#x2F; <code>in_progress</code> &#x2F; <code>completed</code> &#x2F; <code>incomplete</code> &#x2F; <code>failed</code> &#x2F; <code>cancelled</code>；<code>incomplete</code> 时 <code>incomplete_details.reason</code> 会说明原因（如 <code>max_output_tokens</code> 截断）；</li>
+<li><code>usage</code> 的字段名也变了：<code>input_tokens</code> &#x2F; <code>output_tokens</code> &#x2F; <code>total_tokens</code>（对应 Chat Completions 的 prompt&#x2F;completion&#x2F;total），明细同样在 <code>input_tokens_details</code> &#x2F; <code>output_tokens_details</code> 里（含 <code>cached_tokens</code>、<code>reasoning_tokens</code>）。</li>
+</ul>
+<h3 id="2-4-流式：事件流"><a href="#2-4-流式：事件流" class="headerlink" title="2.4　流式：事件流"></a>2.4　流式：事件流</h3><p><code>stream: true</code> 时返回的还是 SSE，但事件语义完全不同。每个事件有 <code>type</code> 字段，按响应生命周期依次出现：</p>
+<table>
+<thead>
+<tr>
+<th>事件类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>response.created</code></td>
+<td>响应对象已创建</td>
+</tr>
+<tr>
+<td><code>response.in_progress</code></td>
+<td>开始生成</td>
+</tr>
+<tr>
+<td><code>response.output_item.added</code></td>
+<td>一个新的 output item 开始（如一段 reasoning、一次工具调用、一条消息）</td>
+</tr>
+<tr>
+<td><code>response.content_part.added</code></td>
+<td>item 内新增一个 content part</td>
+</tr>
+<tr>
+<td><code>response.output_text.delta</code></td>
+<td>文本增量</td>
+</tr>
+<tr>
+<td><code>response.output_text.done</code></td>
+<td>一段文本完成</td>
+</tr>
+<tr>
+<td><code>response.output_item.done</code></td>
+<td>一个 output item 完成</td>
+</tr>
+<tr>
+<td><code>response.function_call_arguments.delta</code> &#x2F; <code>.done</code></td>
+<td>工具参数的增量 &#x2F; 完成</td>
+</tr>
+<tr>
+<td><code>response.completed</code></td>
+<td>整个响应完成</td>
+</tr>
+<tr>
+<td><code>response.failed</code> &#x2F; <code>response.incomplete</code> &#x2F; <code>response.cancelled</code></td>
+<td>异常终态</td>
+</tr>
+</tbody></table>
+<p>对比 Chat Completions 只有 <code>delta</code> 一种语义，Responses API 的事件流可以直接驱动 Agent 的状态机：收到 <code>output_item.added</code> 就知道“开始调工具了”，收到 <code>response.completed</code> 就能拿到完整响应对象。<code>response.output_text.delta</code> 里的 <code>delta</code> 字段才是真正的增量文本，别和 Chat Completions 的 <code>delta</code> 混为一谈。</p>
+<h2 id="03、内置工具"><a href="#03、内置工具" class="headerlink" title="03、内置工具"></a>03、内置工具</h2><p>Responses API 最大的增量价值在这一节。<code>tools</code> 数组里除了自定义 <code>function</code>，Responses API 还支持多种托管工具，例如 web search、file search、code interpreter、computer use以及 MCP 等。具体工具类型和参数应以当前 API Reference 为准。</p>
+<table>
+<thead>
+<tr>
+<th>工具 type</th>
+<th>作用</th>
+<th>关键参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>web_search</code></td>
+<td>联网搜索，模型自行决定搜什么、引用结果</td>
+<td><code>search_context_size</code>（low&#x2F;medium&#x2F;high）、<code>user_location</code></td>
+</tr>
+<tr>
+<td><code>file_search</code></td>
+<td>在已上传的向量库里语义检索</td>
+<td><code>vector_store_ids</code>、<code>max_num_results</code>、<code>ranking_options</code></td>
+</tr>
+<tr>
+<td><code>code_interpreter</code></td>
+<td>在服务端沙箱里跑 Python</td>
+<td><code>container</code>（指定代码执行容器，可自动创建）</td>
+</tr>
+<tr>
+<td><code>computer_use_preview</code></td>
+<td>操控浏览器或桌面（截图、点击、输入）</td>
+<td><code>environment</code>（browser&#x2F;mac&#x2F;windows）、<code>display_width/height</code></td>
+</tr>
+<tr>
+<td><code>mcp</code></td>
+<td>连接外部 MCP 服务器，把远端工具列表并入本次调用</td>
+<td><code>server_label</code>、<code>server_url</code>、<code>allowed_tools</code></td>
+</tr>
+<tr>
+<td><code>function</code></td>
+<td>自定义函数，语义同 Chat Completions 的 tools</td>
+<td><code>name</code>、<code>description</code>、<code>parameters</code>、<code>strict</code></td>
+</tr>
+</tbody></table>
+<p>几个使用要点：</p>
+<ul>
+<li><strong>内置工具是服务端执行的</strong>。你声明 <code>{ &quot;type&quot;: &quot;web_search&quot; }</code> 之后，联网请求由 OpenAI 基础设施发起，检索结果以 <code>web_search_call</code> item 出现在 <code>output</code> 里，并在正文里带来源 annotations。你不需要写任何爬虫或调搜索引擎的代码。</li>
+<li><strong>file_search 需要先建向量库</strong>。通过 Files API 上传文件、建 vector store、把 <code>vector_store_id</code> 传进 <code>file_search</code> 工具，之后模型在需要时自动检索。这是 RAG 的“托管版”，代价是把数据和索引放在了 OpenAI 侧。</li>
+<li><strong>mcp 工具让外部工具集即插即用</strong>。只要对方提供一个符合 MCP 规范的 server URL，声明 <code>{&quot;type&quot;:&quot;mcp&quot;,&quot;server_url&quot;:&quot;...&quot;}</code> 后，该 server 暴露的工具就并入了本次调用的可选工具集。这是 Responses API 与 MCP 生态最直接的打通点。</li>
+<li><strong>计费方式不同</strong>。自定义 function 的调用本身不额外收费（和 Chat Completions 一样按 token 计），但内置工具按使用计费——<code>web_search</code> 按次、<code>code_interpreter</code> 按会话时长、<code>file_search</code> 按存储与查询量。上量前要把这部分成本算进账单模型。</li>
+<li><strong>工具组合可以叠加</strong>。一次请求可以同时声明 <code>web_search</code> + <code>file_search</code> + 自定义 <code>function</code>，模型按需选择，<code>output</code> 中会包含模型在本次响应过程中产生的相应 tool call items，客户端可以根据 item 类型和状态处理工具调用过程。这是 Chat Completions 时代要靠 LangChain 之类框架编排才能做到的事。</li>
+</ul>
+<h2 id="04、Responses-API-与-Chat-Completions-的区别"><a href="#04、Responses-API-与-Chat-Completions-的区别" class="headerlink" title="04、Responses API 与 Chat Completions 的区别"></a>04、Responses API 与 Chat Completions 的区别</h2><p>把两边的核心差异摆在一起看：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Chat Completions</th>
+<th>Responses API</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>设计目标</td>
+<td>通用对话</td>
+<td>Agent 原生</td>
+</tr>
+<tr>
+<td>状态管理</td>
+<td>无状态，客户端拼 messages</td>
+<td>有状态，<code>previous_response_id</code> 续传</td>
+</tr>
+<tr>
+<td>输入字段</td>
+<td><code>messages</code> 字符串消息数组</td>
+<td><code>input</code> typed items（含 <code>reasoning</code> &#x2F; <code>function_call_output</code>）</td>
+</tr>
+<tr>
+<td>输出结构</td>
+<td><code>choices[].message.content</code></td>
+<td><code>output[]</code> 多类型 items + <code>output_text</code> 拼接字段</td>
+</tr>
+<tr>
+<td>工具生态</td>
+<td>用户自定义 <code>tools</code> 为主</td>
+<td>自定义 + 内置（联网 &#x2F; 文件 &#x2F; 代码 &#x2F; 电脑 &#x2F; 生图 &#x2F; MCP）</td>
+</tr>
+<tr>
+<td>上下文控制</td>
+<td><code>max_tokens</code> &#x2F; <code>max_completion_tokens</code></td>
+<td><code>truncation</code>：<code>auto</code> 或 <code>disabled</code></td>
+</tr>
+<tr>
+<td>响应类型</td>
+<td><code>object: chat.completion</code></td>
+<td><code>object: response</code>，含 <code>status</code> 状态机</td>
+</tr>
+<tr>
+<td>流式事件</td>
+<td>SSE chunk（只有 delta 增量一种语义）</td>
+<td>事件流（<code>created</code> &#x2F; <code>output_item.added</code> &#x2F; <code>text.delta</code> &#x2F; <code>completed</code> …）</td>
+</tr>
+</tbody></table>
+<p>再补几个表格装不下的细节：</p>
+<p><strong>响应生命周期。</strong> Chat Completions 的典型交互模型是一次请求对应一次 completion；多轮状态通常由客户端在请求之间维护。Responses API 的 response 是<strong>有生命周期的资源</strong>：<code>GET /v1/responses/{id}</code> 可以随时回查，<code>DELETE</code> 可以删除，<code>cancel</code> 可以取消进行中的响应（长任务 Agent 的刚需）。</p>
+<p><strong>多轮上下文。</strong> Chat Completions 完全靠客户端拼 messages；Responses API 有三条路：<code>previous_response_id</code> 链式续传（最省事）、conversations API 显式管理会话（<code>POST /v1/conversations</code> 建、往里 append item）、或者仍然手动拼 input items（兼容旧习惯）。</p>
+<p><strong>输入内容的组织方式。</strong> Chat Completions 的 <code>messages</code> 是“对话”的抽象，所有东西都要包装成一条消息；Responses API 的 <code>input</code> 是“事件序列”的抽象，消息、工具调用、工具结果、思考过程平铺在一个数组里，顺序即时间线。</p>
+<p><strong>错误处理。</strong> Chat Completions 的错误要么在 HTTP 层（4xx&#x2F;5xx）要么在响应体 <code>error</code> 字段；Responses API 为 response 和部分 output item 提供更细粒度的状态信息，客户端可以据此判断响应或特定操作的执行状态。</p>
+<h2 id="05、Responses-API-对-Agent-应用的影响"><a href="#05、Responses-API-对-Agent-应用的影响" class="headerlink" title="05、Responses API 对 Agent 应用的影响"></a>05、Responses API 对 Agent 应用的影响</h2><p>这是 Responses API 真正的价值所在，也是本文想强调的落脚点。</p>
+<h3 id="5-1-Agent-框架的职责被部分替代"><a href="#5-1-Agent-框架的职责被部分替代" class="headerlink" title="5.1　Agent 框架的职责被部分替代"></a>5.1　Agent 框架的职责被部分替代</h3><p>一个典型的 Chat Completions Agent 框架要自己实现：消息历史管理、工具注册与 schema 描述、tool_calls 解析与分发、结果回填、多轮循环控制、流式拼接、错误重试。LangChain、LlamaIndex 的很大一部分代码就是在填这些坑。</p>
+<p>Responses API 把其中一半直接收进了协议：历史靠 <code>previous_response_id</code>，工具往返是原生 item，内置工具省掉自建集成，事件流天然驱动状态机。OpenAI 自家的 Agents SDK 就是建立在 Responses API 之上的——Responses API 把部分原本需要由 Agent 框架自行实现的底层能力下沉到了 API 层，但复杂 Agent 的状态管理、工作流编排、人工介入、持久化和业务策略仍然需要框架或应用层解决。</p>
+<h3 id="5-2-可观测性和调试体验的跃迁"><a href="#5-2-可观测性和调试体验的跃迁" class="headerlink" title="5.2　可观测性和调试体验的跃迁"></a>5.2　可观测性和调试体验的跃迁</h3><p>Chat Completions 时代做 Agent 轨迹分析，你要自己解析消息流、按 role 和 tool_call_id 拼装出“模型先想了什么、调了什么工具、拿到什么结果、最后怎么答”的完整链路。Responses API 的 <code>output</code> 数组天然就是这条链路——每个 item 有独立 id、类型、status，工具调用还带耗时与引用。配合 <code>store: true</code> 和 <code>GET /v1/responses/{id}</code>，轨迹可以直接回查、对比、回放，不用自己搭观测层。</p>
+<p>对做评估（evals）的团队，这个改变尤其大：以前 eval 脚本要自己从 messages 里抠工具调用序列做 diff，现在直接 diff 两个 response 的 output 数组就行。</p>
+<h3 id="5-3-Agent-能力的上限被抬高"><a href="#5-3-Agent-能力的上限被抬高" class="headerlink" title="5.3　Agent 能力的上限被抬高"></a>5.3　Agent 能力的上限被抬高</h3><p>内置工具让“Agent 能做什么”的天花板直接抬了一截：</p>
+<ul>
+<li><strong>web_search</strong> 让模型可以实时获取信息，不再被训练数据截止日期困住</li>
+<li><strong>computer_use_preview</strong> 让 Agent 直接操作 GUI，把“浏览器自动化”从外挂工具变成协议能力</li>
+<li><strong>mcp</strong> 让你接第三方工具不再需要写 glue code，符合规范的 server 直接接入</li>
+</ul>
+<p>这些能力在 Chat Completions 里都能做，但每个都要自己搭一遍集成、自己处理鉴权与限流、自己维护沙箱。内置工具把它们变成“一行配置”，Agent 迭代的节奏会因此明显加快。</p>
+<h3 id="5-4-代价与风险"><a href="#5-4-代价与风险" class="headerlink" title="5.4　代价与风险"></a>5.4　代价与风险</h3><p>三个必须正视的问题：</p>
+<p><strong>厂商锁定。</strong> 前面说过，Responses API 的内置工具、item 类型、conversations API 都是 OpenAI 私有。一旦用上，换模型的成本不只是换 <code>model</code> 字符串，而是要重写工具调用层。对模型可移植性有硬需求的团队，要么把 Responses API 隔离在适配层后面，要么继续留在 Chat Completions。</p>
+<p><strong>数据边界。</strong> <code>file_search</code> 和 <code>code_interpreter</code> 意味着你的数据和代码会在 OpenAI 的基础设施上被处理和存储。合规敏感的场景要仔细评估数据协议、区域选择（<code>store</code> 的留存范围、vector store 的区域）和删除策略。</p>
+<p><strong>成本结构变化。</strong> 内置工具按次&#x2F;按时长计费，Agent 一次任务可能触发多次工具调用，账单结构从“纯 token”变成“token + 工具使用”。Agent 的设计要在“多调几次工具换准确性”和“控制工具调用次数”之间做权衡，上量前要压测单任务的平均成本。</p>
+<h2 id="06、工程实战的四个建议"><a href="#06、工程实战的四个建议" class="headerlink" title="06、工程实战的四个建议"></a>06、工程实战的四个建议</h2><h3 id="6-1-什么时候迁移"><a href="#6-1-什么时候迁移" class="headerlink" title="6.1　什么时候迁移"></a>6.1　什么时候迁移</h3><p>三条经验法则：<strong>新项目直接上 Responses</strong>——除非你有明确的跨厂商需求；<strong>存量项目按需迁</strong>——如果你在自建检索、自跑沙箱、自己拼 messages 历史，迁移的 ROI 明显为正，如果只是简单的单轮问答，Chat Completions 足够用，不值得动；<strong>多厂商混合的场景分层处理</strong>——把 Responses API 的能力放在适配层后面，核心业务逻辑保持协议无关。</p>
+<h3 id="6-2-内置工具的取舍"><a href="#6-2-内置工具的取舍" class="headerlink" title="6.2　内置工具的取舍"></a>6.2　内置工具的取舍</h3><p>内置工具不是免费午餐。判断标准是“数据的敏感度”和“是否已有自建设施”：已经有自建 RAG（向量库 + 检索服务）的团队，继续用自定义 function 把自家检索服务暴露给模型，比迁到 file_search 更稳；没有自建能力、想快速上线的团队，file_search 和 web_search 能省下几周工程时间；code_interpreter 适合“让模型自己验证答案”的场景，但要注意沙箱里跑的是你的数据。</p>
+<h3 id="6-3-与-Chat-Completions-共存"><a href="#6-3-与-Chat-Completions-共存" class="headerlink" title="6.3　与 Chat Completions 共存"></a>6.3　与 Chat Completions 共存</h3><p>OpenAI 明确表示 Chat Completions 会继续支持，不是弃用关系。两个协议共用同一套模型与鉴权，你可以在同一个应用里按场景选用：对话类、多厂商兼容的场景走 Chat Completions，Agent 类、需要内置工具的场景走 Responses API。<code>store</code> 字段两边都有，但 <code>previous_response_id</code> 是 Responses 独有的——跨协议不共享上下文，不要指望在两个接口之间接力。</p>
+<h3 id="6-4-先想清楚状态归属"><a href="#6-4-先想清楚状态归属" class="headerlink" title="6.4　先想清楚状态归属"></a>6.4　先想清楚状态归属</h3><p>Responses API 最诱人的是“服务端管状态”，但状态放服务端意味着：会话续期、数据删除、跨区域迁移都要走 API。强烈建议在接入前就想清楚：哪些状态允许放服务端（比如可以随时删除的对话历史）、哪些必须留在自己手里（比如用户身份数据、业务敏感上下文）。把 <code>store</code> 和 <code>previous_response_id</code> 的组合用对——长期会话用 conversations API，短链路任务用 <code>previous_response_id</code>，一次性任务干脆 <code>store: false</code>。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

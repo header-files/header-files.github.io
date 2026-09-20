@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>一、为什么要研究 Agent | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent ">
+  <meta name="description" content="一、为什么要研究 Agent | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(11)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(11)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="67k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-一、为什么要研究-Agent" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">一、为什么要研究 Agent</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Agent简介">Agent简介</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-04 16:23</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81Agent-%E8%BF%99%E4%B8%AA%E8%AF%8D%E5%BE%88%E8%80%81%EF%BC%8C%E6%98%AF-LLM-%E8%AE%A9%E5%AE%83%E9%87%8D%E6%96%B0%E6%9C%89%E7%94%A8"><span class="toc-text">01、Agent 这个词很老，是 LLM 让它重新有用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%81%B0%E5%A5%BD%E6%98%AF%E8%BF%99%E5%87%A0%E5%B9%B4"><span class="toc-text">02、为什么恰好是这几年</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%BB%8E%E2%80%9C%E5%B8%AE%E6%88%91%E5%86%99%E2%80%9D%E5%88%B0%E2%80%9C%E5%B8%AE%E6%88%91%E5%81%9A%E5%AE%8C%E2%80%9D"><span class="toc-text">03、从“帮我写”到“帮我做完”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E5%B7%AE%E5%88%AB%E4%B8%8D%E5%9C%A8%E6%99%BA%E8%83%BD%EF%BC%8C%E5%9C%A8%E6%9D%83%E9%99%90"><span class="toc-text">04、差别不在智能，在权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E9%9D%A0-Prompt-%E8%A7%A3%E5%86%B3%E4%B8%8D%E4%BA%86%E5%A4%8D%E6%9D%82%E4%BB%BB%E5%8A%A1"><span class="toc-text">05、为什么只靠 Prompt 解决不了复杂任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E9%82%A3%E5%A4%9A%E5%87%BA%E6%9D%A5%E7%9A%84%E4%B8%9C%E8%A5%BF%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">06、那多出来的东西到底是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E5%AE%83%E7%8E%B0%E5%9C%A8%E8%BF%98%E5%81%9A%E4%B8%8D%E5%A5%BD%E4%BB%80%E4%B9%88"><span class="toc-text">07、它现在还做不好什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%BB%B6%E4%BA%8B%E6%9C%80%E5%90%8E%E5%8F%98%E6%88%90%E4%BA%86%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">08、为什么这件事最后变成了工程问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#09%E3%80%81%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%EF%BC%9A%E5%85%AB%E5%B1%82%E5%8F%B0%E9%98%B6"><span class="toc-text">09、学习路线：八层台阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E5%9B%9E%E5%88%B0%E6%9C%80%E5%88%9D%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">10、回到最初的问题</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Prompt 能表达意图，却不能执行意图。Agent 补上的是模型与现实之间那条缺失的闭环——而这条闭环，正是 LLM 从演示走向生产的必经之路。</p>
+</blockquote>
+<p>你让模型帮你处理一批数据：读进来、清洗、去重、算几个指标、导出成表。它答得头头是道，步骤清晰，连该用哪个函数都替你写好了。<strong>然后它停住了</strong>。剩下的活，还是你去做。</p>
+<p>过去两年，我们大部分关于“LLM 应用”的努力，本质上都在解决这个停顿。Agent 是这轮解法里最有分量的那个名字——不是因为它听起来更高级，而是因为它换了一个问题：<strong>与其让模型把答案说得更好，不如让它自己去把事办完</strong>。</p>
+<h2 id="01、Agent-这个词很老，是-LLM-让它重新有用"><a href="#01、Agent-这个词很老，是-LLM-让它重新有用" class="headerlink" title="01、Agent 这个词很老，是 LLM 让它重新有用"></a>01、Agent 这个词很老，是 LLM 让它重新有用</h2><p>在人工智能的教科书里，agent 指的是一个能通过传感器感知环境、并通过执行器作用于环境的实体。按这个标准，空调的恒温器也是 agent——它感知温度，然后决定压缩机开还是关。所以我们今天讨论的显然不是这个词本身，而是它在这两三年突然变得可用的原因。</p>
+<p>真正变的是“决定下一步做什么”这件事的归属。以前它必须由人写死：状态机、规则表、启发式函数，一套一套地堆。现在它可以交给一个通用模型现场判断。这个迁移听起来轻巧，实际意义是：<strong>Agent 从“每个领域单独建造一次”变成了“可以用一套通用骨架承载”。</strong> 在这之前，没有人谈论”通用 agent”，因为它的成本结构不允许。</p>
+<p>所以站在工程角度，我给一个尽量小的定义：</p>
+<blockquote>
+<p><strong>Agent ＝ 一个 LLM 控制器 ＋ 一组工具 ＋ 一个循环 ＋ 一份可持久化的状态，在真实环境中反复行动，直到目标达成或判定失败。</strong></p>
+</blockquote>
+<p>这四个部件缺一个，退化成什么形态是可以精确说出来的：没有工具，模型只能吐文本，它就是 Chatbot；没有循环，就只剩下一次函数调用；没有状态，上下文一被压缩，任务当场失忆；没有明确目标，它不知道何时该停，会一直“继续”下去直到烧完预算。工程上遇到的大多数莫名其妙的问题，最后都能对应到这四个里面少了一块。</p>
+<p>写成伪代码，Agent 和一次普通调用的差别一眼就看得出来：</p>
+<pre><code class="language-python"># 一次 LLM 调用
+text = llm(prompt)
+
+# 一个 Agent
+state = init(task)
+while not done(state) and steps &lt; budget:
+    action = llm(state.context, tools)   # 决策
+    result = execute(action)             # 行动
+    state = update(state, result)        # 观察与记忆
+return state.artifacts
+</code></pre>
+<p>这里面最关键的其实是 <code>execute</code> 那一行。它意味着模型的行为开始有后果——这是 Agent 和“会聊天的模型”之间真正的分水岭，也是后面所有麻烦的来源。</p>
+<h2 id="02、为什么恰好是这几年"><a href="#02、为什么恰好是这几年" class="headerlink" title="02、为什么恰好是这几年"></a>02、为什么恰好是这几年</h2><p>如果只允许用一句话回答，那就是：不是哪一个突破，而是几条原本互不相干的曲线恰好凑到了同一时刻。</p>
+<ul>
+<li><p>模型这一侧，2022 年 ReAct 那篇论文已经把“边推理边行动”的思路讲清楚了，但当时工具调用还得靠 Prompt 里约定 JSON 格式、再拿正则去解析，脆得像纸。真正的转折点是 2023 年 6 月函数调用变成原生能力——工具选择从“祈愿式解析”变成了受约束的解码。之后结构化输出、长上下文、带显式推理过程的模型依次到位，每一步都在往下压 Agent 的失败率，而不是往上抬它的上限。</p>
+</li>
+<li><p>需求这一侧的道理更朴素。写一段文案，省的是人几分钟；把一件事从头办完，省的是那件事本身的钱。企业愿意为前者付一杯咖啡，为后者付的可能是一部分人力成本。需求其实一直都在，只是过去没人接得住——复杂流程的自动化只能靠 RPA 加硬编码规则，维护成本高到不划算。与此同时 token 变得便宜，”多花十倍 token、多想几步、多验一遍”从一个奢侈策略变成了常规操作，架构上原本不可行的方案突然变得可行了。</p>
+</li>
+<li><p>再往下是接口和度量两件事。2024 年 11 月 MCP 开源之后，工具接入从“每个应用各写一遍”变成“一次实现、多处复用”。这看着像工程细节，其实决定了生态能不能长出来——一个需要为每个客户端重写 N 遍适配层的能力，是长不出生态的。而 SWE-bench、GAIA 这类基准，把“到底行不行”从感觉变成了可比较的数字。一个领域开始有排行榜，通常就是它从概念走向工程的信号。</p>
+</li>
+</ul>
+<p>不过，把这五条线摆在一起，也能得到一个反向的判据：<strong>如果你的问题恰好不落在它们的交集里，Agent 可能还不是正确答案。</strong> 这一点在后面还会再回来。</p>
+<h2 id="03、从“帮我写”到“帮我做完”"><a href="#03、从“帮我写”到“帮我做完”" class="headerlink" title="03、从“帮我写”到“帮我做完”"></a>03、从“帮我写”到“帮我做完”</h2><p>回头看，“然后它停住了”这件事是一级一级被解决的，而每一级改变的都不只是体验，还有<strong>谁在为正确性负责</strong>。</p>
+<ul>
+<li><p>最早 LLM 就是一个文本函数，输入什么就回什么。所有编排都在人身上：自己想、自己复制、自己粘贴、自己判断、自己跑到别的地方去执行。模型的输出没有后果，它只提供建议。</p>
+</li>
+<li><p>后来有了多轮上下文和角色设定，交互自然多了，可责任结构一点没变，执行的人还是你。ChatGPT 帮你把 SQL 写好了，你得自己粘到数据库里跑；帮你把行程理顺了，机票还得你自己订。模型始终停在“世界的描述层”，从不触碰世界本身。</p>
+</li>
+<li><p>到第三级，模型开始自己决定调什么工具、按什么顺序、失败了怎么办。它第一次接触到未经自己修饰的现实。</p>
+</li>
+</ul>
+<p>但模型一旦开始接手执行，真正难解决的问题也变了：以前只需要保证“说的对”，现在还要保证“做的对”。生成错了，人一眼就能看出来，成本通常只是重生成一次；执行错了，可能要等到十几步之后才暴露，而那时被删掉的文件、被发出去的邮件、被写坏的生产数据已经回不来了。于是工程重心也跟着挪：从“怎么写出一段更好的 Prompt”，变成“怎么验证、怎么回滚、怎么观测、怎么限权”。</p>
+<p><strong>评价指标随之换了一套。</strong> 我们不再问模型回复的好不好，而是问：任务成功率多少？平均要走几步、烧多少 token、花多长时间？失败集中在哪一类步骤上——是工具选错、参数填错，还是整条路走岔了？失败了能不能回到上一个正确状态接着跑？</p>
+<h2 id="04、差别不在智能，在权限"><a href="#04、差别不在智能，在权限" class="headerlink" title="04、差别不在智能，在权限"></a>04、差别不在智能，在权限</h2><p>很多人习惯用“智能程度”来区分 Chatbot、Workflow 和 Agent。这个区分方法很容易误导架构决策，它们的真正差别是<strong>决策权和执行权分别落在谁手里</strong>，以及<strong>人是站在回路里面还是外面</strong>。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Chatbot</strong></th>
+<th><strong>Workflow</strong></th>
+<th><strong>Agent</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>谁决定下一步</td>
+<td>人。模型只负责应答当前问题</td>
+<td>代码。流程由开发者预先编排</td>
+<td>模型。运行时自主决定</td>
+</tr>
+<tr>
+<td>谁执行</td>
+<td>人。模型不产生副作用</td>
+<td>系统。按照预设流程执行</td>
+<td>模型通过工具调用执行</td>
+</tr>
+<tr>
+<td>人的位置</td>
+<td>回路中，同步参与</td>
+<td>回路外，通常无需逐步参与</td>
+<td>回路外，通常只在必要时介入或事后审计</td>
+</tr>
+<tr>
+<td>作用域</td>
+<td>对话文本</td>
+<td>预先定义的任务流程和工具</td>
+<td>真实系统：文件、API、数据库、浏览器等</td>
+</tr>
+<tr>
+<td>执行路径</td>
+<td>人决定下一步</td>
+<td>代码决定下一步</td>
+<td>模型根据当前状态决定下一步</td>
+</tr>
+<tr>
+<td>失败成本</td>
+<td>很低，重问一次即可</td>
+<td>可预测，通常可以针对固定路径测试和回滚</td>
+<td>不确定，可能连续执行多步后才暴露</td>
+</tr>
+<tr>
+<td>典型形态</td>
+<td>客服问答、知识助手</td>
+<td>文档处理流水线、RAG 流程、数据处理流程</td>
+<td>自动修 Bug、批量数据清洗、跨系统同步</td>
+</tr>
+</tbody></table>
+<p>三者可以简单理解成：</p>
+<ul>
+<li><p><strong>Chatbot：人决定怎么做，模型负责回答。</strong></p>
+</li>
+<li><p><strong>Workflow：代码决定怎么做，模型负责完成其中某些步骤。</strong></p>
+</li>
+<li><p><strong>Agent：模型决定怎么做，并通过工具把决定执行出去。</strong></p>
+</li>
+</ul>
+<p>这也是为什么 <strong>Workflow 和 Agent 经常被混在一起</strong>。它们都可能使用 LLM，也都可能调用工具，但控制权不同。Workflow 的调用路径是开发者提前定义好的：什么时候调用模型、什么时候检索、什么时候调用工具、什么时候判断结果，都已经写进流程里——模型可以参与某个节点的决策，但不能随意改变整个流程。Agent 则相反。开发者提供目标、工具、规则和运行环境，具体下一步做什么由模型在运行时决定。它可能先查资料，再调用工具；发现结果不对，又换一种方法；工具失败了，还可能重新规划。</p>
+<p>因此，两者的核心区别不是“有没有 LLM”，甚至也不是“智能程度高低”，而是<strong>执行路径是预先确定的，还是运行时生成的</strong>。这会直接影响成本和可靠性。Workflow 的路径相对确定，因此更容易测试、预测和定价；Agent 的路径由运行时状态决定，灵活性更高，但执行步数、Token 消耗、工具调用次数和失败位置都存在更大的不确定性。</p>
+<p>所以，架构选择时有一个很实用的判断：<strong>如果任务流程本身是确定的，就优先考虑 Workflow；如果任务需要根据中间结果不断判断“下一步该做什么”，才真正需要 Agent。</strong></p>
+<p>例如：</p>
+<blockquote>
+<p>用户上传一份合同 → 提取文本 → 分段 → 向量化 → 写入数据库 → 返回结果</p>
+</blockquote>
+<p>这是典型的 Workflow。每一步基本都是确定的，没有必要让模型自己决定下一步。</p>
+<p>而：</p>
+<blockquote>
+<p>“帮我找出这个项目里的 Bug，并修好它。”</p>
+</blockquote>
+<p>就更适合 Agent。因为它可能需要自己搜索代码、理解调用关系、修改文件、运行测试、分析报错，再决定下一步怎么处理。</p>
+<p><strong>Agent 的价值并不是把 Workflow 做得更“智能”，而是把原本需要人不断做决策的部分交给模型。</strong></p>
+<p>因此，真正应该问的不是“这个任务够不够智能，要不要上 Agent”，而是：</p>
+<blockquote>
+<p><strong>下一步到底应该由谁决定？</strong></p>
+</blockquote>
+<p>如果答案始终是代码，那么是 Workflow。如果答案经常需要根据运行时情况临时判断，而且这种判断可以安全地交给模型，那么才有必要引入 Agent。</p>
+<h2 id="05、为什么只靠-Prompt-解决不了复杂任务"><a href="#05、为什么只靠-Prompt-解决不了复杂任务" class="headerlink" title="05、为什么只靠 Prompt 解决不了复杂任务"></a>05、为什么只靠 Prompt 解决不了复杂任务</h2><p>到这里通常会有人提出一个合理的反驳：模型再强一点、Prompt 再写好一点，不就行了吗？不行。而且原因不是能力问题，是结构问题——这两者的区别很重要，因为它决定了你该等模型升级，还是该动手改架构。</p>
+<p>先看上下文。一个长任务会产生大量中间产物：读到的文件内容、接口返回、报错堆栈、已经确认过的事实。这些都得进上下文，而上下文窗口是有限的。更麻烦的是，就算塞得进去，模型对长上下文的利用效率也会明显下降，“中间遗忘”和长上下文退化都是已经被反复观察到的现象。而 Prompt 工程没有办法创造外部存储，它只能请求模型“记住”，可模型的记忆在一次压缩、一次截断之后就静默消失了——<strong>没有状态，就没有长任务。</strong></p>
+<p>其次，模型看不见现实。文件存不存在、接口是不是返回 500、代码能不能编译、这条 SQL 跑不跑得通，它一概不知。没有工具，它对世界的一切判断都建立在“根据训练数据推测”之上。这一点经常被低估：<em>幻觉的一个重要成因，不是模型爱编，而是它没有获得反馈的渠道。</em> 一个永远收不到“你错了”的系统，只能一直自信下去。</p>
+<p>还有更根本的一层。一次前向传播只能做一个决定，而复杂任务需要 n 个决定，第 k 个还依赖前 k−1 个的真实结果。把它压进一次生成，等于要求模型在不知道任何中间结果的前提下，把整条路一次性猜对。误差会累加：哪怕单步正确率有 95%，三十步之后整体只剩两成左右。这不是靠“想得更仔细”能补回来的，这是概率算术。</p>
+<p>于是它也无法验证自己。没有执行器，模型只能靠“看起来对不对”来判断自己的输出，无法运行测试、无法比对数据、无法确认副作用。而如果你试图用 Prompt 把控制流补上，很快就会撞到另一堵墙：重试、循环、分支、超时、限流、事务、幂等，这些全都是运行时的活。你当然可以在 Prompt 里写“如果失败就重试”，但你没法强迫模型真的重试第二次；也可以写“确保操作是幂等的”，可幂等是代码属性，不是文字属性。</p>
+<blockquote>
+<p><strong>所以：Prompt 是意图的表达，不是执行的机制。</strong></p>
+<p>复杂任务的失败，大多数时候不是因为模型不够聪明，而是因为架构里缺了东西：没地方存状态、没通道感知现实、没机制强制执行、没来源判断对错。Agent 要补的正是这些缺件——它补的不是智力，是结构。</p>
+</blockquote>
+<h2 id="06、那多出来的东西到底是什么"><a href="#06、那多出来的东西到底是什么" class="headerlink" title="06、那多出来的东西到底是什么"></a>06、那多出来的东西到底是什么</h2><p>不是更长的 Prompt，也不是更花哨的提示词模板。是把五个部件补进系统，再用一条循环把它们串起来。</p>
+<pre><code>   目标  ──▶  决策  ──▶  行动  ──▶  环境
+             (LLM)     (工具)    (文件/API/DB/浏览器)
+               ▲                     │
+               └──── 观察结果回流 ─────┘
+                        （反馈）
+
+   底部支撑：  状态 / 记忆          约束 / 权限
+              （跨步骤持久化）     （沙箱、最小权限、人工审批）
+</code></pre>
+<p><strong>工具</strong>是模型的动作空间，但它带来的东西比”能做更多事”更微妙：它把模型不擅长的确定性计算外包了出去。算术、检索、精确的格式转换、类型检查，交给代码执行正确率是百分之百，而让模型心算，正确率永远只是一个概率。工具不只是扩展边界，它同时在削掉模型最不可靠的那一部分。</p>
+<p><strong>状态</strong>则容易被想得太简单。它其实分好几层：当前任务的中间结果、历史轨迹、外部知识库，以及真实世界里的那些对象——文件、数据库记录、工单。这里有一个必须建立起来的心智模型：<em>上下文是缓存，状态才是真相。</em> 上下文可以被压缩、被摘要、被丢弃，而状态必须始终能恢复。把这两者搞混的人，几乎一定会遇到“跑到第四十步，突然忘了自己在干什么”这类问题，而且在很长一段时间里找不到原因。</p>
+<p><strong>规划</strong>也不是“先输出一份完美计划再照着执行”。真实环境里，第三步的结果随时可能推翻第二步的假设，所以计划必须可修正：先给出粗略路径，执行中根据观察动态重排。ReAct 的交替推理、Plan-and-Execute 的先规划后执行、Tree-of-Thoughts 的多路径搜索，本质上都在处理同一个矛盾——在信息不完整时做决策，并在拿到新信息后改掉它。</p>
+<p>剩下的两个，<strong>执行</strong>和<strong>反馈</strong>，才是真正的分水岭。只有执行才能改变世界，也只有执行才能换来关于世界的真实信息；而工具返回的结果就是 ground truth——编译器的报错、测试的通过与否、接口的返回码、对账的差额。这些信号第一次让“自我修正”从一句口号变成了机制。没有反馈，模型的一切自我评估都是自说自话；有了反馈，循环才有一个收敛的方向。</p>
+<p>如果把这几件事压成一句话：Prompt 给的是知识和表达，Agent 给的是知识和表达，外加感知、记忆、行动和纠错。</p>
+<h2 id="07、它现在还做不好什么"><a href="#07、它现在还做不好什么" class="headerlink" title="07、它现在还做不好什么"></a>07、它现在还做不好什么</h2><p>对 Agent 保持清醒比对它热情更重要。现在真正能跑通的场景，几乎都满足同一个条件：<strong>存在廉价、客观、而且及时的验证信号。</strong> 有了它，模型能自己发现错了、自己改；没有它，循环只是在原地绕圈。</p>
+<p><strong>当前比较成立</strong></p>
+<ul>
+<li><strong>信息聚合</strong>：多源检索、交叉验证、汇总成报告</li>
+<li><strong>结构化转换</strong>：非结构化文本变成结构化字段，跨格式搬运</li>
+<li><strong>可验证的编码任务</strong>：改代码、编译、跑测试，反馈免费且客观</li>
+<li><strong>长流程重复操作</strong>：批量处理、跨系统同步、表单填报</li>
+<li><strong>可探索的排障任务</strong>：调试、定位异常、数据探查</li>
+</ul>
+<p><strong>需要非常慎重</strong></p>
+<ul>
+<li><strong>反馈缺失或严重延迟</strong>：长期效果类决策，没有客观标准的创作质量评判</li>
+<li><strong>错误不可逆且代价高</strong>：生产环境写操作、资金操作、对外发送</li>
+<li><strong>目标本身模糊</strong>：需求还在探索中，需要反复和人对齐意图</li>
+<li><strong>依赖隐性经验</strong>：组织协作、人际沟通，需要读取大量没被记录的背景</li>
+<li><strong>极长任务链</strong>：误差累积和上下文腐化仍然是两堵最硬的墙</li>
+</ul>
+<p>有一条粗糙但很好用的直觉，值得记住：</p>
+<blockquote>
+<p><strong>端到端可靠性 ≈ 单步可靠性 ^ 步数 × 验证覆盖率</strong></p>
+</blockquote>
+<p>它给出的其实只有两条改进路径，但这两条恰好是工程上最有价值的。第一条是<strong>减少步数</strong>：不是所有事情都该拆细，一个本来能一次做完的子任务拆成五步，只是把单步错误率乘了五次。设计工具粒度时该问的问题是“哪一层最容易被验证”，而不是“哪一层粒度最优雅”。第二条是<strong>提高验证覆盖率</strong>：尽量给每一步接上可校验的信号——类型检查、schema 校验、单元测试、断言、人工确认点。每加一个自动验证点，就等于给误差设了一道闸。</p>
+<h2 id="08、为什么这件事最后变成了工程问题"><a href="#08、为什么这件事最后变成了工程问题" class="headerlink" title="08、为什么这件事最后变成了工程问题"></a>08、为什么这件事最后变成了工程问题</h2><p>一个很自然的反驳是：模型会越来越强，这些工程复杂度会不会自己消失？不会。因为它解决的绝大多数问题，本来就不是模型能力问题，而是系统问题。</p>
+<p>最直观的一类，是可靠性。重试与退避、幂等设计、检查点与恢复、状态机、补偿事务、超时与熔断——任何一次“跑到一半崩了”的 Agent 任务，都会把你拽回分布式系统那一整套老问题里。再加上调度、并发、持久化和崩溃恢复，你会发现这一层和后端工程几乎同构。</p>
+<p>其次是信息该怎么组织。什么内容该进上下文、什么时候压缩、怎么分层、检索回来的东西怎么放、整个预算怎么分——这一组问题的总和，业界叫 Context Engineering，它正在取代 Prompt Engineering 的位置。原因很直接：真正的杠杆不在“这句话怎么写”，而在“这一刻模型看到了什么”。同一层逻辑也适用于工具：工具切多细、参数 schema 怎么定义、报错信息写成什么样，都直接决定上限。“参数缺失”和“缺少必填字段 user_id，请先调用 get_user 获取”，对模型来说是完全不同量级的信息。</p>
+<p>再往下，是评测和可观测性，也是最容易被放到最后、却最不该被放到最后的两件事。没有 eval 就没有迭代——因为你没法判断一次改动到底让 Agent 变好了还是变差了。而 Agent 的调试体验，更接近调试一个分布式系统：你要回答的是“它为什么在第七步选了这个工具”，而不是“这段话读起来为什么不顺”。</p>
+<p>最后是安全。最小权限、沙箱、关键节点人工确认、成本和速率上限，这些还算常规；Agent 真正新增的攻击面是：<em>提示词注入会经由工具返回的内容进来。</em> 模型读到的一段网页文本、一份文档、一条搜索结果，都可能是载荷，而 Chatbot 时代根本不存在这个威胁模型。</p>
+<blockquote>
+<p><strong>本质：Agent，就是用 LLM 当控制器的分布式系统。</strong></p>
+<p>所以它的工程问题大多与后端系统同构，只是多了一个新的不确定性来源：控制器本身是概率性的，行为不可完全预测，也无法用断言穷举。把“一个不可预测的控制器”和“一个必须确定的结果”塞进同一个系统，就是 Agent Engineering 的全部难度。</p>
+</blockquote>
+<p>还有一个更务实的理由。模型会换、框架会换、协议也会换，但这套方法论会留下来。今天学某个编排框架，明天可能就换成别的了；而“怎么给一个会自动执行的系统加上检查点、评测和权限”这件事，十年后依然成立。研究 Agent 的长期回报，恰恰在于它沉淀下来的不是某个 API，而是一种设计能力。</p>
+<h2 id="09、学习路线：八层台阶"><a href="#09、学习路线：八层台阶" class="headerlink" title="09、学习路线：八层台阶"></a>09、学习路线：八层台阶</h2><p>这条路线不是并列的知识清单，而是<strong>逐层依赖</strong>的——每一层都是下一层的前提。跳着学最典型的结果，是会用框架，但说不清楚为什么框架要这样设计。</p>
+<ol>
+<li><p><strong>LLM（基础）</strong><br>别急着上框架，先搞清楚大模型到底怎么工作：token 怎么切、采样为什么会带来随机性、上下文窗口为什么是硬边界、幻觉从哪里冒出来。这一层最容易被跳过，而跳过的人往往在后面最基础的地方反复吃亏——比如想不通模型为什么会编出一个根本不存在的函数名。</p>
+</li>
+<li><p><strong>Context（上下文工程）</strong><br>上下文是模型唯一的信息通道，你对它的一切控制最终都走这条路：system prompt 怎么写、少样本示例给几个、历史什么时候压缩、检索到的内容怎么注入、预算怎么分。这一层比 Prompt Engineering 更接近真正的杠杆。<br><em>过关标志：能精确控制“模型此刻看到了什么”。</em></p>
+</li>
+<li><p><strong>Tool（工具调用）</strong><br>从函数调用的协议入手，但重点不在协议，而在接口设计。工具切多细、参数 schema 怎么定、报错信息写成什么样，这些细节比模型选型更能决定成败，也是最快见效的优化点。</p>
+</li>
+<li><p><strong>MCP（接入标准）</strong><br>工具接入的标准化协议。它的价值不在这条协议本身，而在于把“连接”从业务代码里解耦出来：一件事情只实现一次，任何兼容的客户端都能接上。<br><em>过关标志：写出一个自己的 MCP server。</em></p>
+</li>
+<li><p><strong>Skill（能力封装）</strong><br>把“做某类事”的领域知识和流程打包成一个可复用单元：指令、脚本、附带资源、判定规则。这一步的意义是把原本只存在某个人脑子里的隐性经验，变成团队可复用、可审查的显式资产。</p>
+</li>
+<li><p><strong>Agent（循环与规划）</strong><br>到这里才开始碰真正的循环：规划、状态管理、多步执行、中断与恢复。建议先用裸循环写一遍，别急着上编排框架——你会更清楚框架替你做了什么，以及在哪些地方帮了倒忙。<br><em>过关标志：能稳定跑完 10 步以上的任务。</em></p>
+</li>
+<li><p><strong>Runtime（运行时）</strong><br>让 Agent 真能上线的那一层：持久化、并发、沙箱、超时、成本控制、权限体系、多 Agent 编排。判据很实在——任务崩溃后能不能恢复，能不能同时跑上百个，成本是不是可预测。</p>
+</li>
+<li><p><strong>Eval（评测与验证）</strong></p>
+<p>当 Agent 能够稳定运行之后，下一个问题就变成：**怎么知道它到底做得好不好？**Agent 的输出不再只是文本，而可能是一连串工具调用和最终任务结果。因此需要从“回答是否正确”转向“任务是否完成”：建立任务集、记录 Trace、自动评分、结果验证、回归测试。这一层最常被排到最后，也最不该被排到最后：缺了它，前面所有改动的好坏都只能靠感觉。<br><em>过关标志：能建立一套 Agent 评测集，并通过 Trace 和自动评测判断一次改动是变好还是变差。</em></p>
+</li>
+</ol>
+<p><strong>三条建议：</strong> </p>
+<ul>
+<li>按层学，不要按框架学——框架是某一层的临时实现，会过时，层是稳定的认知结构，今天记住某个 API 的写法，价值大概只有半年</li>
+<li>每层都用一个最小可运行项目打通，尤其是第六层之前，先把裸循环写明白，再去看框架做了什么取舍</li>
+<li>以及，尽早把 eval 建起来，哪怕只有二十个用例，也远好过靠感觉迭代：评测不是终点，它是让你前面每一步都能被验证的前提。</li>
+</ul>
+<h2 id="10、回到最初的问题"><a href="#10、回到最初的问题" class="headerlink" title="10、回到最初的问题"></a>10、回到最初的问题</h2><p>Agent 到底解决了 LLM 应用里的什么问题？</p>
+<p>它解决的，不是“模型不够聪明”。它解决的是——<strong>模型与现实之间缺少闭环</strong>。</p>
+<p>LLM 本质上是一个封闭的函数：给它文本，它回文本。它不知道自己错了，无法让世界发生任何变化，也做不完一件需要跨越很多步骤的事。Prompt 只能把更多信息喂进去，但喂得再多，闭环依然不存在。</p>
+<p>Agent 做的，是在模型和现实之间接上了四根线。一根<strong>感知线</strong>，通过 RAG 和工具获取外部知识与环境信息，让它不再只依赖模型参数中的知识；一根<strong>记忆线</strong>，用状态做持久化，让任务不因上下文耗尽而失忆；一根<strong>行动线</strong>，通过工具执行产生副作用，让输出第一次有后果；还有一根<strong>纠错线</strong>，用反馈带回真实信号，让它第一次能发现自己错了。</p>
+<p>接上之后，LLM 从一个会说话的模型，变成了一个能做事的主体。而这四根线带来的所有新问题——可靠性、状态一致性、权限边界、成本控制、评测体系、可观测性——正好就是 Agent Engineering 的全部内容。</p>
+<blockquote>
+<p>所以，研究 Agent 的理由是：它是 LLM 从演示走向生产的必经之路。</p>
+<p>而研究 Agent 的本质，是研究<strong>如何让概率性的智能，在确定性的系统里可靠地工作</strong>。</p>
+</blockquote>
+<p>这个问题不会随着模型变强而消失。模型越强，我们越会放心地把更重要的任务交给它；任务越重要，系统的可靠性、可观测性和可控制性就越关键。这是一道会长期存在的工程命题。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

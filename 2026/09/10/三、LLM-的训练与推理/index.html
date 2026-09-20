@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>三、LLM 的训练与推理 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent ">
+  <meta name="description" content="三、LLM 的训练与推理 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(11)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(11)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="67k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-三、LLM-的训练与推理" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">三、LLM 的训练与推理</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;LLM简介">LLM简介</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-10 11:07</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:6.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81LLM-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">01、LLM 生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%9A%E6%8A%8A%E5%88%86%E5%B8%83%E8%A3%85%E8%BF%9B%E5%8F%82%E6%95%B0"><span class="toc-text">02、预训练：把分布装进参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81SFT%EF%BC%9A%E6%95%99%E4%BC%9A%E6%A8%A1%E5%9E%8B%E2%80%9C%E5%9B%9E%E7%AD%94%E2%80%9D%E8%BF%99%E4%BB%B6%E4%BA%8B"><span class="toc-text">03、SFT：教会模型“回答”这件事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81RLHF-%E4%B8%8E-DPO%EF%BC%9A%E4%BB%8E%E2%80%9C%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9D%E5%88%B0%E2%80%9C%E5%9B%9E%E7%AD%94%E5%BE%97%E8%AE%A9%E4%BA%BA%E6%BB%A1%E6%84%8F%E2%80%9D"><span class="toc-text">04、RLHF 与 DPO：从“会回答”到“回答得让人满意”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-RLHF%EF%BC%9A%E4%B8%89%E6%AD%A5%E8%B5%B0%E7%9A%84%E9%87%8D%E5%9E%8B%E7%AE%A1%E7%BA%BF"><span class="toc-text">4.1 RLHF：三步走的重型管线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-DPO%EF%BC%9A%E6%8A%8A%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B%E4%BB%8E%E6%B5%81%E7%A8%8B%E9%87%8C%E5%88%A0%E6%8E%89"><span class="toc-text">4.2 DPO：把奖励模型从流程里删掉</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E6%8E%A8%E7%90%86%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%9D%83%E9%87%8D%E5%86%BB%E7%BB%93%E4%B9%8B%E5%90%8E%E5%8F%91%E7%94%9F%E7%9A%84%E4%BA%8B"><span class="toc-text">05、推理阶段：权重冻结之后发生的事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%EF%BC%9A%E5%9B%9B%E4%B8%AA%E5%86%B3%E5%AE%9A%E6%88%90%E6%9C%AC%E4%B8%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E5%BC%80%E5%85%B3"><span class="toc-text">06、推理优化：四个决定成本与延迟的开关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-KV-Cache%EF%BC%9A%E5%88%AB%E6%8A%8A%E5%B7%B2%E7%BB%8F%E7%AE%97%E8%BF%87%E7%9A%84%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D"><span class="toc-text">6.1 KV Cache：别把已经算过的再算一遍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Batch%EF%BC%9A%E5%90%9E%E5%90%90%E5%92%8C%E5%BB%B6%E8%BF%9F%E7%9A%84%E9%9B%B6%E5%92%8C%E5%8D%9A%E5%BC%88"><span class="toc-text">6.2 Batch：吞吐和延迟的零和博弈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Quantization%EF%BC%9A%E7%9C%81%E6%98%BE%E5%AD%98%EF%BC%8C%E4%B9%9F%E7%9C%81%E6%8E%89%E4%B8%80%E9%83%A8%E5%88%86%E7%B2%BE%E5%BA%A6"><span class="toc-text">6.3 Quantization：省显存，也省掉一部分精度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-Speculative-Decoding%EF%BC%9A%E7%94%A8%E5%B0%8F%E6%A8%A1%E5%9E%8B%E6%8D%A2%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%80%9F%E5%BA%A6"><span class="toc-text">6.4 Speculative Decoding：用小模型换大模型的速度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E8%BF%99%E4%BA%9B%E8%AE%AD%E7%BB%83%E5%86%B3%E7%AD%96%E5%A6%82%E4%BD%95%E4%BD%93%E7%8E%B0%E5%9C%A8-Agent-%E4%B8%8A"><span class="toc-text">07、这些训练决策如何体现在 Agent 上</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%9B%9B%E7%A7%8D%E8%AE%AD%E7%BB%83%E6%96%B9%E5%BC%8F%E5%AF%B9%E5%BA%94%E7%9A%84%E5%9B%9B%E7%A7%8D-Agent-%E8%83%BD%E5%8A%9B"><span class="toc-text">7.1 四种训练方式对应的四种 Agent 能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%9E%8B%E5%9C%A8-Agent-%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%A1%A8%E7%8E%B0%E5%B7%AE%E5%BC%82%E5%B7%A8%E5%A4%A7"><span class="toc-text">7.2 为什么不同模型在 Agent 场景下表现差异巨大</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-Agent-%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%9D%A1%E5%AE%9E%E8%B7%B5%E7%BB%93%E8%AE%BA"><span class="toc-text">7.3 Agent 工程的四条实践结论</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>同一个 Prompt、同一套工具、同一个沙箱，换一个模型，Agent 的表现可能从稳定交付直接跌到反复翻车。多数人把这种差异归因于参数规模，但真正决定 Agent 上限的，是模型被造出来的那几个阶段：预训练决定它“知道什么”，指令微调决定它“听懂什么”，对齐训练决定它“遵守什么”，推理优化决定它“跑得多快、多贵”。一个 Agent 到底行不行，答案在它被部署之前就已经写好了一半。</p>
+</blockquote>
+<p>一个 LLM 是如何从不会说话变成能够回答问题的？</p>
+<p>这个问题表面上属于训练框架的范畴，但它其实直接决定你每天写的 Agent 代码长什么样。你调的每一个 temperature、写的每一段 system prompt、加的每一个 few-shot 示例，本质上都是在和一个已经被固定下来的“训练产物”打交道。不清楚它是怎么被塑造的，就只能靠试错去猜它的脾气，而试错的成本通常是几十次失败的调用和一堆看不懂的报错。</p>
+<p>本文沿着 LLM 的完整生命周期走一遍：预训练、指令微调、对齐训练、部署推理，以及推理阶段那些直接影响账单和延迟的工程优化。每一步都回答同一个问题——它在模型能力上留下了什么，又给 Agent 工程留下了什么。</p>
+<h2 id="01、LLM-生命周期"><a href="#01、LLM-生命周期" class="headerlink" title="01、LLM 生命周期"></a>01、LLM 生命周期</h2><p>一个能上线的语言模型，大致要经过五个阶段：</p>
+<pre><code class="language-text">数据
+ ↓
+预训练 Pre-training
+ ↓
+指令微调 SFT
+ ↓
+对齐训练 RLHF / DPO
+ ↓
+部署推理 Inference
+</code></pre>
+<p>每个阶段解决的问题完全不同，用一句话概括：</p>
+<ul>
+<li>预训练是“读万卷书”。把互联网规模的文本压缩进参数，得到的是一个语言模型，而不是一个助手。</li>
+<li>指令微调是“学说话”。把只会续写的模型改造成知道自己在和用户对话的模型。</li>
+<li>对齐训练是“学做人”。让模型从“能回答”变成“愿意按人类期望的方式回答”。</li>
+<li>部署推理是“干活”。权重冻结，只做前向计算，这也是唯一一个模型不再变化的阶段。</li>
+</ul>
+<p>这里需要先纠偏一个常见的过时框架。经典的“四段论”里没有推理能力强化这一步，但 2024 年之后的模型，也就是 o1、DeepSeek-R1 这一代，普遍在 SFT 和偏好对齐之后增加了一个独立的强化学习阶段：用可验证奖励去训练长链思维，奖励信号来自数学题的最终答案、代码的单元测试结果、形式化证明能否通过编译，而不是来自人类偏好打分。这不是可选项，它直接决定了模型能不能在 Agent 里完成多步规划。所以更贴近当前工程现实的生命周期应该是：</p>
+<pre><code class="language-text">数据
+ ↓
+预训练 Pre-training
+ ↓
+指令微调 SFT
+ ↓
+偏好对齐 RLHF / DPO
+ ↓
+推理能力强化 RLVR（第一梯队标配）
+ ↓
+部署推理 Inference
+</code></pre>
+<p>把这五步分开看，后面所有关于 Agent 表现的疑问，几乎都能在其中的某一步找到出处。</p>
+<h2 id="02、预训练：把分布装进参数"><a href="#02、预训练：把分布装进参数" class="headerlink" title="02、预训练：把分布装进参数"></a>02、预训练：把分布装进参数</h2><p>预训练的目标极其简单，一句话就能说完：</p>
+<pre><code class="language-text">预测下一个 Token
+</code></pre>
+<p>给定一段文本，模型的任务是预测下一个 token 是什么。训练目标是最小化交叉熵损失：</p>
+<pre><code class="language-text">L(θ) = - (1 / N) · Σ log P(x_t | x_1 ... x_{t-1} ; θ)
+</code></pre>
+<p>整个互联网被拿来做这件看起来毫无技术含量的事，然后模型就学会了推理。这听起来像奇迹，但机制上并不神秘：要准确预测下一个 token，模型不得不隐式地学会语法、事实、逻辑关系和解题步骤。</p>
+<p>数据上，主流配方大致由四类构成：</p>
+<ul>
+<li>网络文本：Common Crawl 一类的大规模爬取数据，需要经过去重、质量过滤、有害内容清洗，这部分最脏也最便宜。</li>
+<li>代码：GitHub 等来源的代码仓库。代码是性价比极高的语料，因为它的逻辑结构严密、依赖关系明确，对推理能力的迁移效果明显好于同体量的自然文本。</li>
+<li>书籍：小说、教材、非虚构。提供长程连贯性和叙事结构，是模型学“长文本组织”的主要来源。</li>
+<li>文档：论文、百科、技术手册、问答社区。提供高密度的结构化知识和专业术语。</li>
+</ul>
+<p>配比本身就是核心竞争力之一，各家都不公开细节。一个可观察的经验是：代码和数学语料的比例，与模型在 Agent 场景的表现高度相关。</p>
+<p>训练过程的循环是这样的：</p>
+<pre><code class="language-text">文本
+ ↓
+Tokenize
+ ↓
+模型前向预测
+ ↓
+计算 Loss
+ ↓
+反向传播、参数更新
+</code></pre>
+<p>这一步通常在数千到数万张加速卡上跑几个月，中间会因为损失尖峰反复回滚 checkpoint，也会因为数据管线的 bug 重跑部分阶段。规模上，Chinchilla 的缩放定律纠正了早期“只堆参数”的做法：在固定算力预算下，参数量和数据量应当按比例同步放大，大约每 1 个参数配 20 个训练 token 才是计算最优的。后来的实践又在这个基础上大幅偏向数据侧，因为推理成本是按参数算的，训练时多喂数据比多堆参数更划算。</p>
+<p>预训练结束后，模型学到了四类东西：</p>
+<ul>
+<li>语言规律：语法、搭配、篇章结构、不同文体的语感。</li>
+<li>世界知识：事实、常识、实体关系。注意这是统计意义上的知识，不仅会过时，也会在低置信区域流畅地编造。</li>
+<li>编程模式：API 调用惯例、代码风格、常见 bug 的形态，以及大量“问题-解法”配对。</li>
+<li>推理模式：语料里本来就存在大量论证、推导和解题过程，模型从模仿推理的表面形式开始，逐步涌现出 chain-of-thought 能力。上下文学习能力也是在这个阶段涌现的。</li>
+</ul>
+<p>这里有一个对工程实践极其重要的判断：预训练决定的是能力底座，后面所有阶段都只能放大或抑制已有能力，很难凭空造出预训练里不存在的知识。这解释了为什么把一个小模型反复微调，也做不好它底座本来就没掌握的复杂推理。</p>
+<p>预训练留下的工程后遗症同样明确：训练数据的截止时间就是模型的知识截止时间。Agent 要处理任何晚于这个时间的信息，必须依赖检索，这不是可以靠 prompt 绕过去的问题。</p>
+<h2 id="03、SFT：教会模型“回答”这件事"><a href="#03、SFT：教会模型“回答”这件事" class="headerlink" title="03、SFT：教会模型“回答”这件事"></a>03、SFT：教会模型“回答”这件事</h2><p>预训练模型的本质是续写机器。给它“法国的首都是”，它会接“巴黎”；但给它“帮我写一个 Python 快排”，它可能续写出另一段类似的问题描述——因为在语料里，这句话通常出现在一个 FAQ 页面的标题位置，后面跟着的往往就是另一个问题。</p>
+<p>这就产生了 SFT 要解决的核心矛盾：</p>
+<pre><code class="language-text">预训练模型：
+知道很多
+但不知道怎么回答用户
+</code></pre>
+<p>监督微调的做法是构造“指令 + 回答”的配对数据，用对话模板把输入包装成模型能识别的结构：</p>
+<pre><code class="language-text">&lt;|system|&gt;你是一个严谨的软件工程师助手&lt;|user|&gt;帮我写一个快排&lt;|assistant|&gt;……
+</code></pre>
+<p>几个决定成败的实现细节：</p>
+<ul>
+<li><strong>损失掩码</strong>。只在 assistant 部分的 token 上计算 loss，user 和 system 部分要 mask 掉。否则模型会学着去生成用户的问题，训练损失看着在降，实际行为完全错位。</li>
+<li><strong>数据质量远重于数量</strong>。几万条精心撰写的高质量样本，效果通常好于上百万条噪声数据。这背后的假说被称为“表面一致性”：SFT 主要教的是输出的格式、结构和语气，而不是注入新知识。新知识要靠继续预训练或检索。</li>
+<li><strong>灾难性遗忘</strong>。纯 SFT 会让基座能力退化，表现为模型变得只会用特定格式回答，通用能力下降。实践中会掺入少量预训练数据一起训练，或者用 LoRA 这类低秩适配器做参数高效微调，把改动限制在一个小得多的参数子空间里。</li>
+<li><strong>对话能力和工具调用格式也是在这里注入的</strong>。function calling 的 JSON schema、ReAct 的 Thought &#x2F; Action &#x2F; Observation 模板、多轮工具调用的历史组织方式，本质上都是 SFT 阶段的格式约定。模型工具调用能力强不强，第一看 SFT 数据里工具轨迹的配比和质量，而不是看底座参数多大。</li>
+</ul>
+<h2 id="04、RLHF-与-DPO：从“会回答”到“回答得让人满意”"><a href="#04、RLHF-与-DPO：从“会回答”到“回答得让人满意”" class="headerlink" title="04、RLHF 与 DPO：从“会回答”到“回答得让人满意”"></a>04、RLHF 与 DPO：从“会回答”到“回答得让人满意”</h2><p>SFT 的根本局限是它在做模仿：它只告诉模型什么是标准答案，不告诉模型哪个答案更好。而面对开放式问题，人类自己也写不出唯一的标准答案。但人类很容易判断两个回答里哪个更好——偏好数据的获取成本远低于高质量标注数据。对齐训练就是围绕这个不对称展开的。</p>
+<h3 id="4-1-RLHF：三步走的重型管线"><a href="#4-1-RLHF：三步走的重型管线" class="headerlink" title="4.1 RLHF：三步走的重型管线"></a>4.1 RLHF：三步走的重型管线</h3><p>经典流程分三步：</p>
+<pre><code class="language-text">人工偏好数据
+ ↓
+训练奖励模型
+ ↓
+强化学习优化策略
+</code></pre>
+<p>第一步，先有一个 SFT 模型作为初始策略。第二步，让模型对同一个 prompt 生成多个回答，由人来标注哪一对更好，得到成对偏好数据，再用 Bradley-Terry 模型训练一个奖励模型，让它的打分差能解释人类的选择倾向。第三步，用 PPO 优化策略模型，目标函数是：</p>
+<pre><code class="language-text">maximize   E[ r_φ(x, y) ]  -  β · KL( π_θ ‖ π_ref )
+</code></pre>
+<p>前半段是让模型追求奖励模型给出的高分，后半段的 KL 惩罚是防止它为了拿高分而彻底跑偏，π_ref 通常就是那个 SFT 模型，相当于一根锚。没有这个约束项，模型会很快学会奖励模型的漏洞。</p>
+<p>InstructGPT 是这条路线第一次得到大规模验证，也是“对齐”从一个抽象概念变成工程流程的起点。</p>
+<p>RLHF 的目标很明确：让模型更符合人类偏好、更安全、更容易使用。但代价同样明确——训练时要同时维护策略模型、参考模型、奖励模型和价值模型四个模型，显存和工程复杂度都高，PPO 本身对超参极其敏感，可复现性差。更麻烦的是，奖励模型只是人类偏好的近似，模型总能找到它的盲区，这类现象统称为奖励黑客，典型症状是为了“显得有帮助”而过度自信、编造细节，或者无差别地把所有回答都排成带粗体标题的列表。</p>
+<p>后来为了降低人工标注成本，出现了用 AI 反馈替代部分人类反馈的做法（RLAIF、Constitutional AI），本质上还是 RLHF 管线，只是标注源换了。</p>
+<h3 id="4-2-DPO：把奖励模型从流程里删掉"><a href="#4-2-DPO：把奖励模型从流程里删掉" class="headerlink" title="4.2 DPO：把奖励模型从流程里删掉"></a>4.2 DPO：把奖励模型从流程里删掉</h3><p>DPO 的核心洞察是一个数学化简：在 KL 约束下的奖励最大化问题里，最优策略和奖励函数之间存在解析关系。把这个关系代回偏好似然，奖励模型就被消掉了，对齐目标可以直接写成在偏好对上的一个分类损失：</p>
+<pre><code class="language-text">L_DPO = - E[ log σ( β·log(π_θ(y_w|x) / π_ref(y_w|x))
+                  - β·log(π_θ(y_l|x) / π_ref(y_l|x)) ) ]
+</code></pre>
+<p>直观理解是：提高被选中答案的相对概率，压低被拒绝答案的相对概率，参考模型作为锚点控制偏离幅度，β 就是这个偏移的强度旋钮。整个过程不需要训练奖励模型，不需要在线采样，就是一个普通的监督训练循环。</p>
+<p>两者的区别可以这样对照：</p>
+<ul>
+<li>RLHF 是在线的，模型可以自己生成新样本去探索，因此表达能力强；DPO 是离线的，只能用已有的偏好数据，覆盖不到数据分布之外的情况。</li>
+<li>RLHF 流程复杂但目标明确；DPO 流程简单稳定，但容易过拟合偏好数据的表面特征——最典型的是让回答越来越长、越来越像清单。</li>
+<li>衍生方案各自修补了 DPO 的某个短板：IPO 缓解过拟合，KTO 只需要单条样本的好坏标签而不需要成对数据，ORPO 把 SFT 和偏好优化合并成一步完成。</li>
+</ul>
+<p>工程现实是：大量开源模型走 DPO 或其变体，因为成本可控、复现容易；第一梯队模型通常在 PPO 系列管线上投入更多，配合规模庞大的内部偏好数据。</p>
+<p>这里还有一个必须正视的副作用——对齐税。对齐不是免费的，过度对齐会让模型变得安全但保守。在 Agent 场景里，这表现为过度拒绝执行、动辄要求用户确认、不敢调用有副作用的工具。这就解释了为什么不少团队在 Agent 里宁愿选对齐没那么激进的模型：他们要的不是一个礼貌的聊天对象，而是一个敢把活干完的执行者。</p>
+<h2 id="05、推理阶段：权重冻结之后发生的事"><a href="#05、推理阶段：权重冻结之后发生的事" class="headerlink" title="05、推理阶段：权重冻结之后发生的事"></a>05、推理阶段：权重冻结之后发生的事</h2><p>训练完成后，模型进入推理模式，流程是：</p>
+<pre><code class="language-text">输入 Prompt
+ ↓
+Tokenize
+ ↓
+Prefill：并行处理整个 prompt
+ ↓
+Decode：逐 token 自回归生成
+ ↓
+Detokenize 输出结果
+</code></pre>
+<p>推理分为两个性质截然不同的阶段，这个区分是后面所有优化的基础：</p>
+<ul>
+<li>Prefill 阶段一次并行处理整个 prompt，attention 计算量与序列长度成平方关系，属于计算密集型，瓶颈在算力。</li>
+<li>Decode 阶段每步只生成一个 token，计算量微不足道，真正的瓶颈是把模型权重和 KV 缓存从显存读进来，属于访存密集型。</li>
+</ul>
+<p>采样策略决定了输出的稳定性。贪心解码总选概率最高的 token；temperature 控制概率分布的陡峭程度；top-k 和 top-p 分别从候选数量和累积概率上截断长尾。Agent 场景通常要求低temperature（0 到 0.3），因为工具调用的 JSON 必须合法、参数必须准确；创意写作可以放宽到 0.7 以上。</p>
+<p>这里有一个必须反复强调的重点：推理不是继续学习。</p>
+<p>权重在推理阶段完全冻结，上下文里出现的任何信息都不会写进参数。所谓“模型在对话中学会了新东西”，实际发生的是上下文学习——信息只活在当前上下文窗口里，会话一关就丢失，窗口一满就被截断或压缩。这直接推出 Agent 工程的两条铁律：<strong>外部记忆必须由系统显式管理，靠模型“记住”是不可靠的；长任务的中间状态必须落盘，不能长期悬在上下文里。</strong></p>
+<h2 id="06、推理优化：四个决定成本与延迟的开关"><a href="#06、推理优化：四个决定成本与延迟的开关" class="headerlink" title="06、推理优化：四个决定成本与延迟的开关"></a>06、推理优化：四个决定成本与延迟的开关</h2><h3 id="6-1-KV-Cache：别把已经算过的再算一遍"><a href="#6-1-KV-Cache：别把已经算过的再算一遍" class="headerlink" title="6.1 KV Cache：别把已经算过的再算一遍"></a>6.1 KV Cache：别把已经算过的再算一遍</h3><p>自回归生成时，第 t 步的 attention 需要前 t-1 个 token 的 K 和 V。如果不做任何处理，每一步都要把这部分重新算一遍，而它们其实完全相同——这就是最典型的重复计算。</p>
+<p>解决办法是把每层每个注意力头的 K、V 缓存起来，每一步只计算新 token 的 Q、K、V，然后拼接到缓存上。单步复杂度从平方级降到线性级，这是所有推理框架的共同基础。</p>
+<p>代价是显存。KV 缓存的大小大致是：</p>
+<pre><code class="language-text">2 × 层数 × KV头数 × 头维度 × 序列长度 × batch × 精度字节数
+</code></pre>
+<p>在长上下文加大 batch 的场景下，这部分占用可能超过模型权重本身。优化方向有三个：用 MQA 或 GQA 减少 KV 头数；用 PagedAttention 一类的分页式显存管理消除内存碎片（vLLM 的核心贡献）；用前缀缓存复用系统提示词的 KV。</p>
+<p>最后一项对 Agent 特别有价值，因为 Agent 的 system prompt 和工具定义通常又长又固定，每个请求都重算一遍是巨大的浪费。反过来说，KV 缓存的显存压力也是长上下文定价高、并发上不去的根本原因。</p>
+<h3 id="6-2-Batch：吞吐和延迟的零和博弈"><a href="#6-2-Batch：吞吐和延迟的零和博弈" class="headerlink" title="6.2 Batch：吞吐和延迟的零和博弈"></a>6.2 Batch：吞吐和延迟的零和博弈</h3><p>静态批处理的问题是，一个请求生成完就空出一个槽位，但要等整批里最慢的那个结束才能换新请求进来，显存和算力都在空转。连续批处理（continuous batching，也叫 in-flight batching）改成以 token 为粒度调度，某个请求一结束，立刻从队列里补一个新请求进来，吞吐提升通常是数倍。</p>
+<p>但这里存在一个真实的权衡。decode 阶段受访存带宽限制，增大 batch 能摊薄读取权重的固定开销，所以吞吐收益非常显著；而 prefill 阶段是计算密集的，大 batch 会把首 token 延迟（TTFT）明显拉长。对 Agent 来说这个取舍尤其关键：多轮工具调用本质上是串行的，用户对每一跳的延迟都很敏感，所以 Agent 服务通常选择较小 batch 加高优先级队列，而不是去追最大吞吐。</p>
+<h3 id="6-3-Quantization：省显存，也省掉一部分精度"><a href="#6-3-Quantization：省显存，也省掉一部分精度" class="headerlink" title="6.3 Quantization：省显存，也省掉一部分精度"></a>6.3 Quantization：省显存，也省掉一部分精度</h3><p>量化把 FP16 或 BF16 的权重压缩到 INT8、INT4 或 FP8，收益直接体现在三件事上：显存降 2 到 4 倍、吞吐提升、单位成本下降。一个 INT4 量化的 70B 模型可以塞进单张消费级显卡，这在几年前不可想象。</p>
+<p>主流方法各有取舍：GPTQ 做逐层的误差补偿，AWQ 识别并保护对输出影响大的重要通道，GGUF 是本地推理生态常用的混合精度方案，而 FP8 因为精度损失小、又有新一代硬件原生支持，正在成为服务端的新默认。</p>
+<p>代价必须说清楚，而且和 Agent 强相关：量化误差在长链推理和结构化输出上会被逐层放大。典型症状包括 JSON 少一个引号或括号、工具参数类型写错、多步推理中途丢失早期约束。所以 Agent 场景下 INT4 要谨慎，INT8 或 FP8 是更稳的折中；更重要的是，评测必须用真实的工具调用轨迹做回归测试，只看通用困惑度指标会漏掉这些失效模式。</p>
+<h3 id="6-4-Speculative-Decoding：用小模型换大模型的速度"><a href="#6-4-Speculative-Decoding：用小模型换大模型的速度" class="headerlink" title="6.4 Speculative Decoding：用小模型换大模型的速度"></a>6.4 Speculative Decoding：用小模型换大模型的速度</h3><p>这个优化直接针对 6.1 节背后的结构性问题：decode 阶段受访存带宽限制，大量算力处于闲置状态。既然算力便宜而带宽昂贵，那就用算力换带宽——先用一个小而快的草稿模型连续猜出 k 个 token，再让大模型一次性并行验证这 k 个 token，配合拒绝采样机制，可以在理论上严格保持输出分布不变的前提下获得 2 到 3 倍加速。</p>
+<p>变体不少：Medusa 用多个预测头并行出草稿，EAGLE 在特征层做自回归预测，lookahead decoding 则完全不用草稿模型。代价是额外的显存开销，以及加速比高度依赖任务——模板化输出、代码补全、结构化 JSON 的命中率很高，开放式创作的命中率明显偏低。</p>
+<p>对 Agent 反而是好消息，因为 Agent 的输出里有很大比例是工具调用和格式固定的内容，恰好落在投机解码最擅长的区域。</p>
+<h2 id="07、这些训练决策如何体现在-Agent-上"><a href="#07、这些训练决策如何体现在-Agent-上" class="headerlink" title="07、这些训练决策如何体现在 Agent 上"></a>07、这些训练决策如何体现在 Agent 上</h2><h3 id="7-1-四种训练方式对应的四种-Agent-能力"><a href="#7-1-四种训练方式对应的四种-Agent-能力" class="headerlink" title="7.1 四种训练方式对应的四种 Agent 能力"></a>7.1 四种训练方式对应的四种 Agent 能力</h3><table>
+<thead>
+<tr>
+<th>训练阶段</th>
+<th>决定的能力</th>
+<th>在 Agent 里的具体表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Instruction tuning</td>
+<td>听懂任务</td>
+<td>正确解析 system prompt、判断该不该调用工具、遵守输出格式</td>
+</tr>
+<tr>
+<td>RLHF &#x2F; DPO</td>
+<td>遵守规则</td>
+<td>不越权执行、不确定时停下来确认、遵循安全边界和风格约束</td>
+</tr>
+<tr>
+<td>Reasoning training</td>
+<td>复杂规划</td>
+<td>把“修复这个 bug”拆成读代码、定位、修改、跑测试，长链路不跑偏</td>
+</tr>
+<tr>
+<td>Tool training</td>
+<td>工具调用能力</td>
+<td>参数填充准确、多工具之间选择得当、能从工具报错中恢复</td>
+</tr>
+</tbody></table>
+<p>这张表最有价值的地方在于，它把“Agent 不好用”这个模糊的判断拆成了可以定位的问题。工具调用格式错、JSON 不合法，问题在指令微调和工具训练；多步任务做到一半逻辑崩了，问题在推理强化；明明能做却拒绝执行，问题在偏好对齐的强度。</p>
+<h3 id="7-2-为什么不同模型在-Agent-场景下表现差异巨大"><a href="#7-2-为什么不同模型在-Agent-场景下表现差异巨大" class="headerlink" title="7.2 为什么不同模型在 Agent 场景下表现差异巨大"></a>7.2 为什么不同模型在 Agent 场景下表现差异巨大</h3><p>答案可以拆成五层，每一层都对应前面某个训练或推理阶段。</p>
+<p><strong>第一层，底座差异在长链路上被复利放大。</strong> Agent 是长链路任务。单步正确率 95% 听起来不错，但二十步之后整体成功率会掉到 36%；单步 99% 的模型二十步后还能有 82%。这个数学事实解释了为什么在一次性问答上差距不大的两个模型，到了 Agent 场景差距会变得触目惊心——预训练阶段积累的单步优势，会在长链上被指数级放大。</p>
+<p><strong>第二层，工具调用是被专门训练出来的能力，不是自然涌现的。</strong> 一个通用能力很强但没有经过工具数据 SFT 的模型，照样会在参数格式、调用时机、错误恢复上反复出错。反过来，底座略弱但工具轨迹数据训练充分的模型，在 Agent 评测上完全可以反超。</p>
+<p><strong>第三层，对齐强度决定模型敢不敢干活。</strong> 对齐激进的模型倾向于拒绝模糊指令、反复请求确认，在 Agent 里表现为任务完成率低；对齐不足的模型又可能越权操作。这是一个明确的取舍，不是单纯的好坏排序。</p>
+<p><strong>第四层，服务端推理配置会改变同一个模型的表现。</strong> 同一个开源模型，INT4 量化加短上下文，与 FP8 加 128K 上下文，Agent 表现完全是两回事。上下文长度决定了模型能不能看到完整的工具返回，量化精度决定了它输出的 JSON 会不会随机崩坏。</p>
+<p><strong>第五层，后训练数据的分布决定了它的擅长领域。</strong> 模型在训练时见过什么工具、什么 API 风格、什么错误恢复模式，就会在相似场景里表现更好。所谓“某个模型特别适合 Agent”，本质上是它的后训练数据分布与你的任务分布更接近，而不是它更聪明。</p>
+<blockquote>
+<p>Agent 表现上的差异，不是“聪不聪明”的差异，而是训练阶段一系列取舍在具体任务分布上的投影。选模型不是选最强的那一个，而是选取舍与你的任务最匹配的那一个。</p>
+</blockquote>
+<h3 id="7-3-Agent-工程的四条实践结论"><a href="#7-3-Agent-工程的四条实践结论" class="headerlink" title="7.3 Agent 工程的四条实践结论"></a>7.3 Agent 工程的四条实践结论</h3><p><strong>先分清是格式问题还是能力问题。</strong> 工具调用格式错、JSON 结构错，属于指令微调层面，用更明确的工具 schema、结构化输出约束、少量 few-shot 示例就能救；多步规划错、长链逻辑崩，属于推理强化层面，只有换模型或增加思考预算才有效。把这两类问题混在一起调，是最常见的浪费。</p>
+<p><strong>上下文工程比 prompt 工程重要。</strong> 既然推理阶段不发生学习，那么所有需要跨轮次保留的信息都必须由系统显式管理：落盘、检索、摘要压缩。指望靠一句“请记住上面的内容”来维持长任务状态，注定失败。</p>
+<p><strong>延迟预算决定架构选型。</strong> Agent 的串行工具调用会放大每一跳的延迟，所以推理优化的优先级应该是前缀缓存、小 batch 高优先级队列、结构化输出配合投机解码，而不是追求最大吞吐。</p>
+<p><strong>量化必须用真实轨迹做回归测试。</strong> 通用困惑度指标检测不出 JSON 少括号和参数类型错误。评测集应当来自你自己 Agent 的真实调用日志。</p>
+<p>回到最初的问题。一个 LLM 从不会说话到能够回答问题，中间发生的是四件事：预训练让它“有话说”，SFT 让它“知道该回答你”，对齐让它“按人类期望的方式回答”，推理优化让它“又快又便宜地回答”。而 Agent 表现的好坏，取决于这四件事有没有对齐到你的任务上——理解这一点，能让排查 Agent 故障从玄学变成定位。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
