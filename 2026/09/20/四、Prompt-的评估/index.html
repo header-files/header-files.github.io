@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>四、Prompt 的评估 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent , Prompt ">
+  <meta name="description" content="四、Prompt 的评估 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(15)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(15)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="15">
+<input type="hidden" id="yelog_site_word_count" value="83.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-四、Prompt-的评估" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">四、Prompt 的评估</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">Prompt-Engineering</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+            <a class="color2">Prompt</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-22 13:10:24'>2026-09-20 11:15</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:4.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88-Prompt-%E9%9C%80%E8%A6%81%E8%AF%84%E4%BC%B0"><span class="toc-text">01、为什么 Prompt 需要评估</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E6%B5%8B%E8%AF%95%E9%9B%86%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="toc-text">02、测试集与评价指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%B5%8B%E8%AF%95%E9%9B%86%E6%80%8E%E4%B9%88%E5%BB%BA"><span class="toc-text">2.1　测试集怎么建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%8C%87%E6%A0%87%E6%80%8E%E4%B9%88%E5%AE%9A"><span class="toc-text">2.2　指标怎么定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%B8%89%E7%A7%8D%E8%AF%84%E4%BC%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">03、三种评估方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BA%BA%E5%B7%A5%E8%AF%84%E4%BC%B0"><span class="toc-text">3.1　人工评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%A7%84%E5%88%99%E8%AF%84%E4%BC%B0"><span class="toc-text">3.2　规则评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-LLM-as-a-Judge"><span class="toc-text">3.3　LLM-as-a-Judge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%80%8E%E4%B9%88%E7%BB%84%E5%90%88"><span class="toc-text">3.4　怎么组合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81A-B-Test"><span class="toc-text">04、A&#x2F;B Test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81Prompt-%E4%BC%98%E5%8C%96%E4%B8%8E%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95"><span class="toc-text">05、Prompt 优化与回归测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81Prompt-Engineering-%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-text">06、Prompt Engineering 的局限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E4%BB%8E-Prompt-Engineering-%E5%88%B0-Context-Engineering"><span class="toc-text">07、从 Prompt Engineering 到 Context Engineering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81%E4%BB%8E-Prompt-%E5%88%B0-Agent"><span class="toc-text">08、从 Prompt 到 Agent</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>没有评估，就没有优化，只有折腾。你以为自己在调 Prompt，其实只是在同一批样本上反复试探自己的直觉。</p>
+</blockquote>
+<p>这个系列走到最后一篇。前几篇解决了“Prompt 怎么写”“方法怎么用”“工程怎么落地”，但始终悬着一个问题：凭什么说改完之后变好了？靠肉眼看两条输出、靠“感觉更顺了”来判断，在原型阶段勉强够用，一旦进入持续迭代就完全不成立。这篇文章先补上评估这一环，然后讨论 Prompt Engineering 的天花板——以及越过天花板之后，注意力会迁移到哪里。</p>
+<h2 id="01、为什么-Prompt-需要评估"><a href="#01、为什么-Prompt-需要评估" class="headerlink" title="01、为什么 Prompt 需要评估"></a>01、为什么 Prompt 需要评估</h2><p>凭直觉调 Prompt 之所以不可靠，原因不是人不够聪明，而是反馈信号本身质量太差。具体有四点：</p>
+<ul>
+<li><strong>改动的影响面不可预测</strong>。语言模型的输出是全局受条件影响的——你在系统提示词里加一句“回答要简洁”，可能修好了摘要场景，却让代码解释场景丢掉了必要细节。这类跨场景的连锁影响，靠人工抽查几乎不可能发现。</li>
+<li><strong>输出本身有随机性</strong>。同一条 Prompt 连续调十次，可能八次都好、两次格式崩坏。你恰好看到的那一次，不能代表分布。</li>
+<li><strong>模型在动</strong>。模型升级或参数调整会让同一份 Prompt 的表现发生位移，而这种位移不会主动通知你。</li>
+<li><strong>“变好”缺乏定义</strong>。什么算好？更准确、更符合格式、更短、更少幻觉？没有事先定义的评价标准，讨论就只是各人主观偏好的拉扯。</li>
+</ul>
+<p>评估的价值就在这里：它把“感觉”换成可复现、可比较、可累积的证据。评估集一旦建起来，你的每一次修改都能得到一个数字，改进可以被验证、失败可以被归因、经验可以被沉淀。</p>
+<p>需要提醒一个顺序问题：不要一开始就搭一套宏大评估体系。常见的建议是从二三十条真实、有代表性的样本起步，跑通“改—测—比”这个循环，再逐步扩规模。评估体系是长出来的，不是设计出来的。</p>
+<h2 id="02、测试集与评价指标"><a href="#02、测试集与评价指标" class="headerlink" title="02、测试集与评价指标"></a>02、测试集与评价指标</h2><h3 id="2-1-测试集怎么建"><a href="#2-1-测试集怎么建" class="headerlink" title="2.1　测试集怎么建"></a>2.1　测试集怎么建</h3><p><strong>样本来源</strong>：最优解是线上真实日志——真实的输入分布、真实的失败案例、真实的边界情况，全都免费躺在你的日志里。次优解是领域专家按业务理解编写的样本。最差的是让模型自己造样本，在这个过程中你会不自觉地写出模型很容易通过的题，从而高估效果。</p>
+<p><strong>样本构成</strong>：一批能长期用的测试集，通常包含四类样本。高频主路径若干条，代表大多数真实流量；边界输入若干条，比如空输入、超长输入、含特殊字符或指令样式文字的输入；已知坑若干条，每一条对应一次真实事故，用于防止同一个问题重新出现；以及一组“不该被改变”的基线样本，用来探测副作用。</p>
+<p><strong>规模与维护</strong>：起步 20 到 50 条，覆盖主要场景后扩到数百条即可，不必追求几千条——样本的质量和代表性远比数量重要。测试集要定期更新：把线上新出现的失败案例补进去，把已经不可能出现的场景删掉。</p>
+<p><strong>留一手</strong>：留一小批 holdout 样本，只在最终验收时使用，用来检验改动是否真的泛化。</p>
+<h3 id="2-2-指标怎么定"><a href="#2-2-指标怎么定" class="headerlink" title="2.2　指标怎么定"></a>2.2　指标怎么定</h3><p>指标要分层，因为不同层的指标回答不同问题：</p>
+<ul>
+<li><strong>任务质量</strong>：准确率、关键要点覆盖率、抽取字段的正确率，这是最核心的一层。</li>
+<li><strong>格式与合规</strong>：结构化输出校验通过率、必含字段完整率、长度是否在范围内、是否触犯禁止项。这层最容易自动化，适合做硬性门禁。</li>
+<li><strong>行为稳定性</strong>：拒答率、兜底触发率、重试率、输出长度的波动幅度。</li>
+<li><strong>成本与性能</strong>：延迟的分位数（不要只看平均，长尾延迟才是用户体验的杀手）、输入输出 token 用量、单次调用成本。</li>
+<li><strong>线上业务指标</strong>：采纳率、人工改写率、任务完成率、留存。这是最终裁判，只是它反馈得慢。</li>
+</ul>
+<p>一个反复出现的教训是：<strong>单一指标会被优化出“假象”</strong>。只看长度会让模型越写越短，只看相似度会让模型学会套模板。所以至少要有一个质量指标配一个成本指标，再加上一条护栏（比如格式合规率必须不下降）。</p>
+<h2 id="03、三种评估方式"><a href="#03、三种评估方式" class="headerlink" title="03、三种评估方式"></a>03、三种评估方式</h2><h3 id="3-1-人工评估"><a href="#3-1-人工评估" class="headerlink" title="3.1　人工评估"></a>3.1　人工评估</h3><p>人工评估是基准，也是最贵的。它的质量取决于两件事：评分细则写得够不够具体（好&#x2F;差分别对应什么可观察的特征，而不是“感觉不错”），以及标注者之间的一致性够不够（多人标同一批样本，看分歧有多大；分歧大的条目，通常说明你的评分标准本身有问题）。</p>
+<p>方法上，<strong>成对比较优于绝对打分</strong>。让人判断“A 和 B 哪个更好”比“给 A 打 1 到 5 分”稳定得多，因为人对相对差异的感知一致性远高于对绝对量级的感知一致性。</p>
+<p>人工评估的正确用法不是全量标注，而是：高风险场景的关键样本、以及定期校准自动评估方法。</p>
+<h3 id="3-2-规则评估"><a href="#3-2-规则评估" class="headerlink" title="3.2　规则评估"></a>3.2　规则评估</h3><p>规则评估是可判定部分的自动化检查：格式是否合法、字段是否齐全、数值是否越界、必含词与禁用词、长度区间。它的好处是结果确定、可解释、可直接进 CI 和线上兜底。它的边界同样清晰：规则只能覆盖“能写下来”的要求，覆盖不了“回答得好不好”。所以规则评估在实践中通常不作为质量分数使用，而是作为<strong>门禁</strong>——格式不合规直接判定为失败，不需要再讨论质量。</p>
+<p>写规则时有个细节值得注意：规则要判定的应该是<strong>结果</strong>而不是<strong>表述形式</strong>。比如“必须包含免责声明”这条规则，判定的是有没有相应内容，而不是要求出现某个固定句子，否则模型换个说法就会被误判为失败，反过来也逼迫你把 Prompt 写死。</p>
+<h3 id="3-3-LLM-as-a-Judge"><a href="#3-3-LLM-as-a-Judge" class="headerlink" title="3.3　LLM-as-a-Judge"></a>3.3　LLM-as-a-Judge</h3><p>用模型当评委，是在成本和质量之间补上的中间层：可以规模化、能处理开放式质量判断、评分细则可以写得很细。但它带着已知的系统性偏差，用之前必须了解：</p>
+<ul>
+<li><strong>位置偏差</strong>：成对比较时倾向于选前面的那个。缓解办法是把顺序随机化，或交换顺序各评一次再合并。</li>
+<li><strong>自我偏好</strong>：评委模型倾向偏爱与自身风格相似的输出。换用与生成模型不同家族或不同版本的评委能缓解一部分。</li>
+<li><strong>长度与格式偏好</strong>：更长、结构更整齐的回答容易得高分，即使信息量并没有增加。要在细则里显式压掉这项偏好。</li>
+<li><strong>细则缺失时的不稳定</strong>：让评委“综合打分”会得到方差不小的结果。改成逐项检查清单式的细则，稳定性会明显提升。</li>
+</ul>
+<p>还有一条经验：给评委提供参考答案或判定要点，比让它自由评判可靠得多；能拆成多个二选一判断的，不要合成一个五档打分。最后，judge 的分数必须定期与人工标注做校准——它不是真理，只是一个便宜得多的近似。</p>
+<h3 id="3-4-怎么组合"><a href="#3-4-怎么组合" class="headerlink" title="3.4　怎么组合"></a>3.4　怎么组合</h3><p>三种方法不是竞争关系，而是一条成本递增的漏斗：</p>
+<p>规则评估做硬门禁（格式与合规一票否决）→ judge 评估做质量分层与批量筛选 → 高风险场景与 judge 结果存疑的样本交给人工复核 → 人工标注的结果反过来校准 judge 的细则。</p>
+<p>如此循环，你会得到一套“大部分时间自动化、关键时刻有人把关”的评估体系。</p>
+<h2 id="04、A-B-Test"><a href="#04、A-B-Test" class="headerlink" title="04、A&#x2F;B Test"></a>04、A&#x2F;B Test</h2><p>离线评估能回答“输出质量是否更好”，但回答不了“对产品是否更好”。用户可能更愿意采纳一个稍短、少一点细节的回答；也可能因为回答变长而更快完成任务。这些只有真实流量能告诉你。</p>
+<p>一次像样的 A&#x2F;B 要提前定好几件事：<strong>单一变更</strong>（一次只比一个变量，否则无法归因）、<strong>稳定性分流</strong>（同一用户在实验期内始终落在同一版本，否则体验会抖动）、<strong>指标预设</strong>（主指标 + 护栏指标，防止为了主指标牺牲掉不该牺牲的东西）、<strong>样本量与时长估计</strong>（流量小、效应小的实验，跑不够时间就会得到噪声结论）。</p>
+<p>LLM 场景下 A&#x2F;B 还有几个特有难点。输出的方差大，需要的样本量比常规 UI 实验更大；用户反馈稀疏且滞后，很多信号要过几天才显现；多轮对话场景存在溢出效应——用户对当前版本的体验会影响后续判断。这些都需要在实验设计阶段就考虑，而不是事后解释数据。</p>
+<p>另外要区分两种“灰度”：<strong>影子流量</strong>（新版本只处理流量、结果不返回给用户）适合观察输出差异、成本变化和异常率，不适合测用户体验；<strong>灰度发布</strong>（小比例真实用户使用新版本）才是有反馈信号的实验。别把前者当成后者。</p>
+<h2 id="05、Prompt-优化与回归测试"><a href="#05、Prompt-优化与回归测试" class="headerlink" title="05、Prompt 优化与回归测试"></a>05、Prompt 优化与回归测试</h2><p>有了评估，优化才变成一个可管理的循环：<strong>建立基线</strong>（当前版本跑一遍全量评测）→ <strong>定位失败</strong>（把失败样本归类，而不是笼统地说“效果不好”）→ <strong>单变量修改</strong> → <strong>重跑评测</strong>（看总分，更看分项和长尾）→ <strong>更新实验记录</strong> → <strong>发布并保留回滚点</strong>。</p>
+<p>失败样本的归类很重要，它决定了你该往哪个方向改。常见类别和对应动作大致是：</p>
+<ul>
+<li><strong>指令歧义</strong>：模型理解成了另一件事 → 改措辞、补定义、拆任务。</li>
+<li><strong>信息不足</strong>：模型没有依据只能编 → 这不是 Prompt 问题，需要接入检索或补充资料。</li>
+<li><strong>格式问题</strong>：内容对但结构不对 → 收紧约束、给示例、上结构化输出。</li>
+<li><strong>示例误导</strong>：模型套用了错误模式 → 检查示例的一致性与代表性。</li>
+<li><strong>能力上限</strong>：要求和模型能力不匹配 → 换模型或换方案，继续调 Prompt 是浪费。</li>
+</ul>
+<p>优化手段本身也有一个性价比排序，通常按这个顺序试：先把指令写清楚，再补示例，再调结构与位置，然后上格式约束与结构化输出，然后考虑任务分解，最后才是换模型。<strong>每次只改一处</strong>，否则你永远不知道是哪个改动起了作用。每轮实验都值得留一条记录：改了什么、指标怎么变、结论是什么——这些记录累积起来，就是团队的 Prompt 经验库。</p>
+<p>最后是把回归测试接进流程：Prompt 文件变更时自动跑评测集，分数低于阈值就拦住合并。做到这一步，“改 Prompt”才和“改代码”享受同等待遇。</p>
+<h2 id="06、Prompt-Engineering-的局限"><a href="#06、Prompt-Engineering-的局限" class="headerlink" title="06、Prompt Engineering 的局限"></a>06、Prompt Engineering 的局限</h2><p>评估做到位之后，你会更清楚地看到一件事：很多“Prompt 没调好”的问题，其实根本不是 Prompt 的问题：</p>
+<p><strong>模型不知道的事，问不出来</strong>。内部知识、实时数据、私有数据库里的内容，无论怎么措辞都不会凭空出现。这类需求的方向是检索增强与知识注入，不是修辞。</p>
+<p><strong>模型做不到的事，写不出来</strong>。精确计算、严格事务、可靠的外部动作，靠自然语言约束只能提高概率，不能提供保证。这些要靠工具调用与代码执行。</p>
+<p><strong>状态问题不属于 Prompt 层</strong>。多轮对话中的历史管理、长期记忆、上下文预算分配，本质是上下文工程；把希望寄托在“写得更好的一句话”上，只会让 Prompt 越来越长、越来越脆弱。</p>
+<p><strong>系统约束不是文本能解决的</strong>。并发、延迟、成本上限、权限与合规，全都超出 Prompt 的作用范围。</p>
+<p><strong>Prompt 的收益会递减并趋于平台</strong>。当指令、示例、约束都写到位之后，继续微调措辞的边际收益会快速接近零——这时候真正的增量来自上下文组织方式、工具能力和模型选型。</p>
+<p>把这些摆清楚，不代表 Prompt 不重要，而是说明它在系统中的位置：它是接口层，负责把意图、资料和约束翻译成模型能消费的形式；但一个可靠的系统需要在它之外再叠三层——更好的上下文、更强的工具、更稳的编排。</p>
+<h2 id="07、从-Prompt-Engineering-到-Context-Engineering"><a href="#07、从-Prompt-Engineering-到-Context-Engineering" class="headerlink" title="07、从 Prompt Engineering 到 Context Engineering"></a>07、从 Prompt Engineering 到 Context Engineering</h2><p>从“怎么写一句话”变成“怎么为模型的每一步设计它看到的全部信息”，这个视角常被称为 Context Engineering（上下文工程）。</p>
+<p>它关注的不是一段提示词，而是每一次模型调用的完整输入构成：系统指令、检索到的资料、工具定义、工具返回结果、历史对话、记忆片段、少量示例、以及格式约束。核心问题也随之从“措辞”变成了分配与取舍：</p>
+<ul>
+<li><strong>选什么进来</strong>：相关性、时效性、可信度如何权衡？宁缺毋滥还是宁多勿漏？多进来的噪声会挤掉真正重要的信号。</li>
+<li><strong>怎么压缩</strong>：长材料是全文放进去，还是先摘要、先结构化抽取、或只放关键段落与引用指针？压缩本身会引入信息损失，需要有评估。</li>
+<li><strong>放在哪里</strong>：位置会影响权重，长材料与关键指令的相对顺序需要按目标模型验证，而不是照抄结论。</li>
+<li><strong>怎么验证</strong>：评估对象从“一条 Prompt 的质量”升级为“一套上下文组装策略的端到端任务成功率”，同时要监控 token 成本与延迟的变化。</li>
+</ul>
+<p>工程化的要求也随之平移：模板演进为上下文组装，版本管理要覆盖组装策略与检索配置，日志要记录“这一次实际拼进了哪些片段”，回归测试要能感知“换了一种召回策略”带来的影响。上下文工程不是一套新协议或新技术栈，它更多是关注点的迁移——当模型本身变强，把信息组织对，往往比把话说得漂亮更值钱。</p>
+<h2 id="08、从-Prompt-到-Agent"><a href="#08、从-Prompt-到-Agent" class="headerlink" title="08、从 Prompt 到 Agent"></a>08、从 Prompt 到 Agent</h2><p>再往前一步，就是从单次问答走向多步自主执行。Agent 的形态是：模型自己决定下一步做什么（选工具、给参数），执行、观察结果，再决定下一步，直到任务完成或触发终止条件。ReAct 这类早期工作已经把“推理与行动交替进行”的范式讲清楚了，后续的工具调用范式（由模型声明调用工具及其参数，由外部执行并回填结果）把它变成了工程上的标准配置。</p>
+<p>在这个形态下，Prompt 的位置发生了什么变化？它没有消失，反而更关键了一层：系统指令仍然定义目标、边界与终止条件，工具说明的质量直接决定模型会不会正确使用工具，异常处理规则决定它卡住时是重试、换路径还是退出。</p>
+<p>但更大的变量已经转移到 Prompt 之外：</p>
+<ul>
+<li><strong>工具设计</strong>。工具的数量、粒度与描述质量。工具太多会稀释选择准确率，描述含糊会让模型反复试错。工具是 Agent 的“API 文档”，也是它的能力边界。</li>
+<li><strong>循环控制</strong>。步数上限、时间与成本预算、超时与死循环检测、何时强制收敛出结论。</li>
+<li><strong>状态与上下文管理</strong>。多步执行会迅速吃满上下文，需要摘要、外置记忆、只保留必要观察结果的压缩策略。</li>
+<li><strong>错误恢复</strong>。失败后的重试策略、反思与修正、降级路径，以及什么时候必须交给人。</li>
+<li><strong>权限与安全</strong>。写操作、资金操作、对外发送这类动作必须有白名单、沙箱与人审批，而不能依赖模型“自觉”。</li>
+</ul>
+<p>评估方式同样要升级。从“这一次输出对不对”变成“这一条执行轨迹对不对”：过程是否合理、工具选择是否正确、参数是否恰当、步数与成本是否可接受、最终目标是否达成。A&#x2F;B 也变得更难做——一条轨迹的成败由多个步骤共同决定，方差更大，需要的样本量更多，因此基于固定场景的轨迹评测集往往比线上 A&#x2F;B 更实用。</p>
+<p>工程化的血脉则延续下来：日志从“一次调用”变成“一条轨迹”，每个步骤是一个可追踪的片段；版本管理同时要管提示词、工具定义和模型版本——这三者中任何一个变化，都可能让原来跑通的轨迹失效。</p>
+<p>回到这个系列最初的问题：Prompt 到底是什么。它是自然语言写给模型的程序，是意图与模型能力之间的接口。系列走到这里，可以补上后半句：随着系统变复杂，Prompt 从“全部”变成了“一部分”——但它是被最先写下的那一部分，也是所有上下文、工具与编排最终要服务于的那部分。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

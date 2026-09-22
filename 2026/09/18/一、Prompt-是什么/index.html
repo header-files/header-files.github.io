@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>about | 玲洲月</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="about | 玲洲月">
+  <title>一、Prompt 是什么 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent , Prompt ">
+  <meta name="description" content="一、Prompt 是什么 | 玲洲月">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
 <meta property="og:type" content="website">
@@ -417,24 +417,45 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-一、Prompt-是什么" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">about</h1>
+        <h1 class="article-title">一、Prompt 是什么</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">Prompt-Engineering</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+            <a class="color2">Prompt</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2026-09-20 18:41:05'>2026-09-08 16:58</time>
+            发布时间 : <time class="date" title='最后更新: 2026-09-22 12:27:04'>2026-09-18 22:24</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:111</span>
+        <span>字数:3.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -464,7 +485,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%BD%91%E7%AB%99"><span class="toc-text">关于本网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">01、Prompt 是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%80%E6%AE%B5%E5%86%B3%E5%AE%9A%E6%A8%A1%E5%9E%8B%E8%A1%8C%E4%B8%BA%E7%9A%84%E6%96%87%E6%9C%AC"><span class="toc-text">1.1 一段决定模型行为的文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Prompt-%E4%B8%8E-LLM-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">1.2 Prompt 与 LLM 的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Prompt-%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%BD%A2%E6%80%81"><span class="toc-text">1.3 Prompt 的两种形态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81Prompt-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">02、Prompt 的基本结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%8C%87%E4%BB%A4%EF%BC%9A%E5%91%8A%E8%AF%89%E6%A8%A1%E5%9E%8B%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">2.1　指令：告诉模型做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A%E4%BA%A4%E4%BB%A3%E6%A8%A1%E5%9E%8B%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E8%83%8C%E6%99%AF"><span class="toc-text">2.2　上下文：交代模型需要知道的背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%BE%93%E5%85%A5%EF%BC%9A%E6%98%8E%E7%A1%AE%E8%A6%81%E5%A4%84%E7%90%86%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">2.3　输入：明确要处理的对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E7%BA%A6%E6%9D%9F%EF%BC%9A%E5%88%92%E6%B8%85%E8%BE%B9%E7%95%8C"><span class="toc-text">2.4　约束：划清边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%EF%BC%9A%E5%AE%9A%E4%B9%89%E8%BE%93%E5%87%BA%E7%9A%84%E5%BD%A2%E7%8A%B6"><span class="toc-text">2.5　输出格式：定义输出的形状</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%9C%80%E7%9B%B4%E6%8E%A5%E7%9A%84%E7%A4%BA%E8%8C%83"><span class="toc-text">2.6　示例：最直接的示范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81Prompt-%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA"><span class="toc-text">03、Prompt 如何影响模型输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81Prompt-Engineering-%E8%83%BD%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E3%80%81%E4%B8%8D%E8%83%BD%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88"><span class="toc-text">04、Prompt Engineering 能解决什么、不能解决什么</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -480,10 +501,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="关于本网站"><a href="#关于本网站" class="headerlink" title="关于本网站"></a>关于本网站</h2><p>本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>，主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在GitHub上开源。</p>
+        <blockquote>
+<p>大模型不会读心术。你以为你提出了要求，其实你只是发出了噪声——模型只能从这段噪声里，猜你想干什么。</p>
+</blockquote>
+<p>同样一个需求，一句“帮我写个总结”和一段写清楚背景、格式、边界的提示词，产出的结果可能天差地别。很多人把这种差距归结为“模型不行”或者“运气不好”，但真正的原因往往很简单：Prompt 没写清楚。</p>
+<h2 id="01、Prompt-是什么"><a href="#01、Prompt-是什么" class="headerlink" title="01、Prompt 是什么"></a>01、Prompt 是什么</h2><h3 id="1-1-一段决定模型行为的文本"><a href="#1-1-一段决定模型行为的文本" class="headerlink" title="1.1 一段决定模型行为的文本"></a>1.1 一段决定模型行为的文本</h3><p>Prompt 就是你在调用大模型时输入的那段文本。它看起来只是普通的自然语言，但它实际上是模型的“运行时配置”：模型接收到 Prompt 之后做什么、不做什么、以什么风格做、输出成什么样子，很大程度上由这段文本决定。</p>
+<p>可以把模型想象成一个能力极强、但对你的处境一无所知的实习生。它读过整个互联网，会写代码会写文章，但它不知道你在做什么项目、给谁看、要什么格式。Prompt 的作用，就是把这一切交代清楚。交代得越清楚，产出越接近预期；交代得含糊，模型就只能按最平均、最常见的理解来回答。</p>
+<h3 id="1-2-Prompt-与-LLM-的关系"><a href="#1-2-Prompt-与-LLM-的关系" class="headerlink" title="1.2 Prompt 与 LLM 的关系"></a>1.2 Prompt 与 LLM 的关系</h3><p>要理解 Prompt 为什么这么重要，得先回到 LLM 的工作方式。语言模型的本质是一个“下一个词预测器”：给定前面的所有文本，预测接下来最可能出现的词。它没有一个独立的“理解你意图”的模块，它只是对你给出的全部文本（包括系统指令、历史对话、你的输入）做条件生成。这带来两个直接的推论：</p>
+<ul>
+<li>Prompt 是模型唯一的输入信号。模型不知道你脑子里想什么，不知道你昨天说过什么（除非你写进 Prompt），也不知道你的业务背景。所有它需要的信息，都必须显式或隐式地出现在 Prompt 里。</li>
+<li>Prompt 会“ conditioning ”模型的概率分布。当你在 Prompt 里给出几个格式一致的示例时，模型对“接下来输出同样格式”的概率会显著上升；当你在 Prompt 里指定角色和语气时，模型会倾向于延续这种语言风格。这不是魔法，只是条件概率在起作用——你改变了条件，就改变了输出分布。</li>
+</ul>
+<p>所以 Prompt 与 LLM 的关系可以概括为一句话：Prompt 是模型的程序，自然语言就是编程语言。模型架构和权重决定它的“能力上限”，而 Prompt 决定这一次调用中，它表现出能力的哪个切面。</p>
+<h3 id="1-3-Prompt-的两种形态"><a href="#1-3-Prompt-的两种形态" class="headerlink" title="1.3 Prompt 的两种形态"></a>1.3 Prompt 的两种形态</h3><p>Prompt 并不总是“用户在对话框里打的那句话”。在实际应用中，一个完整的 Prompt 通常包括系统提示词（System Prompt）和用户输入（User Input）两部分。系统提示词由应用开发者编写，定义模型的角色、能力和边界，通常对终端用户不可见；用户输入则是每次交互的具体内容。前者决定“这是一个什么样的助手”，后者决定“这一次要做什么”。做产品的人和做使用的人，写的是 Prompt 的不同部分，但遵守同样的原理。</p>
+<h2 id="02、Prompt-的基本结构"><a href="#02、Prompt-的基本结构" class="headerlink" title="02、Prompt 的基本结构"></a>02、Prompt 的基本结构</h2><p>一条成熟的 Prompt，很少是一句孤零零的话。把它拆开看，基本由六个零件组成：指令、上下文、输入、约束、输出格式和示例。不是每条 Prompt 都要凑齐六件，但每当你觉得“模型没听懂”的时候，逐项检查这六个零件，几乎总能找到缺的那一块。</p>
+<h3 id="2-1-指令：告诉模型做什么"><a href="#2-1-指令：告诉模型做什么" class="headerlink" title="2.1　指令：告诉模型做什么"></a>2.1　指令：告诉模型做什么</h3><p>指令是 Prompt 的核心，回答“你要模型干什么”。好的指令有三个特征：动词明确（“翻译”“分类”“提取”“改写”，而不是“帮我处理一下”）、任务单一（一次调用做一件事，复杂任务拆成多步）、对象清晰（对谁做、从哪段文本里做）。</p>
+<p>一个常见的反例是“帮我把这个写得更好”。好在哪里？给谁看？保持长度还是可以重写？“更好”这个词把判断标准完全留给了模型，而模型的默认判断标准未必是你的。改成“把这段产品介绍改写得更口语化，面向 20 到 30 岁的消费者，长度保持在 100 字以内”，模型立刻就有了明确的靶子。</p>
+<h3 id="2-2-上下文：交代模型需要知道的背景"><a href="#2-2-上下文：交代模型需要知道的背景" class="headerlink" title="2.2　上下文：交代模型需要知道的背景"></a>2.2　上下文：交代模型需要知道的背景</h3><p>上下文回答“模型需要知道什么才能做好这件事”。它包括业务背景（这是给什么场景用的）、受众信息（写给谁看的）、相关材料（参考文档、数据、之前的对话结论）。</p>
+<p>背景信息的价值经常被低估。同一个问题，“我们是一家做企业级 SaaS 的公司，客户是中小企业的财务部门，请解释一下什么是数据合规”，和直接问“什么是数据合规”，得到的答案深度、用词、举例方向完全不同。模型不会自动猜到你的场景，你给了场景，它就能把答案校准到场景里。</p>
+<h3 id="2-3-输入：明确要处理的对象"><a href="#2-3-输入：明确要处理的对象" class="headerlink" title="2.3　输入：明确要处理的对象"></a>2.3　输入：明确要处理的对象</h3><p>输入是模型这次真正要处理的内容。听起来简单，但在长 Prompt 里，输入经常和指令、背景混在一起，导致模型分不清“哪部分是要处理的材料，哪部分是处理要求”。实践中有两个有效的做法：一是用明确的标记把输入包裹起来（比如 XML 标签、三引号、分隔线），二是在指令里显式引用这个标记（“请翻译 &lt;原文&gt; 标签中的内容”）。这样即使输入里本身含有指令样式的文字，模型也不容易混淆。</p>
+<h3 id="2-4-约束：划清边界"><a href="#2-4-约束：划清边界" class="headerlink" title="2.4　约束：划清边界"></a>2.4　约束：划清边界</h3><p>约束回答“不要做什么、限制是什么”。它通常包括：长度限制（不超过 200 字）、内容限制（不要编造数据、不要提及竞品）、行为限制（如果信息不足就追问，而不是自己补）、风格限制（避免营销话术）。</p>
+<p>约束的一个关键技巧是“正向表述优先于负向表述”。模型对“要做什么”的响应质量，普遍好于对“不要做什么”的规避质量。与其只写“不要太啰嗦”，不如同时写“用三句话以内说清楚”，后者给了模型一个可以执行的目标，而前者只给了一个需要自我否定的方向。</p>
+<h3 id="2-5-输出格式：定义输出的形状"><a href="#2-5-输出格式：定义输出的形状" class="headerlink" title="2.5　输出格式：定义输出的形状"></a>2.5　输出格式：定义输出的形状</h3><p>如果你要把模型的输出交给下游程序处理（解析 JSON、填入表格、渲染成页面），输出格式就必须在 Prompt 里白纸黑字地定义清楚：用什么结构、哪些字段、字段类型是什么、要不要 Markdown、错了怎么处理。</p>
+<p>格式定义得越具体，输出越稳定。“输出 JSON”和“输出一个 JSON 对象，包含 title（字符串）、tags（字符串数组，最多 3 个）、score（0 到 1 的小数，保留两位）三个字段，不要输出 JSON 以外的任何文字”是两条天差地别的 Prompt。很多“模型输出不稳定”的问题，本质上是格式定义的颗粒度不够。</p>
+<h3 id="2-6-示例：最直接的示范"><a href="#2-6-示例：最直接的示范" class="headerlink" title="2.6　示例：最直接的示范"></a>2.6　示例：最直接的示范</h3><p>示例（Few-shot）是六件套里性价比最高的一个。用三言两语描述不清楚的格式、风格、判断标准，直接给两三个例子，模型往往就懂了。这在行为学上叫上下文学习（In-Context Learning）：模型并不修改参数，但从 Prompt 里的示例中“学会”了模式，并在新输入上延续这个模式。</p>
+<p>写示例要注意两点：一是示例要覆盖典型的边界情况，全是同质化的例子反而会让模型过度套用模式；二是示例之间的格式必须完全一致，模型会忠实模仿你示例里的一切，包括你不想让它模仿的瑕疵。</p>
+<h2 id="03、Prompt-如何影响模型输出"><a href="#03、Prompt-如何影响模型输出" class="headerlink" title="03、Prompt 如何影响模型输出"></a>03、Prompt 如何影响模型输出</h2><p>理解了结构，再往深看一层：这些组件究竟通过什么机制影响输出？大致有三条路径。</p>
+<p>第一，<strong>条件生成</strong>。前面说过，模型是“给定前文，预测下一个词”。Prompt 的每一个字都在参与构建这个条件。你在 Prompt 里写下“作为一个严谨的法务”，模型的输出分布就会向法律文本的用词倾斜；你写下“用轻松的口吻”，分布就向口语化表达倾斜。Prompt 不是在“告诉”模型什么，而是在“牵引”模型的概率走向。</p>
+<p>第二，<strong>注意力分配</strong>。模型在生成每一个词时，都会对 Prompt 里的不同位置分配不同的注意力。这带来一个实际问题：长 Prompt 里，开头和结尾的内容通常获得更多注意力，中间部分容易被“稀释”——学术界把这个现象称为 “Lost in the Middle”。这就是为什么最重要的指令通常建议放在 Prompt 的开头或结尾，而不是埋在一大段背景材料中间。</p>
+<p>第三，<strong>模式匹配</strong>。模型对 Prompt 中的示例、结构、关键词进行模式识别。一致的示例格式会让模型延续格式；结构化的 Prompt（用标题、标签、编号组织）会让模型的输出也趋向结构化。很多“Prompt 排版技巧”背后的原理就在这里：Prompt 本身的结构，就是模型输出结构的先兆。</p>
+<p>这三条机制共同解释了一个经验法则：Prompt 写作的本质，不是“和 AI 对话”，而是“为概率分布设计输入”。每一个措辞、每一处结构、每一条约束，都是在向模型的下一个词预测注入偏向。</p>
+<p>看到这里再回头看前两节就会明白：**所谓 Prompt Engineering，并不是一组孤立的“咒语技巧”，而是把“拆结构”“懂机制”组合起来、为模型设计输入的一门工程手艺。**那么这门手艺的成色到底如何？它被宣传过两次：一次被吹成无所不能，一次被贬为一文不值。都过头了。给它划一条清晰的边界，比争论高低更有用。</p>
+<h2 id="04、Prompt-Engineering-能解决什么、不能解决什么"><a href="#04、Prompt-Engineering-能解决什么、不能解决什么" class="headerlink" title="04、Prompt Engineering 能解决什么、不能解决什么"></a>04、Prompt Engineering 能解决什么、不能解决什么</h2><p>Prompt Engineering被宣传过两次：一次被吹成无所不能，一次被贬为一文不值。都过头了。给它划一条清晰的边界，比争论高低更有用。</p>
+<p><strong>它能解决的：</strong></p>
+<ul>
+<li><strong>对齐与格式问题</strong>。模型的输出风格、结构、格式不符合需求，绝大多数可以通过写清楚指令、约束和示例解决。这是 Prompt 工程回报最高的领域。</li>
+<li><strong>稳定复用</strong>。把一条反复调优的 Prompt 固化成模板（系统提示词），就能让同样的任务在无数次调用中保持一致的产出质量。产品里的系统提示词本质上就是“沉淀下来的 Prompt 工程成果”。</li>
+<li><strong>能力引导</strong>。让模型分步骤思考（思维链）、先分析再输出、自我检查再提交，这些“引导模型使用已有能力”的技巧，往往能显著提升复杂任务的完成质量。</li>
+</ul>
+<p><strong>它不能解决的：</strong></p>
+<ul>
+<li><strong>模型不具备的能力</strong>。模型没有实时数据（除非接入检索或工具），算不准复杂算术（除非接入代码执行），不知道你公司内部的知识（除非你把知识给它）。Prompt 再精妙，也无法凭空召唤出模型没有的能力——这些场景需要的是检索增强（RAG）、工具调用，而不是更好的措辞。</li>
+<li><strong>模型本身的缺陷</strong>。幻觉、知识过时、推理上限，这些是模型架构和训练数据的属性。Prompt 可以降低幻觉的概率（比如要求“不确定就说明不知道”），但不能根除。指望一条完美的 Prompt 把一个中等模型变成顶级模型，是不现实的。</li>
+<li><strong>替代系统设计</strong>。真实的 AI 应用是“模型 + Prompt + 检索 + 工具 + 评估 + 兜底”的系统。Prompt 只是其中一环。当模型选型、上下文管理、错误处理这些问题没解决时，单点打磨 Prompt 的边际收益会很快见顶。</li>
+</ul>
+<p>所以更准确的定位是：Prompt Engineering 是性价比最高的第一层优化——它零成本、见效快，任何 AI 应用都应该先把这一层做扎实；但它也是天花板明确的优化——当任务复杂度超出“说清楚就能做好”的范围时，就该往上叠工具、检索和系统设计了。</p>
+<p>把 Prompt 当成魔法的人会失望，把它当成“与模型沟通的接口规范”的人，才能真正用它换来稳定、可控的输出。说到底，Prompt 工程的全部秘密只有一句话：模型只能看到你给它的世界，那就把这个世界描述清楚。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
