@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>三、上下文组装 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent , Context ">
+  <meta name="description" content="三、上下文组装 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(21)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(21)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="107.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-三、上下文组装" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">三、上下文组装</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">Context-Engineering</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+            <a class="color3">Context</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-23 11:28:45'>2026-09-21 20:11</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:5.2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E6%A0%B8%E5%BF%83%E5%BE%AA%E7%8E%AF%EF%BC%9A%E5%85%88%E7%9C%8B%E5%85%A8%E5%B1%80"><span class="toc-text">01、核心循环：先看全局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85%EF%BC%9A%E4%BA%94%E6%AD%A5%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-text">02、上下文组装：五步流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%94%B6%E9%9B%86%EF%BC%9A%E5%85%88%E5%88%92%E5%AE%9A%E5%80%99%E9%80%89%E8%8C%83%E5%9B%B4"><span class="toc-text">2.1 收集：先划定候选范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%80%89%E6%8B%A9%EF%BC%9A%E5%86%B3%E5%AE%9A%E8%B0%81%E8%BF%9B%E6%9D%A5%E3%80%81%E8%B0%81%E7%95%99%E4%B8%8B%E6%8C%87%E9%92%88"><span class="toc-text">2.2 选择：决定谁进来、谁留下指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%BB%84%E7%BB%87%EF%BC%9A%E6%8A%8A%E4%BF%A1%E6%81%AF%E5%88%87%E6%88%90%E6%9C%89%E8%BE%B9%E7%95%8C%E7%9A%84%E5%9D%97"><span class="toc-text">2.3 组织：把信息切成有边界的块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%9A%E9%80%82%E9%85%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%BB%E5%8F%96%E6%96%B9%E5%BC%8F"><span class="toc-text">2.4 格式化：适配模型的读取方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E6%8E%92%E5%BA%8F%EF%BC%9A%E4%BD%8D%E7%BD%AE%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%BF%A1%E6%81%AF"><span class="toc-text">2.5 排序：位置本身就是信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8E%B7%E5%8F%96%EF%BC%9A%E4%BA%94%E7%A7%8D%E6%9D%A5%E6%BA%90%EF%BC%8C%E4%BA%94%E7%A7%8D%E4%BB%A3%E4%BB%B7"><span class="toc-text">03、上下文获取：五种来源，五种代价</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A3%80%E7%B4%A2%EF%BC%9A%E5%90%91%E7%9F%A5%E8%AF%86%E5%BA%93%E8%A6%81%E4%BA%8B%E5%AE%9E"><span class="toc-text">3.1 检索：向知识库要事实</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%B0%E5%BF%86%EF%BC%9A%E5%90%91%E5%8E%86%E5%8F%B2%E8%A6%81%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="toc-text">3.2 记忆：向历史要连续性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%90%91%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E8%A6%81%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81"><span class="toc-text">3.3 工具：向真实世界要当前状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-SKILL%EF%BC%9A%E5%90%91%E8%BF%87%E7%A8%8B%E6%80%A7%E7%9F%A5%E8%AF%86%E8%A6%81%E6%96%B9%E6%B3%95%EF%BC%88%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD%EF%BC%89"><span class="toc-text">3.4 SKILL：向过程性知识要方法（按需加载）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E7%8E%AF%E5%A2%83%EF%BC%9A%E5%90%91%E8%BF%90%E8%A1%8C%E6%97%B6%E8%A6%81%E7%8E%B0%E5%9C%BA%E7%8A%B6%E6%80%81"><span class="toc-text">3.5 环境：向运行时要现场状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%B8%80%E6%AC%A1%E6%80%A7%E5%85%A8%E5%A1%9E%E8%BF%9B%E5%8E%BB"><span class="toc-text">04、为什么不能一次性全塞进去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E6%8C%89%E4%BB%BB%E5%8A%A1%E5%8A%A8%E6%80%81%E6%9E%84%E5%BB%BA"><span class="toc-text">05、按任务动态构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E6%B8%90%E8%BF%9B%E6%8A%AB%E9%9C%B2%EF%BC%9A%E8%AE%A9%E4%BF%A1%E6%81%AF%E5%88%86%E5%B1%82%E5%87%BA%E7%8E%B0"><span class="toc-text">06、渐进披露：让信息分层出现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E5%A4%9A%E8%BD%AE%E5%AF%B9%E8%AF%9D%E9%87%8C%EF%BC%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%A6%82%E4%BD%95%E4%B8%8D%E6%96%AD%E5%8F%98%E5%8C%96"><span class="toc-text">07、多轮对话里，上下文如何不断变化</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>上一章拆开了上下文的组成，这一章要回答的是更实际的问题：这些东西是怎么在每一轮被拼装起来的？**从 Agent 的工程视角看，每一轮都需要重新确定“模型这一轮应该看到什么”。**即使上一轮已经存在完整上下文，下一轮仍然可能因为新增消息、工具结果、状态变化或上下文压缩而发生变化。在最简单的无状态 API 模式下，这通常表现为客户端重新组织所需的历史和上下文并发起下一次请求。</p>
+</blockquote>
+<h2 id="01、核心循环：先看全局"><a href="#01、核心循环：先看全局" class="headerlink" title="01、核心循环：先看全局"></a>01、核心循环：先看全局</h2><p>把 Agent 的一轮调用拉远看，它的形状是一个闭环：</p>
+<pre><code class="language-text">用户任务
+   ↓
+需要什么信息？
+   ↓
+RAG / Tool / Memory / Skill
+   ↓
+上下文组装
+   ↓
+LLM
+   ↓
+新的结果 / 状态
+   ↓
+重新构建 Context ──────┐
+   ↑                  │
+   └──────────────────┘
+</code></pre>
+<p>这个环里有两个容易混为一谈的动作，值得先分开命名：</p>
+<ul>
+<li><strong>上下文获取</strong>：去什么地方、用什么手段，把外部信息取回来。它回答“信息从哪来”。检索知识库、读记忆、调工具、加载技能、采集环境状态，都属于这一步。</li>
+<li><strong>上下文组装</strong>：把取回来的原料，连同系统提示、历史记录，加工成这一次请求的完整配置。它回答“信息怎么摆”。</li>
+</ul>
+<h2 id="02、上下文组装：五步流水线"><a href="#02、上下文组装：五步流水线" class="headerlink" title="02、上下文组装：五步流水线"></a>02、上下文组装：五步流水线</h2><p>组装这件事，拆开看是五步。它不是什么框架规定的标准流程，而是把实际在做的事按顺序说清楚。</p>
+<h3 id="2-1-收集：先划定候选范围"><a href="#2-1-收集：先划定候选范围" class="headerlink" title="2.1 收集：先划定候选范围"></a>2.1 收集：先划定候选范围</h3><p>第一步是把“可能用得到的东西”列出来：哪些工具可用、哪些技能相关、哪些文件可能有关、历史里哪几段还有效、记忆里有没有相关条目。</p>
+<p>这一步的判据是<strong>宽进</strong>——宁可多列一点，也不要漏掉关键项。但“宽进”有个前提：候选必须是可以被枚举的。如果你根本不知道信息在哪（不知道有哪个文件、哪张表、哪个接口），那就不是收集问题，而是要在组装阶段安排一次“探索”，让 agent 用工具去找。另外，**这里的“宽进”只针对候选集，不意味着把候选信息全部放进 Context。**候选集可以很大，但真正注入模型的 Context 仍应尽量保持高信号密度。</p>
+<h3 id="2-2-选择：决定谁进来、谁留下指针"><a href="#2-2-选择：决定谁进来、谁留下指针" class="headerlink" title="2.2 选择：决定谁进来、谁留下指针"></a>2.2 选择：决定谁进来、谁留下指针</h3><p>第二步是把候选集收敛成“这次真的放进去”的那一份。判据不是“相关不相关”，而是更严格的一条：<strong>没有它，这一步能不能做对？</strong></p>
+<p>这一步是整条流水线上最需要判断力、也最容易被做坏的地方。最常见的错误是“看起来相关就带上”：检索命中十份文档就都塞进去，其中八份就是纯干扰；工具返回一个大 JSON，字段一个不落地灌进去。选择的反面不是遗漏，而是稀释——放进去的东西越多，关键信号的相对权重越低。一个实用的判据是：<strong>如果内容体量较大、当前又不一定需要全文，优先保留指针；只有真正需要时再加载本体</strong>， 文件路径、查询语句、文档链接都是指针，成本极低；真需要内容时再取。</p>
+<h3 id="2-3-组织：把信息切成有边界的块"><a href="#2-3-组织：把信息切成有边界的块" class="headerlink" title="2.3 组织：把信息切成有边界的块"></a>2.3 组织：把信息切成有边界的块</h3><p>第三步是结构问题。同样一批信息，平铺成一大段文字，和分成若干带标题的区块，模型的理解难度差很多。Anthropic 在系统提示的写法上给过具体建议：拆成明确的分节（背景信息、指令、工具指引、输出格式等），用 XML 标签或 Markdown 标题把边界标出来。Cognition 从另一个角度说了同一件事：**对需要协作或交接的 Agent，不能只共享一个脱离上下文的最终结论；至少应该保留足以解释该结论的关键行动、观察和决策信息。**因为一个动作背后带着一串隐含决策，只给结论就等于让接收方重新猜一遍。</p>
+<p>组织这一步的核心是让每块信息的<strong>边界和身份</strong>都清楚：这是什么、谁写的、什么时候产生的、还算不算数。含糊的边界会直接变成后面的冲突——两块内容互相矛盾时，模型往往连它们属于哪个层面都分不清。</p>
+<h3 id="2-4-格式化：适配模型的读取方式"><a href="#2-4-格式化：适配模型的读取方式" class="headerlink" title="2.4 格式化：适配模型的读取方式"></a>2.4 格式化：适配模型的读取方式</h3><p>第四步是决定用什么格式呈现。结构化数据用 JSON、表格还是自然语言？长文档给全文还是给摘要？日志给多少行？代码给整个文件还是给片段？</p>
+<p>这里有个容易被忽略的判断：<strong>格式要迁就模型的处理方式，而不是迁就上游系统的输出方式。</strong> 直接透传一个嵌套五层的 API 响应，通常不如提取三个关键字段再列成表。格式化的核心目标，是让模型能够低成本地识别信息结构、提取关键信息，并按预期使用它。这也是工具设计里常说的原则——工具应当返回 token 效率高、无需二次加工的信息。</p>
+<h3 id="2-5-排序：位置本身就是信息"><a href="#2-5-排序：位置本身就是信息" class="headerlink" title="2.5 排序：位置本身就是信息"></a>2.5 排序：位置本身就是信息</h3><p>最后一步是摆放顺序。位置为什么重要，有两个原因：</p>
+<p><strong>原因一：注意力分布不均匀。</strong> “lost in the middle”的研究发现，长上下文里位于开头和结尾的信息更容易被模型准确利用，埋在中间的信息召回明显下降。所以在长上下文中，可以优先考虑把高优先级指令和关键结论放在模型更容易利用的位置。</p>
+<p><strong>原因二：前缀缓存。</strong> 这一点在工程上更硬。多数模型的缓存是按前缀匹配的——从请求开头到缓存断点之间的内容完全一致，才能命中缓存；中间任何一处变化，都会让它之后的所有内容重新计算。这意味着顺序不只是注意力问题，还是成本与延迟问题。</p>
+<p>因此有一条被官方文档明确写出的排序原则：<strong>静态内容在前，动态内容在后。</strong> 以采用前缀缓存的 Agent 系统为例，一个常见的组织方式是：</p>
+<ol>
+<li>静态系统提示与工具定义（全局缓存）</li>
+<li>项目上下文，如指令文件、自动记忆（项目内缓存）</li>
+<li>会话上下文（会话内缓存）</li>
+<li>对话消息（每轮变化）</li>
+</ol>
+<p>顺序一旦被破坏，代价立刻体现——把精确到秒的时间戳写进静态系统提示、工具定义顺序随机抖动，都会让整段缓存失效。所以需要更新的信息（比如当前时间、刚改过的文件）更合适的做法是<strong>随下一轮消息带进去</strong>，而不是回头改系统提示。在一些 Agent 实现中，临时加载的技能、计划或阶段性指令会作为新的上下文块追加，而不是修改原有系统指令。这样可以减少对稳定前缀的影响。</p>
+<h2 id="03、上下文获取：五种来源，五种代价"><a href="#03、上下文获取：五种来源，五种代价" class="headerlink" title="03、上下文获取：五种来源，五种代价"></a>03、上下文获取：五种来源，五种代价</h2><p>组装流水线要往里面放的原料，来自五个地方。它们真正的差别不在“能拿到什么”，而在<strong>新鲜度、成本和可控性</strong>这三件事上。</p>
+<h3 id="3-1-检索：向知识库要事实"><a href="#3-1-检索：向知识库要事实" class="headerlink" title="3.1 检索：向知识库要事实"></a>3.1 检索：向知识库要事实</h3><p>检索解决的是“从外部信息空间中找到与当前任务相关的信息”这一问题——产品文档、规范、历史邮件、代码库说明。它通常发生在调用之前，把相关资料预先召回并注入。</p>
+<p>它的主要风险是精度而非召回：召回太多会污染上下文，召回太旧会引入过时事实。所以检索环节真正需要设计的往往不是“怎么多拿”，而是“怎么少拿”和“怎么判断还算不算数”——重排序、时效过滤、版本与权限过滤，都属于这一层。</p>
+<h3 id="3-2-记忆：向历史要连续性"><a href="#3-2-记忆：向历史要连续性" class="headerlink" title="3.2 记忆：向历史要连续性"></a>3.2 记忆：向历史要连续性</h3><p>记忆解决的是“跨会话连续性”——用户偏好、项目背景、之前做过的决策。它的形态可以是文件、向量库或结构化存储，但机制一致：<strong>存在外面，按需回灌。</strong></p>
+<p>记忆系统的难点不在读取，而在写入与失效。一条过时的结论一旦进了记忆，它会持续污染此后所有会话，而且因为“看起来是记忆”而显得格外可信。设计记忆时，写入规则和过期机制的重要性不低于检索质量。</p>
+<h3 id="3-3-工具：向真实世界要当前状态"><a href="#3-3-工具：向真实世界要当前状态" class="headerlink" title="3.3 工具：向真实世界要当前状态"></a>3.3 工具：向真实世界要当前状态</h3><p>工具解决的是“实时性”——当前订单状态、当前库存、当前分支、当前线上指标。对实时性要求高、且状态变化频繁的信息，应优先通过工具在运行时获取；对于允许一定延迟的数据，更新后的索引仍然可以通过 RAG 提供。</p>
+<p>这条原则有一个很实际的推论：<strong>凡是会变化的信息，都不该写进静态上下文。</strong> 把它写进系统提示，既会过期，又会破坏缓存；正确做法是留一个工具，让 agent 在需要时自己去问。</p>
+<h3 id="3-4-SKILL：向过程性知识要方法（按需加载）"><a href="#3-4-SKILL：向过程性知识要方法（按需加载）" class="headerlink" title="3.4 SKILL：向过程性知识要方法（按需加载）"></a>3.4 SKILL：向过程性知识要方法（按需加载）</h3><p>技能解决的是“怎么做才对”——某个领域的标准流程、注意事项、脚本工具。它的加载方式上一章已经讲过：名称与描述常驻（元数据层），触发时才把正文读进上下文，引用的文件与脚本进一步按需加载，脚本甚至只回灌运行结果。</p>
+<p>从获取的角度看，技能是最“省”的一种：不带内容，只带入口。它的代价转移到另一个地方——描述必须准确，否则技能永远不会被触发。</p>
+<h3 id="3-5-环境：向运行时要现场状态"><a href="#3-5-环境：向运行时要现场状态" class="headerlink" title="3.5 环境：向运行时要现场状态"></a>3.5 环境：向运行时要现场状态</h3><p>环境获取解决的是“我在哪儿干活”——工作目录、操作系统、当前时间、git 分支与改动、目录结构、项目说明文件。它让 agent 能写对路径、按平台差异行事、正确处理日期。</p>
+<p>需要注意两点。第一，<strong>环境信息可以以快照形式注入，也可以通过工具在运行时重新获取。</strong> 如果系统只在会话开始时建立环境快照，那么后续文件、Git 状态等变化不会自动反映到这份快照中，需要主动重新读取。第二，环境信息的采集成本往往被低估——把整个目录树塞进上下文，在大型仓库里可能直接吃掉可观的预算，通常更好的做法是给出摘要与导航入口。</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>典型获取时机</th>
+<th>新鲜度</th>
+<th>边际成本</th>
+<th>主要风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检索</td>
+<td>调用前预取</td>
+<td>取决于索引更新</td>
+<td>中（内容体积大）</td>
+<td>信噪比低、可能过时</td>
+</tr>
+<tr>
+<td>记忆</td>
+<td>按需回灌</td>
+<td>跨会话累积，可能过时</td>
+<td>低到中</td>
+<td>过时结论持续污染</td>
+</tr>
+<tr>
+<td>工具</td>
+<td>运行时主动调用</td>
+<td>最高（当场为真）</td>
+<td>延迟 + 结果不可控</td>
+<td>结果体积失控</td>
+</tr>
+<tr>
+<td>技能</td>
+<td>触发时加载正文</td>
+<td>低（过程知识少变）</td>
+<td>元数据极小</td>
+<td>描述不准导致不触发</td>
+</tr>
+<tr>
+<td>环境</td>
+<td>会话开始采集</td>
+<td>快照，不自动更新</td>
+<td>中到大</td>
+<td>过期快照误导判断</td>
+</tr>
+</tbody></table>
+<h2 id="04、为什么不能一次性全塞进去"><a href="#04、为什么不能一次性全塞进去" class="headerlink" title="04、为什么不能一次性全塞进去"></a>04、为什么不能一次性全塞进去</h2><p>既然信息都能拿到，为什么不干脆开局全放进去，省掉每一轮的取用决策？这是很多人的第一反应，但它行不通，即使模型拥有很大的 Context Window，也不意味着应该把所有可用信息一次性放进去。原因有四层，而且是叠加的。</p>
+<p><strong>第一，相关性是随任务演化的，而预加载是静态的。</strong> 任务第 30 步真正需要的信息，第 1 步时未必存在——它可能是第 25 步的产物；也可能当时看起来无关，后来才变得关键。预加载逻辑写在第 1 步，注定要猜第 30 步的心思。</p>
+<p><strong>第二，环境会变，索引会旧。</strong> 预先构建的索引、预先拉取的数据，在长任务里会逐渐偏离真实状态。官方文档在对比两种策略时点出过这一点：即时检索能绕开陈旧索引的问题。</p>
+<p><strong>第三，注意力与预算都是有限的。</strong> 上下文越长，通常意味着模型一定表现越差，而且信息噪声、处理成本和延迟通常会上升，部分长上下文任务还可能出现有效信息利用率下降的问题。把所有信息一次性塞进去，等于主动把自己的有效上下文压缩到最差状态。</p>
+<p><strong>第四，也是最少被提到的一点：你不可能提前知道 agent 需要什么。</strong> 面对复杂任务，人也不知道下一步会撞上什么。预先穷举所有可能性，成本上不可行，而且会把上下文变成一份无人维护的档案库。</p>
+<p>所以主流方案不是二选一，而是<strong>混合</strong>：一部分信息预先注入（稳定、必然需要，如系统提示、项目约定文件），其余留轻量标识符，运行时按需加载。Claude Code 就是这种形态——项目说明文件在会话开始时直接放入上下文，而文件检索交给 glob、grep 这类工具即时完成。</p>
+<p>这个权衡有它的代价，得说清楚：<strong>运行时探索比预先检索更慢</strong>，而且它依赖两件事做到位——合适的工具，以及清晰的导航规则。工具不称手或规则不明确时，agent 会在上下文里浪费预算：误用工具、走进死胡同、或者干脆找不到关键信息。所以“让 agent 自己去查”不是省事，而是把工程量从数据准备挪到了工具与规则设计上。</p>
+<h2 id="05、按任务动态构建"><a href="#05、按任务动态构建" class="headerlink" title="05、按任务动态构建"></a>05、按任务动态构建</h2><p>动态构建的实操方法，可以总结成一句反推：<strong>先问这一步要产出什么，再问产出它需要什么信息。</strong></p>
+<p>例如“修一个测试失败的 bug”，需要的是复现路径、报错信息、相关源码、近期改动；不需要的是整个代码库的架构文档。而“跨模块重构接口”，需要的是调用点清单、接口契约、约定规范，不需要某一次具体的报错堆栈。同一套系统面对这两类任务，正确的上下文配置完全不同：</p>
+<table>
+<thead>
+<tr>
+<th>任务类型</th>
+<th>主要信息来源</th>
+<th>可以只留指针的</th>
+<th>需要警惕的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定点修 bug</td>
+<td>报错输出、目标源码、近期改动</td>
+<td>无关模块的代码</td>
+<td>历史里已被推翻的旧结论</td>
+</tr>
+<tr>
+<td>跨模块重构</td>
+<td>调用点清单、接口契约、项目约定</td>
+<td>实现细节、测试夹具全文</td>
+<td>局部改动带来的隐藏依赖</td>
+</tr>
+<tr>
+<td>数据分析</td>
+<td>表结构、统计口径、抽样结果</td>
+<td>全量数据集</td>
+<td>大结果集直接灌入</td>
+</tr>
+<tr>
+<td>长文写作</td>
+<td>大纲、素材片段、参考规范</td>
+<td>素材全文</td>
+<td>素材之间口径不一致</td>
+</tr>
+<tr>
+<td>线上排障</td>
+<td>实时指标、日志摘要、变更记录</td>
+<td>历史归档日志</td>
+<td>用快照当实时状态</td>
+</tr>
+</tbody></table>
+<p>这张表的价值不在具体条目，而在那个反推动作：<strong>从产出倒推输入</strong>。按这个顺序想，绝大多数“要不要放进去”的纠结会自动消失——凡是对本次产出没有贡献的，都不进来。</p>
+<h2 id="06、渐进披露：让信息分层出现"><a href="#06、渐进披露：让信息分层出现" class="headerlink" title="06、渐进披露：让信息分层出现"></a>06、渐进披露：让信息分层出现</h2><p>渐进披露是把“选择”这一步制度化的做法。技能机制是它最清晰的实现：元数据常驻、正文触发时加载、资源按需读取，脚本只回灌结果。三层各有各的 token 成本，未使用的那部分几乎不花钱。</p>
+<p>但这个原则的价值远不止于技能。它可以被提炼成通用的四句话：</p>
+<ul>
+<li><strong>指针优先于内容</strong>：先给路径、查询、链接，需要时再取；</li>
+<li><strong>摘要优先于全文</strong>：先给结构和结论，细节在追问时展开；</li>
+<li><strong>索引优先于数据</strong>：先让 agent 知道“有什么、在哪”，而不是把东西全搬过来；</li>
+<li><strong>入口优先于知识</strong>：过程性知识只保留入口（技能描述），不预载正文。</li>
+</ul>
+<p>支撑这一切的前提条件常被忽略：<strong>按需加载要求 agent 有办法“找到”信息。</strong> 文件系统的价值因此不止是存储——目录层级、命名约定、时间戳本身就是信号，它们让 agent 能在不读内容的情况下判断该不该读：同名文件在 <code>tests/</code> 下和 <code>src/</code> 下意味着完全不同的用途，文件大小暗示复杂度，时间戳是相关性的agent指标。agent 就是这样一层层把理解拼起来，工作记忆里只保留当下必需的。</p>
+<p>隔离是渐进披露的另一种形态：把子任务交给独立上下文的子agent，让它自己去查、去试，只把结论带回来。这样调查过程不必占据主agent的历史，主agent的轨迹可以跑得更长。代价是子agent看不到全部背景，所以它适合回答边界清晰的问题，而不适合替主agent做需要全局信息的决策。</p>
+<h2 id="07、多轮对话里，上下文如何不断变化"><a href="#07、多轮对话里，上下文如何不断变化" class="headerlink" title="07、多轮对话里，上下文如何不断变化"></a>07、多轮对话里，上下文如何不断变化</h2><p>回到开头的循环。单看一轮，组装是五步流水线；连起来看多轮，上下文其实一直在做四种动作：</p>
+<ul>
+<li><strong>追加。</strong> 新消息、新工具结果、新的环境变化，都从尾部进入。这是最自然的增长方式，也是最容易失控的方式。</li>
+<li><strong>外置。</strong> 把该记住但不必常驻的东西写到上下文之外：任务清单、进展笔记、关键决策。Anthropic 把这套做法称为结构化笔记，也直接叫 agentic memory；它的价值在于<strong>上下文重置之后还能恢复连续性</strong>——agent 读回自己的笔记，接着往下做。这里有一个关键细节：外置的不只是数据，更是决策的上下文。写“改了 A 文件”没用，写“因为 B 约束所以选择 A 而不是 C”才有用。</li>
+<li><strong>压缩。</strong> 接近预算上限时，把历史总结成精炼版本，用压缩后的上下文开启新窗口。压缩的取舍很讲究：保留架构决策、未解决的 bug、实现细节，丢掉重复的工具输出和寒暄。压得太狠会丢掉当时看不出重要、后来才关键的细节，所以压缩提示通常需要专门调校，先保证召回率再收紧。Cognition 对此的判断很直接：把行动与对话历史压缩成关键细节是一件极难做对的事，值得专门投入，甚至为此训练专门的小模型。</li>
+<li><strong>重置与回灌。</strong> 任务之间清空上下文（换一个不相干的任务时），或者从压缩点重新开始，然后按需把记忆、笔记、必要文件读回来。Claude Code 的做法是压缩后带上最近访问的若干文件继续——连续性由“摘要 + 少量新鲜文件”维持，而不是靠保留全部历史。</li>
+</ul>
+<p>这四种动作合起来，构成了 Agent 长期工作的基本节奏：<strong>追加 → 积累 → 压缩 → 重置 → 回灌</strong>。而决定每一次动作取舍的判据，回到最上面那句话——这一步需要什么信息。</p>
+<p>最后还有一个常被忽视的工程约束：**上下文的大幅改动可能影响缓存复用。**对采用前缀缓存的系统，如果缓存前缀中的内容发生变化，变化点之后的内容通常无法继续复用原缓存。因此，压缩、重载项目上下文、调整工具集合等可能影响前缀的操作，最好在任务的自然断点进行。具体哪些参数会导致缓存失效，则取决于模型提供商和缓存机制，不能一概而论。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

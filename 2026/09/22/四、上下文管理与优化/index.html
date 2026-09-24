@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>二、Prompt 的技巧 | 玲洲月</title>
-  <meta name="keywords" content=" LLM , Agent , Prompt ">
-  <meta name="description" content="二、Prompt 的技巧 | 玲洲月">
+  <title>四、上下文管理与优化 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent , Context ">
+  <meta name="description" content="四、上下文管理与优化 | 玲洲月">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
 <meta property="og:type" content="website">
@@ -494,9 +494,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-二、Prompt-的技巧" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-四、上下文管理与优化" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">二、Prompt 的技巧</h1>
+        <h1 class="article-title">四、上下文管理与优化</h1>
     
     <div class="article-meta">
         
@@ -508,7 +508,7 @@
             
             <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
             
-            <a  data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">Prompt-Engineering</a>
+            <a  data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">Context-Engineering</a>
             
         </span>
         
@@ -520,19 +520,19 @@
             
             <a class="color1">Agent</a>
             
-            <a class="color2">Prompt</a>
+            <a class="color3">Context</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2026-09-22 13:09:19'>2026-09-19 10:27</time>
+            发布时间 : <time class="date" title='最后更新: 2026-09-23 11:57:42'>2026-09-22 10:34</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:4k</span>
+        <span>字数:3.6k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -562,7 +562,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%B8%80%E5%BC%A0%E6%96%B9%E6%B3%95%E5%9C%B0%E5%9B%BE"><span class="toc-text">01、一张方法地图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81Zero-shot%EF%BC%9A%E4%B8%8D%E4%B8%BE%E4%BE%8B%EF%BC%8C%E5%8F%AA%E8%AF%B4%E6%B8%85%E6%A5%9A"><span class="toc-text">02、Zero-shot：不举例，只说清楚</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81Few-shot%EF%BC%9A%E7%BB%99%E6%A8%A1%E5%9E%8B%E7%9C%8B%E5%87%A0%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">03、Few-shot：给模型看几个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81Role-Prompting%EF%BC%9A%E8%AE%BE%E5%AE%9A%E8%BA%AB%E4%BB%BD"><span class="toc-text">04、Role Prompting：设定身份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81Chain-of-Thought%EF%BC%9A%E8%AE%A9%E6%8E%A8%E7%90%86%E8%BF%87%E7%A8%8B%E6%98%BE%E5%BC%8F%E5%B1%95%E5%BC%80"><span class="toc-text">05、Chain-of-Thought：让推理过程显式展开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81Task-Decomposition%EF%BC%9A%E6%8A%8A%E5%A4%A7%E4%BB%BB%E5%8A%A1%E6%8B%86%E6%88%90%E5%A4%9A%E6%AC%A1%E8%B0%83%E7%94%A8"><span class="toc-text">06、Task Decomposition：把大任务拆成多次调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E7%BA%A6%E6%9D%9F%E4%B8%8E-Structured-Output"><span class="toc-text">07、输出格式约束与 Structured Output</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E7%BA%A6%E6%9D%9F"><span class="toc-text">7.1　输出格式约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-Structured-Output%EF%BC%9A%E7%94%B1%E5%8D%8F%E8%AE%AE%E4%BF%9D%E8%AF%81%E7%9A%84%E5%BD%A2%E7%8A%B6"><span class="toc-text">7.2　Structured Output：由协议保证的形状</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81Prompt-%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E7%BB%87"><span class="toc-text">08、Prompt 中的上下文组织</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E4%BD%8D%E7%BD%AE%E5%86%B3%E5%AE%9A%E6%9D%83%E9%87%8D"><span class="toc-text">8.1　位置决定权重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E6%8C%87%E4%BB%A4%E3%80%81%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%A4%BA%E4%BE%8B%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87"><span class="toc-text">8.2　指令、数据与示例如何组织</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E7%AE%A1%E7%90%86%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E4%B8%89%E4%BB%B6%E4%BA%8B"><span class="toc-text">01、管理上下文的三件事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%EF%BC%9A%E6%8A%8A%E5%86%85%E5%AE%B9%E5%8F%98%E5%B0%8F"><span class="toc-text">02、上下文压缩：把内容变小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8E%86%E5%8F%B2%E6%91%98%E8%A6%81"><span class="toc-text">2.1 历史摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B7%A5%E5%85%B7%E7%BB%93%E6%9E%9C%E5%8E%8B%E7%BC%A9"><span class="toc-text">2.2 工具结果压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BF%A1%E6%81%AF%E5%8E%BB%E9%87%8D"><span class="toc-text">2.3 信息去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Map-Reduce"><span class="toc-text">2.4 Map-Reduce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-text">2.5 滑动窗口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%A2%84%E7%AE%97%EF%BC%9A%E5%88%86%E9%85%8D%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="toc-text">03、上下文预算：分配的艺术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Token-%E9%A2%84%E7%AE%97"><span class="toc-text">3.1 Token 预算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8D%E5%90%8C%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">3.2 不同信息的优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%8A%A8%E6%80%81%E6%88%AA%E6%96%AD"><span class="toc-text">3.3 动态截断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E6%8E%A7%E5%88%B6"><span class="toc-text">3.4 长上下文控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BC%98%E5%8C%96%EF%BC%9A%E4%BB%8E%E6%9C%BA%E5%88%B6%E4%B8%8A%E7%9C%81"><span class="toc-text">04、上下文优化：从机制上省</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E9%80%89%E6%8B%A9%EF%BC%9A%E4%BB%8E%E6%BA%90%E5%A4%B4%E5%B0%91%E8%A3%85"><span class="toc-text">4.1 选择：从源头少装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%8E%92%E5%BA%8F%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7%E5%B8%83%E5%B1%80"><span class="toc-text">4.2 排序与优先级布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E9%9A%94%E7%A6%BB%EF%BC%9A%E5%88%AB%E8%AE%A9%E6%89%80%E6%9C%89%E4%BF%A1%E6%81%AF%E6%8C%A4%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AA%E7%AA%97%E5%8F%A3%E9%87%8C"><span class="toc-text">4.3 隔离：别让所有信息挤在同一个窗口里</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%93%AA%E4%B8%80%E6%8B%9B"><span class="toc-text">05、什么时候用哪一招</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -579,68 +579,122 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>提示词技巧不是一串能背下来的咒语，而是一组按需取用的杠杆：有的负责消除歧义，有的负责提供示范，有的负责把输出的形状锁死。用错杠杆，比不用更费力。</p>
+<p>上一篇拆的是“每一轮怎么把上下文拼起来”，这一篇要回答的是更实际的问题：<strong>拼不下、装太多的时候怎么办。</strong> 上下文管理做得好不好，衡量的不是“装下了多少”，而是“扔掉了多少不该装的”。</p>
 </blockquote>
-<p>上一篇拆开了 Prompt 的零件，也讲了它对模型的输出施加影响的三条机制。但知道零件不等于会组装——真正落地时，你会遇到另一类问题：模型理解得对，但风格不对；风格对了，但推理不到位；推理到位了，格式又解析不了。这篇文章把这些具体麻烦对应的方法整理成一张地图：零样本、少样本、角色提示、思维链、任务分解、输出格式约束与结构化输出，最后回到最容易被忽视的一层——上下文该如何组织。</p>
-<h2 id="01、一张方法地图"><a href="#01、一张方法地图" class="headerlink" title="01、一张方法地图"></a>01、一张方法地图</h2><p>在逐个展开之前，先给这些方法分个类，后面就不会把它们当成互斥的选项。按作用方向看，常见方法大致作用在三个方向：</p>
+<h2 id="01、管理上下文的三件事"><a href="#01、管理上下文的三件事" class="headerlink" title="01、管理上下文的三件事"></a>01、管理上下文的三件事</h2><p>前面说过，上下文是一种边际收益递减的稀缺资源。而Agent 循环会不断追加工具结果、历史消息和状态信息，使上下文越来越大；当信息量超过模型能够有效利用的范围后，噪声、成本和延迟都会开始成为问题。于是所有管理手段都可以归到三类：</p>
 <ul>
-<li><strong>减少歧义</strong>。零样本提示、角色提示属于这一层。它们不改变模型的能力，只试图让你想表达的意思更少被误解——通过更明确的指令措辞，或更具体的身份设定。</li>
-<li><strong>提供示例</strong>。少样本提示、思维链、任务分解属于这一层。它们通过给模型看例子、看推理路径、看任务切分方式，把你要的行为模式“示范”出来，让模型在新输入上延续这个模式。</li>
-<li><strong>约束输出</strong>。输出格式约束和结构化输出属于这一层。它们不关心模型怎么想，只关心输出长什么样，能不能被下游程序或人稳定消费。</li>
+<li><strong>压缩</strong>：内容已经装进去了，怎么把它变小而不失真；</li>
+<li><strong>预算</strong>：地方就这么大，怎么决定谁占多少；</li>
+<li><strong>优化</strong>：跳出单次请求，从结构和机制上让每一轮更省。</li>
 </ul>
-<p>而“上下文组织”不属于以上任何一个方向，它是编排层：决定了前面三类信息在 Prompt 里的位置、顺序和主次。同一个方法，组织方式不同，效果可能差别很大。</p>
-<p>需要说明两点。第一，这份清单列的是最常见、最重要的一组方法，不构成完整枚举——提示词领域每年都在长出新的技巧，遇到没见过的名字，先按“它属于哪一层”归位，比记忆名字更有用。第二，本文写于 2026 年 9 月，涉及具体模型行为的部分（尤其是与具体模型绑定的推理类技巧），请以你使用模型时的官方文档为准。</p>
-<h2 id="02、Zero-shot：不举例，只说清楚"><a href="#02、Zero-shot：不举例，只说清楚" class="headerlink" title="02、Zero-shot：不举例，只说清楚"></a>02、Zero-shot：不举例，只说清楚</h2><p>Zero-shot，零样本提示是最基础的用法：不给任何示例，直接用自然语言描述任务，让模型完成。它成立的前提，是模型经过指令微调，已经具备“听懂任务描述”的能力——这在早期的语言模型上是行不通的，那时候不给例子模型几乎不会做事。</p>
-<p>零样本的成败几乎完全取决于指令质量，所以它更像是把上一篇讲的指令写法做到极致的检验：动词明确、对象清晰、边界清晰。一个实用的自检方法是，把 Prompt 交给一个不了解背景的同事看，如果他读完能一次性知道该做什么、输出是什么样，模型通常也能。</p>
-<p>它的优势是短、便宜、可读，适合高频调用、任务简单、格式要求不高的场景。它的局限也明显：当任务带有隐含的判断标准（什么是“好的标题”？什么算“相关的段落”？），而这些标准又难以用一两句话说清楚时，零样本会开始不稳定。这时候该往上走一层，给例子。</p>
-<h2 id="03、Few-shot：给模型看几个例子"><a href="#03、Few-shot：给模型看几个例子" class="headerlink" title="03、Few-shot：给模型看几个例子"></a>03、Few-shot：给模型看几个例子</h2><p>Few-shot，少样本提示是在 Prompt 里带上若干“输入—输出”示例，让模型照猫画虎。它在 GPT-3 论文里被系统验证过：模型不更新参数，仅凭上下文中的少量示例就能在新任务上表现明显提升，这一现象被称为上下文学习（In-Context Learning）。</p>
-<p>少样本的收益来自模式示范，所以示例的“质量”比“数量”重要得多。几个实操要点：</p>
+<p>三者关注的是不同层面：</p>
 <ul>
-<li><strong>示例中要有你想让模型学会的那个判断</strong>。分类任务里，如果示例全是容易区分的正例，模型学到的是“大概都能判成正类”；带上两个边界样本，它才学到你的标准。</li>
-<li><strong>格式必须严格一致</strong>。模型会忠实模仿示例里的一切，包括你不想要的瑕疵——示例里输出带一句解释，正式输出也会带。</li>
-<li><strong>注意示例里的分布偏差</strong>。如果示例的标签明显偏向某一类，模型会倾向于多输出那一类，这是少样本的常见陷阱。</li>
-<li><strong>数量存在收益递减</strong>。从 2 个加到 5 个示例通常有提升，从 20 个加到 50 个通常没有，反而挤占上下文预算。</li>
+<li><strong>压缩</strong>：对已经产生的上下文做减法；</li>
+<li><strong>预算</strong>：给有限的 Context Window 划定边界；</li>
+<li><strong>优化</strong>：从获取、组织、隔离、缓存等机制上减少不必要的上下文消耗。</li>
 </ul>
-<p>还有个容易被忽略的收益：少样本同时是一种格式约束手段。你不需要用文字描述输出结构，示例本身就是结构说明。</p>
-<h2 id="04、Role-Prompting：设定身份"><a href="#04、Role-Prompting：设定身份" class="headerlink" title="04、Role Prompting：设定身份"></a>04、Role Prompting：设定身份</h2><p>Role Prompting，角色提示是给模型设定一个身份——“你是一位资深数据库工程师”“你是一位面向零基础读者的科普作者”。它有时写在系统提示词里（对整个应用生效），有时写在单次输入里。提示主要影响语言风格、术语密度、叙述口吻和关注点：同一个问题，用“儿科医生”和“医学期刊审稿人”的身份提问，答案的用词和详略程度会明显不同。</p>
-<p>但它不会凭空带来知识或能力。让模型扮演“顶级律师”，它并不会因此变得更容易答对具体的法条细节；角色不是知识库，也不是能力开关。因此更稳妥的用法是：用角色提示来锚定风格和视角，用上下文和资料来提供事实，两者别混为一谈。另外，角色设定越具体，收益越明显——“你是一位写技术文档的工程师”远不如“你是一位为内部开发者写 API 使用说明的工程师，读者已经熟悉基本概念”来得有效。</p>
-<h2 id="05、Chain-of-Thought：让推理过程显式展开"><a href="#05、Chain-of-Thought：让推理过程显式展开" class="headerlink" title="05、Chain-of-Thought：让推理过程显式展开"></a>05、Chain-of-Thought：让推理过程显式展开</h2><p>Chain-of-Thought，思维链提示属于“提供示范”：不直接要答案，而是要求模型先给出推理步骤，再给结论。它的经典形式是在示例里展示完整推理过程（少样本思维链），后来也发展出只需一句“让我们一步步思考”的零样本形式。</p>
-<p>它为什么有效？因为对需要多步推理的任务（数学、逻辑、多约束判断），模型在自回归生成时是一步一步产生的——把中间步骤写出来，等于给后续生成更多的中间结果作为条件，减少了一步跳错、后面全错的概率。更进一步的做法是自洽性（Self-Consistency）：让模型用不同路径推理多次，再对最终答案投票，用采样的多样性换取稳健性。</p>
-<p>使用时需要注意以下几点：</p>
+<h2 id="02、上下文压缩：把内容变小"><a href="#02、上下文压缩：把内容变小" class="headerlink" title="02、上下文压缩：把内容变小"></a>02、上下文压缩：把内容变小</h2><p>压缩的本质是一个有损变换：把大量原始内容变换成小得多的表示，同时尽量保住“对后续步骤有用的信息”。它一定丢信息，所以所有压缩技巧的核心问题都是同一个——<strong>丢什么、留什么。</strong></p>
+<h3 id="2-1-历史摘要"><a href="#2-1-历史摘要" class="headerlink" title="2.1 历史摘要"></a>2.1 历史摘要</h3><p>历史摘要是长对话和长周期 Agent 中常见的上下文压缩方式：接近预算上限时，把之前所有轮次交给模型总结，用摘要替换原始历史，从精简后的状态继续工作。它有效的前提是摘要“留对了东西”。Anthropic 在描述 Claude Code 的压缩机制时给出过参考答案：保留架构决策、未解决的 bug、实现细节这类<strong>会持续影响后续判断的信息</strong>，丢弃重复的工具输出和过程性对话。做完压缩后，agent 带着摘要和最近访问的几个文件继续，用户感知不到中断。</p>
+<p>两个实践要点。第一，摘要的粒度要“决策级”：写“改了 A 文件”价值有限，写“因为 B 约束所以选了 A 而不是 C”才有用——隐含决策丢了，后面就会重蹈覆辙或做出矛盾行为。第二，压缩过猛会丢掉当时看不出重要、后来才关键的细节，Anthropic 在介绍 compaction 时建议把压缩提示当成需要专门调校的工程产物：先保证召回率，把相关信息全部留住，再逐步收紧。</p>
+<p>还有一个容易被忽略的时机问题：在一些长任务中，可以考虑把压缩安排在任务自然断点，而不是等到上下文几乎耗尽；这样更容易选择合适的保留内容。但具体触发策略应根据任务和实现评估。</p>
+<h3 id="2-2-工具结果压缩"><a href="#2-2-工具结果压缩" class="headerlink" title="2.2 工具结果压缩"></a>2.2 工具结果压缩</h3><p>在 Agent 的上下文里，增长快的除了对话，还有工具结果。一次工具调用可能带回几千 token 的 JSON、一整页网页、一大段日志，如果不做清理或压缩，这些工具结果会继续留在后续上下文中，并不断增加输入规模。对应的压缩手段由几层组成：</p>
 <ul>
-<li>思维链不是万能增幅器。对于检索事实、格式转换这类没有推理链的任务，强行要求分步思考只会增加 token 成本和延迟，甚至让模型在无关细节上自我纠缠。</li>
-<li>它与模型特点强相关。部分较新的模型中内置了思考过程，模型自己会决定展开多少推理——对这类模型，显式要求“一步步思考”的收益会明显下降，是否仍然需要、以及该用哪种形式，请以目标模型的当期文档为准。</li>
-<li>思维链要不要展示给用户是产品决策。内部推理过程往往冗长且不适合终端阅读，常见做法是要求模型按“先分析后结论”的结构输出，或只输出结论，把过程留在模型内部。</li>
+<li><strong>源头收敛</strong>：让工具本身就返回精炼结果——只返回必要字段、做分页、支持裁剪，这是最根本的一层，也是工具设计的核心要求之一；</li>
+<li><strong>抽样代替全量</strong>：处理大文件、大结果集时不整体加载，用 <code>head</code>、<code>tail</code> 这类命令先看头尾，用针对性查询代替全表扫描；</li>
+<li><strong>事后清理</strong>：调用完成、结论提取之后，把过大的原始输出替换成结论或摘要。</li>
 </ul>
-<h2 id="06、Task-Decomposition：把大任务拆成多次调用"><a href="#06、Task-Decomposition：把大任务拆成多次调用" class="headerlink" title="06、Task Decomposition：把大任务拆成多次调用"></a>06、Task Decomposition：把大任务拆成多次调用</h2><p>Task Decomposition，任务分解是把一个复杂目标拆成若干子任务，分步完成——既可以拆成一次 Prompt 内的多个步骤，也可以拆成多次模型调用，让上一步的输出成为下一步的输入。</p>
-<p>它和思维链的区别在于粒度：思维链是在一次调用内展开推理，任务分解是把任务本身切开，每一步都更小、更可控、更容易检查。当任务里出现“先抽取再归类再改写”这类异质环节时，拆开几乎是必然选择——因为不同环节需要不同的指令、不同的输出格式，硬塞进一次 Prompt 只会互相干扰。</p>
-<p>两个实用模式：一是流水线式，步骤有明确先后依赖，逐级传递结果；二是从易到难式，先解决简单子问题，再把简单问题的结论作为上下文去攻难的部分。前者更常见，后者适合需要积累中间结论的任务。</p>
-<p>任务分解的额外价值是可验证性。每一步输出都可以单独校验、单独重试、单独缓存。当一次调用失败时，你只需要重跑失败的那一步，而不是整个流程。代价是调用次数和延迟上升，以及错误可能在步骤间传递——所以每一步都要有格式和内容上的检查点。</p>
-<h2 id="07、输出格式约束与-Structured-Output"><a href="#07、输出格式约束与-Structured-Output" class="headerlink" title="07、输出格式约束与 Structured Output"></a>07、输出格式约束与 Structured Output</h2><h3 id="7-1-输出格式约束"><a href="#7-1-输出格式约束" class="headerlink" title="7.1　输出格式约束"></a>7.1　输出格式约束</h3><p>严格来说，格式约束属于上一篇讲的“输出格式”的强化版：不只是说明要什么格式，而是用可执行的方式把格式钉住。常用手段有三种——给出目标结构的样例、逐字段说明类型和取值范围、明确禁止多余内容（比如“只输出 JSON，不要代码块包裹，不要任何解释文字”）。</p>
-<p>这里有个反复出现的经验：正向表述比负向表述有效。与其写“不要输出太长”，不如写“不超过三句话”；与其写“不要用术语”，不如写“用日常词汇解释，术语第一次出现时附一句说明”。模型对“做到什么”的执行力，普遍好于对“避免什么”的规避力。</p>
-<p>还要预期失败模式。自然语言约束始终是概率性的：模型可能加上一句“好的，以下是结果”，可能用 markdown 代码块把 JSON 包起来，可能在数组末尾多一个逗号。所以任何自动解析的链路都必须有容错——剥离代码块围栏、跳过前导文本、解析失败时重试并收紧约束。指望“写清楚了就 100% 稳定”，是在给系统埋雷。</p>
-<h3 id="7-2-Structured-Output：由协议保证的形状"><a href="#7-2-Structured-Output：由协议保证的形状" class="headerlink" title="7.2　Structured Output：由协议保证的形状"></a>7.2　Structured Output：由协议保证的形状</h3><p>如果你需要的是“语法层面保证合法”的结构化数据，那就不要只靠自然语言约束，而应该使用模型服务商提供的结构化输出能力。目前主流大模型厂商都提供了这类机制，但形态不同：有的提供 JSON 模式（保证输出是合法 JSON，但不保证字段符合你的 schema），有的支持用 JSON Schema 声明字段与类型并对生成过程施加约束（即约束解码，让模型在每一步只能生成符合 schema 的数据），还有的通过“让你声明工具及其参数 schema、由模型填充参数”的路径达到类似效果。</p>
-<p>使用时注意几点：</p>
+<h3 id="2-3-信息去重"><a href="#2-3-信息去重" class="headerlink" title="2.3 信息去重"></a>2.3 信息去重</h3><p>去重处理的是一种结构性浪费：<strong>同一条信息以不同形态出现在多个位置。</strong> 项目说明既在环境快照里、又被检索命中了一次、还写进了记忆；同一段代码因为两次文件读取而在历史里存了两份；系统提示里讲过的规则，又在用户消息里复述了一遍。</p>
+<p>去重的原则在之前就埋下了：<strong>关键事实保留单一可信源，其余位置只放指针。</strong> 实践上可以按三个步骤检查：找出重复项、指定权威来源、把其余出现替换为引用。与摘要相比，去重通常可以在不改变主要信息内容的情况下减少重复，但前提是能够确认重复内容具有相同语义和相同有效性——所以凡是发现重复，优先去重，而不是先急着压缩。</p>
+<h3 id="2-4-Map-Reduce"><a href="#2-4-Map-Reduce" class="headerlink" title="2.4 Map-Reduce"></a>2.4 Map-Reduce</h3><p>前面三种手段都作用于“一个上下文内部”。当单份上下文根本装不下要处理的内容时，就要换思路：<strong>分而治之。</strong> 把大内容切块，每一块在独立的上下文里处理（Map），只把精炼结果带出来，最后汇总（Reduce）。</p>
+<p>多智能体系统可以采用 Map-Reduce 的组织方式，每个子 Agent 在自己的上下文里读完大量资料，只向主 Agent 返回一千到两千 token 量级的精炼结论，主agent基于这些结论做综合。Cognition 对这类架构的提醒也要记着：子agent之间的上下文是割裂的，各自基于各自的部分信息做决策，容易出现彼此冲突的隐含决策——所以 Map-Reduce 适合“各块相互独立、结果可合并”的任务（如大规模检索、批量分析），不适合各部分强耦合的工程任务。</p>
+<h3 id="2-5-滑动窗口"><a href="#2-5-滑动窗口" class="headerlink" title="2.5 滑动窗口"></a>2.5 滑动窗口</h3><p>滑动窗口是最简单的历史控制手段：只保留最近 N 轮，更早的直接丢掉。它实现成本几乎为零，适合闲聊型应用。但在 Agent 场景里它有致命缺陷：<strong>被丢掉的信息里可能藏着后续必需的约束。</strong> 任务第 3 步定下的关键决定，到第 40 步可能正是需要遵守的——滑出窗口就等于忘了。在需要长期保持任务约束的 Agent 中，单纯滑动窗口存在明显的信息遗失风险，因此通常需要配合摘要、外部状态或 Memory 等机制：窗口外的内容不是直接丢，而是先沉淀成摘要或外部笔记，窗口内保留近期原文。这也正是“滑动窗口 + 记忆回灌”成为常见组合的原因——窗口负责控制体积，记忆负责保住连续性。</p>
+<h2 id="03、上下文预算：分配的艺术"><a href="#03、上下文预算：分配的艺术" class="headerlink" title="03、上下文预算：分配的艺术"></a>03、上下文预算：分配的艺术</h2><h3 id="3-1-Token-预算"><a href="#3-1-Token-预算" class="headerlink" title="3.1 Token 预算"></a>3.1 Token 预算</h3><p>预算思维的第一步是把账算清楚。一次调用里，上下文要同时容纳以下几类内容，而且它们互相挤占：</p>
 <ul>
-<li><strong>schema 越严，越要写全</strong>。字段是否必填、枚举取值、是否允许额外字段，这些信息不写清楚，模型只能自由发挥。枚举类字段建议列全取值，同时客户端仍应保留对未知值的兼容分支。</li>
-<li><strong>语法合法不等于语义正确</strong>。约束解码保证的是结构合规，不保证内容正确——字段填错了值，解析照样成功。校验必须做在业务层。</li>
-<li><strong>能力名称与启用方式会变</strong>。同一个厂商的不同模型对结构化输出的支持程度不同，部分能力初期以 beta 形式提供、需要额外请求头或参数，写法也随版本演进。请以当期官方文档为准，不要照抄旧文章里的字段名。</li>
-<li><strong>宽容解析</strong>。即使有 schema 约束，下游仍应对未知字段和未知枚举值保持宽容，避免上游一次小改动打挂整条链路。</li>
+<li>系统提示词与工具定义（常驻成本，每轮重发）；</li>
+<li>项目与任务指令；</li>
+<li>对话历史与工具结果（增长成本）；</li>
+<li>检索与记忆注入的内容（可变成本）；</li>
+<li><strong>留给模型输出的空间</strong>——这一项最容易被忘掉：Context Window 通常同时受到输入和输出 token 的限制，具体上限取决于模型和 API，预留不足，长回复会被截断。</li>
 </ul>
-<h2 id="08、Prompt-中的上下文组织"><a href="#08、Prompt-中的上下文组织" class="headerlink" title="08、Prompt 中的上下文组织"></a>08、Prompt 中的上下文组织</h2><h3 id="8-1-位置决定权重"><a href="#8-1-位置决定权重" class="headerlink" title="8.1　位置决定权重"></a>8.1　位置决定权重</h3><p>前面三类方法讲的都是“放什么”，这一节讲“放在哪”。原因在之前提到过的注意力机制：长上下文里，不同位置的信息获得的注意力并不均等，开头和结尾通常更受关注，中段容易被稀释，这就是所谓的“Lost in the Middle”。</p>
-<p>由此有两条被广泛采用的实践：把重要的指令和最终的问题放在开头或结尾，而不是埋在材料中间；在长材料场景里，先给文档、后给问题，让问题紧贴生成位置。前者是通用原则，后者是常见做法——不同模型对顺序的偏好并不一致，必要时用几条真实样本做 A&#x2F;B 测试，比照搬结论可靠。</p>
-<p>另一种有效的组织手段是显式分区：用 XML 标签、三引号、标题或分隔线把 Prompt 切成指令区、资料区、输入区、示例区。这既帮助模型区分“要处理的材料”和“处理的要求”，也降低了材料本身含有指令样式文字时的混淆风险。当资料是一整篇文档时，还可以用“先给一句摘要、再给全文”的方式降低模型在长文中丢失重点的概率。</p>
-<h3 id="8-2-指令、数据与示例如何组织"><a href="#8-2-指令、数据与示例如何组织" class="headerlink" title="8.2　指令、数据与示例如何组织"></a>8.2　指令、数据与示例如何组织</h3><p>把三者放在一起看，一个稳定的组织骨架通常是这样的顺序：</p>
+<p>很多实现提供了查看占用构成的手段（例如 Claude Code 的 <code>/context</code> 命令可以按类别显示各层占了多少）。养成先看账再调优的习惯，比凭感觉删内容有效得多——你经常会发现，占大头的是某个没有做源头收敛的工具，而不是自以为冗长的系统提示。</p>
+<h3 id="3-2-不同信息的优先级"><a href="#3-2-不同信息的优先级" class="headerlink" title="3.2 不同信息的优先级"></a>3.2 不同信息的优先级</h3><p>算清总量之后是分配。分配需要一张优先级表，优先级主要取决于<strong>当前任务的必要性、信息可靠性和时效性</strong>；变更频率则更多影响它应该如何缓存、更新和注入。综合起来，一套常见的分配次序是：</p>
 <ol>
-<li><strong>角色与总目标</strong>：一句话交代身份和要达成的目标，让模型先建立语境。</li>
-<li><strong>资料与数据</strong>：紧跟着给上下文材料，用标签包裹并说明它是什么。长材料放前面。</li>
-<li><strong>任务指令</strong>：明确要做什么、怎么做，指向上面的资料标签。</li>
-<li><strong>示例</strong>：给出一致格式的少样本示例，示范判断标准和输出形状。</li>
-<li><strong>约束与输出格式</strong>：把长度、禁止项、字段结构集中说明，避免散落各处。</li>
-<li><strong>输入与收尾提醒</strong>：给出本次要处理的具体内容，并在最后用一两句重申最关键的一两条约束。</li>
+<li><strong>不可妥协的</strong>：安全约束、当前任务目标、刚才做出的关键决策——丢了它们，后面全错；</li>
+<li><strong>高价值常驻的</strong>：系统提示词、工具定义——它们决定了模型“会什么”，但可以通过精简控制体积；</li>
+<li><strong>按需进出的</strong>：检索内容、记忆、技能正文——用指针和触发机制控制，用时再进；</li>
+<li><strong>可牺牲的</strong>：历史中的过程细节、被取代的旧方案、探索性尝试的中间输出——压缩和截断主要发生在这里。</li>
 </ol>
-<p>这个骨架有两个设计意图。一是<strong>就近原则</strong>：最关键的要求离生成位置最近，权重最高。二是<strong>分区原则</strong>：指令、数据、示例各有归属，不互相污染——这也是为什么把用户输入和系统指令混在同一段里是危险的：一旦输入里出现指令样式的文字，模型可能把它当作要求执行。</p>
-<p>组织顺序不是教条。不同厂商的官方指南对“长文档在前还是问题在前”的建议存在差异，不同模型的长上下文特性也在变，所以更稳妥的态度是：把上面这套骨架作为默认起点，然后用你自己的真实任务做几组对照实验，把结论固定在你的 Prompt 模板里。</p>
+<p>这张表的用法不是背下来，而是在每次“装不下”的时候问一遍：<strong>现在在窗口里的东西，有哪些属于第四类？</strong> 十有八九，问题出在那里。</p>
+<h3 id="3-3-动态截断"><a href="#3-3-动态截断" class="headerlink" title="3.3 动态截断"></a>3.3 动态截断</h3><p>静态预算管不住动态增长，所以需要动态截断：给不同类别的信息设置上限，超限就按规则裁剪。几个常见的截断点：</p>
+<ul>
+<li><p>工具结果超长时截断并提示“已截断”（让模型知道可以去分页取）；</p>
+</li>
+<li><p>历史超过阈值时触发压缩；</p>
+</li>
+<li><p>单条注入的检索内容限量，超出部分只给标题列表。</p>
+</li>
+</ul>
+<p>截断设计里有一个容易做错的细节：<strong>截断要留线索。</strong> 直接静默裁掉，模型会以为看到的就是全部，基于残缺信息继续推理；正确做法是明确告知“此处截断，完整内容可通过某工具获取”，把截断变成一次渐进披露，而不是一次静默丢失。</p>
+<h3 id="3-4-长上下文控制"><a href="#3-4-长上下文控制" class="headerlink" title="3.4 长上下文控制"></a>3.4 长上下文控制</h3><p>前三小节都是单点手段，长上下文控制是把它们组合成一套随长度变化的策略。一个实用的分层是：</p>
+<ul>
+<li><strong>短任务</strong>：什么都不用做，正常追加；</li>
+<li><strong>中等任务</strong>：开始收紧——工具结果源头收敛、及时去重、历史按需摘要；</li>
+<li><strong>接近预算</strong>：触发压缩，摘要 + 最近文件重开窗口；</li>
+<li><strong>超出预算的任务</strong>：转入外置模式——状态写进笔记和文件，上下文里只留指针，靠回灌维持连续性；必要时拆分成多个独立子任务。</li>
+</ul>
+<p>要说明的是，各实现在“接近预算”时的具体阈值和触发方式各不相同（有的自动触发压缩，有的需要手动），这是实现细节而非协议规定，以所用工具的文档为准。<strong>但策略分层本身是通用的：长度每上一个台阶，就应该多启用一层管理手段。</strong></p>
+<h2 id="04、上下文优化：从机制上省"><a href="#04、上下文优化：从机制上省" class="headerlink" title="04、上下文优化：从机制上省"></a>04、上下文优化：从机制上省</h2><p>压缩和预算都是在“内容已经很多”之后补救，优化则从结构上让问题变少。</p>
+<h3 id="4-1-选择：从源头少装"><a href="#4-1-选择：从源头少装" class="headerlink" title="4.1 选择：从源头少装"></a>4.1 选择：从源头少装</h3><p>选择是优化手段里杠杆最大的一条：<strong>不该进的，从一开始就不进。</strong> 它的工程落点是检索链路——查询改写、重排序、相关性过滤、时效过滤——以及“即时上下文”：预先只放轻量标识符，运行时按需加载。</p>
+<h3 id="4-2-排序与优先级布局"><a href="#4-2-排序与优先级布局" class="headerlink" title="4.2 排序与优先级布局"></a>4.2 排序与优先级布局</h3><p>同一批内容，放的位置不同，效果和成本都不同。这一条在之前已经展开（静态在前、动态在后），这里只补一个预算视角：<strong>位置布局也是预算工具。</strong> 根据模型和任务特点，把高价值内容放在更容易被模型利用的位置；对于长上下文，可以通过实验验证开头、中间、结尾不同位置的效果，而不是机械套用固定排序。布局一次做对，后面每一轮都在受益。</p>
+<h3 id="4-3-隔离：别让所有信息挤在同一个窗口里"><a href="#4-3-隔离：别让所有信息挤在同一个窗口里" class="headerlink" title="4.3 隔离：别让所有信息挤在同一个窗口里"></a>4.3 隔离：别让所有信息挤在同一个窗口里</h3><p>隔离的原则是：<strong>每个模型调用只看到完成当前任务所需的最小上下文。</strong> 它有两个主要形态。</p>
+<p>一是子Agent：让独立的上下文去做调查、试错这类“过程脏活”，只把结论带回主上下文。好处是主上下文的轨迹可以跑得更长，坏处是子Agent看不到全局背景——子 Agent 更适合上下文边界清晰、可以相对独立完成的子任务；需要综合全局状态的最终决策通常仍应由能够看到足够全局信息的协调 Agent 完成。Cognition 则从反面给出了更强的警告：多个Agent并行决策时，各自的行动带着各自的隐含假设，容易互相冲突；默认情况下应该排除不满足“共享完整轨迹”原则的架构。</p>
+<p>二是任务切换时的上下文重置：换一个不相干的任务就清空重来，而不是让上一个任务的残留混进下一个任务——这既是预算问题，更是冲突问题。</p>
+<h2 id="05、什么时候用哪一招"><a href="#05、什么时候用哪一招" class="headerlink" title="05、什么时候用哪一招"></a>05、什么时候用哪一招</h2><p>最后把三类手段收拢成一张决策表：</p>
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>首选手段</th>
+<th>关键动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>历史把窗口撑满了</td>
+<td>历史摘要</td>
+<td>决策级摘要 + 最近文件，断点处触发</td>
+</tr>
+<tr>
+<td>单次工具调用拖垮预算</td>
+<td>工具结果压缩</td>
+<td>源头收敛优先，抽样与清理兜底</td>
+</tr>
+<tr>
+<td>同一事实到处出现</td>
+<td>信息去重</td>
+<td>单一可信源，其余放指针</td>
+</tr>
+<tr>
+<td>内容总量超过单个窗口</td>
+<td>Map-Reduce</td>
+<td>切块独立处理，只带结论回来</td>
+</tr>
+<tr>
+<td>简单场景想省事</td>
+<td>滑动窗口</td>
+<td>必须配摘要或记忆，否则丢关键约束</td>
+</tr>
+<tr>
+<td>输出被截断</td>
+<td>Token 预算核算</td>
+<td>别忘了给输出留位置</td>
+</tr>
+<tr>
+<td>装进去的大多没用上</td>
+<td>选择收紧</td>
+<td>重排、过滤、即时加载</td>
+</tr>
+</tbody></table>
+<p>这张表读起来像工具箱，但底层只有一句话：<strong>上下文管理的所有手段，都是在一个有限预算内，持续地决定“什么该被模型看见”。</strong> 压缩是事后减法，预算是事前分配，优化是让这两件事的需要变少。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>

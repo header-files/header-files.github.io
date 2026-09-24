@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>二、Prompt 的技巧 | 玲洲月</title>
-  <meta name="keywords" content=" LLM , Agent , Prompt ">
-  <meta name="description" content="二、Prompt 的技巧 | 玲洲月">
+  <title>二、上下文里有什么 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent , Context ">
+  <meta name="description" content="二、上下文里有什么 | 玲洲月">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
 <meta property="og:type" content="website">
@@ -494,9 +494,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-二、Prompt-的技巧" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-二、上下文里有什么" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">二、Prompt 的技巧</h1>
+        <h1 class="article-title">二、上下文里有什么</h1>
     
     <div class="article-meta">
         
@@ -508,7 +508,7 @@
             
             <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
             
-            <a  data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">Prompt-Engineering</a>
+            <a  data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">Context-Engineering</a>
             
         </span>
         
@@ -520,14 +520,14 @@
             
             <a class="color1">Agent</a>
             
-            <a class="color2">Prompt</a>
+            <a class="color3">Context</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2026-09-22 13:09:19'>2026-09-19 10:27</time>
+            发布时间 : <time class="date" title='最后更新: 2026-09-23 11:00:53'>2026-09-21 15:05</time>
         
     </div>
     <div class="article-meta">
@@ -562,7 +562,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%B8%80%E5%BC%A0%E6%96%B9%E6%B3%95%E5%9C%B0%E5%9B%BE"><span class="toc-text">01、一张方法地图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81Zero-shot%EF%BC%9A%E4%B8%8D%E4%B8%BE%E4%BE%8B%EF%BC%8C%E5%8F%AA%E8%AF%B4%E6%B8%85%E6%A5%9A"><span class="toc-text">02、Zero-shot：不举例，只说清楚</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81Few-shot%EF%BC%9A%E7%BB%99%E6%A8%A1%E5%9E%8B%E7%9C%8B%E5%87%A0%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">03、Few-shot：给模型看几个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81Role-Prompting%EF%BC%9A%E8%AE%BE%E5%AE%9A%E8%BA%AB%E4%BB%BD"><span class="toc-text">04、Role Prompting：设定身份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81Chain-of-Thought%EF%BC%9A%E8%AE%A9%E6%8E%A8%E7%90%86%E8%BF%87%E7%A8%8B%E6%98%BE%E5%BC%8F%E5%B1%95%E5%BC%80"><span class="toc-text">05、Chain-of-Thought：让推理过程显式展开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81Task-Decomposition%EF%BC%9A%E6%8A%8A%E5%A4%A7%E4%BB%BB%E5%8A%A1%E6%8B%86%E6%88%90%E5%A4%9A%E6%AC%A1%E8%B0%83%E7%94%A8"><span class="toc-text">06、Task Decomposition：把大任务拆成多次调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E7%BA%A6%E6%9D%9F%E4%B8%8E-Structured-Output"><span class="toc-text">07、输出格式约束与 Structured Output</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E7%BA%A6%E6%9D%9F"><span class="toc-text">7.1　输出格式约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-Structured-Output%EF%BC%9A%E7%94%B1%E5%8D%8F%E8%AE%AE%E4%BF%9D%E8%AF%81%E7%9A%84%E5%BD%A2%E7%8A%B6"><span class="toc-text">7.2　Structured Output：由协议保证的形状</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81Prompt-%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E7%BB%87"><span class="toc-text">08、Prompt 中的上下文组织</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E4%BD%8D%E7%BD%AE%E5%86%B3%E5%AE%9A%E6%9D%83%E9%87%8D"><span class="toc-text">8.1　位置决定权重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E6%8C%87%E4%BB%A4%E3%80%81%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%A4%BA%E4%BE%8B%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87"><span class="toc-text">8.2　指令、数据与示例如何组织</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E5%85%88%E5%88%AB%E6%80%A5%E7%9D%80%E5%88%97%E6%B8%85%E5%8D%95"><span class="toc-text">01、先别急着列清单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E6%8C%87%E4%BB%A4%E4%BF%A1%E6%81%AF%EF%BC%9A%E7%BA%A6%E6%9D%9F%E8%A1%8C%E4%B8%BA%E7%9A%84%E7%A8%B3%E5%AE%9A%E5%B1%82"><span class="toc-text">02、指令信息：约束行为的稳定层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-System-Prompt"><span class="toc-text">2.1 System Prompt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-SKILL%EF%BC%9A%E8%A2%AB%E6%8B%86%E5%87%BA%E6%9D%A5%E7%9A%84%E8%BF%87%E7%A8%8B%E6%80%A7%E7%9F%A5%E8%AF%86"><span class="toc-text">2.2 SKILL：被拆出来的过程性知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%B7%A5%E5%85%B7%E6%8F%8F%E8%BF%B0%E4%B8%8E%E5%B7%A5%E5%85%B7%E7%BB%93%E6%9E%9C%EF%BC%9A%E8%83%BD%E5%8A%9B%E5%A3%B0%E6%98%8E%E4%B8%8E%E6%89%A7%E8%A1%8C%E5%9B%9E%E6%89%A7"><span class="toc-text">2.3 工具描述与工具结果：能力声明与执行回执</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%A8%E8%BF%B9"><span class="toc-text">03、任务信息：任务自己的轨迹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="toc-text">3.1 用户输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AF%B9%E8%AF%9D%E5%8E%86%E5%8F%B2"><span class="toc-text">3.2 对话历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%EF%BC%9A%E8%AE%A1%E5%88%92%E3%80%81%E5%BE%85%E5%8A%9E%E4%B8%8E%E8%BF%9B%E5%BA%A6"><span class="toc-text">3.3 任务状态：计划、待办与进度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E5%A4%96%E9%83%A8%E4%BF%A1%E6%81%AF%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B9%8B%E5%A4%96%E7%9A%84%E4%B8%96%E7%95%8C"><span class="toc-text">04、外部信息：上下文之外的世界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-RAG-External-Knowledge%EF%BC%9A%E6%8C%89%E9%9C%80%E6%A3%80%E7%B4%A2%E7%9A%84%E4%BA%8B%E5%AE%9E"><span class="toc-text">4.1 RAG &#x2F; External Knowledge：按需检索的事实</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Memory%EF%BC%9A%E8%B7%A8%E4%BC%9A%E8%AF%9D%E7%9A%84%E6%8C%81%E4%B9%85%E6%B2%89%E6%B7%80"><span class="toc-text">4.2 Memory：跨会话的持久沉淀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%BF%90%E8%A1%8C%E6%97%B6%E7%8E%AF%E5%A2%83%E5%BF%AB%E7%85%A7"><span class="toc-text">4.3 运行时环境快照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E5%9B%9B%E4%B8%AA%E7%BB%B4%E5%BA%A6%E7%9C%8B%E6%B8%85%E5%AE%83%E4%BB%AC%E7%9A%84%E5%B7%AE%E5%88%AB"><span class="toc-text">05、四个维度看清它们的差别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E5%90%88%E8%B5%B7%E6%9D%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90"><span class="toc-text">06、合起来是什么样子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E7%94%B1%E8%BF%99%E5%BC%A0%E5%9B%BE%E5%BC%95%E5%87%BA%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%9E%E8%B7%B5%E5%88%A4%E6%96%AD"><span class="toc-text">07、由这张图引出的三个实践判断</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -579,68 +579,152 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>提示词技巧不是一串能背下来的咒语，而是一组按需取用的杠杆：有的负责消除歧义，有的负责提供示范，有的负责把输出的形状锁死。用错杠杆，比不用更费力。</p>
+<p>很多人以为自己在跟一个“读过很多东西的模型”对话。事实是：每次调用，模型只知道这一次塞进去的那几万到几十万个 token——你在下一轮问题里少放一段历史，它就真的不记得；你没声明的工具，它就真的不知道存在。所以理解上下文的组成，是理解 Agent 行为的第一步。</p>
 </blockquote>
-<p>上一篇拆开了 Prompt 的零件，也讲了它对模型的输出施加影响的三条机制。但知道零件不等于会组装——真正落地时，你会遇到另一类问题：模型理解得对，但风格不对；风格对了，但推理不到位；推理到位了，格式又解析不了。这篇文章把这些具体麻烦对应的方法整理成一张地图：零样本、少样本、角色提示、思维链、任务分解、输出格式约束与结构化输出，最后回到最容易被忽视的一层——上下文该如何组织。</p>
-<h2 id="01、一张方法地图"><a href="#01、一张方法地图" class="headerlink" title="01、一张方法地图"></a>01、一张方法地图</h2><p>在逐个展开之前，先给这些方法分个类，后面就不会把它们当成互斥的选项。按作用方向看，常见方法大致作用在三个方向：</p>
-<ul>
-<li><strong>减少歧义</strong>。零样本提示、角色提示属于这一层。它们不改变模型的能力，只试图让你想表达的意思更少被误解——通过更明确的指令措辞，或更具体的身份设定。</li>
-<li><strong>提供示例</strong>。少样本提示、思维链、任务分解属于这一层。它们通过给模型看例子、看推理路径、看任务切分方式，把你要的行为模式“示范”出来，让模型在新输入上延续这个模式。</li>
-<li><strong>约束输出</strong>。输出格式约束和结构化输出属于这一层。它们不关心模型怎么想，只关心输出长什么样，能不能被下游程序或人稳定消费。</li>
-</ul>
-<p>而“上下文组织”不属于以上任何一个方向，它是编排层：决定了前面三类信息在 Prompt 里的位置、顺序和主次。同一个方法，组织方式不同，效果可能差别很大。</p>
-<p>需要说明两点。第一，这份清单列的是最常见、最重要的一组方法，不构成完整枚举——提示词领域每年都在长出新的技巧，遇到没见过的名字，先按“它属于哪一层”归位，比记忆名字更有用。第二，本文写于 2026 年 9 月，涉及具体模型行为的部分（尤其是与具体模型绑定的推理类技巧），请以你使用模型时的官方文档为准。</p>
-<h2 id="02、Zero-shot：不举例，只说清楚"><a href="#02、Zero-shot：不举例，只说清楚" class="headerlink" title="02、Zero-shot：不举例，只说清楚"></a>02、Zero-shot：不举例，只说清楚</h2><p>Zero-shot，零样本提示是最基础的用法：不给任何示例，直接用自然语言描述任务，让模型完成。它成立的前提，是模型经过指令微调，已经具备“听懂任务描述”的能力——这在早期的语言模型上是行不通的，那时候不给例子模型几乎不会做事。</p>
-<p>零样本的成败几乎完全取决于指令质量，所以它更像是把上一篇讲的指令写法做到极致的检验：动词明确、对象清晰、边界清晰。一个实用的自检方法是，把 Prompt 交给一个不了解背景的同事看，如果他读完能一次性知道该做什么、输出是什么样，模型通常也能。</p>
-<p>它的优势是短、便宜、可读，适合高频调用、任务简单、格式要求不高的场景。它的局限也明显：当任务带有隐含的判断标准（什么是“好的标题”？什么算“相关的段落”？），而这些标准又难以用一两句话说清楚时，零样本会开始不稳定。这时候该往上走一层，给例子。</p>
-<h2 id="03、Few-shot：给模型看几个例子"><a href="#03、Few-shot：给模型看几个例子" class="headerlink" title="03、Few-shot：给模型看几个例子"></a>03、Few-shot：给模型看几个例子</h2><p>Few-shot，少样本提示是在 Prompt 里带上若干“输入—输出”示例，让模型照猫画虎。它在 GPT-3 论文里被系统验证过：模型不更新参数，仅凭上下文中的少量示例就能在新任务上表现明显提升，这一现象被称为上下文学习（In-Context Learning）。</p>
-<p>少样本的收益来自模式示范，所以示例的“质量”比“数量”重要得多。几个实操要点：</p>
-<ul>
-<li><strong>示例中要有你想让模型学会的那个判断</strong>。分类任务里，如果示例全是容易区分的正例，模型学到的是“大概都能判成正类”；带上两个边界样本，它才学到你的标准。</li>
-<li><strong>格式必须严格一致</strong>。模型会忠实模仿示例里的一切，包括你不想要的瑕疵——示例里输出带一句解释，正式输出也会带。</li>
-<li><strong>注意示例里的分布偏差</strong>。如果示例的标签明显偏向某一类，模型会倾向于多输出那一类，这是少样本的常见陷阱。</li>
-<li><strong>数量存在收益递减</strong>。从 2 个加到 5 个示例通常有提升，从 20 个加到 50 个通常没有，反而挤占上下文预算。</li>
-</ul>
-<p>还有个容易被忽略的收益：少样本同时是一种格式约束手段。你不需要用文字描述输出结构，示例本身就是结构说明。</p>
-<h2 id="04、Role-Prompting：设定身份"><a href="#04、Role-Prompting：设定身份" class="headerlink" title="04、Role Prompting：设定身份"></a>04、Role Prompting：设定身份</h2><p>Role Prompting，角色提示是给模型设定一个身份——“你是一位资深数据库工程师”“你是一位面向零基础读者的科普作者”。它有时写在系统提示词里（对整个应用生效），有时写在单次输入里。提示主要影响语言风格、术语密度、叙述口吻和关注点：同一个问题，用“儿科医生”和“医学期刊审稿人”的身份提问，答案的用词和详略程度会明显不同。</p>
-<p>但它不会凭空带来知识或能力。让模型扮演“顶级律师”，它并不会因此变得更容易答对具体的法条细节；角色不是知识库，也不是能力开关。因此更稳妥的用法是：用角色提示来锚定风格和视角，用上下文和资料来提供事实，两者别混为一谈。另外，角色设定越具体，收益越明显——“你是一位写技术文档的工程师”远不如“你是一位为内部开发者写 API 使用说明的工程师，读者已经熟悉基本概念”来得有效。</p>
-<h2 id="05、Chain-of-Thought：让推理过程显式展开"><a href="#05、Chain-of-Thought：让推理过程显式展开" class="headerlink" title="05、Chain-of-Thought：让推理过程显式展开"></a>05、Chain-of-Thought：让推理过程显式展开</h2><p>Chain-of-Thought，思维链提示属于“提供示范”：不直接要答案，而是要求模型先给出推理步骤，再给结论。它的经典形式是在示例里展示完整推理过程（少样本思维链），后来也发展出只需一句“让我们一步步思考”的零样本形式。</p>
-<p>它为什么有效？因为对需要多步推理的任务（数学、逻辑、多约束判断），模型在自回归生成时是一步一步产生的——把中间步骤写出来，等于给后续生成更多的中间结果作为条件，减少了一步跳错、后面全错的概率。更进一步的做法是自洽性（Self-Consistency）：让模型用不同路径推理多次，再对最终答案投票，用采样的多样性换取稳健性。</p>
-<p>使用时需要注意以下几点：</p>
-<ul>
-<li>思维链不是万能增幅器。对于检索事实、格式转换这类没有推理链的任务，强行要求分步思考只会增加 token 成本和延迟，甚至让模型在无关细节上自我纠缠。</li>
-<li>它与模型特点强相关。部分较新的模型中内置了思考过程，模型自己会决定展开多少推理——对这类模型，显式要求“一步步思考”的收益会明显下降，是否仍然需要、以及该用哪种形式，请以目标模型的当期文档为准。</li>
-<li>思维链要不要展示给用户是产品决策。内部推理过程往往冗长且不适合终端阅读，常见做法是要求模型按“先分析后结论”的结构输出，或只输出结论，把过程留在模型内部。</li>
-</ul>
-<h2 id="06、Task-Decomposition：把大任务拆成多次调用"><a href="#06、Task-Decomposition：把大任务拆成多次调用" class="headerlink" title="06、Task Decomposition：把大任务拆成多次调用"></a>06、Task Decomposition：把大任务拆成多次调用</h2><p>Task Decomposition，任务分解是把一个复杂目标拆成若干子任务，分步完成——既可以拆成一次 Prompt 内的多个步骤，也可以拆成多次模型调用，让上一步的输出成为下一步的输入。</p>
-<p>它和思维链的区别在于粒度：思维链是在一次调用内展开推理，任务分解是把任务本身切开，每一步都更小、更可控、更容易检查。当任务里出现“先抽取再归类再改写”这类异质环节时，拆开几乎是必然选择——因为不同环节需要不同的指令、不同的输出格式，硬塞进一次 Prompt 只会互相干扰。</p>
-<p>两个实用模式：一是流水线式，步骤有明确先后依赖，逐级传递结果；二是从易到难式，先解决简单子问题，再把简单问题的结论作为上下文去攻难的部分。前者更常见，后者适合需要积累中间结论的任务。</p>
-<p>任务分解的额外价值是可验证性。每一步输出都可以单独校验、单独重试、单独缓存。当一次调用失败时，你只需要重跑失败的那一步，而不是整个流程。代价是调用次数和延迟上升，以及错误可能在步骤间传递——所以每一步都要有格式和内容上的检查点。</p>
-<h2 id="07、输出格式约束与-Structured-Output"><a href="#07、输出格式约束与-Structured-Output" class="headerlink" title="07、输出格式约束与 Structured Output"></a>07、输出格式约束与 Structured Output</h2><h3 id="7-1-输出格式约束"><a href="#7-1-输出格式约束" class="headerlink" title="7.1　输出格式约束"></a>7.1　输出格式约束</h3><p>严格来说，格式约束属于上一篇讲的“输出格式”的强化版：不只是说明要什么格式，而是用可执行的方式把格式钉住。常用手段有三种——给出目标结构的样例、逐字段说明类型和取值范围、明确禁止多余内容（比如“只输出 JSON，不要代码块包裹，不要任何解释文字”）。</p>
-<p>这里有个反复出现的经验：正向表述比负向表述有效。与其写“不要输出太长”，不如写“不超过三句话”；与其写“不要用术语”，不如写“用日常词汇解释，术语第一次出现时附一句说明”。模型对“做到什么”的执行力，普遍好于对“避免什么”的规避力。</p>
-<p>还要预期失败模式。自然语言约束始终是概率性的：模型可能加上一句“好的，以下是结果”，可能用 markdown 代码块把 JSON 包起来，可能在数组末尾多一个逗号。所以任何自动解析的链路都必须有容错——剥离代码块围栏、跳过前导文本、解析失败时重试并收紧约束。指望“写清楚了就 100% 稳定”，是在给系统埋雷。</p>
-<h3 id="7-2-Structured-Output：由协议保证的形状"><a href="#7-2-Structured-Output：由协议保证的形状" class="headerlink" title="7.2　Structured Output：由协议保证的形状"></a>7.2　Structured Output：由协议保证的形状</h3><p>如果你需要的是“语法层面保证合法”的结构化数据，那就不要只靠自然语言约束，而应该使用模型服务商提供的结构化输出能力。目前主流大模型厂商都提供了这类机制，但形态不同：有的提供 JSON 模式（保证输出是合法 JSON，但不保证字段符合你的 schema），有的支持用 JSON Schema 声明字段与类型并对生成过程施加约束（即约束解码，让模型在每一步只能生成符合 schema 的数据），还有的通过“让你声明工具及其参数 schema、由模型填充参数”的路径达到类似效果。</p>
-<p>使用时注意几点：</p>
-<ul>
-<li><strong>schema 越严，越要写全</strong>。字段是否必填、枚举取值、是否允许额外字段，这些信息不写清楚，模型只能自由发挥。枚举类字段建议列全取值，同时客户端仍应保留对未知值的兼容分支。</li>
-<li><strong>语法合法不等于语义正确</strong>。约束解码保证的是结构合规，不保证内容正确——字段填错了值，解析照样成功。校验必须做在业务层。</li>
-<li><strong>能力名称与启用方式会变</strong>。同一个厂商的不同模型对结构化输出的支持程度不同，部分能力初期以 beta 形式提供、需要额外请求头或参数，写法也随版本演进。请以当期官方文档为准，不要照抄旧文章里的字段名。</li>
-<li><strong>宽容解析</strong>。即使有 schema 约束，下游仍应对未知字段和未知枚举值保持宽容，避免上游一次小改动打挂整条链路。</li>
-</ul>
-<h2 id="08、Prompt-中的上下文组织"><a href="#08、Prompt-中的上下文组织" class="headerlink" title="08、Prompt 中的上下文组织"></a>08、Prompt 中的上下文组织</h2><h3 id="8-1-位置决定权重"><a href="#8-1-位置决定权重" class="headerlink" title="8.1　位置决定权重"></a>8.1　位置决定权重</h3><p>前面三类方法讲的都是“放什么”，这一节讲“放在哪”。原因在之前提到过的注意力机制：长上下文里，不同位置的信息获得的注意力并不均等，开头和结尾通常更受关注，中段容易被稀释，这就是所谓的“Lost in the Middle”。</p>
-<p>由此有两条被广泛采用的实践：把重要的指令和最终的问题放在开头或结尾，而不是埋在材料中间；在长材料场景里，先给文档、后给问题，让问题紧贴生成位置。前者是通用原则，后者是常见做法——不同模型对顺序的偏好并不一致，必要时用几条真实样本做 A&#x2F;B 测试，比照搬结论可靠。</p>
-<p>另一种有效的组织手段是显式分区：用 XML 标签、三引号、标题或分隔线把 Prompt 切成指令区、资料区、输入区、示例区。这既帮助模型区分“要处理的材料”和“处理的要求”，也降低了材料本身含有指令样式文字时的混淆风险。当资料是一整篇文档时，还可以用“先给一句摘要、再给全文”的方式降低模型在长文中丢失重点的概率。</p>
-<h3 id="8-2-指令、数据与示例如何组织"><a href="#8-2-指令、数据与示例如何组织" class="headerlink" title="8.2　指令、数据与示例如何组织"></a>8.2　指令、数据与示例如何组织</h3><p>把三者放在一起看，一个稳定的组织骨架通常是这样的顺序：</p>
+<h2 id="01、先别急着列清单"><a href="#01、先别急着列清单" class="headerlink" title="01、先别急着列清单"></a>01、先别急着列清单</h2><p>要回答“上下文由什么组成”，最容易的写法是列一张清单，逐个名词解释一遍。但那不太有用——清单只能告诉你有哪些角色出场，不能告诉你它们在什么条件下出场、谁和谁抢地方、哪一个该被丢掉。Context Engineering 关注的不是“上下文里有哪些东西”，而是“从所有可用信息中，如何构造当前这一轮真正应该给模型看的 Context”。</p>
+<p>先建立一个更准确的视角。围绕“信息能否进入上下文”，其实存在三层：</p>
 <ol>
-<li><strong>角色与总目标</strong>：一句话交代身份和要达成的目标，让模型先建立语境。</li>
-<li><strong>资料与数据</strong>：紧跟着给上下文材料，用标签包裹并说明它是什么。长材料放前面。</li>
-<li><strong>任务指令</strong>：明确要做什么、怎么做，指向上面的资料标签。</li>
-<li><strong>示例</strong>：给出一致格式的少样本示例，示范判断标准和输出形状。</li>
-<li><strong>约束与输出格式</strong>：把长度、禁止项、字段结构集中说明，避免散落各处。</li>
-<li><strong>输入与收尾提醒</strong>：给出本次要处理的具体内容，并在最后用一两句重申最关键的一两条约束。</li>
+<li><strong>可注入的全集</strong>：从系统状态到外部世界，所有理论上可以被搬进上下文的东西——文件系统、数据库、API、会话历史、环境变量。</li>
+<li><strong>本轮的候选集</strong>：根据当前这一步的目标，被判断为“可能相关”的那部分。检索、筛选、工具调用都在这一层发生。</li>
+<li><strong>实际注入的集</strong>：在 token 预算和注意力预算之内，最终真的写进这次请求的那部分配置。</li>
 </ol>
-<p>这个骨架有两个设计意图。一是<strong>就近原则</strong>：最关键的要求离生成位置最近，权重最高。二是<strong>分区原则</strong>：指令、数据、示例各有归属，不互相污染——这也是为什么把用户输入和系统指令混在同一段里是危险的：一旦输入里出现指令样式的文字，模型可能把它当作要求执行。</p>
-<p>组织顺序不是教条。不同厂商的官方指南对“长文档在前还是问题在前”的建议存在差异，不同模型的长上下文特性也在变，所以更稳妥的态度是：把上面这套骨架作为默认起点，然后用你自己的真实任务做几组对照实验，把结论固定在你的 Prompt 模板里。</p>
+<p>后面要讲的十个组成部分，描述的是第一层——全集里有哪些可选项。而工程的实质工作发生在第二层和第三层：<strong>从全集里挑出最小的高信号子集</strong>。所以在读下面的分类时，请始终保持一个意识：这里列的每一项，都是“可以进来”，不是“应该进来”。</p>
+<h2 id="02、指令信息：约束行为的稳定层"><a href="#02、指令信息：约束行为的稳定层" class="headerlink" title="02、指令信息：约束行为的稳定层"></a>02、指令信息：约束行为的稳定层</h2><p>第一根支干是指令信息，即“模型应该怎么做”的约束。它的特点是相对稳定：写一次，多轮生效。</p>
+<h3 id="2-1-System-Prompt"><a href="#2-1-System-Prompt" class="headerlink" title="2.1 System Prompt"></a>2.1 System Prompt</h3><p>系统提示词是上下文中用于约束模型行为的一类稳定信息。不同 API 对它的承载方式不同：有的提供独立字段，有的将其作为消息序列中的特殊角色或指令层级处理。</p>
+<p>关于系统提示有个常见误区：写得越长越保险。Anthropic 的建议恰好相反——追求“最小的、足以完整描述期望行为的信息集合”，并且用分节、XML 标签或 Markdown 标题把内容组织成可导航的区块（背景信息、指令、工具说明、输出格式等）。注意“最小”不等于“短”：如果 agent 必须知道某条规则才能正确工作，那这条规则再长也该写进去。此外，在一些 Coding Agent 中，项目级或用户级规则文件（例如各类 <code>AGENT.md</code>、规则目录）会在启动或特定阶段被加载，并最终作为模型可见的指令上下文使用；有的实现会将其拼接到系统提示词中，有的则采用其他注入方式。</p>
+<h3 id="2-2-SKILL：被拆出来的过程性知识"><a href="#2-2-SKILL：被拆出来的过程性知识" class="headerlink" title="2.2 SKILL：被拆出来的过程性知识"></a>2.2 SKILL：被拆出来的过程性知识</h3><p>Skill解决的是“系统提示装不下大量专业知识”的问题。一个 Skill 本质是一个目录，核心是 <code>SKILL.md</code>：YAML 头部写名字和描述，正文写流程、最佳实践和示例，目录里还可以附带参考文档和可执行脚本。</p>
+<p>它进入上下文的方式是渐进披露，分三级：</p>
+<ul>
+<li><strong>第一级：元数据，始终在</strong>。启动时，所有已安装 Skill 的名字和描述被预加载进系统提示，单个约百 token 量级。它只够让模型判断“这个 Skill 该不该用”。</li>
+<li><strong>第二级：指令，触发时才读</strong>。当请求匹配上某个 Skill 的描述，agent 通过读取文件的方式把 <code>SKILL.md</code> 正文载入上下文（官方文档给出的量级是 5K token 以内）。</li>
+<li><strong>第三级：资源与代码，按需加载</strong>。附带的参考文档只有被打开时才进入上下文；脚本则由执行环境运行，<strong>通常只有运行结果进入上下文，源码本身不进入</strong>。</li>
+</ul>
+<p>这套设计的价值在于：你可以装几十个 Skill，而不常用的那些只付元数据的成本。也正因为如此，Skill 的作者必须把“描述”当成检索入口来写——描述写得含糊，整个 Skill 可能永远不会被触发。</p>
+<p>顺带澄清一个高频混淆：Skill 与 MCP 不是竞品。MCP 是连接标准，解决“agent 如何访问外部工具和系统”；Skill 是知识打包标准，解决“agent 知道该按什么流程办事”。一个 Skill 的正文里完全可以指示模型去调用某个 MCP 工具。</p>
+<h3 id="2-3-工具描述与工具结果：能力声明与执行回执"><a href="#2-3-工具描述与工具结果：能力声明与执行回执" class="headerlink" title="2.3 工具描述与工具结果：能力声明与执行回执"></a>2.3 工具描述与工具结果：能力声明与执行回执</h3><p>工具描述是“我能做什么”的描述：名称、用途描述、入参 schema。它和 Skill 的区别是职责不同——Skill 教流程，工具给能力。工具定义的常见失败模式是<strong>臃肿</strong>：功能重叠、边界模糊，导致模型在决策点上犹豫。如果人类工程师都说不清某个场景该用哪个工具，模型更不可能说清。</p>
+<p>工具结果则是“我做了什么”的回执：API 响应、命令输出、代码执行结果、文件内容。严格说，它的性质和历史消息一样是动态增长的——每调一次工具就多一块。这里要如实说明一个规范细节：<strong>在多数 API 设计里，工具结果并不是一种独立消息类型，而是以特定形式回灌进消息序列的</strong>（例如作为 user 消息中的工具结果块，或使用专门的工具角色），具体形式以各家 API 文档为准。也就是说，工具结果其实同时属于“工具契约的延伸”和“对话历史的一部分”。</p>
+<p>它在后面结构图上挂在提示词支干末端、却直接通向 LLM，原因就在这里：它是一个跨界的组件——身世属于工具，形态属于历史，内容属于外部世界。</p>
+<h2 id="03、任务信息：任务自己的轨迹"><a href="#03、任务信息：任务自己的轨迹" class="headerlink" title="03、任务信息：任务自己的轨迹"></a>03、任务信息：任务自己的轨迹</h2><p>第二根支干是任务信息，即“当前这个任务进行到哪儿了”。它的特点是随每一轮增长，是上下文里体积最不可控的部分。</p>
+<h3 id="3-1-用户输入"><a href="#3-1-用户输入" class="headerlink" title="3.1 用户输入"></a>3.1 用户输入</h3><p>用户当前输入是整次调用中最“显式”的上下文：本轮的问题、附件、<code>@</code> 引用的文件。它通常还承担一个隐含角色——<strong>注意力锚点</strong>。上下文中的信息很多，但当前这一步到底要解决什么，主要靠它来指认。这也是为什么在多轮长任务里，把目标重新表述一遍，往往比补充更多背景资料更有效。</p>
+<h3 id="3-2-对话历史"><a href="#3-2-对话历史" class="headerlink" title="3.2 对话历史"></a>3.2 对话历史</h3><p>对话历史是前序所有轮次的用户消息、模型回复和工具调用的累积。它的地位可以用一句话概括：<strong>从工程视角看，对话历史承担了当前会话的短期记忆作用：如果上一轮的重要信息没有以某种形式保留下来，后续推理就无法直接利用它。</strong>——不是“参考材料”，而是它唯一能知道“刚才发生了什么”的途径。</p>
+<p>对话历史带来两个结构性麻烦。一是它单调增长，在最简单的无状态 API 调用模式下，每一轮通常需要重新提供模型所需的历史信息；随着历史增长，这部分输入成本和上下文占用也会增加；二是它一旦被写进去就很难撤销——一条错误结论留在历史里，会被后续步骤反复引用，成为后续判断的事实基础。所以压缩、总结、截断这些手段的主战场都在这里。</p>
+<h3 id="3-3-任务状态：计划、待办与进度"><a href="#3-3-任务状态：计划、待办与进度" class="headerlink" title="3.3 任务状态：计划、待办与进度"></a>3.3 任务状态：计划、待办与进度</h3><p>任务状态是任务自己的结构化状态：当前目标、已完成步骤、待办清单、已知结论、未解决的问题。Anthropic 把它称作结构化笔记（structured note-taking），也直接叫 agentic memory——agent 把笔记写到上下文之外的文件里，需要时再取回来。Claude Code 的待办清单、自定义 agent 维护的 <code>NOTES.md</code> 都是这个模式：任务跨越几十次工具调用、甚至经历几轮上下文重置之后，agent 靠读自己的笔记恢复连续性。</p>
+<p>这里必须说明一个术语边界：Anthropic 用 memory 指代这套机制，而本系列把 Task State（任务内）和 Memory（跨任务）分开讨论。<strong>这只是工程视角的划分，不是官方分类。</strong> 区分它们的实用价值在于判断生命周期：任务结束就该清理的是 Task State，需要长期沉淀的是 Memory。</p>
+<h2 id="04、外部信息：上下文之外的世界"><a href="#04、外部信息：上下文之外的世界" class="headerlink" title="04、外部信息：上下文之外的世界"></a>04、外部信息：上下文之外的世界</h2><p>第三根支干是外部信息，即“模型世界之外的知识”。它的特点是默认不在上下文里，需要主动搬运——而搬运方式决定了成本。</p>
+<h3 id="4-1-RAG-External-Knowledge：按需检索的事实"><a href="#4-1-RAG-External-Knowledge：按需检索的事实" class="headerlink" title="4.1 RAG &#x2F; External Knowledge：按需检索的事实"></a>4.1 RAG &#x2F; External Knowledge：按需检索的事实</h3><p>RAG 等检索机制，负责把领域资料、文档、数据库内容按需拉进上下文。这里的核心工程判断不是“怎么检索到”，而是“检索到多少”：召回十个片段、只有两个真正相关，那八个就是纯粹的干扰项。检索环节的精度直接决定上下文的信噪比。</p>
+<p>Anthropic 提出的“即时（just in time）上下文”是另一个方向：与其预先把所有相关数据都塞进去，不如<strong>只保留轻量标识符</strong>——文件路径、存储的查询语句、网页链接——在需要时通过工具动态加载。Claude Code 处理大数据库时就是这么做的：让模型写针对性查询、抽样查看，而不是把整个数据对象装进上下文。</p>
+<h3 id="4-2-Memory：跨会话的持久沉淀"><a href="#4-2-Memory：跨会话的持久沉淀" class="headerlink" title="4.2 Memory：跨会话的持久沉淀"></a>4.2 Memory：跨会话的持久沉淀</h3><p>Memory 是跨会话、跨任务保留的信息：用户偏好、项目背景、历史决策、踩过的坑。它的实现形态多样——文件式（Anthropic 在 Sonnet 4.5 发布时公开了基于文件系统的 memory tool 公测）、向量库、结构化数据库——但共同点是：<strong>存储在外，按需回灌</strong>。</p>
+<p>Memory 的坑不在“记不记得住”，而在“记的是不是还对”。写进记忆的结论如果已经过时，就会变成一条持续误导后续所有会话的错误事实。所以记忆系统真正需要设计的不仅是检索，还需要设计<strong>写入规则和失效机制</strong>。</p>
+<h3 id="4-3-运行时环境快照"><a href="#4-3-运行时环境快照" class="headerlink" title="4.3 运行时环境快照"></a>4.3 运行时环境快照</h3><p>最后一类是环境信息：当前工作目录、操作系统与平台、当前日期、git 分支与状态、目录结构、项目说明文件等。它让 agent 能正确使用绝对路径、按平台差异行事、在提交信息里写对日期。 例如在 Coding Agent 中，它的系统提示里包含环境块（工作目录、是否为 git 仓库、平台、当天日期、当前模型）、目录结构树、git 状态以及 README 内容。</p>
+<p>环境信息里藏着一个很典型的陷阱：<strong>它是会话开始时的静态快照，且明确说明不会在会话中更新</strong>。agent 自己新建了文件、提交了代码，快照里都看不到。于是模型可能基于过期的环境认知做判断——除非它主动用工具去重新读取真实状态。这里将运行时环境单独列出，是因为它与任务状态的生命周期不同：任务状态描述 Agent 对任务的内部认知，而环境信息描述 agent 所处外部环境的当前状态。</p>
+<h2 id="05、四个维度看清它们的差别"><a href="#05、四个维度看清它们的差别" class="headerlink" title="05、四个维度看清它们的差别"></a>05、四个维度看清它们的差别</h2><p>把上面十项放在一起，用同一套坐标去比，结构会清楚很多。下面这张表只是常见实现的归纳，不是规范定义：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>谁产生</th>
+<th>何时进入</th>
+<th>变更频率</th>
+<th>典型体量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>系统提示词</td>
+<td>开发者</td>
+<td>每次调用</td>
+<td>极低</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>Skill 作者</td>
+<td>元数据常驻，正文按需</td>
+<td>低</td>
+<td>元数据小，正文中</td>
+</tr>
+<tr>
+<td>工具描述</td>
+<td>开发者</td>
+<td>每次调用</td>
+<td>低</td>
+<td>中</td>
+</tr>
+<tr>
+<td>工具结果</td>
+<td>外部系统</td>
+<td>每次工具调用后</td>
+<td>每轮增长</td>
+<td>大且不可控</td>
+</tr>
+<tr>
+<td>用户输入</td>
+<td>用户</td>
+<td>本轮</td>
+<td>每轮</td>
+<td>小</td>
+</tr>
+<tr>
+<td>对话历史</td>
+<td>双方累积</td>
+<td>每次调用（或压缩后）</td>
+<td>每轮增长</td>
+<td>最大</td>
+</tr>
+<tr>
+<td>任务状态</td>
+<td>Agent 自己</td>
+<td>按需写入与取回</td>
+<td>每轮</td>
+<td>小到中</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>外部知识库</td>
+<td>检索命中时</td>
+<td>按需</td>
+<td>中到大</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>用户 &#x2F; Agent</td>
+<td>按需回灌</td>
+<td>跨会话累积</td>
+<td>小到中</td>
+</tr>
+<tr>
+<td>运行时环境快照</td>
+<td>运行时采集</td>
+<td>会话开始时</td>
+<td>极低（且不自动更新）</td>
+<td>中到大</td>
+</tr>
+</tbody></table>
+<p>四个维度里，最有指导意义的是<strong>变更频率</strong>，这决定了哪些该外置、哪些必须每轮精算，在后面几章讲压缩、隔离与冲突处理时会反复用到。</p>
+<h2 id="06、合起来是什么样子"><a href="#06、合起来是什么样子" class="headerlink" title="06、合起来是什么样子"></a>06、合起来是什么样子</h2><p>三个支干合起来，就是一张 Agent 单轮调用的上下文全景图：</p>
+<pre><code class="language-text">                      Context
+                         │
+     ┌───────────────────┼───────────────────┐
+     │                   │                   │
+  指令信息             任务信息              外部信息
+     │                   │                   │
+提示词 / Skill         用户输入           RAG / Knowledge
+工具描述               对话历史           Memory
+工具结果               任务状态           运行时环境快照
+     │                   │                   │
+     └───────────────────┼───────────────────┘
+                         ▼
+                        LLM
+</code></pre>
+<p>这张图的划分逻辑是“<strong>这块信息是干什么用的</strong>”：</p>
+<ul>
+<li><strong>指令信息</strong> 回答“该怎么做”，是行为约束，稳定优先；</li>
+<li><strong>任务信息</strong> 回答“做到哪了”，是任务轨迹，增量最大；</li>
+<li><strong>外部信息</strong> 回答“世界是什么样”，是外部事实，按需加载。</li>
+</ul>
+<p>最后一点需要说清楚：<strong>这类结构图是工程组织的产物，不是协议规定</strong>。Anthropic 官方文档在系统提示的组织上给过具体建议（用 XML 标签或 Markdown 标题分节），但并没有规定全部上下文组件必须按某个固定顺序排列。各家实现在顺序、边界和命名上都有差异——比如任务信息与 Memory 的界线，在很多实现里是模糊的。把它当作思考地图，而不是交接规范。</p>
+<h2 id="07、由这张图引出的三个实践判断"><a href="#07、由这张图引出的三个实践判断" class="headerlink" title="07、由这张图引出的三个实践判断"></a>07、由这张图引出的三个实践判断</h2><p><strong>第一，稳定层要薄，动态层要管。</strong> 上面每一块“每次调用都会重发”的内容（系统提示、指令文件、工具定义）都是常驻成本。能外置的要外置：流程知识放进 Skill、参考资料放进可检索的存储、状态写进文件，让每轮固定重发的部分尽量小。Skill 的渐进披露就是这条原则最直接的体现。</p>
+<p><strong>第二，上下文管理的主战场在“结果”和“历史”上。</strong> 十项里增长最快、最不可控的就是工具结果和对话历史——它们由 agent 自己的行为产生，无法预先写死。压缩、总结、外置、隔离这些手段几乎都是冲着它们去的。</p>
+<p><strong>第三，同一个事实出现在多条支干上，是风险而不是冗余的保险。</strong> 项目说明可能同时出现在环境快照、RAG 命中和记忆里；工具结果可能和历史中某条更早的结论矛盾。一旦出现，模型不会报错，它只会行为摇摆。所以上下文治理的一条基本要求是：<strong>关键事实应尽量明确权威来源，并避免在多个上下文位置维护彼此独立的副本</strong> 这正好把话题交回上一章的问题——冲突是上下文的头号敌人之一，而它的根源往往不在模型，在信息架构。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
