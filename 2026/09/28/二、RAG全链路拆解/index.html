@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>二、RAG全链路拆解 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , RAG ">
+  <meta name="description" content="二、RAG全链路拆解 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(24)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(24)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;RAG">
+            
+            RAG
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="24">
+<input type="hidden" id="yelog_site_word_count" value="124.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RAG</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93RAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="三、实现一个简易RAG">三、实现一个简易RAG</span>
+            <span class="post-date" title="2026-09-28 19:26:47">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="二、RAG全链路拆解">二、RAG全链路拆解</span>
+            <span class="post-date" title="2026-09-28 13:52:00">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="一、什么是RAG">一、什么是RAG</span>
+            <span class="post-date" title="2026-09-28 09:46:57">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-二、RAG全链路拆解" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">二、RAG全链路拆解</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;RAG">RAG</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color4">RAG</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-28 19:28:11'>2026-09-28 13:52</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:11.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E9%93%BE%E8%B7%AF%E6%80%BB%E8%A7%88"><span class="toc-text">01、链路总览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%A4%E6%9D%A1%E9%93%BE%E8%B7%AF%E7%9A%84%E4%B8%8D%E5%90%8C%E7%BA%A6%E6%9D%9F"><span class="toc-text">1.1　两条链路的不同约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%AF%8F%E4%B8%80%E7%8E%AF%E9%83%BD%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A4%B1%E8%B4%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">1.2　每一环都有自己的失败模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%86%E6%AE%B5%E8%AF%84%E4%BC%B0%E6%AF%94%E5%8F%8D%E5%A4%8D%E8%B0%83%E5%8F%82%E6%9B%B4%E7%9C%81%E6%97%B6%E9%97%B4"><span class="toc-text">1.3　为什么分段评估比反复调参更省时间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E4%BB%8E%E6%96%87%E6%A1%A3%E5%88%B0%E7%9F%A5%E8%AF%86%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%8E-Chunking"><span class="toc-text">02、从文档到知识：解析与 Chunking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%96%87%E6%A1%A3%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%B8%85%E6%B4%97"><span class="toc-text">2.1　文档解析与清洗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Chunking-%E4%B8%8E%E5%88%87%E5%88%86%E7%AD%96%E7%95%A5"><span class="toc-text">2.2　Chunking 与切分策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%9D%97%E5%A4%A7%E5%B0%8F%E4%B8%8E-Overlap"><span class="toc-text">2.3　块大小与 Overlap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Parent-Child-Chunking"><span class="toc-text">2.4　Parent-Child Chunking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-Metadata"><span class="toc-text">2.5　Metadata</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E4%BB%8E%E7%9F%A5%E8%AF%86%E5%88%B0%E7%B4%A2%E5%BC%95%EF%BC%9AEmbedding-%E4%B8%8E-Index"><span class="toc-text">03、从知识到索引：Embedding 与 Index</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Embedding"><span class="toc-text">3.1　Embedding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2"><span class="toc-text">3.2　向量检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">3.3　向量数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E7%B4%A2%E5%BC%95"><span class="toc-text">3.4　索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E4%BB%8E%E7%B4%A2%E5%BC%95%E5%88%B0%E7%BB%93%E6%9E%9C%EF%BC%9A%E6%A3%80%E7%B4%A2%EF%BC%88Retrieval%EF%BC%89"><span class="toc-text">04、从索引到结果：检索（Retrieval）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2"><span class="toc-text">4.1　向量检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A3%80%E7%B4%A2"><span class="toc-text">4.2　关键词检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2"><span class="toc-text">4.3　混合检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%85%83%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4"><span class="toc-text">4.4　元数据过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-Query-%E6%94%B9%E5%86%99"><span class="toc-text">4.5　Query 改写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E5%A4%9A%E6%9F%A5%E8%AF%A2"><span class="toc-text">4.6　多查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-%E6%9F%A5%E8%AF%A2%E5%88%86%E8%A7%A3"><span class="toc-text">4.7　查询分解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E4%BB%8E%E5%80%99%E9%80%89%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9ARerank-%E4%B8%8E-Context"><span class="toc-text">05、从候选到上下文：Rerank 与 Context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E5%8F%AC%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-text">5.1　为什么不能直接使用召回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="toc-text">5.2　重排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%87%E6%BB%A4"><span class="toc-text">5.3　上下文过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9"><span class="toc-text">5.4　上下文压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%8E%92%E5%BA%8F"><span class="toc-text">5.5　上下文排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9E%84%E5%BB%BA"><span class="toc-text">5.6　上下文构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E4%BB%8E-Naive-RAG-%E5%88%B0-Agentic-RAG"><span class="toc-text">06、从 Naive RAG 到 Agentic RAG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-Naive-RAG"><span class="toc-text">6.1　Naive RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Advanced-RAG"><span class="toc-text">6.2　Advanced RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Modular-RAG"><span class="toc-text">6.3　Modular RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-Graph-RAG"><span class="toc-text">6.4　Graph RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-Agentic-RAG"><span class="toc-text">6.5　Agentic RAG</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81RAG-%E7%9A%84%E8%AF%84%E4%BC%B0"><span class="toc-text">07、RAG 的评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%A3%80%E7%B4%A2%E8%AF%84%E4%BC%B0"><span class="toc-text">7.1　检索评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E7%94%9F%E6%88%90%E8%AF%84%E4%BC%B0"><span class="toc-text">7.2　生成评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E8%AF%84%E4%BC%B0%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">7.3　评估数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E5%AE%9A%E4%BD%8D-Retrieval-Context-Generation-%E9%97%AE%E9%A2%98"><span class="toc-text">7.4　定位 Retrieval &#x2F; Context &#x2F; Generation 问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81RAG-%E7%9A%84%E8%BE%B9%E7%95%8C%EF%BC%9A%E4%BB%8E%E7%9F%A5%E8%AF%86%E5%BA%93%E5%88%B0-Agent"><span class="toc-text">08、RAG 的边界：从知识库到 Agent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E9%80%82%E5%90%88-RAG"><span class="toc-text">8.1　什么场景适合 RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8-SQL-API-Search"><span class="toc-text">8.2　什么场景应该使用 SQL &#x2F; API &#x2F; Search</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-RAG-%E4%B8%8E-Memory-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">8.3　RAG 与 Memory 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-RAG-%E4%BD%9C%E4%B8%BA-Agent-Tool"><span class="toc-text">8.4　RAG 作为 Agent Tool</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>真正决定一套 RAG 好不好用的，往往不是模型本身，而是那条从原始文档走到最终上下文的链路上，每一步丢掉了多少信息。</p>
+</blockquote>
+<p>上一篇讲清了 RAG 的定位：它把事实性知识从模型权重里挪到外部索引，回答前先检索证据。但定位清楚不等于能落地——同样叫 RAG 的系统，效果可以差出几个量级，差别几乎都藏在链路的细节里。这篇把链路逐段拆开，从文档解析一直走到 Agent 工具，重点不在某个框架怎么调用，而在每个环节为什么存在、代价是什么、什么情况下可以整个省掉。需要预先说明的是，本文讨论的是结构与取舍，具体模型、索引参数与工具能力迭代很快，工程取值请以最新相关技术文档和实际评估结果为准。</p>
+<h2 id="01、链路总览"><a href="#01、链路总览" class="headerlink" title="01、链路总览"></a>01、链路总览</h2><p>一套 RAG 系统由一条离线链路和一条在线链路组成。离线链路负责把文档变成索引，在线链路负责把问题变成答案，两者之间用索引交接。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig1-rag-pipeline.png" alt="RAG 的完整链路：离线索引构建决定召回上限，在线检索与上下文组装决定材料质量，生成阶段决定答案表达"></p>
+<p>离线侧有四步：采集并解析文档、清洗与结构化、切分成知识单元、标注元数据，最后向量化并写入索引。在线侧有五步：理解用户问题（必要时改写、扩展、拆分）、多路召回候选、过滤与重排、组装上下文、生成答案并附上引用。九步之间并非松耦合——离线侧的解析与切分决定了召回的上限，在线侧的召回与重排决定了上下文的品质，而上下文品质直接决定答案的上限。</p>
+<h3 id="1-1-两条链路的不同约束"><a href="#1-1-两条链路的不同约束" class="headerlink" title="1.1　两条链路的不同约束"></a>1.1　两条链路的不同约束</h3><p>离线链路可以慢、可以重跑、可以批处理，因此它的优化目标是质量与成本。在线链路要面对并发用户与秒级等待，优化目标是延迟与稳定性。把两类约束混进同一套指标，就会出现“为了让召回率好看把候选数调到几百条，结果线上延迟翻倍”这类问题。分段设定指标，是把链路做稳的前提。</p>
+<h3 id="1-2-每一环都有自己的失败模式"><a href="#1-2-每一环都有自己的失败模式" class="headerlink" title="1.2　每一环都有自己的失败模式"></a>1.2　每一环都有自己的失败模式</h3><p>下面这张表把三段的性质放在一起对照。它值得在排查问题时回头看一眼，因为同一句“效果不好”，落在不同环节意味着完全不同的修法。</p>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>运行时机</th>
+<th>主要产出物</th>
+<th>延迟敏感度</th>
+<th>典型失败表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Indexing</td>
+<td>离线批处理</td>
+<td>分块、向量、元数据、索引</td>
+<td>低</td>
+<td>解析丢内容、切分截断答案</td>
+</tr>
+<tr>
+<td>Retrieval</td>
+<td>在线前置</td>
+<td>候选片段与其分数</td>
+<td>高</td>
+<td>召回不到、召回到无关内容</td>
+</tr>
+<tr>
+<td>Generation</td>
+<td>在线末尾</td>
+<td>最终答案与引用</td>
+<td>中</td>
+<td>有材料却答错、引用错位</td>
+</tr>
+</tbody></table>
+<h3 id="1-3-为什么分段评估比反复调参更省时间"><a href="#1-3-为什么分段评估比反复调参更省时间" class="headerlink" title="1.3　为什么分段评估比反复调参更省时间"></a>1.3　为什么分段评估比反复调参更省时间</h3><p>链路的串联性质意味着“效果不好”这句反馈几乎没有信息量：可能是解析丢了内容，可能是切分把答案截断，可能是召回没命中，可能是重排把正确项排到了后面，也可能是材料都对但模型读错了。把这几种可能拆成三次可验证的检查，往往比换一轮嵌入模型更快定位问题——具体做法在 7.4 展开。下面的内容按链路顺序推进，每一节都会说明这一环在什么条件下可以简化甚至省略。</p>
+<h2 id="02、从文档到知识：解析与-Chunking"><a href="#02、从文档到知识：解析与-Chunking" class="headerlink" title="02、从文档到知识：解析与 Chunking"></a>02、从文档到知识：解析与 Chunking</h2><p>索引质量的上限由两个决定因素构成：文档被正确读懂了没有，以及知识被切成了什么样的单元。这两件事都在离线阶段完成，却很难在上线之后补救。</p>
+<h3 id="2-1-文档解析与清洗"><a href="#2-1-文档解析与清洗" class="headerlink" title="2.1　文档解析与清洗"></a>2.1　文档解析与清洗</h3><p>RAG 的输入几乎总是脏的。来源可能是 PDF、HTML、Word、PPT、Markdown、聊天记录、工单、数据库导出、扫描件甚至音视频。PDF 是其中最麻烦的一种：双栏排版会让文本抽取的顺序完全错乱，页眉页脚和页码会被反复插进正文，跨页表格会被拆成互不相干的碎片，扫描件则必须走 OCR。这些问题的共同特点是——解析错误不会抛异常，它只是安静地产生一段看起来通顺、实际语义错位的文本，然后在检索阶段变成永远召不回来的知识。</p>
+<p>清洗要处理的事情包括去重（同一份文档的多个版本、互相包含的副本）、去模板（导航栏、版权页、免责声明、审批说明）、统一字符（全角半角、空白、连字符、乱码）、恢复结构（标题层级、列表、表格转成结构化文本），以及保留出处信息（文档 ID、页码、章节路径、原始 URL）。有一个经常被忽略但收益很高的动作：把解析结果当作可回溯的一等公民，让每个分块都能定位回原文位置。它同时解决三件事——答案可以给出处，解析质量可以抽样验收，后期调整切分策略时不必重新解析。</p>
+<h3 id="2-2-Chunking-与切分策略"><a href="#2-2-Chunking-与切分策略" class="headerlink" title="2.2　Chunking 与切分策略"></a>2.2　Chunking 与切分策略</h3><p>为什么要切分？三个现实约束：embedding模型有输入长度上限；检索粒度太粗会把大量无关内容一起带进上下文；生成阶段的 token 预算有限，塞不下整篇文档。切分的目标是让每个单元自成一个最小可回答的语义单位。常见的策略有五类，实践中经常组合使用：</p>
+<ul>
+<li>固定长度切分最简单、最可控，但会在句子中间断开</li>
+<li>递归切分按段落、句子、字符的优先级依次尝试，尽量在语义边界处断开，是通用场景的默认起点</li>
+<li>结构感知切分顺着文档自身的层级走（Markdown 标题、HTML 标签、代码函数边界），对结构清晰的文档效果最好</li>
+<li>语义切分计算相邻句子的向量相似度，在相似度骤降处断开，边界更自然但计算成本更高</li>
+<li>按天然业务单元切分（一条 FAQ、一张工单、一个 API 定义、一条法规条款）往往比任何通用算法都好，前提是你的数据本来就有这样的单元</li>
+</ul>
+<p>有几类内容不能硬切：表格要整体保留或按行组保留并重复表头，代码块要按函数或类切，有序列表和合同条款要保留编号关系。切碎之后语义消失，检索命中率会显著下降，而这类损失在下游是看不出来的。</p>
+<h3 id="2-3-块大小与-Overlap"><a href="#2-3-块大小与-Overlap" class="headerlink" title="2.3　块大小与 Overlap"></a>2.3　块大小与 Overlap</h3><p>块大小是一个没有全局最优解的权衡。块越小，向量表征越聚焦，检索定位越准、噪声越少，但容易丢失必要的上下文——一个只写着“不得低于 60%”的条款，脱离前文就无法判断它在说什么。块越大，语义越完整，但相关性被稀释，检索精度下降，同样的 token 预算能放进去的候选数量也变少。</p>
+<p>Overlap，也就是让相邻块重叠一部分，用来缓解答案正好被切在边界上的问题，代价是存储冗余和检索冗余：同一段内容可能被多次召回，挤占其他候选的位置。比较稳妥的做法是先把切分点对齐到句子或段落边界，再按文档类型分别设定大小，用评估集（见 7.3）去选值，而不是全局套用一个数字。同一套系统里，合同、FAQ、代码、聊天记录的最优切分粒度本来就不一样。</p>
+<h3 id="2-4-Parent-Child-Chunking"><a href="#2-4-Parent-Child-Chunking" class="headerlink" title="2.4　Parent-Child Chunking"></a>2.4　Parent-Child Chunking</h3><p>这里有一对天然矛盾的需求：检索希望块小，因为小的块匹配更精准；生成希望块大，因为大的块语义更完整。Parent-Child Chunking 的做法是分别满足——用小的子块建索引，命中子块后返回它的父块或邻居窗口交给模型。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig2-chunking.png" alt="Parent-Child Chunking：子块用于检索，父块用于生成，兼顾匹配精度与语义完整"></p>
+<p>常见形态包括子块到父块（父子两级）、句子到段落、摘要到原文，以及小块检索加相邻块扩展的滑动窗口。它带来的代价同样明确：需要维护父子映射关系，返回的上下文变长，如果父块本身很大，相关性又会被稀释回去。另一种方向相反的思路是大块检索、小块生成——用较大的块保证召回率，重排之后只截取其中最相关的片段送进上下文。两种做法解决的是同一个矛盾，选哪一种取决于你的数据是答案集中在一两句话里，还是需要整段才能说清。</p>
+<h3 id="2-5-Metadata"><a href="#2-5-Metadata" class="headerlink" title="2.5　Metadata"></a>2.5　Metadata</h3><p>元数据是检索的第二条腿。它不参与语义相似度计算，但参与过滤、排序、引用、权限与去重，而且往往是低成本高收益的部分。常见字段可以分四组：来源（文档 ID、标题、URL、作者）、位置（页码、章节路径、块序号）、时间与版本（创建时间、更新时间、版本号）、治理信息（文档类型、语言、密级、所属部门、可见用户组）。</p>
+<p>它的用途很直接：把检索范围限定在某个时间窗或某个业务域内；给较新的文档加权；识别并合并重复内容；生成带出处的引用格式；以及在检索阶段就完成权限裁剪——只把用户有权看到的候选交给模型，比生成之后再检查答案是否泄露信息要安全得多。需要提醒的是，元数据缺失或不一致会让过滤条件形同虚设，建议在入库阶段用固定 schema 做校验，而不是指望下游容错。</p>
+<pre><code class="language-json">{
+  &quot;chunk_id&quot;: &quot;doc-1042#sec-3#p18-21&quot;,
+  &quot;doc_id&quot;: &quot;doc-1042&quot;,
+  &quot;title&quot;: &quot;差旅费用管理办法&quot;,
+  &quot;section_path&quot;: &quot;第三章 住宿标准 &gt; 3.2 一线城市&quot;,
+  &quot;page&quot;: 7,
+  &quot;updated_at&quot;: &quot;2026-03-11&quot;,
+  &quot;doc_type&quot;: &quot;policy&quot;,
+  &quot;department&quot;: &quot;finance&quot;,
+  &quot;acl_groups&quot;: [&quot;all-staff&quot;],
+  &quot;source_url&quot;: &quot;https://intranet.example.com/policies/1042&quot;
+}
+</code></pre>
+<h2 id="03、从知识到索引：Embedding-与-Index"><a href="#03、从知识到索引：Embedding-与-Index" class="headerlink" title="03、从知识到索引：Embedding 与 Index"></a>03、从知识到索引：Embedding 与 Index</h2><p>切分完成之后，知识还需要变成可以被快速比较的形式。这一步分两层：文本如何变成向量，以及向量如何被组织成能够快速搜索的索引。</p>
+<h3 id="3-1-Embedding"><a href="#3-1-Embedding" class="headerlink" title="3.1　Embedding"></a>3.1　Embedding</h3><p>Embedding 把一段文本映射成稠密向量，让语义相近的文本在向量空间里彼此靠近。选型时要看的维度包括语言覆盖、领域适配度、向量维度（直接影响存储与检索成本）、最大输入长度（决定单块能放多少 token）、是否区分查询与文档的编码方式，以及是否需要按模型要求添加指令前缀。很多检索模型是非对称的——查询和文档走不同的编码路径或不同的前缀，用错前缀会让效果明显下降，这一点在换模型时尤其容易踩坑。</p>
+<p>有一条硬约束：不同 embedding 模型产生的向量通常不处于同一个可直接比较的向量空间。更换嵌入模型时，已有文档通常需要重新生成向量并重建对应索引；如果采用新旧索引并存、双写或灰度迁移，也可以逐步完成迁移，但会增加一段时间内的系统复杂度。另外，通用嵌入模型在专业术语密集的场景（医疗、法律、金融、内部代号）上经常失效——同一个词在专业语境下的含义与通用语境完全不同。可选的补救手段是用领域数据微调嵌入模型，或者提高稀疏检索的权重，甚至在专有名词场景直接走关键词检索。</p>
+<h3 id="3-2-向量检索"><a href="#3-2-向量检索" class="headerlink" title="3.2　向量检索"></a>3.2　向量检索</h3><p>向量检索的核心是相似度度量，常见的有余弦相似度、内积和欧氏距离。向量归一化之后，余弦相似度与内积等价，所以很多实现只做内积再统一排序。</p>
+<table>
+<thead>
+<tr>
+<th>度量方式</th>
+<th>关注的性质</th>
+<th>使用注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>余弦相似度</td>
+<td>方向一致性，忽略向量长度</td>
+<td>需先归一化，文本检索最常见</td>
+</tr>
+<tr>
+<td>内积</td>
+<td>方向与长度共同作用</td>
+<td>归一化后等价于余弦，计算最快</td>
+</tr>
+<tr>
+<td>欧氏距离</td>
+<td>空间中的绝对距离</td>
+<td>对向量长度敏感，需注意量纲</td>
+</tr>
+</tbody></table>
+<p>更重要的一个认知是：相似不等于相关。嵌入相似度衡量的是两段文本在说什么，而不是这段文本能不能回答问题。一段讲“报销标准”的文本与问题“出差住宿能报多少”语义非常接近，而真正包含判定规则的可能是另一段讲“差旅审批范围”的文本。这种错位正是后面需要重排的根本原因（见 5.2）。</p>
+<h3 id="3-3-向量数据库"><a href="#3-3-向量数据库" class="headerlink" title="3.3　向量数据库"></a>3.3　向量数据库</h3><p>向量数据库提供的能力可以拆成几项：向量的持久化存储、近似最近邻检索、元数据过滤、增量更新与删除、水平扩展。按形态大致分四类——专用向量库、传统数据库的向量扩展、搜索引擎自带的向量能力、进程内的内存索引（适合小规模语料与离线评估）。选型时真正要问的不是哪个最快，而是数据规模与增长速度、过滤条件的复杂度、能否接受最终一致的更新、以及团队是否愿意多维护一套存储。</p>
+<p>其中最容易出问题的是带过滤的向量检索。当过滤条件筛掉的候选比例很高时，近似检索可能连足够数量的结果都凑不齐，表现为“明明库里有，就是搜不到”。这类问题的解法包括把过滤下推到索引内部、扩大检索的候选倍数、或者对高频过滤维度单独建子索引。它在现象上是检索召回不足，根因却在索引与数据建模层。</p>
+<h3 id="3-4-索引"><a href="#3-4-索引" class="headerlink" title="3.4　索引"></a>3.4　索引</h3><p>在不建索引的情况下做精确最近邻检索需要逐条比较，代价随语料规模线性增长，在线场景无法接受，因此向量检索普遍使用近似最近邻（ANN）索引，用一点召回损失换取数量级的性能提升。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig3-vector-index.png" alt="向量索引的基本结构：HNSW 用分层图做近似最近邻搜索，上层跳跃、下层精搜"></p>
+<p>常见的索引结构有几种：基于图的 HNSW 查询快、内存占用高、构建较慢；基于聚类的 IVF 需要先训练码本，查询时只扫描最近的若干簇；乘积量化 PQ 把向量压缩成短码，大幅降低内存但引入量化误差；这些结构还可以组合（IVF 加 PQ、HNSW 加标量量化），也可以放到磁盘上以内存换成本。选择与调参本质上是在三个量之间取舍：召回率、延迟、内存。索引参数（例如 HNSW 的搜索宽度、IVF 的扫描簇数）调的正是这个三角——提高索引的搜索精度通常会增加查询计算量和延迟；而索引结构、构建参数与量化方式则会进一步影响内存占用。因此索引调优本质上是在召回率、延迟与资源成本之间取舍。</p>
+<p>还有一件常被低估的事是更新成本：频繁增删的语料会带来删除标记、空间碎片与定期重建的需求。如果知识库每天都在变，索引的运维策略要和检索效果一起设计。此外，单层块索引不是唯一选择。在块之上增加摘要索引或假设问题索引，可以先通过更高层次的语义表示定位相关文档或章节，再回到下层索引召回具体内容。这类分层检索能够改善长文档、全局性问题以及部分复杂问题的召回效果。</p>
+<h2 id="04、从索引到结果：检索（Retrieval）"><a href="#04、从索引到结果：检索（Retrieval）" class="headerlink" title="04、从索引到结果：检索（Retrieval）"></a>04、从索引到结果：检索（Retrieval）</h2><p>检索阶段的任务，是从知识库中找到一批<strong>可能与问题相关的候选证据</strong>。它首先追求的是覆盖率，而不是最终答案所需的精确性。一次完整的检索通常包含两类工作：一类是<strong>怎么搜索</strong>，另一类是<strong>怎么构造更适合搜索的查询</strong>。前者包括向量检索、关键词检索和混合检索，后者包括查询改写、多查询和查询分解；元数据过滤则负责缩小搜索范围。这一阶段结束后，系统得到的是一个候选集，而不是最终上下文。候选集允许存在一定噪声，下一章再负责从中筛出真正值得交给模型的内容。</p>
+<h3 id="4-1-向量检索"><a href="#4-1-向量检索" class="headerlink" title="4.1　向量检索"></a>4.1　向量检索</h3><p>向量检索做的是语义召回，能处理同义替换、口语化表达与模糊描述，这是它不可替代的地方。它的弱项也很固定：专有名词、产品代号、错误码、编号、精确短语、用户 ID 与时间数字。在这些场景里，语义相近反而带来干扰——错误码 4012 和 4013 在向量空间里几乎重合，但它们是完全不同的事。</p>
+<h3 id="4-2-关键词检索"><a href="#4-2-关键词检索" class="headerlink" title="4.2　关键词检索"></a>4.2　关键词检索</h3><p>关键词检索（典型实现是 BM25 一类的稀疏检索）依赖词项匹配，在罕见词、专有名词、编号、引用原文的场景里表现稳定，可解释性也强，命中哪个词一目了然。它的弱项是词汇不匹配：用户问“报销要走什么流程”，文档里写的是“费用申请审批”，两边没有一个共同词项，稀疏检索就完全失手。稀疏表示也并非只能做字面匹配，SPLADE 这类模型会做词项扩展，在保留稀疏可解释性的同时补一部分语义能力。</p>
+<h3 id="4-3-混合检索"><a href="#4-3-混合检索" class="headerlink" title="4.3　混合检索"></a>4.3　混合检索</h3><p>两种方式的能力互补，所以混合检索通常是更稳妥的起点。融合方式主要有两种：一种是倒数排名融合（RRF），只看两路结果各自的排名而不看分数，因此不需要把两套打分体系归一化，工程上最省事；另一种是加权分数融合，需要先把分数归一化再按权重相加，可调性更强但更依赖调参。在同时存在语义表达差异和大量专有名词、编号等精确匹配需求的场景中，混合检索通常比单路检索更稳，但它并非所有数据集上的必然最优方案。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig4-hybrid-retrieval.png" alt="混合检索与查询处理：查询改写、多查询与分解生成多路输入，向量与关键词两路召回后用 RRF 融合"></p>
+<table>
+<thead>
+<tr>
+<th>检索方式</th>
+<th>主要优势</th>
+<th>典型失效场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>向量检索</td>
+<td>语义匹配，容忍改写与口语化</td>
+<td>编号、代号、精确短语、否定表达</td>
+</tr>
+<tr>
+<td>关键词检索</td>
+<td>词项精确，结果可解释</td>
+<td>词汇不匹配、同义改写</td>
+</tr>
+<tr>
+<td>混合检索</td>
+<td>兼顾语义与词项，召回更稳</td>
+<td>延迟与权重调参成本上升</td>
+</tr>
+</tbody></table>
+<h3 id="4-4-元数据过滤"><a href="#4-4-元数据过滤" class="headerlink" title="4.4　元数据过滤"></a>4.4　元数据过滤</h3><p>元数据过滤把检索范围限定在结构化条件内，例如时间范围、文档类型、业务线、密级与用户可见范围。实现上有两种挂载位置：前置过滤先筛数据再检索，候选可能不足，近似检索在小集合上会退化；后置过滤先检索再筛结果，top-k 可能被整体筛空。实践中常见的折中是扩大检索候选倍数再后置过滤，或者使用支持过滤感知的索引结构。权限过滤是这一类中最不能含糊的：它必须在检索阶段完成，因为一旦越权内容进入上下文，模型就不再区分该不该说。</p>
+<h3 id="4-5-Query-改写"><a href="#4-5-Query-改写" class="headerlink" title="4.5　Query 改写"></a>4.5　Query 改写</h3><p>用户的问题很少天然适合检索。多轮对话里大量查询带着指代——“它的价格呢”“那第二种方案呢”——独立看完全无法检索，需要结合对话历史重写成自包含的查询。此外还有拼写与语音转写错误、口语表达与术语之间的落差、以及用户描述的现象与文档记录的原因之间的落差，都属于查询改写要处理的范围。</p>
+<p>改写可以用规则、小模型或大模型完成，代价是一次额外的模型调用。需要警惕的是改写本身会引入幻觉或改变原意，因此工程上通常保留原始查询作为兜底：原始查询与改写后的查询分别进行检索，再对两路结果去重、合并并统一重排，而不是完全依赖改写结果。</p>
+<h3 id="4-6-多查询"><a href="#4-6-多查询" class="headerlink" title="4.6　多查询"></a>4.6　多查询</h3><p>一个问题往往有多种问法。多查询（Multi-Query）让模型围绕原问题生成若干个不同视角或不同措辞的子查询，分别检索后合并去重（常用 RRF），以此提升召回覆盖面，对用户用词与文档用词不一致的情况尤其有效。代价是 N 倍的检索开销加一次模型调用，延迟会明显上升，所以它更适合高价值查询或对延迟不敏感的场景；在线低延迟链路里通常只生成两到三个子查询。也有人把这一步挪到离线：为每个块生成若干“能被它回答的问题”，把这些问题的向量一起建索引，把扩展放在写入侧而不是查询侧。</p>
+<h3 id="4-7-查询分解"><a href="#4-7-查询分解" class="headerlink" title="4.7　查询分解"></a>4.7　查询分解</h3><p>有一类问题在结构上就不是一个检索问题，而是几个检索问题的组合。例如“A 方案和 B 方案哪个更适合我们这种规模”，要先查清两个方案各自的适用范围再比较；“某政策调整前后对 X 的影响”，要先确认调整时间点。查询分解（Query Decomposition）把这类问题拆成子问题，按依赖关系串行（后一个子问题依赖前一个的结果）或并行执行，再汇集结果。</p>
+<p>它与 Multi-Query 常被混淆，区别在于要解决的问题不同：Multi-Query 处理的是同一个问题换了种说法，各子查询的答案集合基本重合；Query Decomposition 处理的是一个提问里其实包含多个问题，各子查询的答案必须都拿到才能作答。两者可以叠加使用。</p>
+<p><strong>到这里，Retrieval 的任务完成了：系统已经尽可能把可能相关的证据找了出来。接下来面对的问题变成了另一个问题——这些候选里，哪些真正值得进入上下文？</strong></p>
+<h2 id="05、从候选到上下文：Rerank-与-Context"><a href="#05、从候选到上下文：Rerank-与-Context" class="headerlink" title="05、从候选到上下文：Rerank 与 Context"></a>05、从候选到上下文：Rerank 与 Context</h2><p>检索出来的东西还不能直接交给模型。召回阶段为了不漏，会有意放宽标准、放大候选数量，这些候选里混着大量弱相关内容；而上下文预算是有限的，直接全塞进去等于用噪声稀释信号。这一步要做的是把几十条候选筛成几条真正有用的材料，并组织成模型能读懂的形式。</p>
+<h3 id="5-1-为什么不能直接使用召回结果"><a href="#5-1-为什么不能直接使用召回结果" class="headerlink" title="5.1　为什么不能直接使用召回结果"></a>5.1　为什么不能直接使用召回结果</h3><p>检索通常采用“两阶段”结构：<strong>先召回，再排序</strong>。第一阶段负责从大规模知识库中快速找出一批候选，目标是<strong>尽可能不要漏掉相关内容</strong>；第二阶段负责对这些候选重新判断相关性，目标是<strong>把真正有用的内容排到前面</strong>。两阶段优化的是不同目标，因此不应该用同一种方式处理</p>
+<ul>
+<li><strong>召回阶段</strong>通常使用向量检索、关键词检索或混合检索，从数万、数百万甚至更大的知识库中快速筛出几十到几百个候选。这个阶段更看重 Recall：只要相关内容被漏掉，后面的排序再准确也没有意义。因此召回阶段通常会适当放宽范围，接受一定的噪声。</li>
+<li><strong>排序阶段</strong>则面对已经缩小的候选集合，对每个候选重新计算它与用户问题之间的相关性，再按照分数排序，最后只保留少量结果进入上下文。这里追求的是 Precision：不是“这段内容和问题有没有关系”，而是“这段内容是否真正能够帮助回答这个问题”。</li>
+</ul>
+<p>之所以不直接用精确的相关性模型对整个知识库排序，是因为计算成本太高。向量检索使用 Embedding 将查询和文档分别编码，可以提前计算文档向量，再通过索引快速完成大规模候选召回；而更精确的排序模型通常需要同时读取查询和候选文本，让两者进行更细粒度的交互。对整个知识库执行这种计算，在线延迟通常无法接受。因此，一条典型的检索链路可以表示为：</p>
+<blockquote>
+<p><strong>全量知识库 → 快速召回 → 候选集 → 精确排序 → Top-K 上下文</strong></p>
+</blockquote>
+<p>例如，一个知识库有 100 万个 Chunk，系统可以先通过混合检索召回 50～100 个候选，再使用 Rerank 模型重新排序，最终选择 5～10 个进入上下文。前面的召回负责“别漏”，后面的排序负责“别把真正相关的内容排在后面”。这也意味着两个阶段应该分别评估。召回阶段重点看 <strong>Recall@K</strong>：正确证据有没有进入候选集；排序阶段重点看 <strong>MRR、NDCG 或 Top-K 命中情况</strong>：正确证据进入候选集之后，能不能被排到足够靠前的位置。这样才能判断问题究竟出在“没召回来”，还是“召回了但排错了”。</p>
+<h3 id="5-2-重排序"><a href="#5-2-重排序" class="headerlink" title="5.2　重排序"></a>5.2　重排序</h3><p>重排序（ReRank）把查询与候选文本拼在一起送入模型，输出一个相关性分数。因为查询和文档在模型内部充分交互，它对相关性的判断精度显著高于向量相似度，代价是它无法预计算，只能对已经缩小过的候选集逐条打分，计算量随候选数线性增长。</p>
+<p>除了 Cross-Encoder，也有把大模型直接当作重排器（对候选打分或排序）的做法，以及 ColBERT 这类保留词级多向量、做延迟交互的方案。实践中，先召回几十条候选，再重排后取少量结果，通常比单纯增大向量检索的 top-k 更能改善最终上下文质量，因此 Rerank 往往是 RAG 检索链路中较有价值的一项增强。需要注意的是重排也有失败模式：长文档在被截断后送入重排器，可能把正确答案排低，因此训练与推理阶段的截断长度需要保持一致。</p>
+<h3 id="5-3-上下文过滤"><a href="#5-3-上下文过滤" class="headerlink" title="5.3　上下文过滤"></a>5.3　上下文过滤</h3><p>过滤在重排前后都可以做，目的是把明显无用甚至有害的候选去掉。常见动作包括按相关性阈值截断，只保留分数在阈值之上的候选；做近似去重，对高度重叠的候选去重，对于同一父块下高度相似的多个子块，可合并或保留代表性片段。按时间与权限条件再做一次裁剪；以及在多来源冲突时确定保留哪些来源（见 5.6）。去重的收益常被低估：当同一段内容在候选里出现三次，它不仅会挤掉其他有用内容，还会让模型误以为这个信息被反复确认过，从而放大偏差。</p>
+<h3 id="5-4-上下文压缩"><a href="#5-4-上下文压缩" class="headerlink" title="5.4　上下文压缩"></a>5.4　上下文压缩</h3><p>候选块的常见问题是块里只有一两句话相关。压缩的做法有几种：抽取式压缩只保留被判定相关的句子；摘要式压缩用模型把长段改写为简短要点；token 级压缩用专门的小模型删掉低信息量词元。三种方式的压缩率递增，信息损失风险也递增，选哪一种取决于下游任务对细节精度的要求——涉及数字、条款、代码的场景应慎用改写型压缩。</p>
+<p>压缩必须保留到原文的映射关系，否则引用会失效，用户点开出处看到的和答案里引用的对不上，是这类压缩最典型的副作用。另一种更轻量的做法是先对每个句子做相关性打标，只保留判定相关的句子并保留位置标记，兼顾压缩率与可追溯性。</p>
+<h3 id="5-5-上下文排序"><a href="#5-5-上下文排序" class="headerlink" title="5.5　上下文排序"></a>5.5　上下文排序</h3><p>顺序会影响模型对材料的利用程度。已有研究反复观察到，长上下文里的信息位置并不等价——位于中间位置的内容更容易被忽略，这一现象通常被称为 lost in the middle，其明显程度随模型与任务变化。工程上的对策是把最相关的材料放在上下文的开头或结尾，把次要材料放中间。</p>
+<p>顺序还牵涉另外两件事。一是引用：如果要求模型标注引用，材料需要带稳定编号，并在指令中明确引用格式，否则模型会自己编一个看起来合理的出处。二是缓存与前缀稳定性：对支持前缀缓存的模型服务，稳定的指令部分放在前面、动态的检索结果放在后面，有利于提高前缀缓存的复用率；如果缓存前缀发生变化，具体失效范围取决于模型服务的缓存机制。</p>
+<h3 id="5-6-上下文构建"><a href="#5-6-上下文构建" class="headerlink" title="5.6　上下文构建"></a>5.6　上下文构建</h3><p>上下文组装的产物是一个结构化提示：系统指令、检索材料、用户问题、输出格式要求。系统指令负责划定边界——只依据给定材料作答、没有依据时明确说明不足、引用必须指向材料编号；检索材料需要带来源、时间与编号；输出格式要求决定答案结构。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig5-recall-to-context.png" alt="从召回到可用上下文：多路召回与融合后重排，再经过过滤、压缩、排序与组装，最终形成受 token 预算约束的上下文"></p>
+<p>组装的难点在预算与冲突。token 预算要在指令、材料与输出之间分配，材料超出预算时需要一条明确的降级路径，例如先裁掉低分候选、再做压缩、最后才减少候选数量。多来源信息冲突时的处理原则需要提前规定，而且要拆成三件不同的事：谁有权约束谁（指令优先级）、同类事实应该信谁（来源可信度）、新旧信息以谁为准（时效性）。把这三件事混成一个笼统的“综合判断”交给模型，会得到不可预测的结果。</p>
+<p>还有一条安全上的要求：检索结果、工具返回、外部文档都可能夹带“忽略之前的指令”这类内容。外部内容进入上下文时的身份是数据，不是指令，组装时应当用明确的分隔标记把它包起来，并在系统指令里说明标记内的内容是资料而非命令。指望模型自己分辨来源，不是可靠的做法。</p>
+<table>
+<thead>
+<tr>
+<th>上下文成分</th>
+<th>主要作用</th>
+<th>常见写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>系统指令</td>
+<td>划定回答边界与引用规则</td>
+<td>只用给定材料、无依据需声明、按编号引用</td>
+</tr>
+<tr>
+<td>检索材料</td>
+<td>提供回答所需的事实依据</td>
+<td>带编号、来源与时间；外部内容用标记包裹</td>
+</tr>
+<tr>
+<td>用户问题</td>
+<td>明确任务目标</td>
+<td>保留原始表述，必要时附改写后的查询</td>
+</tr>
+<tr>
+<td>输出格式要求</td>
+<td>约束答案结构</td>
+<td>明确引用格式、长度与不确定时的表达方式</td>
+</tr>
+</tbody></table>
+<h2 id="06、从-Naive-RAG-到-Agentic-RAG"><a href="#06、从-Naive-RAG-到-Agentic-RAG" class="headerlink" title="06、从 Naive RAG 到 Agentic RAG"></a>06、从 Naive RAG 到 Agentic RAG</h2><p>同样的三个动作（索引、检索、生成），在不同成熟度下会被组织成差别很大的系统。下面这条演进线不是为了说明越新越好，而是为了说明每一层新增的到底是什么能力，以及它换来了什么新代价。</p>
+<h3 id="6-1-Naive-RAG"><a href="#6-1-Naive-RAG" class="headerlink" title="6.1　Naive RAG"></a>6.1　Naive RAG</h3><p>最基础的形态是固定三步：把文档切块嵌入，把用户问题嵌入，取相似度最高的若干块拼进提示词。它的问题几乎都是结构性的：没有查询理解，多轮对话里的指代直接失效；没有重排，候选里噪声多；切分粒度固定，长答案常被截断；没有评估，效果好坏靠感觉；面对需要多跳推理的问题基本无能为力。</p>
+<h3 id="6-2-Advanced-RAG"><a href="#6-2-Advanced-RAG" class="headerlink" title="6.2　Advanced RAG"></a>6.2　Advanced RAG</h3><p>在检索的前后各加一层加工。检索前做查询改写、扩展、意图分类与数据源路由；检索后做重排、过滤与压缩。这一层把 Naive RAG 的大部分明显缺陷补齐了，而且仍然是可预测的固定流水线——延迟稳定、失败模式清晰、容易评测。对绝大多数业务场景来说，做好这一层就足够。</p>
+<h3 id="6-3-Modular-RAG"><a href="#6-3-Modular-RAG" class="headerlink" title="6.3　Modular RAG"></a>6.3　Modular RAG</h3><p>Modular RAG 的关注点从流程转向模块：把索引、检索、重排、生成、编排拆成边界清晰、可替换的部件，每个部件可以有多种实现，按场景组合。它带来的主要是工程价值——更换嵌入模型或向量库不需要重写链路，不同业务线可以共用大部分模块再各自裁剪。需要说明的是，模块怎么切并没有统一标准，这里描述的是一种常见划分，实际项目可以合并、拆分或省略。</p>
+<h3 id="6-4-Graph-RAG"><a href="#6-4-Graph-RAG" class="headerlink" title="6.4　Graph RAG"></a>6.4　Graph RAG</h3><p>Graph RAG 把知识组织成图结构，例如实体—关系图、文档关系图或社区层级结构，再利用图上的关联关系辅助检索与生成。它擅长两类问题——需要跨文档连接的多跳问题，以及“这批文档整体在讲什么”的全局性问题；后者用向量检索很难做好，因为答案不存在于任何单个块里。代价同样明显：构图需要额外一轮实体与关系抽取，成本高、需要消歧、错误会沿图传播；知识更新时还要同步维护图结构。所以它更适合知识相对稳定、关系密度高的领域（法规、组织架构、供应链、医学文献），而不是所有场景的默认升级。</p>
+<h3 id="6-5-Agentic-RAG"><a href="#6-5-Agentic-RAG" class="headerlink" title="6.5　Agentic RAG"></a>6.5　Agentic RAG</h3><p>Agentic RAG 把检索从流程的一个固定步骤变成 Agent 可以调用的工具：由模型自己决定要不要检索、检索几次、用什么查询、要不要换数据源、现有结果够不够、需不需要再补充。检索因此不再是单轮动作，而是检索、评估、再检索的循环，并且可以和 SQL、API、搜索引擎、计算器并列使用。</p>
+<p>它解决的正是固定流水线解决不了的问题：问题需要几次检索才能拼出答案、检索不到时应该换策略而不是硬答、不同问题应该走不同数据源。代价是延迟与成本变得不可预测，评测更难（路径不固定，不能只比对最终答案），失败模式也更多——无意义的反复检索、过早停止、被检索结果里的噪声带偏。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig6-rag-evolution.png" alt="RAG 的五种形态：从固定 top-k 的 Naive RAG 逐步演进到由模型自主决定检索策略的 Agentic RAG"></p>
+<table>
+<thead>
+<tr>
+<th>演进阶段</th>
+<th>检索的决定方式</th>
+<th>新增能力</th>
+<th>主要代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Naive RAG</td>
+<td>固定 top-k 一次检索</td>
+<td>语义召回</td>
+<td>噪声多、多跳失效</td>
+</tr>
+<tr>
+<td>Advanced RAG</td>
+<td>前置改写加后置重排</td>
+<td>查询理解、精排、压缩</td>
+<td>链路变长、需要调参</td>
+</tr>
+<tr>
+<td>Modular RAG</td>
+<td>模块可插拔组合</td>
+<td>可替换、可裁剪</td>
+<td>抽象的工程成本</td>
+</tr>
+<tr>
+<td>Graph RAG</td>
+<td>沿图遍历关联信息</td>
+<td>多跳与全局性问题</td>
+<td>构图与维护成本</td>
+</tr>
+<tr>
+<td>Agentic RAG</td>
+<td>模型自主决定并迭代</td>
+<td>动态策略、多工具协同</td>
+<td>延迟不可控、评测困难</td>
+</tr>
+</tbody></table>
+<h2 id="07、RAG-的评估"><a href="#07、RAG-的评估" class="headerlink" title="07、RAG 的评估"></a>07、RAG 的评估</h2><p>RAG 的效果不能用一个分数概括，因为它是一条串联链路。评估的价值不在于给出总分，而在于当效果变差时能指出问题在哪一环。因此更实用的做法是把它拆成检索、上下文、生成三段分别评估。</p>
+<h3 id="7-1-检索评估"><a href="#7-1-检索评估" class="headerlink" title="7.1　检索评估"></a>7.1　检索评估</h3><p>检索评估回答的是该找到的找到了没有。有标注的情况下常用召回率、精确率、MRR、MAP 与 NDCG，对典型 RAG 场景而言，Recall@k 通常是最值得优先关注的检索指标之一，因为候选中没有正确材料时，后续生成阶段很难补救。没有标注时，可以用模型从文档反向生成“这个问题应该由哪些块回答”，或者让大模型对候选做相关性判定来构造弱标注（见 7.3）。除了效果指标，检索的工程指标同样要盯：延迟、吞吐、过滤之后的候选数量，以及不同查询类型（短查询、长查询、口语化查询、含编号查询）上的表现差异。</p>
+<h3 id="7-2-生成评估"><a href="#7-2-生成评估" class="headerlink" title="7.2　生成评估"></a>7.2　生成评估</h3><p>生成评估回答的是给了材料之后答得好不好，通常看几个维度：忠实度，即答案是否只依据给定上下文，没有引入外部信息；答案相关性，即是否真正回答了问题；引用正确性，即标注的出处是否真的支撑对应句子；以及拒答能力，即在材料不足时是否明确说明而不是编造。判定方式有三种互补的路径——规则检查（引用编号是否存在、关键数字是否与材料一致）、模型打分（把材料、问题、答案交给评审模型逐项判定）、人工抽样（用于校准自动评审的偏差）。模型评审存在位置偏好、长度偏好与自我偏好，把它当作唯一判据会让评测结果失真；自动评测降低的是标注成本，不是取消人工的必要性。</p>
+<h3 id="7-3-评估数据集"><a href="#7-3-评估数据集" class="headerlink" title="7.3　评估数据集"></a>7.3　评估数据集</h3><p>评估集需要包含三层信息：一组查询、每个查询对应的期望证据（哪些块应该被召回）、以及可接受的答案或判定标准。构造来源有三条——真实用户日志采样（分布最真实，价值最高）、从文档反向生成问题（覆盖度好但分布失真，容易集中在文档里写得最清楚的部分）、人工设计的边界用例（多跳、口语化、含编号、时效性，以及知识库里根本没有答案的负样本）。最后那类负样本尤其重要，它测的是系统会不会硬答。</p>
+<p>规模上不必追求大，要追求覆盖：不同文档类型、不同问题难度、不同表述风格各占一部分。维护上要有纪律——知识库更新后评估集要同步更新，把评估集和评估脚本当作代码一样版本化，纳入回归流程，避免“这次调好了”变成“这次碰巧调好了”。</p>
+<h3 id="7-4-定位-Retrieval-Context-Generation-问题"><a href="#7-4-定位-Retrieval-Context-Generation-问题" class="headerlink" title="7.4　定位 Retrieval &#x2F; Context &#x2F; Generation 问题"></a>7.4　定位 Retrieval &#x2F; Context &#x2F; Generation 问题</h3><p>定位的关键是把链路切成三段分别验证：期望证据是否出现在检索候选里（检索问题）、是否出现在最终送给模型的上下文里（上下文构建问题）、以及在材料都到位的情况下模型能否答对（生成问题）。有了这三步，绝大多数“RAG 效果不好”都能落到具体环节。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig7-eval-triage.png" alt="RAG 评估的三段拆解：检索、上下文、生成各自独立验证，才能把故障定位到具体环节"></p>
+<table>
+<thead>
+<tr>
+<th>故障现象</th>
+<th>优先排查环节</th>
+<th>常见原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正确材料完全检索不到</td>
+<td>索引与检索</td>
+<td>解析丢内容、切分截断、嵌入模型不匹配、过滤过严</td>
+</tr>
+<tr>
+<td>检索到但没进上下文</td>
+<td>重排与组装</td>
+<td>重排把正确项排低、去重误删、预算裁剪过早</td>
+</tr>
+<tr>
+<td>材料在上下文里却答错</td>
+<td>生成</td>
+<td>指令不清、材料被噪声稀释、顺序不利、问题超出材料范围</td>
+</tr>
+<tr>
+<td>答案正确但引用错误</td>
+<td>生成与组装</td>
+<td>材料缺少稳定编号、引用格式未约束</td>
+</tr>
+<tr>
+<td>简单问题也答不好</td>
+<td>全链路与路由</td>
+<td>该走 SQL 或 API 的问题被交给了检索（见第 8 章）</td>
+</tr>
+</tbody></table>
+<h2 id="08、RAG-的边界：从知识库到-Agent"><a href="#08、RAG-的边界：从知识库到-Agent" class="headerlink" title="08、RAG 的边界：从知识库到 Agent"></a>08、RAG 的边界：从知识库到 Agent</h2><p>RAG 是获取外部信息的一种方式，不是唯一方式，也不总是合适的方式。把不该由检索处理的问题交给检索，是很多“RAG 效果差”的真正原因。</p>
+<h3 id="8-1-什么场景适合-RAG"><a href="#8-1-什么场景适合-RAG" class="headerlink" title="8.1　什么场景适合 RAG"></a>8.1　什么场景适合 RAG</h3><p>检索适合处理这样的问题：答案存在于非结构化文本里，语料规模较大且持续变化，问题与文档措辞之间存在表述差异，需要给出处，答案可能散落在多篇文档中需要综合。典型场景包括产品文档问答、内部制度查询、客服知识库、代码库问答、法律与合规条款检索。</p>
+<h3 id="8-2-什么场景应该使用-SQL-API-Search"><a href="#8-2-什么场景应该使用-SQL-API-Search" class="headerlink" title="8.2　什么场景应该使用 SQL &#x2F; API &#x2F; Search"></a>8.2　什么场景应该使用 SQL &#x2F; API &#x2F; Search</h3><p>有三类问题检索天生不擅长。第一类是需要精确计算与聚合的问题——求和、计数、排序、分组、同比环比，向量检索无法保证数值正确，应当交给 SQL 或数据仓库，模型只负责把自然语言翻译成查询并解释结果。第二类是实时状态与事务性问题——订单状态、库存、余额、工单进度，这些数据的权威副本在业务系统里，索引里的副本既滞后又不具备权威性，正确做法是调用 API。第三类是开放世界与最新信息——知识库里没有的内容，应当交给外部搜索。</p>
+<p>这三类判断是路由问题，而不是检索质量问题。工程上更稳妥的做法是在链路最前面做意图与数据源路由，而不是把所有问题都塞进检索，再用更多技巧去补救。</p>
+<p><img src="/./%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/fig8-rag-boundary.png" alt="RAG 与相邻能力的边界：检索负责语义匹配，SQL 负责精确聚合，API 负责实时状态，搜索覆盖开放世界，记忆承载个性化状态"></p>
+<h3 id="8-3-RAG-与-Memory-的区别"><a href="#8-3-RAG-与-Memory-的区别" class="headerlink" title="8.3　RAG 与 Memory 的区别"></a>8.3　RAG 与 Memory 的区别</h3><p>两者都是外部存储加按需取回，所以常被混用，但它们的边界很清楚：知识库里的信息通常属于组织或业务域，面向多个用户共享；记忆里的信息通常属于某个用户、会话、任务或 Agent，具有更强的上下文相关性。判断一条信息该放哪里，看的不是内容形式，而是三个问题——它属于谁、谁有权读、多久之后应该过期。</p>
+<p>这直接决定了实现差异：记忆需要写入与更新策略（什么值得记、重复信息如何合并、过期信息如何遗忘），需要按用户隔离，检索范围天然是小集合；知识库需要的是解析、切分与索引流水线，以及版本与权限管理。把用户偏好塞进知识库、把公司制度塞进记忆，都会在权限与一致性上出问题。</p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>知识库检索</th>
+<th>记忆</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>信息归属</td>
+<td>组织或业务域</td>
+<td>单个用户或会话</td>
+</tr>
+<tr>
+<td>更新频率</td>
+<td>低，按批次重建</td>
+<td>高，随交互实时写入</td>
+</tr>
+<tr>
+<td>检索范围</td>
+<td>全库，按权限裁剪</td>
+<td>当前用户，小集合</td>
+</tr>
+<tr>
+<td>主要挑战</td>
+<td>解析、切分、召回质量</td>
+<td>写入时机、合并、遗忘</td>
+</tr>
+<tr>
+<td>数据敏感度</td>
+<td>需分级与权限管理</td>
+<td>需按用户严格隔离</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-RAG-作为-Agent-Tool"><a href="#8-4-RAG-作为-Agent-Tool" class="headerlink" title="8.4　RAG 作为 Agent Tool"></a>8.4　RAG 作为 Agent Tool</h3><p>当 RAG 进入 Agent 体系，它就从流水线的一步变成一组可选工具之一，与 SQL 查询、业务 API、网页搜索、代码执行并列。这个位置变化带来几条新的工程要求：工具描述要写清楚它适合回答哪类问题、不适合哪类问题，因为调用准确率主要由描述决定；返回结果要控制长度与结构，一次检索返回几万字会直接吃掉上下文；超时、重试与降级要有明确策略；并且要充分接受“检索不到”是一种有效结果——它让 Agent 有机会换工具或承认不知道，而不是基于噪声硬答。</p>
+<p>把这一节和前面的链路放在一起看，RAG 的定位就清楚了：它解决的是“让模型在需要的时候拿到它本身没有的信息”这一类问题中最常见的一种形态。真正值得投入的往往不是把某一步调到极致，而是先把链路切开、把每一环的失败模式量化出来，再决定补哪一块。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

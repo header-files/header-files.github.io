@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>三、实现一个简易RAG | 玲洲月</title>
+  <meta name="keywords" content=" LLM , RAG ">
+  <meta name="description" content="三、实现一个简易RAG | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(24)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(24)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;RAG">
+            
+            RAG
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="24">
+<input type="hidden" id="yelog_site_word_count" value="124.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RAG</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93RAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="三、实现一个简易RAG">三、实现一个简易RAG</span>
+            <span class="post-date" title="2026-09-28 19:26:47">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="二、RAG全链路拆解">二、RAG全链路拆解</span>
+            <span class="post-date" title="2026-09-28 13:52:00">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="一、什么是RAG">一、什么是RAG</span>
+            <span class="post-date" title="2026-09-28 09:46:57">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-三、实现一个简易RAG" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">三、实现一个简易RAG</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;RAG">RAG</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color4">RAG</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-28 19:37:09'>2026-09-28 19:26</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E9%9C%80%E6%B1%82%E8%A1%A8%E8%BF%B0"><span class="toc-text">01、需求表述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E7%94%9F%E6%88%90"><span class="toc-text">02、技术方案生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%9B%AE%E6%A0%87%E4%B8%8E%E8%BE%B9%E7%95%8C"><span class="toc-text">1. 目标与边界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%9B%AE%E6%A0%87"><span class="toc-text">1.1 目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%9C%AC%E6%9C%9F%E4%B8%8D%E5%81%9A"><span class="toc-text">1.2 本期不做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%BB%93%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B"><span class="toc-text">1.3 仓库与远程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-text">2. 总体架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A0%B8%E5%BF%83%E9%93%BE%E8%B7%AF"><span class="toc-text">2.1 核心链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%A8%A1%E5%9D%97%E8%81%8C%E8%B4%A3"><span class="toc-text">2.2 模块职责</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8C%85%E5%B8%83%E5%B1%80"><span class="toc-text">2.3 包布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%AC%E5%85%B1%E8%83%BD%E5%8A%9B"><span class="toc-text">3. 公共能力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%85%8D%E7%BD%AE%EF%BC%88common-config%EF%BC%89"><span class="toc-text">3.1 配置（common.config）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%97%A5%E5%BF%97%EF%BC%88common-logger%EF%BC%89"><span class="toc-text">3.2 日志（common.logger）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%85%AC%E5%85%B1-API%EF%BC%88src-api%EF%BC%89"><span class="toc-text">3.3 公共 API（src&#x2F;api）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E4%BE%A7"><span class="toc-text">4. 模型侧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%AF%B9%E8%AF%9D%EF%BC%88src-llm%EF%BC%89"><span class="toc-text">4.1 对话（src&#x2F;llm）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Embedding-Rerank"><span class="toc-text">4.2 Embedding &#x2F; Rerank</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86"><span class="toc-text">5. 文档处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E8%A7%A3%E6%9E%90"><span class="toc-text">5.1 解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%88%87%E5%88%86"><span class="toc-text">5.2 切分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%85%A5%E5%BA%93"><span class="toc-text">5.3 入库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E8%AE%B0%E5%BD%95%E6%A8%A1%E5%9E%8B"><span class="toc-text">5.4 记录模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-FaissVectorStore"><span class="toc-text">6. FaissVectorStore</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%80%89%E5%9E%8B"><span class="toc-text">6.1 选型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%AF%B9%E5%A4%96%E6%8E%A5%E5%8F%A3"><span class="toc-text">6.2 对外接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-text">6.3 内部结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E6%A3%80%E7%B4%A2%E5%AE%9E%E7%8E%B0%EF%BC%88%E7%AC%AC%E4%B8%80%E6%9C%9F%E5%AE%9A%E6%AD%BB%EF%BC%8C%E6%97%A0-candidate-multiplier%EF%BC%89"><span class="toc-text">6.4 检索实现（第一期定死，无 candidate multiplier）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-Rebuild"><span class="toc-text">6.5 Rebuild</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Retriever"><span class="toc-text">7. Retriever</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-ContextBuilder-%E4%B8%8E-Session"><span class="toc-text">8. ContextBuilder 与 Session</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E4%B8%89%E5%88%86%E5%BC%80"><span class="toc-text">8.1 三分开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E9%95%BF%E5%BA%A6"><span class="toc-text">8.2 长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-SessionStore"><span class="toc-text">8.3 SessionStore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-QueryService"><span class="toc-text">8.4 QueryService</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-HTTP-API"><span class="toc-text">9. HTTP API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-CLI"><span class="toc-text">10. CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E4%B8%80%E8%A7%88"><span class="toc-text">11. 关键配置一览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-text">12. 技术栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E6%96%87%E6%A1%A3%E4%B8%8E%E6%B5%8B%E8%AF%95"><span class="toc-text">13. 文档与测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E8%90%BD%E5%9C%B0%E9%A1%BA%E5%BA%8F"><span class="toc-text">14. 落地顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面进入实战环境，实现一个大模型协议客户端，支持Chat Compleions等协议。由 Cursor 进行代码落地，代码已推送至 GitHub ，仓库地址：<a target="_blank" rel="noopener" href="https://github.com/header-files/rag">https://github.com/header-files/rag</a>。下面简述一下过程。</p>
+<h2 id="01、需求表述"><a href="#01、需求表述" class="headerlink" title="01、需求表述"></a>01、需求表述</h2><p>首先，向cursor描述需求：</p>
+<pre><code>实现一个简易的RAG系统，具体要求如下：
+1. 代码仓库https://github.com/header-files/llm已经实现了基模调用，把这个仓库clone下来之后在这个仓库的基础上继续开发，并且需要遵循这个仓库里面的技术规范（项目结构、文档更新、日志追踪等）。但是后面不要推送到这个远程仓库，远程仓库绑定这个：git@github.com:header-files/rag.git
+2. embedding模型以及rarangk模型参照代码仓库https://github.com/header-files/llm，做好配置分离，涉及的参数也要适当的做好配置（文档切分长度、rerank是top的选择等等等等）
+3. 向量数据库暂时放在内存中，也要做好分层设计，后续会支持opensearch等作为向量数据库
+4. 输入来源需要支持txt、md等基础的文本文档，以及word、pdf等文档，因此需要支持不同文件类型的解析
+5. 暂时不需要前端页面，只暴露后端接口就可以，然后实现一个命令行客户端，用户可以通过命令行进行操作（包括上传文档、对话等功能）
+
+是否明白我的需求？如有问题直接提出
+</code></pre>
+<h2 id="02、技术方案生成"><a href="#02、技术方案生成" class="headerlink" title="02、技术方案生成"></a>02、技术方案生成</h2><p>经过几轮交互之后，最终生成的技术方案如下：</p>
+<hr>
+<h2 id="1-目标与边界"><a href="#1-目标与边界" class="headerlink" title="1. 目标与边界"></a>1. 目标与边界</h2><h3 id="1-1-目标"><a href="#1-1-目标" class="headerlink" title="1.1 目标"></a>1.1 目标</h3><p>在已有多协议大模型客户端基线上实现完整 RAG：</p>
+<ul>
+<li>文档解析、切分、向量化、FAISS 检索、默认重排、上下文组装、多轮问答</li>
+<li>统一 HTTP API（<code>src/api</code>）与命令行客户端</li>
+<li>配置、日志、链路追踪、文档与测试遵循现有工程规范</li>
+</ul>
+<h3 id="1-2-本期不做"><a href="#1-2-本期不做" class="headerlink" title="1.2 本期不做"></a>1.2 本期不做</h3><ul>
+<li>产品前端</li>
+<li>Redis &#x2F; OpenSearch 等外部向量库</li>
+<li>FAISS 索引落盘与重启恢复</li>
+<li>接口鉴权、多租户</li>
+<li>旧版二进制 <code>.doc</code></li>
+<li>精确 tokenizer &#x2F; token budget（第一版用字符数近似）</li>
+<li>HNSW &#x2F; IVF、候选放大倍数（<code>RAG_RETRIEVE_CANDIDATE_MULTIPLIER</code> 不进入第一期配置）</li>
+<li>推送到 <code>header-files/llm</code></li>
+</ul>
+<h3 id="1-3-仓库与远程"><a href="#1-3-仓库与远程" class="headerlink" title="1.3 仓库与远程"></a>1.3 仓库与远程</h3><ul>
+<li>基线：克隆 <code>header-files/llm</code> 后扩展</li>
+<li>远程：<code>git@github.com:header-files/rag.git</code></li>
+<li>主分支：<code>main</code></li>
+<li>仅在用户明确要求时 commit &#x2F; push</li>
+</ul>
+<hr>
+<h2 id="2-总体架构"><a href="#2-总体架构" class="headerlink" title="2. 总体架构"></a>2. 总体架构</h2><h3 id="2-1-核心链路"><a href="#2-1-核心链路" class="headerlink" title="2.1 核心链路"></a>2.1 核心链路</h3><pre><code class="language-text">                  ┌─────────────┐
+                  │   Ingest    │
+                  └──────┬──────┘
+                         │
+            Parser → Chunker → Embedding
+                                  │
+                                  ▼
+                         ┌────────────────┐
+                         │ FaissVectorStore│
+                         └───────┬────────┘
+                                 │
+Query ──→ Embedding ──→ Retriever
+                         │
+                    ┌────┴────┐
+                    │ Filter  │
+                    │ Rerank  │
+                    └────┬────┘
+                         │
+                         ▼
+                   ContextBuilder
+                         │
+                History + Context + Query
+                         │
+                         ▼
+                     LLMClient
+</code></pre>
+<p>HTTP &#x2F; CLI 经 <code>src/api</code> 进入；SessionStore 向 QueryService 提供 History。</p>
+<h3 id="2-2-模块职责"><a href="#2-2-模块职责" class="headerlink" title="2.2 模块职责"></a>2.2 模块职责</h3><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>负责</th>
+<th>不负责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Parser</td>
+<td>文件 → 文本</td>
+<td>Chunk</td>
+</tr>
+<tr>
+<td>Chunker</td>
+<td>文本 → Chunk</td>
+<td>Embedding</td>
+</tr>
+<tr>
+<td>Embedding</td>
+<td>文本 → Vector</td>
+<td>检索</td>
+</tr>
+<tr>
+<td>VectorStore</td>
+<td>Vector 存储 &#x2F; 搜索 &#x2F; 软删 &#x2F; rebuild</td>
+<td>Query 编排</td>
+</tr>
+<tr>
+<td>Retriever</td>
+<td>Query → 有序 Hits（含过滤与可选重排编排）</td>
+<td>Prompt</td>
+</tr>
+<tr>
+<td>Reranker</td>
+<td>Hits 重排</td>
+<td>Session</td>
+</tr>
+<tr>
+<td>ContextBuilder</td>
+<td>Query + Context + History → Messages</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td>SessionStore</td>
+<td>History 生命周期</td>
+<td>RAG 检索</td>
+</tr>
+<tr>
+<td>QueryService</td>
+<td>串起问答流程</td>
+<td>具体检索算法</td>
+</tr>
+<tr>
+<td>LLMClient</td>
+<td>模型调用</td>
+<td>RAG 业务逻辑</td>
+</tr>
+<tr>
+<td><code>src/api</code></td>
+<td>HTTP 工厂、trace、统一错误、挂载路由</td>
+<td>业务算法</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td>调 HTTP</td>
+<td>直连向量库</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-包布局"><a href="#2-3-包布局" class="headerlink" title="2.3 包布局"></a>2.3 包布局</h3><pre><code class="language-text">src/
+  common/          # config、logger
+  api/             # 公共 HTTP 层
+  llm/             # 对话客户端（基线）
+  rag/
+    parsers/
+    chunking/
+    embedding/
+    rerank/
+    vectorstore/   # VectorStore + FaissVectorStore
+    retrieve/      # Retriever
+    context/       # ContextBuilder
+    session/       # SessionStore
+    ingest.py
+    query/         # QueryService
+    api/           # RAG Router
+    cli/
+docs/  AGENT.md + common/ llm/ rag/
+tests/
+.env.example
+</code></pre>
+<hr>
+<h2 id="3-公共能力"><a href="#3-公共能力" class="headerlink" title="3. 公共能力"></a>3. 公共能力</h2><h3 id="3-1-配置（common-config）"><a href="#3-1-配置（common-config）" class="headerlink" title="3.1 配置（common.config）"></a>3.1 配置（<code>common.config</code>）</h3><p>扁平 <code>.env</code>；密钥不进仓库，提供 <code>.env.example</code>。</p>
+<table>
+<thead>
+<tr>
+<th>前缀</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>MODEL_*</code> &#x2F; <code>DEFAULT_MODEL</code></td>
+<td>对话模型</td>
+</tr>
+<tr>
+<td><code>EMBEDDING_*</code> &#x2F; <code>DEFAULT_EMBEDDING</code></td>
+<td>Embedding</td>
+</tr>
+<tr>
+<td><code>RERANK_*</code> &#x2F; <code>DEFAULT_RERANK</code></td>
+<td>Rerank</td>
+</tr>
+<tr>
+<td><code>RAG_*</code></td>
+<td>流水线参数（<strong>在配置层统一校验</strong>）</td>
+</tr>
+<tr>
+<td><code>API_*</code></td>
+<td>HTTP 监听与 CLI 默认地址</td>
+</tr>
+<tr>
+<td><code>LOG_*</code></td>
+<td>日志</td>
+</tr>
+</tbody></table>
+<p>显式入参默认透传；不支持时下游报错归一，禁止静默丢弃。</p>
+<p><strong><code>RAG_*</code> 配置层校验（统一完成，业务代码不散落判断）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>RAG_CHUNK_SIZE &gt; 0</code></td>
+</tr>
+<tr>
+<td><code>0 &lt;= RAG_CHUNK_OVERLAP &lt; RAG_CHUNK_SIZE</code></td>
+</tr>
+<tr>
+<td><code>RAG_EMBED_BATCH_SIZE &gt;= 1</code></td>
+</tr>
+<tr>
+<td><code>RAG_RETRIEVE_TOP_K &gt;= 1</code></td>
+</tr>
+<tr>
+<td><code>RAG_RERANK_TOP_N &gt;= 1</code></td>
+</tr>
+<tr>
+<td><strong><code>RAG_RERANK_TOP_N &lt;= RAG_RETRIEVE_TOP_K</code></strong></td>
+</tr>
+<tr>
+<td><code>RAG_MAX_CONTEXT_CHARS &gt; 0</code></td>
+</tr>
+<tr>
+<td><code>RAG_MAX_HISTORY_TURNS &gt;= 0</code></td>
+</tr>
+<tr>
+<td><code>RAG_MAX_UPLOAD_BYTES &gt;= 1</code></td>
+</tr>
+<tr>
+<td><code>RAG_VECTOR_STORE</code> 本期仅允许 <code>faiss</code>（或实现时固定为 faiss）</td>
+</tr>
+</tbody></table>
+<p>不合法时抛 <code>ConfigError</code>，在加载配置时失败，而不是运行到检索才发现。</p>
+<h3 id="3-2-日志（common-logger）"><a href="#3-2-日志（common-logger）" class="headerlink" title="3.2 日志（common.logger）"></a>3.2 日志（<code>common.logger</code>）</h3><p>控制台 &#x2F; 轮转文件；<code>trace_id</code>；API 回写 <code>X-Trace-Id</code>；不记密钥。</p>
+<h3 id="3-3-公共-API（src-api）"><a href="#3-3-公共-API（src-api）" class="headerlink" title="3.3 公共 API（src/api）"></a>3.3 公共 API（<code>src/api</code>）</h3><p>App 工厂、trace 中间件、统一错误体、<code>GET /health</code>、挂载各域 router。后续服务只贡献 router。</p>
+<hr>
+<h2 id="4-模型侧"><a href="#4-模型侧" class="headerlink" title="4. 模型侧"></a>4. 模型侧</h2><h3 id="4-1-对话（src-llm）"><a href="#4-1-对话（src-llm）" class="headerlink" title="4.1 对话（src/llm）"></a>4.1 对话（<code>src/llm</code>）</h3><ul>
+<li>协议：<code>openai-completions</code>（默认）、<code>openai-responses</code>、<code>anthropic-messages</code></li>
+<li><code>Message.role</code> 仅 system &#x2F; user &#x2F; assistant；不新增 role</li>
+<li>选型：<code>RAG_CHAT_MODEL</code>，空则 <code>DEFAULT_MODEL</code></li>
+</ul>
+<h3 id="4-2-Embedding-Rerank"><a href="#4-2-Embedding-Rerank" class="headerlink" title="4.2 Embedding &#x2F; Rerank"></a>4.2 Embedding &#x2F; Rerank</h3><ul>
+<li>Embedding：<code>EMBEDDING_*</code>，默认 <code>openai-embeddings</code>，批大小 <code>RAG_EMBED_BATCH_SIZE</code></li>
+<li>Rerank：<code>RERANK_*</code>，默认 <code>cohere-rerank</code></li>
+<li><strong><code>RAG_RERANK_ENABLED</code> 默认 <code>true</code></strong>（完整链路展示）；文档标明一次问答至少 Embedding + Rerank + LLM 三次上游调用，联调可关</li>
+</ul>
+<hr>
+<h2 id="5-文档处理"><a href="#5-文档处理" class="headerlink" title="5. 文档处理"></a>5. 文档处理</h2><h3 id="5-1-解析"><a href="#5-1-解析" class="headerlink" title="5.1 解析"></a>5.1 解析</h3><p><code>.txt</code> &#x2F; <code>.md</code> &#x2F; <code>.markdown</code> &#x2F; <code>.docx</code> &#x2F; <code>.pdf</code>；文本解码 utf-8-sig → utf-8 → gb18030。</p>
+<h3 id="5-2-切分"><a href="#5-2-切分" class="headerlink" title="5.2 切分"></a>5.2 切分</h3><p>递归分隔符 + 末级字符硬切；参数见配置校验。</p>
+<h3 id="5-3-入库"><a href="#5-3-入库" class="headerlink" title="5.3 入库"></a>5.3 入库</h3><pre><code class="language-text">校验 → Parser → Chunker → Embedding → VectorStore.add_document
+</code></pre>
+<p>空文本不入库；超 <code>RAG_MAX_UPLOAD_BYTES</code> 拒绝。</p>
+<h3 id="5-4-记录模型"><a href="#5-4-记录模型" class="headerlink" title="5.4 记录模型"></a>5.4 记录模型</h3><pre><code class="language-text">DocumentRecord
+  document_id
+  filename
+  media_type
+  metadata
+  created_at
+  chunk_count          # 可选，便于列表展示
+
+ChunkRecord
+  chunk_id
+  document_id
+  chunk_index
+  text
+  faiss_id
+  deleted: bool        # 软删标记（见 6.3）
+</code></pre>
+<hr>
+<h2 id="6-FaissVectorStore"><a href="#6-FaissVectorStore" class="headerlink" title="6. FaissVectorStore"></a>6. FaissVectorStore</h2><h3 id="6-1-选型"><a href="#6-1-选型" class="headerlink" title="6.1 选型"></a>6.1 选型</h3><ul>
+<li>仅 <code>faiss-cpu</code>；不落盘</li>
+<li>索引：<code>IndexFlatIP</code>；写入前 L2 归一化，内积近似余弦</li>
+</ul>
+<h3 id="6-2-对外接口"><a href="#6-2-对外接口" class="headerlink" title="6.2 对外接口"></a>6.2 对外接口</h3><pre><code class="language-python">add_document(document, records)   # records 含 text + vector；内部生成 chunk_id / faiss_id
+search(vector, top_k, document_ids=None) -&gt; hits
+delete_document(document_id) -&gt; bool
+get_document(document_id) -&gt; DocumentRecord | None
+list_documents() -&gt; list[DocumentRecord]
+rebuild() -&gt; None
+</code></pre>
+<h3 id="6-3-内部结构"><a href="#6-3-内部结构" class="headerlink" title="6.3 内部结构"></a>6.3 内部结构</h3><pre><code class="language-text">FaissVectorStore
+├── index                              # faiss.IndexFlatIP
+├── documents_by_id                    # document_id → DocumentRecord
+├── chunks_by_faiss_id                 # faiss_id → ChunkRecord（含 deleted）
+├── faiss_ids_by_chunk_id              # chunk_id → faiss_id
+└── faiss_ids_by_document_id           # document_id → set[faiss_id]
+</code></pre>
+<ul>
+<li><code>ChunkRecord</code> <strong>自带</strong> <code>faiss_id</code>，关系以记录为准；<code>faiss_ids_by_*</code> 为索引加速</li>
+<li>软删：将对应 <code>ChunkRecord.deleted = true</code>（可另维护 <code>deleted: set[faiss_id]</code> 做轻量判断，与 ChunkRecord 保持一致即可，二选一或双写以实现简单为准）</li>
+<li>删除文档：<code>document_id → faiss_ids →</code> 标记 chunk 删除，并更新文档列表可见性</li>
+</ul>
+<h3 id="6-4-检索实现（第一期定死，无-candidate-multiplier）"><a href="#6-4-检索实现（第一期定死，无-candidate-multiplier）" class="headerlink" title="6.4 检索实现（第一期定死，无 candidate multiplier）"></a>6.4 检索实现（第一期定死，无 candidate multiplier）</h3><p><strong>无 <code>document_ids</code>：</strong></p>
+<pre><code class="language-text">FAISS index.search(query, top_k)
+  → 跳过 deleted
+  → 若因 deleted 不足 top_k：对未删除集合补足或接受不足
+     （无过滤场景 deleted 通常少；不足时以未删除向量精确补齐至 top_k）
+</code></pre>
+<p>无过滤主路径充分使用 <code>IndexFlatIP.search()</code>。因软删导致结果空洞时，对<strong>未删除</strong>向量做补齐（仍不必引入配置化 multiplier）。</p>
+<p><strong>有 <code>document_ids</code>：</strong></p>
+<pre><code class="language-text">document_ids
+  → 并集 faiss_ids_by_document_id
+  → 排除 deleted
+  → 取出对应 vectors（从侧车缓存或 reconstruct）
+  → query 与允许向量做矩阵相似度（归一化后内积）
+  → Top-K
+</code></pre>
+<p>保证：</p>
+<ul>
+<li>有过滤时语义正确，<strong>不受全局 Top-K 截断影响</strong></li>
+<li>不引入 <code>RAG_RETRIEVE_CANDIDATE_MULTIPLIER</code>（留给未来 HNSW&#x2F;IVF）</li>
+</ul>
+<p>侧车缓存：入库时除 FAISS 外保留 <code>faiss_id → vector</code>（或等价结构），供过滤路径矩阵计算，避免依赖 <code>reconstruct</code> 的实现差异。</p>
+<h3 id="6-5-Rebuild"><a href="#6-5-Rebuild" class="headerlink" title="6.5 Rebuild"></a>6.5 Rebuild</h3><pre><code class="language-python">rebuild()  # 仅用未删除 chunk 重建 IndexFlatIP，重写 faiss_id 与各映射
+</code></pre>
+<p>第一期<strong>不自动触发</strong>；可预留阈值配置但不在本期读取。长期运行删除多时由运维&#x2F;后续任务调用。</p>
+<hr>
+<h2 id="7-Retriever"><a href="#7-Retriever" class="headerlink" title="7. Retriever"></a>7. Retriever</h2><pre><code class="language-text">Query
+  → Embedding
+  → VectorStore.search(top_k=RAG_RETRIEVE_TOP_K, document_ids=...)
+  → 若 Rerank 开启：Rerank → RAG_RERANK_TOP_N（已保证 ≤ retrieve top_k）
+  → 返回 SearchHit[]
+</code></pre>
+<p>空结果交 QueryService，不在此调 LLM。</p>
+<hr>
+<h2 id="8-ContextBuilder-与-Session"><a href="#8-ContextBuilder-与-Session" class="headerlink" title="8. ContextBuilder 与 Session"></a>8. ContextBuilder 与 Session</h2><h3 id="8-1-三分开"><a href="#8-1-三分开" class="headerlink" title="8.1 三分开"></a>8.1 三分开</h3><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Query</td>
+<td>用户本轮原话</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>本轮检索片段（编号）</td>
+</tr>
+<tr>
+<td>History</td>
+<td>既往 user&#x2F;assistant（不含历史资料整包）</td>
+</tr>
+</tbody></table>
+<p>逻辑形态：</p>
+<pre><code class="language-text">[system]
+[history...]
+[query]
+[context]
+</code></pre>
+<p>映射到现有 <code>Message</code>：system + history + 一条（或有限条）user，user 正文内用明确分区（如 <code>## 资料</code> &#x2F; <code>## 问题</code>），拼装只在 ContextBuilder。</p>
+<h3 id="8-2-长度"><a href="#8-2-长度" class="headerlink" title="8.2 长度"></a>8.2 长度</h3><ul>
+<li><code>RAG_MAX_CONTEXT_CHARS</code>：对 Context 片段按序装入，超额停止</li>
+<li><strong>第一版用字符数近似，不做精确 token budget</strong>（文档注明）</li>
+</ul>
+<h3 id="8-3-SessionStore"><a href="#8-3-SessionStore" class="headerlink" title="8.3 SessionStore"></a>8.3 SessionStore</h3><ul>
+<li>进程内存；<code>create</code> &#x2F; <code>get</code> &#x2F; <code>append</code> &#x2F; <code>clear</code> &#x2F; <code>delete</code></li>
+<li><code>RAG_MAX_HISTORY_TURNS</code>：超出丢弃最早非 system 轮次</li>
+<li>History 追加的 user 仅为<strong>问题原文</strong>，不是「资料+问题」</li>
+</ul>
+<p><strong>并发（开工收口）：</strong></p>
+<blockquote>
+<p>SessionStore 保证单进程内并发访问安全（如锁保护 dict 读写）；<strong>不保证</strong>同一 <code>session_id</code> 上并发 <code>/chat</code> 严格串行。第一期不做 per-session 请求队列。</p>
+</blockquote>
+<p>同一 session 并行两次 chat 时，历史追加顺序可能交错；调用方应避免对同一 session 并发写，或接受该边界。</p>
+<h3 id="8-4-QueryService"><a href="#8-4-QueryService" class="headerlink" title="8.4 QueryService"></a>8.4 QueryService</h3><pre><code class="language-text">取 History → Retriever → 无命中则直接说明
+→ ContextBuilder → LLM → Session 追加(query, answer)
+→ 返回 answer + citations + session_id
+</code></pre>
+<p>每轮重新检索。</p>
+<hr>
+<h2 id="9-HTTP-API"><a href="#9-HTTP-API" class="headerlink" title="9. HTTP API"></a>9. HTTP API</h2><table>
+<thead>
+<tr>
+<th>范围</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>公共</td>
+<td><code>GET /health</code></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><code>POST/GET/DELETE /documents</code>…</td>
+</tr>
+<tr>
+<td>会话</td>
+<td><code>POST/DELETE /sessions</code>…</td>
+</tr>
+<tr>
+<td>问答</td>
+<td><code>POST /chat</code>（<code>session_id</code> &#x2F; <code>document_ids</code> &#x2F; <code>stream</code>）</td>
+</tr>
+</tbody></table>
+<p>统一错误：<code>{&quot;error&quot;: {&quot;type&quot;, &quot;message&quot;}}</code>；<code>X-Trace-Id</code> 可入可出。<br>流式事件：<code>session</code> &#x2F; <code>citations</code> &#x2F; <code>content</code> &#x2F; <code>done</code> &#x2F; <code>error</code>。</p>
+<hr>
+<h2 id="10-CLI"><a href="#10-CLI" class="headerlink" title="10. CLI"></a>10. CLI</h2><p><code>serve</code> &#x2F; <code>upload</code> &#x2F; <code>ls</code> &#x2F; <code>rm</code> &#x2F; <code>ask</code> &#x2F; <code>chat</code><br>交互：<code>/upload</code> <code>/ls</code> <code>/rm</code> <code>/clear</code> <code>/exit</code><br>经 HTTP 访问服务；默认绑定一个 session。</p>
+<hr>
+<h2 id="11-关键配置一览"><a href="#11-关键配置一览" class="headerlink" title="11. 关键配置一览"></a>11. 关键配置一览</h2><table>
+<thead>
+<tr>
+<th>配置</th>
+<th>建议默认</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>RAG_RERANK_ENABLED</code></td>
+<td><code>true</code></td>
+<td>可关以降延迟</td>
+</tr>
+<tr>
+<td><code>RAG_VECTOR_STORE</code></td>
+<td><code>faiss</code></td>
+<td>本期唯一</td>
+</tr>
+<tr>
+<td><code>RAG_CHUNK_SIZE</code> &#x2F; <code>OVERLAP</code></td>
+<td><code>800</code> &#x2F; <code>120</code></td>
+<td>配置层校验</td>
+</tr>
+<tr>
+<td><code>RAG_EMBED_BATCH_SIZE</code></td>
+<td><code>16</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RAG_RETRIEVE_TOP_K</code></td>
+<td><code>20</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RAG_RERANK_TOP_N</code></td>
+<td><code>5</code></td>
+<td><strong>≤ retrieve top_k</strong></td>
+</tr>
+<tr>
+<td><code>RAG_MAX_CONTEXT_CHARS</code></td>
+<td><code>12000</code></td>
+<td>字符近似</td>
+</tr>
+<tr>
+<td><code>RAG_MAX_HISTORY_TURNS</code></td>
+<td><code>10</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RAG_MAX_UPLOAD_BYTES</code></td>
+<td><code>20MB</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>API_HOST</code> &#x2F; <code>PORT</code> &#x2F; <code>BASE_URL</code></td>
+<td>本地 8000</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>第一期不包含</strong> <code>RAG_RETRIEVE_CANDIDATE_MULTIPLIER</code>。</p>
+<hr>
+<h2 id="12-技术栈"><a href="#12-技术栈" class="headerlink" title="12. 技术栈"></a>12. 技术栈</h2><p>Python ≥ 3.11，uv；httpx；FastAPI + uvicorn；typer；faiss-cpu；python-docx；pypdf；python-dotenv；pytest &#x2F; respx。  </p>
+<hr>
+<h2 id="13-文档与测试"><a href="#13-文档与测试" class="headerlink" title="13. 文档与测试"></a>13. 文档与测试</h2><ul>
+<li>README + <code>docs/AGENT.md</code> + <code>docs/common|llm|rag/</code></li>
+<li>写清：过滤双路径、软删与 rebuild、字符近似、Rerank 默认开与延迟、Session 并发边界</li>
+<li>测试重点：配置校验（含 rerank ≤ retrieve）、有&#x2F;无 <code>document_ids</code> 检索正确性、软删后无过滤路径结果、Context 三分开与 History 不含资料、多轮、API&#x2F;CLI、无密钥泄露</li>
+</ul>
+<hr>
+<h2 id="14-落地顺序"><a href="#14-落地顺序" class="headerlink" title="14. 落地顺序"></a>14. 落地顺序</h2><ol>
+<li>公共配置（含校验）+ 基础类型 + 文档骨架  </li>
+<li>Parser + Chunker  </li>
+<li>Embedding Adapter + FaissVectorStore（双路径 search、软删、<code>rebuild</code>）  </li>
+<li>IngestService  </li>
+<li>Retriever + Rerank + ContextBuilder + QueryService  </li>
+<li>SessionStore（含并发安全）  </li>
+<li><code>src/api</code> + RAG 路由  </li>
+<li>CLI  </li>
+<li>完整测试 + README &#x2F; docs 定稿</li>
+</ol>
+<p>先跑通进程内核心链路，再接 HTTP &#x2F; CLI。</p>
+<hr>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
