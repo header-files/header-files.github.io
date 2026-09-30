@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>四、MCP底层原理 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , MCP ">
+  <meta name="description" content="四、MCP底层原理 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(30)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(30)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;RAG">
+            
+            RAG
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Tool/MCP">
+            
+            Tool/MCP
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;SKILL">
+            
+            SKILL
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="30">
+<input type="hidden" id="yelog_site_word_count" value="168k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MCP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RAG</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SKILL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Tool</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="二、SKILL的原理">二、SKILL的原理</span>
+            <span class="post-date" title="2026-09-30 20:30:40">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFSKILL/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="一、什么是SKILL">一、什么是SKILL</span>
+            <span class="post-date" title="2026-09-30 15:22:48">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/30/%E5%9B%9B%E3%80%81MCP%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="四、MCP底层原理">四、MCP底层原理</span>
+            <span class="post-date" title="2026-09-30 09:58:10">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%89%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMCP/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="三、什么是MCP">三、什么是MCP</span>
+            <span class="post-date" title="2026-09-29 20:15:19">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="二、Tool 的执行链路">二、Tool 的执行链路</span>
+            <span class="post-date" title="2026-09-29 13:13:28">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%80%E3%80%81Function-Calling-%E4%B8%8E-Tool/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="一、Function Calling 与 Tool">一、Function Calling 与 Tool</span>
+            <span class="post-date" title="2026-09-29 10:14:17">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93RAG/"
+           data-tag="LLM,RAG,coding实战"
+           data-author="" >
+            <span class="post-title" title="三、实现一个简易RAG">三、实现一个简易RAG</span>
+            <span class="post-date" title="2026-09-28 19:26:47">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="二、RAG全链路拆解">二、RAG全链路拆解</span>
+            <span class="post-date" title="2026-09-28 13:52:00">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="一、什么是RAG">一、什么是RAG</span>
+            <span class="post-date" title="2026-09-28 09:46:57">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-四、MCP底层原理" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">四、MCP底层原理</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Tool/MCP">Tool/MCP</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color4">MCP</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-30 17:57:49'>2026-09-30 09:58</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:8.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MCP-%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9A%E4%BB%8E%E8%BF%9E%E6%8E%A5%E3%80%81%E5%8F%91%E7%8E%B0%E5%88%B0%E8%B0%83%E7%94%A8"><span class="toc-text">MCP 的原理：从连接、发现到调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E8%BF%9B%E5%85%A5%E5%8D%8F%E8%AE%AE%E5%B1%82%EF%BC%9A%E6%B6%88%E6%81%AF%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7"><span class="toc-text">01、进入协议层：消息长什么样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-JSON-RPC-%E7%9A%84%E4%B8%89%E7%B1%BB%E6%B6%88%E6%81%AF"><span class="toc-text">1.1　JSON-RPC 的三类消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%94%99%E8%AF%AF%E7%A0%81"><span class="toc-text">1.2　错误码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-meta%EF%BC%9A%E5%8D%8F%E8%AE%AE%E5%85%83%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9B%BA%E5%AE%9A%E4%BD%8D%E7%BD%AE"><span class="toc-text">1.3　_meta：协议元数据的固定位置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E6%B6%88%E6%81%AF%E6%80%8E%E4%B9%88%E8%B7%91%EF%BC%9A%E4%B8%A4%E7%A7%8D%E4%BC%A0%E8%BE%93%E7%9A%84%E5%85%B7%E4%BD%93%E8%A6%81%E6%B1%82"><span class="toc-text">02、消息怎么跑：两种传输的具体要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-stdio"><span class="toc-text">2.1　stdio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Streamable-HTTP"><span class="toc-text">2.2　Streamable HTTP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A%E8%BF%9E%E6%8E%A5%E6%80%8E%E4%B9%88%E5%BB%BA%E7%AB%8B%E3%80%81%E6%80%8E%E4%B9%88%E7%BB%93%E6%9D%9F"><span class="toc-text">03、生命周期：连接怎么建立、怎么结束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8F%A1%E6%89%8B%E5%BC%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88legacy%EF%BC%89"><span class="toc-text">3.1　握手式生命周期（legacy）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-modern-era%EF%BC%9A%E6%8F%A1%E6%89%8B%E8%A2%AB%E6%8B%BF%E6%8E%89%E4%B9%8B%E5%90%8E"><span class="toc-text">3.2　modern era：握手被拿掉之后</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E5%B7%A5%E5%85%B7%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B0%83%E7%94%A8"><span class="toc-text">04、工具的发现与调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%8F%91%E7%8E%B0%EF%BC%9Atools-list-%E6%8A%8A%E6%B8%85%E5%8D%95%E5%B8%A6%E5%9B%9E%E6%9D%A5"><span class="toc-text">4.1　发现：tools&#x2F;list 把清单带回来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%B0%83%E7%94%A8%EF%BC%9Atools-call-%E8%B5%B0%E5%AE%8C%E4%B8%80%E6%9D%A1%E5%AE%8C%E6%95%B4%E9%93%BE%E8%B7%AF"><span class="toc-text">4.2　调用：tools&#x2F;call 走完一条完整链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%A8%A1%E5%9E%8B%E6%9C%80%E7%BB%88%E7%9C%8B%E5%88%B0%E4%BB%80%E4%B9%88"><span class="toc-text">4.3　模型最终看到什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B0%83%E7%94%A8"><span class="toc-text">05、资源与提示词的发现与调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Resources%EF%BC%9A%E5%8F%AA%E8%AF%BB%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">5.1　Resources：只读的上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-Prompts%EF%BC%9A%E7%94%A8%E6%88%B7%E6%8C%91%E9%80%89%E7%9A%84%E6%A8%A1%E6%9D%BF"><span class="toc-text">5.2　Prompts：用户挑选的模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E4%B8%89%E8%80%85%E5%B9%B6%E6%8E%92%E7%9C%8B"><span class="toc-text">5.3　三者并排看</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E6%8A%8A%E6%95%B4%E4%B8%AA%E4%BD%93%E7%B3%BB%E4%B8%B2%E8%B5%B7%E6%9D%A5"><span class="toc-text">06、把整个体系串起来</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MCP-的原理：从连接、发现到调用"><a href="#MCP-的原理：从连接、发现到调用" class="headerlink" title="MCP 的原理：从连接、发现到调用"></a>MCP 的原理：从连接、发现到调用</h1><blockquote>
+<p>上一篇停在“MCP 是什么”，这一篇走进协议内部。前面反复说“客户端问服务器有哪些工具、哪些数据、哪些提示模板”，可“问”这件事本身是怎么发生的——消息长什么样、连接怎么建立、清单怎么传到模型手里、一次调用怎么走完——这些问题一直悬着。这一篇把它们一个个落到消息和方法上，落到具体的字段上。</p>
+</blockquote>
+<p>先给这一篇立一条主线，后面所有小节都回扣它：MCP 可以从三个层次理解——<strong>连接、发现、调用</strong>。连接解决消息怎么传，发现解决能力描述从哪里来，调用解决具体能力如何执行。三者在典型使用路径上通常依次出现，但要先说清一点：在 <code>2026-07-28</code> 的 modern era 里，“发现”并不是“调用”之前的强制步骤——协议没有握手机制，客户端完全可以跳过发现、直接对已知的能力发起调用。把三个词当理解框架，不要当成严格的协议状态机。</p>
+<p><strong>注意</strong>：本文写作于 2026 年 9 月，以协议版本 <code>2026-07-28</code> 为准。MCP 的协议版本用日期字符串标识，且会把某些特性标记为 Deprecated。文中反复出现的两个词需要先交代：官方按“怎么协商版本、怎么建立连接”把协议版本分成两代——<strong>modern era</strong> 指 <code>2026-07-28</code> 及之后的版本（无握手，每个请求自己携带版本与能力），<strong>legacy</strong> 指 <code>2025-11-25</code> 及更早的版本（连接建立时先做 <code>initialize</code> 握手）。这一篇涉及生命周期、能力协商这些与版本强绑定的内容，正文里会明确区分“协议里稳定的结构”和“某一代版本的具体写法”。凡方法名、字段名与版本行为，请以所用版本对应的官方规范为准；文中产品名只作举例。</p>
+<h2 id="01、进入协议层：消息长什么样"><a href="#01、进入协议层：消息长什么样" class="headerlink" title="01、进入协议层：消息长什么样"></a>01、进入协议层：消息长什么样</h2><p>上一篇讲过三个角色、数据层和传输层，那是站在“链上有哪些东西”的高度看。这一章往协议层走一步，把两件事讲透：消息的确切结构，以及消息怎么从一端送到另一端。先记住一个不变的前提：<strong>MCP 的消息全部是 JSON-RPC 2.0，无论跑在哪种传输上，消息的语义都不变——传输只决定消息怎么送，不决定消息是什么意思</strong>。</p>
+<h3 id="1-1-JSON-RPC-的三类消息"><a href="#1-1-JSON-RPC-的三类消息" class="headerlink" title="1.1　JSON-RPC 的三类消息"></a>1.1　JSON-RPC 的三类消息</h3><p>一个 MCP 连接上，来回跑的只有三种消息：request、response、notification。</p>
+<p><strong>Request（请求）</strong>。客户端发给服务器，用来发起一个操作。规范要求的结构是四个字段：<code>jsonrpc</code>（固定字符串 <code>&quot;2.0&quot;</code>，协议标识）、<code>id</code>（本请求的唯一标识）、<code>method</code>（方法名，如 <code>&quot;tools/call&quot;</code>）、<code>params</code>（可选，参数对象）。</p>
+<pre><code class="language-text">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: string | number,
+  &quot;method&quot;: string,
+  &quot;params&quot;: { ... }
+}
+</code></pre>
+<p><code>id</code> 上有三条硬约束：它必须是字符串或整数；与基础 JSON-RPC 不同，它<strong>不允许为 <code>null</code></strong>；它<strong>不能与发送方已发出但尚未收到响应的任何其他请求的 <code>id</code> 重复</strong>。这三条合在一起，保证了 <code>id</code> 能在“请求—响应”这一对关系里做唯一的路由键。</p>
+<p><strong>Response（响应）</strong>。服务器发给客户端，对应某个 Request，<code>id</code> 必须与它回应的那个请求完全一致。它分两种结局，二选一。</p>
+<p>成功时带 <code>result</code> 字段：</p>
+<pre><code class="language-text">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    ...
+  }
+}
+</code></pre>
+<p>在 <code>2026-07-28</code> modern era 中，<code>result</code> 里要求一个 <code>resultType</code> 字段，用来声明这次结果的类型——<code>&quot;complete&quot;</code> 表示请求成功完成、结果是最终内容；<code>&quot;input_required&quot;</code> 表示请求未完成、还需要客户端补充输入（这是上一篇讲的 Elicitation &#x2F; MRTR 机制在响应里的落点）。规范允许扩展新增 <code>resultType</code> 值，客户端遇到不认识的值必须按非法处理。要分清版本边界：<code>resultType</code> 是 modern wire protocol 的必需字段，早期版本里根本没有这个字段；对着旧版本服务器交互时的兼容行为，由对应版本的协议和 SDK 处理。</p>
+<p>失败时带 <code>error</code> 字段：</p>
+<pre><code class="language-text">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;error&quot;: {
+    &quot;code&quot;: -32602,
+    &quot;message&quot;: &quot;Unknown tool: get_wheather&quot;,
+    &quot;data&quot;: { ... }
+  }
+}
+</code></pre>
+<p><code>error</code> 的结构是 <code>code</code>（整数，必填）、<code>message</code>（字符串，一句话简述，必填）、<code>data</code>（任意类型，可选，用来塞附加信息）。<code>error</code> 和 <code>result</code> 互斥，一个响应只能带其中一个。</p>
+<p><strong>Notification（通知）</strong>。没有 <code>id</code>，接收方<strong>不得</strong>回任何响应，发出去就完。它承载“不需要对方答复”的信息：进度更新、清单变化、取消一个还在执行的请求。规范只允许两个字段：<code>jsonrpc</code> 和 <code>method</code>（外加可选 <code>params</code>）：</p>
+<pre><code class="language-text">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;method&quot;: &quot;notifications/tools/list_changed&quot;
+}
+</code></pre>
+<p>一个结构上的要点值得单独说：在 <code>2026-07-28</code> modern era 中，消息的方向是固定的——客户端发送 Request 和 Notification，服务器返回 Response、并通过协议规定的订阅流发送相关 Notification；服务器不再直接向客户端发起 JSON-RPC Request。服务器需要客户端提供额外信息时，通过 <code>input_required</code> 结果进入多轮请求流程（后面 4.2 展开）。这不是 MCP 一直以来的样子：<code>2025-11-25</code> 及以前的版本里，服务器确实可以反过来向客户端发 Request（采样、根目录、Elicitation 的旧实现都走这条路），<code>2026-07-28</code> 把这条反向通道移除了。这一条把“谁主动”定死了，是理解后面所有交互的钥匙。</p>
+<h3 id="1-2-错误码"><a href="#1-2-错误码" class="headerlink" title="1.2　错误码"></a>1.2　错误码</h3><p>错误码不是随便填的整数，规范把它管得很细。通用协议故障用标准 JSON-RPC 2.0 错误码，五个：<code>-32700</code>（Parse error，收到无法解析的 JSON）、<code>-32600</code>（Invalid Request，消息结构不符合请求对象要求）、<code>-32601</code>（Method not found，方法不存在或未宣告对应能力）、<code>-32602</code>（Invalid params，参数无效——工具场景里就是“未知工具名或非法参数”）、<code>-32603</code>（Internal error，接收方内部错误）。</p>
+<p>在这个之上，MCP 把 JSON-RPC 预留的 <code>-32000</code> 到 <code>-32099</code> 区间做了划分：<code>-32000</code> 到 <code>-32019</code> 是 legacy 保留区，历史上曾被不同实现使用，新实现不应再依赖其中具体错误码。需要特别注意“资源未找到”这个错误：早期版本用过 <code>-32002</code>，但在 <code>2026-07-28</code> 里已经统一用标准 JSON-RPC 的 <code>-32602</code>（Invalid params）——对着旧服务器互操作时才需要考虑 <code>-32002</code>。<code>-32020</code> 到 <code>-32099</code> 保留给 MCP 规范专用，实现只能发射规范已定义的码，且必须按规定的语义用。目前规范在这一段定义了三个：<code>-32020</code> <code>HeaderMismatch</code>（HTTP 头与请求体不一致）、<code>-32021</code> <code>MissingRequiredClientCapability</code>（处理请求需要客户端未声明的能力，<code>data</code> 里列出缺的能力）、<code>-32022</code> <code>UnsupportedProtocolVersion</code>（不支持的协议版本，<code>data</code> 里给出 <code>supported</code> 和 <code>requested</code>）。</p>
+<p>这个划界值得记住，因为它回答了一个常见问题：遇到错误时先看 <code>code</code> 落在哪一段，就能大致判断是 JSON-RPC 层的故障、还是 MCP 协议层定义的特定错误。</p>
+<h3 id="1-3-meta：协议元数据的固定位置"><a href="#1-3-meta：协议元数据的固定位置" class="headerlink" title="1.3　_meta：协议元数据的固定位置"></a>1.3　<code>_meta</code>：协议元数据的固定位置</h3><p><code>2026-07-28</code> modern era 的请求通过 <code>params._meta</code> 携带协议元数据——注意位置，<code>_meta</code> 不是 JSON-RPC 消息的顶层字段，而是挂在请求参数里的。键名格式是“可选前缀 + <code>/</code> + 名字”，前缀推荐用反向 DNS 记法（如 <code>com.example/</code>）；第二段是 <code>modelcontextprotocol</code> 或 <code>mcp</code> 的前缀被协议保留，实现不能占用。</p>
+<p>modern era 里最关键的保留键有三个，都挂在 <code>io.modelcontextprotocol/</code> 下，且其中两个是每个请求<strong>必填</strong>的。放进一个完整请求里看它们的位置：</p>
+<pre><code class="language-text">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;get_weather&quot;,
+    &quot;_meta&quot;: {
+      &quot;io.modelcontextprotocol/protocolVersion&quot;: &quot;2026-07-28&quot;,
+      &quot;io.modelcontextprotocol/clientInfo&quot;: { &quot;name&quot;: &quot;ExampleClient&quot;, &quot;version&quot;: &quot;1.0.0&quot; },
+      &quot;io.modelcontextprotocol/clientCapabilities&quot;: {}
+    }
+  }
+}
+</code></pre>
+<p>三个键的分工：<code>protocolVersion</code> 必填，是本请求的协议版本；<code>clientInfo</code> 建议填，是客户端身份；<code>clientCapabilities</code> 必填，是本请求相关的客户端能力。</p>
+<p>规范的要求很硬：缺了必填字段的请求是畸形请求，服务器必须以 <code>-32602</code>（Invalid params）拒绝，HTTP 上响应状态必须是 <code>400 Bad Request</code>。服务器也不得依赖客户端没声明过的能力——如果处理某个请求需要一项客户端没在 <code>clientCapabilities</code> 里声明的能力，服务器必须返回 <code>MissingRequiredClientCapabilityError</code>（<code>-32021</code>），并在 <code>data.requiredCapabilities</code> 里列出缺哪几项。<code>clientInfo</code> 和后面会讲的 <code>serverInfo</code> 都是自报身份、协议不做校验，只用于展示、日志和调试，<strong>不该</strong>被拿来做行为分支或安全决策。</p>
+<p>这个设计支撑的是 modern era 的<strong>协议层无状态</strong>：服务器处理一个请求时，不需要依赖同一连接上此前请求建立的状态。注意边界——无状态的只是协议层，应用本身仍然可以保存业务状态；跨越多个请求的状态（比如长任务的句柄）由显式的标识符承载，客户端每次请求带上它，而不是靠连接隐式维持。</p>
+<h2 id="02、消息怎么跑：两种传输的具体要求"><a href="#02、消息怎么跑：两种传输的具体要求" class="headerlink" title="02、消息怎么跑：两种传输的具体要求"></a>02、消息怎么跑：两种传输的具体要求</h2><p>传输层管“JSON-RPC 消息怎么从一端送到另一端”。规范给了两种标准传输，协议语义完全一致。这一节把两者的具体要求都铺开，因为这是把 MCP 真正用起来时最先踩到的一层。</p>
+<h3 id="2-1-stdio"><a href="#2-1-stdio" class="headerlink" title="2.1　stdio"></a>2.1　stdio</h3><p>stdio 下，客户端把服务器拉成一个本地子进程，两端通过子进程的标准流通信。分帧规则一句话：消息以换行分隔，每条是一个完整的 JSON-RPC 消息，<strong>不得含嵌入换行</strong>。围绕这条规则，规范给了一串硬约束：</p>
+<ul>
+<li>服务器从 <code>stdin</code> 读消息、往 <code>stdout</code> 写消息；<code>stdout</code> 上<strong>只准</strong>写合法的 MCP 消息，不准写任何别的。</li>
+<li>客户端<strong>不准</strong>往服务器 <code>stdin</code> 写非 MCP 消息的东西。</li>
+<li>服务器<strong>可以</strong>往 <code>stderr</code> 写任意 UTF-8 日志（信息、调试、错误都行）；客户端可以捕获、转发或忽略这些输出，但<strong>不该</strong>把 <code>stderr</code> 有输出当成出错的信号。</li>
+<li>客户端只写 Request 和 Notification，<strong>不准</strong>写 Response；服务器只写 Response 和 Notification，<strong>不准</strong>写 Request。</li>
+</ul>
+<p>进程生命周期也被规范定义了。客户端发起的关闭顺序是：先关掉到子进程的输入流，等服务器退出，超时再按操作系统的方式强制结束（POSIX 上从 <code>SIGTERM</code> 升级到 <code>SIGKILL</code>）。服务器在 <code>stdin</code> 被关闭或读到 EOF 时应该尽快退出——这是唯一可移植的优雅关闭信号。如果服务器进程意外退出，客户端应该重启它；因为协议层是无状态的，正在执行中的请求会随进程终止而丢失，客户端如果需要继续执行，对着新进程重新发起即可。</p>
+<p>stdio 也有自己的取消方式。因为 stdio 是一条共享的双向通道、没有按请求划分的流，客户端要取消一个还在执行的请求，只能发一条 <code>notifications/cancelled</code> 通知、带上那个请求的 <code>id</code>；服务器应该尽快停止这个请求的工作，并且取消后不得再为它发任何消息。</p>
+<p>stdio 面向的是“同一台机器上的本地服务器”，典型情况是一对一服务一个客户端，没有网络开销。</p>
+<h3 id="2-2-Streamable-HTTP"><a href="#2-2-Streamable-HTTP" class="headerlink" title="2.2　Streamable HTTP"></a>2.2　Streamable HTTP</h3><p>Streamable HTTP 面向远程服务器，是所有“一个服务器服务很多客户端”场景的选择。它的核心形状极简：每条 JSON-RPC 消息都是一个新的 HTTP POST，发往单一 MCP 端点。围绕这个形状，规范的要求分成几层。</p>
+<p><strong>客户端 POST 的硬要求</strong>：必须带 <code>Content-Type: application/json</code>（请求体就是 JSON），并带 <code>Accept</code> 头、同时列出 <code>application/json</code> 和 <code>text/event-stream</code> 两种类型；请求体是单个 JSON-RPC Request，不准是 Response；每个 POST 都要带请求元数据头（见下）。要注意，modern era 的 Streamable HTTP 不再定义普通的客户端到服务器 Notification——stdio 上的 <code>notifications/cancelled</code> 在 HTTP 上没有对应物，取消的表达方式见本节末尾。</p>
+<p><strong>服务器响应的两种形式</strong>：对 Request，服务器必须在两者中选一个返回——<code>Content-Type: application/json</code>（单个 JSON 对象），或 <code>Content-Type: text/event-stream</code>（一条 SSE 流）。客户端必须同时支持两种。SSE 流允许服务器在最终响应前先发与这个请求相关的通知（如 <code>notifications/progress</code>），但这些通知必须与原始请求相关，且最终响应应该结束这条流。</p>
+<p><strong>协议版本与镜像头</strong>：每个 POST 必须带 <code>MCP-Protocol-Version</code> 头，值必须与请求体 <code>_meta</code> 里的 <code>protocolVersion</code> 完全一致，不一致就 <code>400 Bad Request</code> + <code>HeaderMismatch</code>。此外还有两个把请求体字段镜像到 HTTP 头的标准头，供负载均衡器、网关这类不解析请求体的中间件路由和检查：<code>Mcp-Method</code>（镜像 <code>method</code>，所有请求必填）、<code>Mcp-Name</code>（镜像 <code>params.name</code> 或 <code>params.uri</code>，<code>tools/call</code>、<code>resources/read</code>、<code>prompts/get</code> 必填）。服务器必须校验头与体一致，防止“负载均衡器按头路由、服务器按体执行”造成的安全漏洞。</p>
+<p><strong>三道安全闸</strong>：其一，服务器必须校验所有入站连接的 <code>Origin</code> 头，防 DNS rebinding 攻击，<code>Origin</code> 存在但无效时返回 <code>403 Forbidden</code>；其二，本地运行时服务器应该只绑定 <code>127.0.0.1</code>，不要绑所有网卡；其三，服务器应该为所有连接实现适当的身份认证。</p>
+<p><strong>一个容易被旧资料带偏的点</strong>：旧版 Streamable HTTP 里，客户端可以用 GET 打开一条接收服务器主动消息的事件流，<code>Mcp-Session-Id</code> 会话头也随之存在——这套机制是 <code>2025-03-26</code> 到 <code>2025-11-25</code> 的写法，<code>2026-07-28</code> 把两者都移除了。现代协议不再使用 Session&#x2F;GET 模型：服务器收到 GET 或 DELETE 应该返回 <code>405 Method Not Allowed</code>；带 <code>Mcp-Session-Id</code> 的请求应该被忽略，服务器不再生成或回显会话 ID。这呼应了 modern era 的协议层无状态——不再有协议级的会话。</p>
+<p><strong>取消的表达</strong>：客户端直接关掉那条请求的 SSE 响应流，服务器必须把这视为取消，尽快停止工作，取消后不得再为该请求发任何消息。对比 stdio 发 <code>notifications/cancelled</code> 的做法，这里连一条消息都不用发——断流本身就是信号。</p>
+<h2 id="03、生命周期：连接怎么建立、怎么结束"><a href="#03、生命周期：连接怎么建立、怎么结束" class="headerlink" title="03、生命周期：连接怎么建立、怎么结束"></a>03、生命周期：连接怎么建立、怎么结束</h2><p>生命周期讲“一次连接从生到死经过哪些状态”。这里有一个必须说清的分界：握手式生命周期属于 <code>2025-11-25</code> 及更早版本；从 <code>2026-07-28</code> 起的 modern era 已经取消了握手。两代分开记，才不会被手上的旧示例带偏。</p>
+<h3 id="3-1-握手式生命周期（legacy）"><a href="#3-1-握手式生命周期（legacy）" class="headerlink" title="3.1　握手式生命周期（legacy）"></a>3.1　握手式生命周期（legacy）</h3><p>旧版本里，一个连接要经过五个状态，最核心的是开头的一次 <code>initialize</code> 握手：</p>
+<p><strong>Initialize（初始化）</strong>。客户端先发 <code>initialize</code> 请求，带 <code>protocolVersion</code>、<code>capabilities</code>、<code>clientInfo</code>；服务器回 <code>initialize</code> 响应，带 <code>capabilities</code>、<code>serverInfo</code>。</p>
+<p><strong>Capability Negotiation（能力协商）</strong>。就发生在这个握手往返里：双方通过 <code>initialize</code> 请求和响应里的 <code>capabilities</code> 字段互相声明“我支持什么”，据此确定这次连接里哪些功能可用。</p>
+<p><strong>Initialized（初始化完成）</strong>。客户端收到响应后发一条 <code>notifications/initialized</code> 通知，宣告握手结束。它没有 <code>id</code>、不期待回应，只是告诉服务器“可以进入正常工作了”。</p>
+<p><strong>Normal Operation（正常工作）</strong>。之后进入常规交互：客户端发 <code>tools/list</code>、<code>tools/call</code> 这些请求，服务器按协商结果应答。</p>
+<p><strong>Shutdown（关闭）</strong>。旧版本没有专门的关闭方法，结束就是结束传输：stdio 下子进程退出，HTTP 下连接断开。</p>
+<h3 id="3-2-modern-era：握手被拿掉之后"><a href="#3-2-modern-era：握手被拿掉之后" class="headerlink" title="3.2　modern era：握手被拿掉之后"></a>3.2　modern era：握手被拿掉之后</h3><p>从 <code>2026-07-28</code> 起，这五个状态里的“握手”被拿掉了，变化有三处：</p>
+<p>其一，<strong>没有 <code>initialize</code> 握手了</strong>。版本、能力、身份不再靠一次握手交换，而是随每一次请求携带——每个请求的 <code>_meta</code> 带上 <code>protocolVersion</code>、<code>clientInfo</code>、<code>clientCapabilities</code>（就是 1.3 那三个字段），服务器逐请求判断要不要接。</p>
+<p>其二，<strong>能力协商从“连接时一次谈妥”变成“逐请求携带”</strong>。没有一条建立起来的会话去承载“我们谈好了哪些能力”，每个请求自己带上当前的能力声明。需要某个客户端没声明的能力时，服务器用 <code>-32021</code> 拒绝。</p>
+<p>其三，<strong><code>server/discover</code> 是服务器提供的发现入口，但不是客户端调用其他能力前的必经步骤</strong>。服务器必须实现它；客户端可以先调用 <code>server/discover</code> 获取服务器支持的版本、能力和身份，也可以跳过发现，直接对已知能力发起请求。它的请求不带业务参数（只有 <code>_meta</code>），响应结构是：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: &quot;discover-1&quot;,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    &quot;supportedVersions&quot;: [&quot;2026-07-28&quot;],
+    &quot;capabilities&quot;: { &quot;tools&quot;: {}, &quot;resources&quot;: {} },
+    &quot;_meta&quot;: { &quot;io.modelcontextprotocol/serverInfo&quot;: { &quot;name&quot;: &quot;ExampleServer&quot;, &quot;version&quot;: &quot;1.0.0&quot; } },
+    &quot;instructions&quot;: &quot;This server provides weather utilities.&quot;
+  }
+}
+</code></pre>
+<p><code>supportedVersions</code> 是服务器支持的协议版本清单，<code>capabilities</code> 是它提供的能力，<code>instructions</code> 是服务器提供给客户端的自然语言使用说明——客户端可以根据需要把它提供给模型作为上下文，但协议没有规定这段话必须直接进模型。跳过发现直接发业务请求也完全可行：遇到 <code>UnsupportedProtocolVersionError</code>（<code>-32022</code>）就根据错误里的 <code>supported</code> 清单换一个版本重试。<code>server/discover</code> 的实际用途有两个：客户端想一次性展示服务器支持哪些能力时，不必分别探 <code>tools/list</code>、<code>prompts/list</code>、<code>resources/list</code>；以及在 stdio 上做新旧版本的兼容探测（没有 HTTP 状态码可依赖时，先 <code>server/discover</code> 探一下，探测失败再回退 <code>initialize</code> 握手）。</p>
+<h2 id="04、工具的发现与调用"><a href="#04、工具的发现与调用" class="headerlink" title="04、工具的发现与调用"></a>04、工具的发现与调用</h2><p>工具是三类服务端原语里，<strong>通常由模型决定是否调用</strong>的一类（和上一篇建立的控制权概念对应：Tool 归模型、Resource 归应用、Prompt 归用户），也是从“能用”到“用上”路径最完整的一类。这一章拆成三步：先发现（<code>tools/list</code>），再调用（<code>tools/call</code>），最后回答一个常被跳过的细节——模型最终看到的到底是什么。</p>
+<h3 id="4-1-发现：tools-list-把清单带回来"><a href="#4-1-发现：tools-list-把清单带回来" class="headerlink" title="4.1　发现：tools/list 把清单带回来"></a>4.1　发现：<code>tools/list</code> 把清单带回来</h3><p>客户端发 <code>tools/list</code> 请求，服务器回一个工具数组。请求可以带一个可选的 <code>cursor</code> 做分页；响应里除了 <code>tools</code> 数组，还可以带 <code>nextCursor</code>（还有更多）、<code>ttlMs</code> 和 <code>cacheScope</code>（缓存提示）。</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;tools/list&quot;,
+  &quot;params&quot;: {}
+}
+</code></pre>
+<p>响应里的一个工具，核心字段有：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;get_weather&quot;,
+  &quot;description&quot;: &quot;Get current weather for a location&quot;,
+  &quot;inputSchema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: { &quot;location&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;City name&quot; } },
+    &quot;required&quot;: [&quot;location&quot;]
+  },
+  &quot;outputSchema&quot;: { &quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: { ... } },
+  &quot;annotations&quot;: { &quot;readOnlyHint&quot;: true },
+  &quot;title&quot;: &quot;Weather Provider&quot;,
+  &quot;icons&quot;: [ { &quot;src&quot;: &quot;...&quot;, &quot;mimeType&quot;: &quot;image/png&quot; } ]
+}
+</code></pre>
+<p><code>name</code> 是唯一标识，调用时靠它定位；<code>description</code> 给模型看；<code>inputSchema</code> 是 JSON Schema，定义参数形状——这是模型填参数的依据，必须是合法 JSON Schema（无参数时用 <code>{ &quot;type&quot;: &quot;object&quot;, &quot;additionalProperties&quot;: false }</code>）。<code>outputSchema</code> 描述的是工具的<strong>结构化输出</strong>：服务器声明了它，就应提供符合该 schema 的结构化结果（放在 <code>structuredContent</code> 字段）；<code>content</code> 数组则是另一路，放给人或模型看的文本形态，两者不要混为一谈。<code>title</code>、<code>icons</code> 用于界面展示。</p>
+<p><code>annotations</code> 是一组<strong>提示</strong>，描述工具的行为风险，帮助客户端决定要不要先让用户确认。规范明确：这些都是提示，不保证如实描述工具行为，客户端必须把来自不可信服务器的 annotations 当作不可信。四个布尔提示及默认值是：</p>
+<table>
+<thead>
+<tr>
+<th>提示</th>
+<th>含义</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>readOnlyHint</code></td>
+<td>为真表示工具不修改环境</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>destructiveHint</code></td>
+<td>为真表示可能做破坏性更新（相对只做新增）</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>idempotentHint</code></td>
+<td>为真表示同参数重复调用无额外影响（仅在非只读时有意义）</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>openWorldHint</code></td>
+<td>为真表示与外部“开放世界”交互（如联网搜索），为假表示域是封闭的</td>
+<td><code>true</code></td>
+</tr>
+</tbody></table>
+<p>默认值刻意偏保守：一个没写 annotations 的工具，被假定成“非只读、可能破坏性、非幂等、开放世界”——先做最坏假设，等服务器用 hint 来收窄。</p>
+<p>清单本身有几个性质：它可能为空，也可能随时间变化。变化的通知在 modern era 里走订阅流：客户端先通过 <code>subscriptions/listen</code> 打开一条订阅、声明自己要监听工具清单变化，服务器在清单变化时于这条订阅流上发 <code>notifications/tools/list_changed</code>，客户端收到后再重新调 <code>tools/list</code> 拿最新清单——服务器不会凭空向客户端推通知，通知总是落在客户端建好的订阅流上。对于需要缓存的清单，服务器还可以通过 <code>ttlMs</code> 和 <code>cacheScope</code> 提供缓存提示，客户端据此决定自己的缓存策略。一个容易被误解的点是——<code>tools/list</code> 返回的是工具的<strong>描述</strong>，不是工具本身，真正执行要等下一步的 <code>tools/call</code>。</p>
+<h3 id="4-2-调用：tools-call-走完一条完整链路"><a href="#4-2-调用：tools-call-走完一条完整链路" class="headerlink" title="4.2　调用：tools/call 走完一条完整链路"></a>4.2　调用：<code>tools/call</code> 走完一条完整链路</h3><p>调用用 <code>tools/call</code>，请求带工具名和参数：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 2,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;get_weather&quot;,
+    &quot;arguments&quot;: { &quot;location&quot;: &quot;New York&quot; }
+  }
+}
+</code></pre>
+<p>服务器执行完回一个结果，内容放在 <code>content</code> 数组里，通常是文本块，也可以带结构化内容：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 2,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    &quot;content&quot;: [ { &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Temperature: 72°F&quot; } ],
+    &quot;isError&quot;: false
+  }
+}
+</code></pre>
+<p>这里要分清两类错误，它们走完全不同的通道。一类是<strong>协议错误</strong>：工具名不存在、参数不合法——服务器返回 JSON-RPC error（<code>-32602</code>）。另一类是<strong>工具执行错误</strong>：工具本身跑挂了，比如后端服务超时、业务逻辑失败——这时服务器<strong>不</strong>返回 JSON-RPC error，而是返回一个正常的 <code>result</code>，但把 <code>isError</code> 置为 <code>true</code>，把错误信息放进 <code>content</code>。区分的意义在于：协议错误意味着这次请求没有形成一次成功的工具执行（请求可能已经送达服务器，只是在校验这一步被挡下）；而 <code>isError</code> 表示工具已经进入执行路径、在执行过程中发生了业务或运行时错误，模型应该把后者当成一次真实的工具反馈去理解、可能重试或换参数。</p>
+<p>把这次调用放到整条链上看：</p>
+<p>模型输出一个工具调用 → 应用翻译成 <code>tools/call</code> → 服务器执行实际的工具逻辑 → 结果沿原路返回 → 应用回填给模型。关键在“翻译”：模型侧说“我要调 <code>get_weather</code>，参数 New York”，和协议侧的 <code>tools/call</code> 消息不是一回事，中间是应用在做映射。</p>
+<p>一个执行上的细节：服务器可能一次执行不完，比如还缺一个参数。它回一个 <code>resultType</code> 为 <code>input_required</code> 的结果，说“我还需要 X”；客户端收集完输入后带着 <code>inputResponses</code> 重新发一次原请求，注意要用一个新的 <code>id</code>。重发时还要原样带上服务器给的 <code>requestState</code>——它由服务器生成、对客户端是不透明的，客户端只负责回传，不该去解析或修改它；它也不是客户端可以信任的业务状态。这个机制不只作用于 <code>tools/call</code>，<code>prompts/get</code> 和 <code>resources/read</code> 同样可能返回 <code>input_required</code>。这跟上一篇讲的 Elicitation 是同一套机制，方向始终是客户端发起、服务器响应。</p>
+<p>把发现和调用两条链路并排放在一张时序图上，差别就清楚了：</p>
+<p><img src="/./%E5%9B%9B%E3%80%81MCP%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/fig2-discovery-call.png"></p>
+<p>两次请求两次返回，中间隔着“翻译”这一步：<code>tools/list</code> 只把描述带回来，<code>tools/call</code> 才真正让工具跑起来。</p>
+<h3 id="4-3-模型最终看到什么"><a href="#4-3-模型最终看到什么" class="headerlink" title="4.3　模型最终看到什么"></a>4.3　模型最终看到什么</h3><p>从模型那一侧看，MCP 基本是隐身的。在标准的工具调用链路里，模型通常不会直接感知 MCP 服务器的存在——应用把 MCP 服务器返回的工具定义整理成模型可用的工具描述，模型看到的是一份<strong>工具清单</strong>，每个工具一个名字、一段描述、一份参数 schema，模型据此决定要不要调、调哪个、参数怎么填。</p>
+<p>所以“模型最终如何看到这些工具”的答案是：它看不到 <code>tools/list</code> 这个动作，也看不到 MCP 协议本身，它只看到这份清单作为自己上下文的一部分。对模型而言，一个通过 MCP 发现的远程工具，和一个应用本地实现的函数，长得一模一样。这正是 MCP 能“不打扰模型”就完成接入的原因——协议的复杂度被隔离在应用这一侧。</p>
+<p>这也带出一个判断：工具能不能被用好，瓶颈不在 MCP 协议，而在 <code>name</code>、<code>description</code>、<code>inputSchema</code> 写得清不清楚——这和第一篇讲“工具怎么声明给模型”是同一件事，MCP 只是把这套声明从“应用里写死”变成了“从服务器带回来”。</p>
+<h2 id="05、资源与提示词的发现与调用"><a href="#05、资源与提示词的发现与调用" class="headerlink" title="05、资源与提示词的发现与调用"></a>05、资源与提示词的发现与调用</h2><p>工具之外的两类原语，共同点是“读”而不是“调”——它们不执行动作，只提供内容。区别在谁决定什么时候用：Resources 由应用决定放进上下文，Prompts 由用户显式选择。本章的示例为简洁起见省略了每个请求必带的 <code>_meta</code> 字段（结构见 1.3）。</p>
+<h3 id="5-1-Resources：只读的上下文"><a href="#5-1-Resources：只读的上下文" class="headerlink" title="5.1　Resources：只读的上下文"></a>5.1　Resources：只读的上下文</h3><p>Resource 是服务器暴露的一段只读数据，用一个 URI 唯一标识——一份代码文件、一个仓库的 README、一段数据库 schema 都可以。和工具一样，取用分两步：先 <code>resources/list</code> 拿清单，再 <code>resources/read</code> 按 URI 读具体内容。</p>
+<p>第一步 <code>resources/list</code> 的请求，可以带 <code>cursor</code> 做分页：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 3,
+  &quot;method&quot;: &quot;resources/list&quot;,
+  &quot;params&quot;: {}
+}
+</code></pre>
+<p>响应是资源清单，每项只有元信息（URI、名字、MIME 类型等），不含内容本身：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 3,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    &quot;resources&quot;: [
+      {
+        &quot;uri&quot;: &quot;file:///project/src/main.rs&quot;,
+        &quot;name&quot;: &quot;main.rs&quot;,
+        &quot;title&quot;: &quot;Rust Software Application Main File&quot;,
+        &quot;description&quot;: &quot;Primary application entry point&quot;,
+        &quot;mimeType&quot;: &quot;text/x-rust&quot;
+      }
+    ],
+    &quot;nextCursor&quot;: &quot;next-page-cursor&quot;,
+    &quot;ttlMs&quot;: 300000,
+    &quot;cacheScope&quot;: &quot;public&quot;
+  }
+}
+</code></pre>
+<p>第二步 <code>resources/read</code> 的请求，用清单里拿到的 URI 去读内容：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 4,
+  &quot;method&quot;: &quot;resources/read&quot;,
+  &quot;params&quot;: { &quot;uri&quot;: &quot;file:///project/src/main.rs&quot; }
+}
+</code></pre>
+<p>响应是这段数据本身——<code>contents</code> 数组，每项可以是 <code>text</code>（文本）或 <code>blob</code>（base64 的二进制），带 <code>uri</code> 和 <code>mimeType</code>：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 4,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    &quot;contents&quot;: [
+      {
+        &quot;uri&quot;: &quot;file:///project/src/main.rs&quot;,
+        &quot;mimeType&quot;: &quot;text/x-rust&quot;,
+        &quot;text&quot;: &quot;fn main() {\n    println!(\&quot;Hello world!\&quot;);\n}&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<p>Resource 的定义字段有 <code>uri</code>、<code>name</code>、<code>title</code>、<code>description</code>、<code>mimeType</code>、<code>size</code>，外加可选的 <code>annotations</code>（<code>audience</code> 受众、<code>priority</code> 优先级、<code>lastModified</code> 修改时间）。这正是它和 Tool 的根本区别：Resource 是只读的内容，而 Tool 是可执行的能力——既可以是只读操作（查天气、搜索都是 Tool），也可以产生副作用；Tool 的产出是一次执行的结果，Resource 的产出是一段可以作为上下文材料使用的内容。</p>
+<p>Resource 还有两个工具没有的能力。一个是<strong>参数化模板</strong>：服务器可以用 URI 模板（RFC 6570）暴露一类资源，比如 <code>file:///{path}</code>，客户端填了 <code>path</code> 才得到具体资源，通过 <code>resources/templates/list</code> 列出模板。另一个是<strong>订阅</strong>：modern era 下，客户端通过 <code>subscriptions/listen</code> 建立订阅，资源发生变化后，服务器在这条订阅流上发 <code>notifications/resources/updated</code>，客户端据此重新读取对应 Resource；通知的 <code>_meta</code> 里带 <code>subscriptionId</code>，用来和是哪条订阅发出的相对应。</p>
+<h3 id="5-2-Prompts：用户挑选的模板"><a href="#5-2-Prompts：用户挑选的模板" class="headerlink" title="5.2　Prompts：用户挑选的模板"></a>5.2　Prompts：用户挑选的模板</h3><p>Prompt 是服务器提供的、可复用的指令模板，比如一个“审阅这段代码”的模板。它由用户显式触发（常见形态是斜杠命令），服务器定义内容、用户决定何时用——控制权在用户，这是它和 Tool、Resource 都不同的地方。</p>
+<p>获取也是两步：<code>prompts/list</code> 拿模板清单，<code>prompts/get</code> 取具体内容，请求里带参数把模板实例化。取回的不是可执行代码，而是一组消息——通常是 <code>user</code> 角色的一段文字，也可能是 <code>assistant</code> 角色，内容可以是文本、图片、音频，甚至内嵌一个 Resource 或指向资源的链接。</p>
+<p>第一步 <code>prompts/list</code> 的请求：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 5,
+  &quot;method&quot;: &quot;prompts/list&quot;,
+  &quot;params&quot;: {}
+}
+</code></pre>
+<p>响应是模板清单，每项带名字、描述和它接受的参数：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 5,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    &quot;prompts&quot;: [
+      {
+        &quot;name&quot;: &quot;code_review&quot;,
+        &quot;title&quot;: &quot;Request Code Review&quot;,
+        &quot;description&quot;: &quot;Asks the LLM to analyze code quality and suggest improvements&quot;,
+        &quot;arguments&quot;: [
+          { &quot;name&quot;: &quot;code&quot;, &quot;description&quot;: &quot;The code to review&quot;, &quot;required&quot;: true }
+        ]
+      }
+    ]
+  }
+}
+</code></pre>
+<p>第二步 <code>prompts/get</code> 的请求，按清单里的模板名取内容，<code>arguments</code> 用来实例化模板：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 6,
+  &quot;method&quot;: &quot;prompts/get&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;code_review&quot;,
+    &quot;arguments&quot;: { &quot;code&quot;: &quot;def hello():\n    print(&#39;world&#39;)&quot; }
+  }
+}
+</code></pre>
+<p>响应是一组消息——模板被参数实例化后的结果，每条消息带 <code>role</code> 和 <code>content</code>：</p>
+<pre><code class="language-json">{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 6,
+  &quot;result&quot;: {
+    &quot;resultType&quot;: &quot;complete&quot;,
+    &quot;description&quot;: &quot;Code review prompt&quot;,
+    &quot;messages&quot;: [
+      {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: {
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;text&quot;: &quot;Please review this Python code:\ndef hello():\n    print(&#39;world&#39;)&quot;
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<p>返回的消息会被客户端整理后交给模型，作为对话的起点。所以 Prompts 解决的是“重复写同一段开场白”的问题：把一套常用的引导语沉淀成模板，用户一键调用。</p>
+<h3 id="5-3-三者并排看"><a href="#5-3-三者并排看" class="headerlink" title="5.3　三者并排看"></a>5.3　三者并排看</h3><p>三类原语放在一起，差别一眼就能抓住：Tool 是“能做什么”，Resource 是“能看到什么”，Prompt 是“该怎么说”。更本质的差别在控制权——谁决定它们何时被用起来：</p>
+<table>
+<thead>
+<tr>
+<th>原语</th>
+<th>是什么</th>
+<th>谁决定何时用</th>
+<th>发现与取用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tools</td>
+<td>可执行的动作，有输入输出 schema</td>
+<td>模型</td>
+<td><code>tools/list</code> → <code>tools/call</code></td>
+</tr>
+<tr>
+<td>Resources</td>
+<td>只读的上下文数据，有唯一 URI</td>
+<td>应用</td>
+<td><code>resources/list</code> → <code>resources/read</code></td>
+</tr>
+<tr>
+<td>Prompts</td>
+<td>可复用的指令模板，带参数</td>
+<td>用户</td>
+<td><code>prompts/list</code> → <code>prompts/get</code></td>
+</tr>
+</tbody></table>
+<p>三者共用同一套骨架：都提供“列表 → 取用”的标准发现路径，各自的 list 方法都支持分页（<code>cursor</code> &#x2F; <code>nextCursor</code>），清单变化的通知也都走订阅流。但两点要说清：列表不是取用前的强制步骤——客户端已经知道某个工具名、资源 URI 或模板名时，可以直接调对应的取用方法，<code>server/discover</code> 也不是必经入口；另外现代协议为列表结果提供 <code>ttlMs</code>、<code>cacheScope</code> 这类缓存提示，客户端据此决定自己的缓存策略，这是提示而不是原语自带的能力。掌握这一套骨架，再看任何一个新原语，剩下的只是它“是什么、归谁管”的差别。</p>
+<h2 id="06、把整个体系串起来"><a href="#06、把整个体系串起来" class="headerlink" title="06、把整个体系串起来"></a>06、把整个体系串起来</h2><p>到这里，把这一篇和前一篇的图景合成一张。从模型想用一次外部能力，到能力真正被用上，完整路径是这样的：</p>
+<p><img src="/./%E5%9B%9B%E3%80%81MCP%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/fig1-system.png"></p>
+<p>从这张图能读出三个层次。最上面，模型只跟“工具清单 + 调用”打交道，它不知道下面是 MCP 还是本地函数。中间，应用承担了翻译：把模型的调用意图变成 <code>tools/call</code>，把 <code>tools/list</code> 的结果整理成模型看得懂的清单。最下面，协议把“接进来”这件事标准化了——服务器实现一次，就能被任何支持 MCP 的应用连上。</p>
+<p>再回头看这一篇开头的三个词，现在都有了落点：<strong>连接</strong>是第 03 节的生命周期，让两端对上话；<strong>发现</strong>是 <code>tools/list</code>、<code>resources/list</code>、<code>prompts/list</code> 这一族“问出来”的方法，让清单在运行时才成型；<strong>调用</strong>是 <code>tools/call</code> 这条从模型一路穿透到外部系统的链路。三个词不是三种并列的功能，也不是严格串行的三个阶段，而是理解 MCP 协议的一条主线：连接解决消息怎么传，发现解决能力描述从哪里来，调用解决具体能力如何执行。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

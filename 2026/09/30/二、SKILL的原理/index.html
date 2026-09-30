@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>二、SKILL的原理 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , SKILL ">
+  <meta name="description" content="二、SKILL的原理 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(30)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(30)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;RAG">
+            
+            RAG
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Tool/MCP">
+            
+            Tool/MCP
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;SKILL">
+            
+            SKILL
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="30">
+<input type="hidden" id="yelog_site_word_count" value="168k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MCP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RAG</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SKILL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Tool</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="二、SKILL的原理">二、SKILL的原理</span>
+            <span class="post-date" title="2026-09-30 20:30:40">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFSKILL/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="一、什么是SKILL">一、什么是SKILL</span>
+            <span class="post-date" title="2026-09-30 15:22:48">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/30/%E5%9B%9B%E3%80%81MCP%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="四、MCP底层原理">四、MCP底层原理</span>
+            <span class="post-date" title="2026-09-30 09:58:10">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%89%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMCP/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="三、什么是MCP">三、什么是MCP</span>
+            <span class="post-date" title="2026-09-29 20:15:19">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="二、Tool 的执行链路">二、Tool 的执行链路</span>
+            <span class="post-date" title="2026-09-29 13:13:28">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%80%E3%80%81Function-Calling-%E4%B8%8E-Tool/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="一、Function Calling 与 Tool">一、Function Calling 与 Tool</span>
+            <span class="post-date" title="2026-09-29 10:14:17">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93RAG/"
+           data-tag="LLM,RAG,coding实战"
+           data-author="" >
+            <span class="post-title" title="三、实现一个简易RAG">三、实现一个简易RAG</span>
+            <span class="post-date" title="2026-09-28 19:26:47">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="二、RAG全链路拆解">二、RAG全链路拆解</span>
+            <span class="post-date" title="2026-09-28 13:52:00">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="一、什么是RAG">一、什么是RAG</span>
+            <span class="post-date" title="2026-09-28 09:46:57">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-二、SKILL的原理" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">二、SKILL的原理</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;SKILL">SKILL</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">SKILL</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-30 21:44:27'>2026-09-30 20:30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%B8%80%E6%9D%A1%E4%B8%BB%E9%93%BE%EF%BC%9A%E4%BB%8E%E7%94%A8%E6%88%B7%E5%8F%91%E8%AF%9D%E5%88%B0%E7%BB%93%E6%9E%9C%E5%9B%9E%E6%9D%A5"><span class="toc-text">01、一条主链：从用户发话到结果回来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E5%8F%91%E7%8E%B0%EF%BC%9AAgent-%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%9C%89%E8%BF%99%E4%B9%88%E4%B8%80%E4%B8%AA-Skill"><span class="toc-text">02、发现：Agent 怎么知道有这么一个 Skill</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%8A%8A%E6%89%80%E6%9C%89-Skill-%E9%83%BD%E5%A1%9E%E8%BF%9B%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">2.1　为什么不能把所有 Skill 都塞进上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%B8%85%E5%8D%95%E9%87%8C%E8%A3%85%E4%BB%80%E4%B9%88%EF%BC%9A%E5%90%8D%E5%AD%97%E3%80%81%E6%8F%8F%E8%BF%B0%EF%BC%8C%E5%92%8C%E4%B8%80%E6%9D%A1%E8%A2%AB%E6%88%AA%E6%96%AD%E7%9A%84%E7%BA%BF"><span class="toc-text">2.2　清单里装什么：名字、描述，和一条被截断的线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%B0%81%E6%9D%A5%E5%86%B3%E5%AE%9A%E7%94%A8%E5%93%AA%E4%B8%AA%EF%BC%9A%E6%98%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E4%B8%8E%E6%A8%A1%E5%9E%8B%E8%87%AA%E4%B8%BB%E5%8C%B9%E9%85%8D"><span class="toc-text">2.3　谁来决定用哪个：显式调用与模型自主匹配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E5%8A%A0%E8%BD%BD%EF%BC%9ASkill-%E6%80%8E%E4%B9%88%E8%BF%9B%E5%85%A5%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">03、加载：Skill 怎么进入上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%85%88%E5%8A%A0%E8%BD%BD%E4%BB%80%E4%B9%88%EF%BC%8C%E5%90%8E%E9%9D%A2%E6%89%8D%E5%8A%A0%E8%BD%BD%E4%BB%80%E4%B9%88"><span class="toc-text">3.1　先加载什么，后面才加载什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%80%E6%AC%A1%E8%A7%A6%E5%8F%91%E8%AE%A9%E4%B8%8A%E4%B8%8B%E6%96%87%E9%95%BF%E5%A4%A7%E5%A4%9A%E5%B0%91"><span class="toc-text">3.2　一次触发让上下文长大多少</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E6%89%A7%E8%A1%8C%EF%BC%9A%E7%9C%9F%E6%AD%A3%E5%B9%B2%E6%B4%BB%E7%9A%84%E6%98%AF%E8%B0%81"><span class="toc-text">04、执行：真正干活的是谁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Skill-%E4%B8%8D%E6%98%AF%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E"><span class="toc-text">4.1　Skill 不是执行引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Skill-%E6%80%8E%E4%B9%88%E6%8C%87%E5%AF%BC-Agent-%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">4.2　Skill 怎么指导 Agent 使用工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">4.3　执行过程中的上下文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%80%8E%E4%B9%88%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%8F%AF%E5%A4%8D%E7%94%A8%E8%83%BD%E5%8A%9B"><span class="toc-text">05、设计：怎么封装一个可复用能力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%83%BD%E5%8A%9B%E9%80%82%E5%90%88%E5%81%9A%E6%88%90-Skill"><span class="toc-text">5.1　什么样的能力适合做成 Skill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%81%8C%E8%B4%A3%E8%BE%B9%E7%95%8C%EF%BC%9A%E4%B8%8D%E8%AF%A5%E5%A1%9E%E8%BF%9B-Skill-%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="toc-text">5.2　职责边界：不该塞进 Skill 的东西</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E7%B2%92%E5%BA%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%A4%AA%E5%A4%A7%EF%BC%8C%E4%B9%9F%E4%B8%8D%E8%83%BD%E6%8B%86%E5%BE%97%E5%A4%AA%E7%A2%8E"><span class="toc-text">5.3　粒度：为什么不能太大，也不能拆得太碎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E5%8F%AF%E5%A4%8D%E7%94%A8%E3%80%81%E5%8F%AF%E7%BB%84%E5%90%88%E3%80%81%E4%BD%8E%E8%80%A6%E5%90%88"><span class="toc-text">5.4　可复用、可组合、低耦合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81Skill-%E4%B8%8E-MCP%EF%BC%9A%E8%83%BD%E5%8A%9B%E6%80%8E%E4%B9%88%E8%BF%9E%E5%88%B0%E5%A4%96%E9%83%A8%E4%B8%96%E7%95%8C"><span class="toc-text">06、Skill 与 MCP：能力怎么连到外部世界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-MCP-%E6%8F%90%E4%BE%9B%E4%BB%80%E4%B9%88%EF%BC%9A%E8%BF%9E%E6%8E%A5%E3%80%81%E5%B7%A5%E5%85%B7%E3%80%81%E8%B5%84%E6%BA%90%E4%B8%8E%E6%8F%90%E7%A4%BA%E6%A8%A1%E6%9D%BF"><span class="toc-text">6.1　MCP 提供什么：连接、工具、资源与提示模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Skill-%E6%8F%90%E4%BE%9B%E4%BB%80%E4%B9%88%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AE%83%E6%80%8E%E4%B9%88%E7%94%A8%E5%88%B0-MCP-%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-text">6.2　Skill 提供什么，以及它怎么用到 MCP 的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Skill-%E4%BE%9D%E8%B5%96-MCP-%E5%90%97"><span class="toc-text">6.3　Skill 依赖 MCP 吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-MCP-Prompt-%E4%B8%8E-Skill-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">6.4　MCP Prompt 与 Skill 的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81Skill-%E4%B8%8E-Agent%EF%BC%9A%E8%83%BD%E5%8A%9B%E5%92%8C%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BD%93%E7%9A%84%E8%BE%B9%E7%95%8C"><span class="toc-text">07、Skill 与 Agent：能力和执行主体的边界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-Skill-%E4%B8%8D%E6%98%AF-Agent%EF%BC%8C%E4%B9%9F%E4%B8%8D%E9%9C%80%E8%A6%81%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%8A%B6%E6%80%81"><span class="toc-text">7.1　Skill 不是 Agent，也不需要自己的模型与状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-Agent-%E6%80%8E%E4%B9%88%E9%80%89%E3%80%81%E6%80%8E%E4%B9%88%E7%94%A8-Skill"><span class="toc-text">7.2　Agent 怎么选、怎么用 Skill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-Skill-%E4%B8%8E-Workflow%E3%80%81Sub-Agent-%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-text">7.3　Skill 与 Workflow、Sub-Agent 的位置</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一个 Skill 被用上，要走过四件事：先被看见，再被选中，然后被读进上下文，最后靠模型手里的工具把活干完。这四件事里，Skill 本身只提供被发现和被加载的内容；选择由用户或 Agent 决定，执行由 Agent 和运行时完成。</p>
+</blockquote>
+<p>上一篇讲的是一件东西长什么样：一个目录、一份 <code>SKILL.md</code>、外加按需加载的资源。这一篇讲它被用起来的过程——从用户发话到结果回来，中间有几步，每一步由谁决定，上下文里又多了什么。</p>
+<p>本文写作于 2026 年 9 月。Skill 的格式由 Agent Skills 开放标准定义（agentskills.io），标准只规定格式与元数据，<strong>加载与执行的细节属于各客户端的实现</strong>；本文涉及实现时以 Claude Code 的当期文档为准，字段名、默认值、预算算法都可能随版本变化。</p>
+<h2 id="01、一条主链：从用户发话到结果回来"><a href="#01、一条主链：从用户发话到结果回来" class="headerlink" title="01、一条主链：从用户发话到结果回来"></a>01、一条主链：从用户发话到结果回来</h2><p>把一次使用拆开，会得到八个动作：用户请求进来、发现有哪些 Skill 可用、选中其中一个（或几个）、把它读进来、和别的内容一起组装成本轮上下文、模型开始行动、调用工具或 MCP、结果回到上下文里。按职责归并，这八步落在四段上：<strong>发现、选择、加载、执行</strong>。</p>
+<p>这四段是描述性的划分，不是规范定义的生命周期。标准规定的是格式与元数据；哪一步在什么时候发生、由谁触发，取决于运行时的实现。把它画出来只是为了回答一个问题：<strong>同一个 Skill，在链路的哪一段以什么形式存在。</strong></p>
+<p><img src="/./%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/fig1-pipeline.png"></p>
+<p>值得注意的是每一段对上下文的影响并不一样。发现和选择这两段基本不改变上下文——清单里只有名称和描述，用不掉的不花额外的钱。真正的变化发生在加载：正文作为一条消息进来，从此在后续每一轮里都占着位置。执行段最热闹，新增的内容却最杂：引用文件、脚本输出、工具返回，都可能在这一段挤进来。</p>
+<p>下面五节就沿着这条链往下走：怎么被发现（02）、怎么被读进来（03）、谁在执行（04），以及两个边界问题——怎么设计一个值得被复用的能力（05），它和 MCP、和 Agent 各自管到哪儿（06、07）。</p>
+<h2 id="02、发现：Agent-怎么知道有这么一个-Skill"><a href="#02、发现：Agent-怎么知道有这么一个-Skill" class="headerlink" title="02、发现：Agent 怎么知道有这么一个 Skill"></a>02、发现：Agent 怎么知道有这么一个 Skill</h2><h3 id="2-1-为什么不能把所有-Skill-都塞进上下文"><a href="#2-1-为什么不能把所有-Skill-都塞进上下文" class="headerlink" title="2.1　为什么不能把所有 Skill 都塞进上下文"></a>2.1　为什么不能把所有 Skill 都塞进上下文</h3><p>一个装了二十个 Skill 的环境，如果每个 Skill 的完整内容都常驻上下文，<strong>按规范建议的每个 Skill 约 5000 tokens 估算</strong>，就是十万 tokens 级别的固定开销，而其中大部分内容这次对话根本用不到。麻烦的是，内容一多，真正关键的那条约束会被埋掉——这和上一篇里“系统提示变成杂物间”是同一个病。所以发现阶段的取舍很直接：<strong>上下文里只放“怎么找到它”的信息，不放“它的内容”。</strong> 在 Anthropic 的实现里，这条信息就是每个 Skill 的名字和描述，它们在会话启动时被装进系统提示，让模型知道有哪些东西可用、大致什么时候该用。</p>
+<p>这里有三个反复出现的直觉误解。</p>
+<ul>
+<li>第一，以为清单里放的是摘要——不是摘要，清单主要放 Skill 的名称和用于判断何时使用它的描述信息，正文不会在这一阶段进入上下文。</li>
+<li>第二，以为清理清单的办法是“少装几个 Skill”——多数情况下你该做的是把描述写准，因为<strong>自动匹配靠的主要是描述里的词</strong>。</li>
+<li>第三，以为清单的成本可以忽略——单个 Skill 很小，但它随 Skill 数量线性增长，而且只要技能库在长，这件事迟早会撞上预算，见下一节。</li>
+</ul>
+<h3 id="2-2-清单里装什么：名字、描述，和一条被截断的线"><a href="#2-2-清单里装什么：名字、描述，和一条被截断的线" class="headerlink" title="2.2　清单里装什么：名字、描述，和一条被截断的线"></a>2.2　清单里装什么：名字、描述，和一条被截断的线</h3><p>规范对描述的要求只有两条：长度在 1–1024 字符之间，并且要同时说清“做什么”和“什么时候用”，最好带上能帮 Agent 识别任务的词。规范这么做，是因为在模型自主匹配这条路上，描述是模型判断该不该用它时最主要的依据——描述对不上，后面的按需加载通常也就不会发生。除描述之外，运行时的上下文和当前任务本身同样参与这个判断。</p>
+<p>具体到实现，Claude Code 的文档给出了几个具体的量：技能清单的字符预算按模型上下文窗口的 1% 缩放；单条描述与 <code>when_to_use</code> 合并后的文本上限是 1,536 字符，超出即截断；清单装不下时，Claude Code 会<strong>从最少被调用的 Skill 开始丢描述</strong>，名字始终保留；丢掉的正是模型判断该不该用它所需要的那些关键词。这两个数字（1% 和 1,536 字符）是实现的默认值而不是格式约束，可以通过设置或环境变量调整，但方向是清楚的：<strong>描述写得越靠前越有用，因为先被截掉的是后半个句子。</strong></p>
+<p>清单装不下时会发生什么，值得单独想一遍。名字还在，描述没了，结果是这个 Skill 变成一个“模型知道它存在、但看不出该在什么场合用”的条目——装了等于没装。这也是为什么“技能库变大”在 Skill 这套体系里不是免费的：正文按需加载解决了内容成本，但描述的常驻成本仍在，而且会挤掉彼此。</p>
+<p>顺带说清一件事：名字和描述是给模型看的，不是给人看的。目录名 <code>pdf-processing</code> 很规整，但如果描述只写“帮助处理 PDF”，模型看不出它和“表单填写”“文档合并”这些具体说法之间的关系。规范里给的好例子和坏例子差别就在这儿——坏例子是“Helps with PDFs”，好例子把“提取文本、填表单、合并文件”和“用户会说的那些词”都写了进去。</p>
+<h3 id="2-3-谁来决定用哪个：显式调用与模型自主匹配"><a href="#2-3-谁来决定用哪个：显式调用与模型自主匹配" class="headerlink" title="2.3　谁来决定用哪个：显式调用与模型自主匹配"></a>2.3　谁来决定用哪个：显式调用与模型自主匹配</h3><p>一个 Skill 被用上，有两条路。一条是用户显式点名：在支持命令式调用的客户端里，可以通过类似 <code>/skill-name</code> 的入口直接调起；另一条是模型自主匹配——它看着清单里的描述，判断当前任务和哪一条对得上。这两条路不是“基础与高级”的关系，而是两种控制权分配，而且实现允许你把其中一条关掉：</p>
+<p><img src="/./%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/fig2-invocation.png"></p>
+<p>这三种状态的含义值得记住，因为它解释了“为什么有的 Skill 模型怎么都不用它”。以 Claude Code 为例，<code>disable-model-invocation: true</code> 不只是禁止模型自动加载，它还会把描述<strong>从上下文里整个撤掉</strong>——模型连它存在都不知道，自然不会被误触发。反过来 <code>user-invocable: false</code> 那种是给“背景知识”用的：团队的历史系统怎么工作、某个外部接口的调用约定，这些内容模型该在用得上时知道，但它不是一个用户能主动执行的命令。</p>
+<p>判断该用哪种，问一句就够了：<strong>这件事被自动做掉有没有副作用。</strong> 部署、发版、发消息这类动作，时间点该由人掌握，用第一种；写代码规范、解释老系统这类知识，用第三种。至于默认状态，两条路都开着——这也是大多数 Skill 的合理位置。</p>
+<h2 id="03、加载：Skill-怎么进入上下文"><a href="#03、加载：Skill-怎么进入上下文" class="headerlink" title="03、加载：Skill 怎么进入上下文"></a>03、加载：Skill 怎么进入上下文</h2><h3 id="3-1-先加载什么，后面才加载什么"><a href="#3-1-先加载什么，后面才加载什么" class="headerlink" title="3.1　先加载什么，后面才加载什么"></a>3.1　先加载什么，后面才加载什么</h3><p>选择完成之后，加载通常按渐进式的层次展开，而这种分层本身就是设计的一部分。</p>
+<p>最先来的是名字和描述，那是在会话开始时就位、代价最小的一层。第二层是 <code>SKILL.md</code> 的正文：任务和描述匹配上之后，客户端把这份文件读进上下文，通常作为一条消息加入——以 Claude Code 为例，它进来之后不会自己消失，而是跨轮保留在会话里。第三层是目录里的其他文件：参考文档、模板、脚本。这一层不是“一定要读完”的清单，模型按当前任务的需要挑着读。</p>
+<p>这就是渐进式加载：<strong>入口很轻，内容按需，越往里越贵。</strong> 它换来的东西是量级的自由度——Anthropic 在介绍这套按需加载方式时的说法是，能打包进一个 Skill 的上下文量实际上没有上限；装不下的东西可以留在磁盘上，需要时再去取。代价则集中在第二层：正文一旦进来就长期占位，“每一行都是后续每一轮都要再付一次的成本”。</p>
+<p>三层之间怎么分工有个简单判据：<strong>每次都要用到的判断规则写进正文，只在某个分支才要的细节拆成文件，需要精确重复的操作写成脚本。</strong> 同一个 Skill 里三种东西可以并存，取用方式却不同——指令是给模型读的，参考文件是给模型查的，脚本是给运行时执行的。</p>
+<h3 id="3-2-一次触发让上下文长大多少"><a href="#3-2-一次触发让上下文长大多少" class="headerlink" title="3.2　一次触发让上下文长大多少"></a>3.2　一次触发让上下文长大多少</h3><p>把一次触发前后的上下文差额算出来，会比任何形容词都直观：</p>
+<p><img src="/./%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/fig3-context-growth.png"></p>
+<p>清单那部分（二十个 Skill 按规范建议的每条约 100 tokens 估）是无论用不用都要付的；正文部分按规范建议的上限 5000 tokens 估，实际通常更小；后面三段——引用文件、脚本输出、工具返回——没有固定量级，取决于文件多大、脚本打印了什么、接口返回了什么。<strong>前两段的成本可以预估，后三段的成本只能靠约束来管。</strong></p>
+<p>这段差额里有两个容易被忽略的性质。其一，脚本那一段通常最省：脚本被执行，源码通常不进上下文，回来的只有打印出来的结果。“读一份两百行的实现”和“跑它、只看三行结论”，在上下文成本上可能差很多；但便宜多少取决于脚本打印了什么，输出很长时它也可能比源码更贵。其二，读进来的内容没有“退回去”这个操作。正文在 Claude Code 中会跨轮保留；引用文件则取决于客户端怎么加载和管理。上下文压缩发生时怎么处理已加载的内容，同样属于实现行为。</p>
+<p>由此可以推出 Skill 数量与上下文成本之间的关系，它其实是两条不同的曲线：<strong>在清单预算未触顶时，常驻成本随 Skill 数量增长；超过预算后，运行时会开始丢弃部分描述</strong>（每个 Skill 一条描述），而<strong>单次使用成本主要取决于这一轮实际触发了哪些 Skill，以及这些 Skill 加载了多少内容</strong>。这解释了两个看似矛盾的现象：为什么装二十个 Skill 是可行的（常驻成本主要是清单信息），以及为什么一次对话里连续触发五个 Skill 会让上下文迅速变紧（多个 Skill 的正文及其后续加载内容会叠加）。</p>
+<h2 id="04、执行：真正干活的是谁"><a href="#04、执行：真正干活的是谁" class="headerlink" title="04、执行：真正干活的是谁"></a>04、执行：真正干活的是谁</h2><h3 id="4-1-Skill-不是执行引擎"><a href="#4-1-Skill-不是执行引擎" class="headerlink" title="4.1　Skill 不是执行引擎"></a>4.1　Skill 不是执行引擎</h3><p>走到执行段，最容易出错的预期是“Skill 开始运行了”。不是：标准里的 Skill 没有循环、没有状态机、没有调度器，它也没有“被调用”这个动作的含义——它是一份材料，被 Agent 读进来之后，事情仍然由 Agent 和它手里的工具做。把“谁提供什么”和“谁动手”分开看，边界就清楚了：</p>
+<p><img src="/./%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/fig4-who-executes.png"></p>
+<p>Agent 侧的那句判断很关键：<strong>决定下一步做什么的是模型，不是 Skill。</strong> Skill 里可以写“先分组再改写措辞”，但那是一句指令，不是一段控制流；模型完全可能因为任务简单而跳过它，或者因为没有分组脚本而先用别的办法。想要“必须执行”，得靠钩子、校验、权限这些确定性手段——这和上一篇讲的是同一件事：Skill 提高一致性，但不保证必然发生。</p>
+<p>脚本是个容易混淆的例外。它确实会被执行，但执行者是运行时环境，不是 Skill；而且在 Anthropic 描述的执行方式里，脚本的源码不必被读进上下文，只有输出回来。客户端也可以实现成先把脚本读一遍再决定怎么用，所以“代码不进上下文”属于这种执行方式的性质，不是格式的语义。</p>
+<h3 id="4-2-Skill-怎么指导-Agent-使用工具"><a href="#4-2-Skill-怎么指导-Agent-使用工具" class="headerlink" title="4.2　Skill 怎么指导 Agent 使用工具"></a>4.2　Skill 怎么指导 Agent 使用工具</h3><p>工具本身不知道自己该在什么场合出现。<code>query</code> 这个工具叫得再清楚，也不告诉你“先查什么、口径怎么定、异常怎么处理”。Skill 在这件事上的作用是把工具串成做法：<strong>把工具调用放在正确的顺序上，并在每一步之前把判断标准交出去。</strong></p>
+<p>这也是“一个 Skill 组合多个工具”的真实形态——不是 Skill 去编排调用，而是指令里写清了顺序与条件，模型照着发调用。举个具体的：整理季度复盘，指令会写“先用 <code>searchIssues</code> 取范围内的工单，按 <code>query</code> 拿到的口径表归类，遇到没有分类的工单不要猜，单独列出来”。三句话对应三次工具调用，但发起者是模型。</p>
+<p>需要区分这跟“程序化编排”不是一回事。部分平台已经在提供把多次工具调用写进代码执行、由代码处理中间结果的机制（把中间结果挡在上下文之外，只把结论带回来），那种方式下控制流确实回到了代码手里。两条路线解决的是不同问题：<strong>Skill 管“该按什么顺序、按什么口径”，代码编排管“中间过程不进上下文”。</strong></p>
+<h3 id="4-3-执行过程中的上下文"><a href="#4-3-执行过程中的上下文" class="headerlink" title="4.3　执行过程中的上下文"></a>4.3　执行过程中的上下文</h3><p>执行段是上下文变化最剧烈的地方，有三件事值得知道。</p>
+<p>第一，以 Claude Code 为例，Skill 的正文作为一条消息进入会话后会跨轮保留；<strong>如果再次触发时渲染出来的内容与已有内容完全相同，就不会再次追加完整正文</strong>，而是只补一条短提示；如果参数变化或动态上下文产生了新的渲染结果，则会再次追加完整内容。多个 Skill 先后被触发时，它们的内容是叠加的，不是替换的——这也是“一次对话里别触发太多 Skill”的实际原因。压缩发生时怎么处理已触发的 Skill，也属于实现行为：对话被摘要之后，Claude Code 会把每个 Skill 最近一次调用的内容重新附加在摘要后面，每个保留前 5,000 tokens，所有被重新附加的 Skill 共享 25,000 tokens 的预算，并按最近调用优先的顺序填充——触发得多了，较早的那些会被整个丢掉。</p>
+<p>第二，隔离的上下文是另一种选择。需要让一堆探索性操作不污染主对话时，可以把这部分工作放进独立的上下文里跑，只把结论带回来。Skill 也可以被指定在隔离上下文里执行——代价是那个上下文看不到主对话的历史，Skill 里的指令必须能独立成立。</p>
+<p>第三，上下文里的内容不都是可信的。工具返回、外部接口响应、抓来的网页都可能夹带“忽略之前的指令”这类内容。Skill 的指令读起来更像命令，但它和检索到的内容一样，救不了这个问题——<strong>能否被越权，最终取决于应用侧的权限控制，而不是提示词写得多严密。</strong></p>
+<h2 id="05、设计：怎么封装一个可复用能力"><a href="#05、设计：怎么封装一个可复用能力" class="headerlink" title="05、设计：怎么封装一个可复用能力"></a>05、设计：怎么封装一个可复用能力</h2><p>前面四节讲的是 Skill 被使用的过程，现在换个方向问：既然它按这套方式被加载和执行，那什么样的封装方式能让它用得更好。这一节讲判断，不讲语法——目录结构和文件命名在上一篇看过，这里只说怎么决定装什么、装多少。</p>
+<h3 id="5-1-什么样的能力适合做成-Skill"><a href="#5-1-什么样的能力适合做成-Skill" class="headerlink" title="5.1　什么样的能力适合做成 Skill"></a>5.1　什么样的能力适合做成 Skill</h3><p>三个条件同时成立时，做成 Skill 的收益最明显。</p>
+<p><strong>第一，它会重复出现。</strong> 判断标准不是“这件事很重要”，而是“这件事我上个月讲过一遍，这个月还要再讲”。一次性任务写成 Skill，只多了一份要维护的文件。</p>
+<p><strong>第二，做法有讲究但路径不固定。</strong> 如果每一步都能提前确定，写成 Workflow 更省事、更可测；如果做法靠临场判断，才有把“做法”交给模型的必要。夹在中间的那类——顺序大致固定、每步的口径需要看情况——正是 Skill 的舒适区。</p>
+<p><strong>第三，它的价值主要在“怎么说清”，而不是“算了什么”。</strong> 需要精确计算的每一步都可以挪进脚本，但一个 Skill 的核心仍然是那套判断规则：什么算异常、什么该反问、什么情况下宁可停下。</p>
+<p>反过来，三类东西不适合做成 Skill：一次性的临时指令（放当轮对话里就行）、本来就该写在代码里的确定性逻辑（那不是知识问题）、以及纯粹的事实查询（那更适合放进参考文件，或者干脆让它去查）。</p>
+<h3 id="5-2-职责边界：不该塞进-Skill-的东西"><a href="#5-2-职责边界：不该塞进-Skill-的东西" class="headerlink" title="5.2　职责边界：不该塞进 Skill 的东西"></a>5.2　职责边界：不该塞进 Skill 的东西</h3><p>Skill 的边界由它的性质决定：它是一份被读进上下文的材料，不是一层运行时。由此可以列出几条不该越界的地方。</p>
+<p>它不该承担确定性约束。要“每次都必须跑测试”，写在 Skill 里只是提醒；拦截得靠钩子或流程控制。它不该假装自己有状态——Skill 里没有“上次处理到哪了”这回事，需要跨次记住的东西要么交给任务本身的目标（比如进度文件），要么交给运行时的记忆机制。它也不该负责权限决策：Skill 可以写“不要动生产库”，但这句话的效力等同于提示词，真正的隔离要靠工具白名单和权限配置。</p>
+<p>还有一处容易被忽略：<strong>Skill 不该替调用方做选择。</strong> 如果一份 Skill 同时覆盖“整理发版记录”和“回答客户问题”两件事，它的描述就没法写准，遇到哪件事都匹配得不干脆。职责单一不是为了好看，是为了让描述能写清。</p>
+<h3 id="5-3-粒度：为什么不能太大，也不能拆得太碎"><a href="#5-3-粒度：为什么不能太大，也不能拆得太碎" class="headerlink" title="5.3　粒度：为什么不能太大，也不能拆得太碎"></a>5.3　粒度：为什么不能太大，也不能拆得太碎</h3><p>太大会撞上两件事。一是正文成本：正文一旦触发就跨轮常驻，一份八百行的 Skill 会让每次用它都背上这笔开销。二是匹配精度：内容越杂，描述越只能写得泛，而泛描述匹配到的往往是本不需要它的任务。</p>
+<p>太小也有代价，而且更隐蔽。拆成五个小组件之后，触发一次主任务要连带读进四五个正文，成本没有省下，反而多出成本——<strong>每个 Skill 的正文都要进来一次，而它们本来可以合并进同一份正文。</strong> 更麻烦的是互相引用：A 说“按 B 的方式处理”，B 又说“细节见 C”，链子一长，模型容易在半路停下，也没法判断自己读够了没有。</p>
+<p>一个可操作的判据是<strong>按使用场合拆，而不是按知识点拆</strong>。同一个场合里总要一起出现的内容，放在一份 Skill 里；只在某个分支才需要的，拆成同目录下的参考文件——注意这是同一份 Skill 内部的拆分，不是拆成两份 Skill。只有当两件事会<strong>被不同的任务分别触发</strong>时，才值得做成两个 Skill。</p>
+<h3 id="5-4-可复用、可组合、低耦合"><a href="#5-4-可复用、可组合、低耦合" class="headerlink" title="5.4　可复用、可组合、低耦合"></a>5.4　可复用、可组合、低耦合</h3><p>规范对 Skill 的定位是“可组合的能力”——Agent Skills 的概览页把“组合多个 Skill 完成复杂任务”列为使用 Skill 的主要收益之一。要让这句话在实际使用里成立，有三件事需要在写作时就定下来。</p>
+<ul>
+<li><strong>可复用</strong>要求内容不绑定具体环境。写“用 <code>make api-check</code> 检查接口”比写“用我们内部的检查工具”更好用；路径、分支名、内部服务名这类会变的东西，要么写成占位符，要么说明从哪儿获取。</li>
+<li><strong>可组合</strong>要求每份 Skill 的职责不重叠。规范没有规定多个 Skill 同时被触发时谁优先——真出现冲突时，谁说了算取决于运行时的组装顺序，作者控制不了。可控的做法是尽量让触发条件互斥：描述里写清“什么时候用”，用不着写“什么时候不用”；边界足够具体能明显减少两份 Skill 同时命中的机会，但降低的是概率而不是保证——要不要用、用哪一个，最终仍由模型判断。</li>
+<li><strong>低耦合</strong>要求 Skill 之间不要互相引用，也不要假设另一份 Skill 已经在上下文里。需要共同遵守的口径，要么各自写一份，要么放在各自的参考文件里；让 A 去依赖 B 的存在，等于把触发顺序变成了隐性前提，而这个前提运行时并不保证。</li>
+</ul>
+<h2 id="06、Skill-与-MCP：能力怎么连到外部世界"><a href="#06、Skill-与-MCP：能力怎么连到外部世界" class="headerlink" title="06、Skill 与 MCP：能力怎么连到外部世界"></a>06、Skill 与 MCP：能力怎么连到外部世界</h2><h3 id="6-1-MCP-提供什么：连接、工具、资源与提示模板"><a href="#6-1-MCP-提供什么：连接、工具、资源与提示模板" class="headerlink" title="6.1　MCP 提供什么：连接、工具、资源与提示模板"></a>6.1　MCP 提供什么：连接、工具、资源与提示模板</h3><p>MCP（Model Context Protocol）是一套开放协议，管的是 AI 应用怎么和外部系统说话：连接怎么建立、能力怎么声明、调用怎么发出去、结果怎么回来。按当前修订版 <code>2026-07-28</code>，服务端可以暴露三类原语——<strong>工具</strong>（可执行的函数，比如文件操作、接口调用、数据库查询）、<strong>资源</strong>（提供上下文的数据源，比如文件内容、表结构、接口响应）、<strong>提示模板</strong>（可复用的交互模板，比如系统提示与少样本示例）。规范把这些方法概括成发现（<code>*/list</code>）、获取（<code>*/get</code>），以及在工具这一类上额外的执行（<code>tools/call</code>）；落到具体方法名，工具用 <code>tools/list</code> 与 <code>tools/call</code>，资源用 <code>resources/list</code> 与 <code>resources/read</code>，提示模板用 <code>prompts/list</code> 与 <code>prompts/get</code>。</p>
+<p>工具这一类的机制值得单独看一眼，因为它决定了“Skill 用到的工具最终是谁在执行”。工具由应用通过 <code>tools/list</code> 发现，把各服务器的清单合并成一份模型可见的工具表；模型决定调用之后，<strong>应用负责拦截这次调用、路由到对应的服务器、执行它，再把结果作为对话的一部分交回模型</strong>。发现是动态的、可以分页的，也可能带缓存提示。</p>
+<h3 id="6-2-Skill-提供什么，以及它怎么用到-MCP-的工具"><a href="#6-2-Skill-提供什么，以及它怎么用到-MCP-的工具" class="headerlink" title="6.2　Skill 提供什么，以及它怎么用到 MCP 的工具"></a>6.2　Skill 提供什么，以及它怎么用到 MCP 的工具</h3><p>把两边的输出摆在一起，关系就清楚了：</p>
+<p><img src="/./%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/fig5-mcp-chain.png"></p>
+<p>Skill 和 MCP 不在同一层，也不在一段上。MCP 管的是<strong>能力怎么被标准化地暴露和调用</strong>——把数据库、工单系统、内部服务接成模型能看见的工具。Skill 管的是<strong>这些能力怎么被组织起来完成一件具体的事</strong>——先做什么、按什么口径判断、结果写成什么样、遇到异常怎么处理。</p>
+<p>所以“Skill 怎么调用 MCP 工具”这个问法本身需要修正一下：Skill 不发起调用。它做的是在正文里写明“这一步用某个工具、给它什么参数、结果怎么用”，然后由模型发出调用，应用把调用路由给对应的 MCP 服务器。<strong>Skill 提供的是调用该发生的位置与条件，发起权始终在模型和应用手里。</strong></p>
+<p>两者的分工在 Anthropic 的文档里被概括成一句：MCP 提供连接，Skill 教会 Claude 如何用好它。用一个具体场景看会更清楚：数据库的 schema 和查询约定放进一份 Skill（这是做法），数据库本身通过 MCP 接进来（这是连接）。单有 MCP，模型能看到一堆表和一堆查询工具却不知道这个团队的口径；单有 Skill，口径写得再全也够不着真实数据。</p>
+<h3 id="6-3-Skill-依赖-MCP-吗"><a href="#6-3-Skill-依赖-MCP-吗" class="headerlink" title="6.3　Skill 依赖 MCP 吗"></a>6.3　Skill 依赖 MCP 吗</h3><p>不依赖，而且大部分 Skill 根本用不到 MCP。Skill 里可以完全没有工具调用：纯知识的 Skill（怎么写提交信息、某类文档的格式约定）不含任何外部交互；带脚本的 Skill 可以自己完成计算与格式转换，不需要外部服务。</p>
+<p>依赖关系是反过来的：<strong>MCP 让 Skill 能碰到的外部世界变大，但不改变 Skill 的写法。</strong> 一份 Skill 里写的“调用某个查询工具”，在那个工具来自本地内置还是来自 MCP 服务器之间，正文写法没有区别——工具一旦在模型可见的工具表里，用法就是一致的。真正的差异出现在失败模式上：本地工具失败通常是代码问题，MCP 工具失败还可能是连接、认证、版本协商出了问题，所以涉及外部调用的 Skill 更需要写明超时与失败时怎么办。</p>
+<h3 id="6-4-MCP-Prompt-与-Skill-的区别"><a href="#6-4-MCP-Prompt-与-Skill-的区别" class="headerlink" title="6.4　MCP Prompt 与 Skill 的区别"></a>6.4　MCP Prompt 与 Skill 的区别</h3><p>这两者最容易被看成同一件东西，因为都叫“给模型一段话”。差别在四处。</p>
+<ul>
+<li><strong>从哪儿来。</strong> MCP 的提示模板由服务端提供，走协议传过来；Skill 是文件系统上的目录，跟着代码库走。</li>
+<li><strong>谁来触发。</strong> 提示模板是面向用户的模板，通常由用户显式选择——在支持它的客户端里会以命令的形式出现；Skill 有两条路，模型能按描述自主匹配，用户也可以点名。</li>
+<li><strong>能带什么。</strong> 提示模板的核心是一段结构化的话；Skill 可以带参考文件、模板、可执行脚本，并且能让读者只读其中一部分。</li>
+<li><strong>怎么进上下文。</strong> 提示模板被选中时整段进入；Skill 是渐进式的，名字和描述常驻、正文按需、资源更后面。</li>
+</ul>
+<p>把它们放在一起看，判断标准其实就一句话：<strong>要的是“用户在某个场合选一段话”，还是“模型在合适的任务上自动带出一整套做法”。</strong> 前者用提示模板就够，后者才是 Skill 的地盘。</p>
+<h2 id="07、Skill-与-Agent：能力和执行主体的边界"><a href="#07、Skill-与-Agent：能力和执行主体的边界" class="headerlink" title="07、Skill 与 Agent：能力和执行主体的边界"></a>07、Skill 与 Agent：能力和执行主体的边界</h2><h3 id="7-1-Skill-不是-Agent，也不需要自己的模型与状态"><a href="#7-1-Skill-不是-Agent，也不需要自己的模型与状态" class="headerlink" title="7.1　Skill 不是 Agent，也不需要自己的模型与状态"></a>7.1　Skill 不是 Agent，也不需要自己的模型与状态</h3><p>Agent 指的是模型自己决定下一步做什么、自己决定调哪个工具的系统。Skill 在这套系统里没有独立的位置——它没有自己的循环，没有自己的上下文窗口，也没有“正在运行”这个状态。</p>
+<p>由此可以直接回答两个常见问题。<strong>Skill 不需要自己的模型</strong>：读它的和用它的是同一个模型，跑在哪一轮、用哪个模型由运行环境决定；某些实现允许 Skill 声明“用这个模型”，那是运行时的覆盖能力，不是 Skill 的组成部分。<strong>Skill 也不需要自己的状态</strong>：它是一组文件，状态在文件系统里——版本管理、修改历史、谁改的都走代码那一套。需要跨会话记住点什么的，是子代理或运行时的记忆机制该管的事，不是 Skill 的职责。</p>
+<h3 id="7-2-Agent-怎么选、怎么用-Skill"><a href="#7-2-Agent-怎么选、怎么用-Skill" class="headerlink" title="7.2　Agent 怎么选、怎么用 Skill"></a>7.2　Agent 怎么选、怎么用 Skill</h3><p>选择主要发生在两个节点上。先看清单，按描述判断“要不要用”；用起来之后，按正文判断“下一步读哪份文件、跑哪个脚本”。两个节点都由模型决定，但依据不同：前者靠描述里的关键词，后者靠正文里的指令。</p>
+<p>用户能干预的地方在两处：调用入口（能不能被模型自动触发）和可见性（在清单里出现成什么样）。除此之外，还有一层更粗的开关——把某个 Skill 从模型可见的清单里隐藏，或者只留名字不留描述。这些都是实现的配置能力，作用是控制“模型能看见什么”，而不是“模型该怎么想”。</p>
+<p>一个容易忽略的事实是：<strong>能力越多，“发现”这件事本身就越重要。</strong> 工具侧已经出现按需发现工具的机制，用来解决工具定义提前占满上下文的问题；Skill 侧对应的就是那份不断增长的清单。两条线都在往同一个方向走——不要让模型在不需要的时候看见太多东西。</p>
+<h3 id="7-3-Skill-与-Workflow、Sub-Agent-的位置"><a href="#7-3-Skill-与-Workflow、Sub-Agent-的位置" class="headerlink" title="7.3　Skill 与 Workflow、Sub-Agent 的位置"></a>7.3　Skill 与 Workflow、Sub-Agent 的位置</h3><p>三者经常被混着用，其实各自解决一件事：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>控制流在哪</th>
+<th>上下文在哪</th>
+<th>适合什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Workflow</td>
+<td>代码里预先定好</td>
+<td>调用方自己的</td>
+<td>路径确定、要可测可审计的流程</td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>模型这里，做法写在正文</td>
+<td>主对话，读进来就留着</td>
+<td>做法有讲究、路径不固定的任务</td>
+</tr>
+<tr>
+<td>Sub-Agent</td>
+<td>模型这里，但有自己的循环</td>
+<td>独立窗口，只回传结论</td>
+<td>会污染主对话的探索性工作</td>
+</tr>
+</tbody></table>
+<p>Skill 和 Sub-Agent 之间有两个方向的组合，值得记清楚。一个是<strong>让 Skill 在隔离上下文里跑</strong>：声明之后，这份 Skill 的内容会被注入到指定的子代理里，子代理看不到主对话的历史。另一个方向是<strong>让子代理预加载 Skill</strong>：在子代理定义里列出若干 Skill，它们的<strong>完整正文</strong>会在子代理启动时一次性注入——注意这和普通会话不同，普通会话里只常驻描述。两个方向互为逆操作，选哪个取决于“这套做法该由谁做主”：子代理做主就是前者，Skill 做主就是后者。</p>
+<p>代价也要一并记住。隔离拿到的干净上下文，是用“看不到历史”换来的；被注入的 Skill 越多，子代理启动时背的上下文就越重——何况子代理跑完还要把结论交回来，返回的内容一样占主对话的位置。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

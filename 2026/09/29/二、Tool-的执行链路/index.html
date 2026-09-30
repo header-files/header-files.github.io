@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>二、Tool 的执行链路 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Tool ">
+  <meta name="description" content="二、Tool 的执行链路 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(30)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(30)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;RAG">
+            
+            RAG
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Tool/MCP">
+            
+            Tool/MCP
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;SKILL">
+            
+            SKILL
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="30">
+<input type="hidden" id="yelog_site_word_count" value="168k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MCP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RAG</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SKILL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Tool</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="二、SKILL的原理">二、SKILL的原理</span>
+            <span class="post-date" title="2026-09-30 20:30:40">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFSKILL/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="一、什么是SKILL">一、什么是SKILL</span>
+            <span class="post-date" title="2026-09-30 15:22:48">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/30/%E5%9B%9B%E3%80%81MCP%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="四、MCP底层原理">四、MCP底层原理</span>
+            <span class="post-date" title="2026-09-30 09:58:10">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%89%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMCP/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="三、什么是MCP">三、什么是MCP</span>
+            <span class="post-date" title="2026-09-29 20:15:19">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="二、Tool 的执行链路">二、Tool 的执行链路</span>
+            <span class="post-date" title="2026-09-29 13:13:28">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%80%E3%80%81Function-Calling-%E4%B8%8E-Tool/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="一、Function Calling 与 Tool">一、Function Calling 与 Tool</span>
+            <span class="post-date" title="2026-09-29 10:14:17">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93RAG/"
+           data-tag="LLM,RAG,coding实战"
+           data-author="" >
+            <span class="post-title" title="三、实现一个简易RAG">三、实现一个简易RAG</span>
+            <span class="post-date" title="2026-09-28 19:26:47">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="二、RAG全链路拆解">二、RAG全链路拆解</span>
+            <span class="post-date" title="2026-09-28 13:52:00">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="一、什么是RAG">一、什么是RAG</span>
+            <span class="post-date" title="2026-09-28 09:46:57">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-二、Tool-的执行链路" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">二、Tool 的执行链路</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Tool/MCP">Tool/MCP</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color5">Tool</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-29 18:02:11'>2026-09-29 13:13</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BA%A4%E5%87%BA%E7%9A%84%E5%8F%AA%E6%98%AF%E4%B8%80%E4%BB%BD%E6%8F%90%E8%AE%AE"><span class="toc-text">01、模型交出的只是一份提议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9B%9B%E6%AE%B5%EF%BC%9A%E5%86%B3%E5%AE%9A%E3%80%81%E6%94%BE%E8%A1%8C%E3%80%81%E6%89%A7%E8%A1%8C%E3%80%81%E5%9B%9E%E5%A1%AB"><span class="toc-text">1.1　四段：决定、放行、执行、回填</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%89%E5%85%B3%E5%8F%A3%E5%88%87%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E6%8C%89%E7%BB%84%E4%BB%B6%E5%88%97%E8%81%8C%E8%B4%A3"><span class="toc-text">1.2　为什么按关口切，而不是按组件列职责</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%80%E6%AC%A1%E8%B0%83%E7%94%A8%E8%87%B3%E5%B0%91%E6%98%AF%E4%B8%A4%E6%AC%A1%E6%A8%A1%E5%9E%8B%E8%AF%B7%E6%B1%82"><span class="toc-text">1.3　一次调用至少是两次模型请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81%E7%AC%AC%E4%B8%80%E6%AE%B5-%C2%B7-%E5%86%B3%E5%AE%9A%EF%BC%9A%E6%A8%A1%E5%9E%8B%E8%BF%99%E4%B8%80%E4%BE%A7"><span class="toc-text">02、第一段 · 决定：模型这一侧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%83%E5%81%9A%E7%9A%84%E5%9B%9B%E4%BB%B6%E4%BA%8B"><span class="toc-text">2.1　它做的四件事</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%83%E5%86%B3%E5%AE%9A%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9B%9B%E4%BB%B6%E4%BA%8B%EF%BC%8C%E6%AD%A3%E5%A5%BD%E6%8C%87%E5%90%91%E5%90%8E%E9%9D%A2%E4%B8%89%E6%AE%B5"><span class="toc-text">2.2　它决定不了的四件事，正好指向后面三段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81%E7%AC%AC%E4%BA%8C%E6%AE%B5%E4%B8%8E%E7%AC%AC%E4%B8%89%E6%AE%B5-%C2%B7-%E6%94%BE%E8%A1%8C%E4%B8%8E%E6%89%A7%E8%A1%8C"><span class="toc-text">03、第二段与第三段 · 放行与执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BB%8E%E2%80%9C%E7%82%B9%E5%90%8D%E2%80%9D%E5%88%B0%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%AD%98%E5%9C%A8%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-text">3.1　从“点名”到一个真实存在的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%A0%A1%E9%AA%8C%E5%88%86%E4%B8%89%E5%B1%82%EF%BC%8C%E5%9B%A0%E4%B8%BA%E4%B8%89%E5%B1%82%E7%9A%84%E5%87%BA%E5%8F%A3%E4%B8%8D%E5%90%8C"><span class="toc-text">3.2　校验分三层，因为三层的出口不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%89%A7%E8%A1%8C%EF%BC%9A%E6%8A%8A%E5%8F%82%E6%95%B0%E7%BF%BB%E8%AF%91%E6%88%90%E7%9C%9F%E5%AE%9E%E8%B0%83%E7%94%A8"><span class="toc-text">3.3　执行：把参数翻译成真实调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%94%BE%E8%A1%8C%E6%AE%B5%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%AD%A5%EF%BC%9A%E8%BF%99%E6%9D%A1%E9%94%99%E8%AF%AF%E8%AF%A5%E4%B8%8D%E8%AF%A5%E8%AE%A9%E6%A8%A1%E5%9E%8B%E7%9C%8B%E8%A7%81"><span class="toc-text">3.4　放行段的最后一步：这条错误该不该让模型看见</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81%E7%AC%AC%E5%9B%9B%E6%AE%B5-%C2%B7-%E5%9B%9E%E5%A1%AB%EF%BC%9A%E7%BB%93%E6%9E%9C%E4%BB%A5%E4%BB%80%E4%B9%88%E5%BD%A2%E6%80%81%E5%9B%9E%E5%88%B0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">04、第四段 · 回填：结果以什么形态回到上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%B8%A4%E5%B1%82%E7%BB%93%E6%9E%84%EF%BC%8C%E5%88%AB%E6%B7%B7%E7%9D%80%E7%9C%8B"><span class="toc-text">4.1　两层结构，别混着看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%9B%9E%E5%A1%AB%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AE%83%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BB%A3%E4%BB%B7"><span class="toc-text">4.2　回填的方式，以及它的两个代价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%A4%B1%E8%B4%A5%E4%B9%9F%E8%A6%81%E6%98%BE%E5%BC%8F"><span class="toc-text">4.3　失败也要显式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E7%BB%93%E6%9E%9C%E5%A4%AA%E9%95%BF%E6%97%B6"><span class="toc-text">4.4　结果太长时</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E4%B8%80%E6%89%B9%E8%B0%83%E7%94%A8%EF%BC%9A%E4%B8%B2%E8%A1%8C%E8%BF%98%E6%98%AF%E5%B9%B6%E8%A1%8C"><span class="toc-text">05、一批调用：串行还是并行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%B2%E8%A1%8C%EF%BC%9A%E4%BE%9D%E8%B5%96%E5%A4%A9%E7%84%B6%E6%AD%A3%E7%A1%AE"><span class="toc-text">5.1　串行：依赖天然正确</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%B9%B6%E8%A1%8C%EF%BC%9A%E7%9C%81%E4%B8%8B%E7%9A%84%E6%98%AF%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4"><span class="toc-text">5.2　并行：省下的是等待时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E4%BE%9D%E8%B5%96%EF%BC%9A%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%A7%84%E5%88%92%E9%87%8C%E6%B2%A1%E6%9C%89%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">5.3　依赖：模型的规划里没有执行顺序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81%E5%9B%9B%E6%AE%B5%E5%90%84%E8%87%AA%E4%BC%9A%E6%80%8E%E4%B9%88%E5%9D%8F"><span class="toc-text">06、四段各自会怎么坏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%89%A7%E8%A1%8C%E6%AE%B5%EF%BC%9A%E8%B6%85%E6%97%B6%E3%80%81%E9%87%8D%E8%AF%95%E3%80%81%E5%B9%82%E7%AD%89%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%89%E4%B8%AA%E9%9D%A2"><span class="toc-text">6.1　执行段：超时、重试、幂等是同一个问题的三个面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%94%BE%E8%A1%8C%E6%AE%B5%EF%BC%9A%E6%9D%83%E9%99%90%E4%B8%8E%E4%BA%BA%E5%B7%A5%E7%A1%AE%E8%AE%A4"><span class="toc-text">6.2　放行段：权限与人工确认</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E6%A8%AA%E5%88%87%EF%BC%9A%E6%97%A5%E5%BF%97%E4%B8%8E-Trace-%E8%A6%81%E5%85%88%E8%83%BD%E6%8C%87%E8%AE%A4%E5%9D%8F%E5%9C%A8%E5%93%AA%E4%B8%80%E6%AE%B5"><span class="toc-text">6.3　横切：日志与 Trace 要先能指认坏在哪一段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E5%BE%AA%E7%8E%AF%E8%B5%B7%E6%9D%A5%EF%BC%9ATool-%E4%B8%8E-Agent-Loop"><span class="toc-text">07、循环起来：Tool 与 Agent Loop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%BD%A2%E7%8A%B6"><span class="toc-text">7.1　循环的形状</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%81%9C%E6%AD%A2%E6%9D%A1%E4%BB%B6%E7%94%B1%E5%BA%94%E7%94%A8%E5%88%92"><span class="toc-text">7.2　停止条件由应用划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E5%9B%9B%E7%A7%8D%E5%A4%B1%E6%8E%A7%E6%A8%A1%E5%BC%8F"><span class="toc-text">7.3　四种失控模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-text">08、小结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>模型说出“调用 get_order_status，参数是 ORD-2026-000123”这句话之后，到真正产生一次查询之间，还隔着三道它看不见的关口：放行、执行、回填。Tool 里几乎所有的工程细节，都是在回答这三道关口上的具体问题。</p>
+</blockquote>
+<p>上一篇讲的是模型如何提出调用，落点在声明与协议；这一篇讲这句话之后发生的事。全文按四段展开——<strong>决定、放行、执行、回填</strong>，每一段回答一个问题，答错的那一段就是故障发生的地方。后半篇再把这条线放大：一批调用同时走、走的时候会怎么坏、以及把它循环起来之后会变成什么。</p>
+<p>为了不把讨论悬在空中，后面统一用两个工具举例：<code>get_order_status(order_id)</code> 是读工具，<code>cancel_order(order_id)</code> 是写工具。读和写的差别会在好几处反复出现。</p>
+<p><strong>注意</strong>：本文写作于 2026 年 9 月。文中把应用侧拆成“运行时”与“执行器”两段来讲，是<strong>本文为了方便讨论做的参考拆分</strong>，不是任何规范里的分层；实际实现里它们常常合成一层，也常常与业务代码混在一起，可以按需要合并、拆分或省略。凡涉及具体平台的字段名、错误分类与安全要求，以目标平台具体文档为准。</p>
+<h2 id="01、模型交出的只是一份提议"><a href="#01、模型交出的只是一份提议" class="headerlink" title="01、模型交出的只是一份提议"></a>01、模型交出的只是一份提议</h2><p>先看主链：</p>
+<pre><code class="language-text">User
+↓
+LLM
+↓
+Tool Call
+↓
+Tool Runtime
+↓
+Tool Executor
+↓
+External System
+↓
+Tool Result
+↓
+LLM
+↓
+Final Response
+</code></pre>
+<p>比上一篇多出来三段：Tool Runtime、Tool Executor、External System。这三段有一个共同点——都发生在模型的盲区里，也正好构成本文的主线。</p>
+<h3 id="1-1-四段：决定、放行、执行、回填"><a href="#1-1-四段：决定、放行、执行、回填" class="headerlink" title="1.1　四段：决定、放行、执行、回填"></a>1.1　四段：决定、放行、执行、回填</h3><p>把这条链按“谁在回答哪个问题”重新切开，就是四段：</p>
+<p><img src="/./%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/fig1-gates.png"></p>
+<p>模型只负责第一段。它交出来的东西，准确地说是一份<strong>提议</strong>：调用哪个工具、传什么参数。提议之后还有三道关口——这次调用允不允许发生（放行）、怎么真正访问外部系统（执行）、结果以什么形态回到上下文（回填）。后三段都在应用侧，这就是本文把应用侧拆成“运行时”和“执行器”来讨论的原因：运行时对接模型，执行器对接真实系统。</p>
+<h3 id="1-2-为什么按关口切，而不是按组件列职责"><a href="#1-2-为什么按关口切，而不是按组件列职责" class="headerlink" title="1.2　为什么按关口切，而不是按组件列职责"></a>1.2　为什么按关口切，而不是按组件列职责</h3><p>按组件列职责——模型做什么、运行时做什么、执行器做什么——读起来像一份岗位表，读完记不住哪里会出事。按关口切的好处是每道关口都对应一个明确的问题，而这个问题的答案一旦答错，故障就固定发生在那个位置。第 06 节讲工程问题时用的就是这个分法。</p>
+<h3 id="1-3-一次调用至少是两次模型请求"><a href="#1-3-一次调用至少是两次模型请求" class="headerlink" title="1.3　一次调用至少是两次模型请求"></a>1.3　一次调用至少是两次模型请求</h3><p>主链末尾那个“回到 LLM”的箭头值得留意。工具结果不是被追加到服务端的某个会话里，而是由运行时拼成一条新消息、随下一次请求一起发回去（上一篇讲过的无状态约束）。所以一次带工具的问答至少包含两次模型请求：第一次得到提议，第二次带上结果得到回答；结果不足以作答就继续。</p>
+<p>更需要注意的是：<strong>回填进历史的东西，在之后每一轮请求里都会被重新发一遍</strong>。所以一条长结果不是付一次成本，而是付每一轮。这条约束在后面好几处都会出现——为什么结果要做归一化、为什么长结果必须处理、为什么循环的成本会越跑越高。</p>
+<p>明确了四段和各段的归属，下面按顺序走。第一段是模型自己的。</p>
+<h2 id="02、第一段-·-决定：模型这一侧"><a href="#02、第一段-·-决定：模型这一侧" class="headerlink" title="02、第一段 · 决定：模型这一侧"></a>02、第一段 · 决定：模型这一侧</h2><h3 id="2-1-它做的四件事"><a href="#2-1-它做的四件事" class="headerlink" title="2.1　它做的四件事"></a>2.1　它做的四件事</h3><p>模型侧只做四件事：理解用户意图、在工具清单里选一个（或几个）、把参数填出来、根据回填的结果决定下一步。最后一件最容易被低估——它是整个闭环里唯一能判断“信息够不够了”的一环，应用做不到这个判断，因为只有模型知道它还缺什么。</p>
+<p>前三件的质量几乎完全由工具的声明决定：选得对不对取决于名字与描述的区分度，参数填得对不对取决于 schema 的表达能力。工具变多之后选择准确率会下降，因为每条定义都占上下文，而描述相近的工具彼此干扰。这件事在工具设计阶段就该解决，等到运行时报错再回头改描述，通常已经晚了。</p>
+<h3 id="2-2-它决定不了的四件事，正好指向后面三段"><a href="#2-2-它决定不了的四件事，正好指向后面三段" class="headerlink" title="2.2　它决定不了的四件事，正好指向后面三段"></a>2.2　它决定不了的四件事，正好指向后面三段</h3><p>模型不执行任何东西，不做授权判断，不保证参数在业务上成立，也不知道外部系统的真实状态。这四条不是一份缺陷清单，而是后面几节的索引：</p>
+<ul>
+<li>它不做授权、不保证参数在业务上成立 → 第二段“放行”必须自己判断这两件事；</li>
+<li>它不执行 → 第三段“执行”必须由别的组件负责；</li>
+<li>它不知道外部状态 → 它只能靠第四段回填的信息来判断，所以回填什么、以什么形态回填，直接决定它下一步能不能做对。</li>
+</ul>
+<p>两条由此而来的错误设计，值得单独点出。第一条是把授权写进描述里——“只查询当前用户自己的订单”。模型通常会照做，但这不构成授权：描述是提示词，会被上下文里的其他内容影响，而模型的行为本身是概率性的。更要紧的是，“当前用户是谁”这件事模型并不知道，也不该由它判断。第二条是把重试写进描述里——“如果失败请重试”。模型会真的重发调用，而它对幂等一无所知，也看不到下游此刻正在限流。</p>
+<p>既然模型交出的只是一份提议，就需要有人判断这份提议允不允许发生。这是第二段。</p>
+<h2 id="03、第二段与第三段-·-放行与执行"><a href="#03、第二段与第三段-·-放行与执行" class="headerlink" title="03、第二段与第三段 · 放行与执行"></a>03、第二段与第三段 · 放行与执行</h2><p>放行和执行是两件事，但它们都落在应用侧，也都属于“模型看不见的处理”，所以放在同一节里按顺序讲。</p>
+<h3 id="3-1-从“点名”到一个真实存在的工具"><a href="#3-1-从“点名”到一个真实存在的工具" class="headerlink" title="3.1　从“点名”到一个真实存在的工具"></a>3.1　从“点名”到一个真实存在的工具</h3><p><strong>接收</strong>这一步从响应里取出调用，有两个细节。一是模型可能一次给出多条，要按批次处理而不是只取第一条（留到第 05 节展开）。二是参数的形态并不统一——有的平台给的是序列化后的字符串，需要自行解析；有的平台给的已经是结构化对象。把这层差异挡在运行时内部，后面的逻辑就不必再关心它来自哪家 API。</p>
+<p><strong>查找</strong>这一步把名字映射到实现。名字不存在时怎么处理，各家并不一致：有的实现把它当作工具执行失败，回传一个带错误标记的结果，让模型有机会改用别的工具；有的实现把它归为协议层错误，直接以错误响应结束。两种都说得通——前者照顾模型的自愈能力，后者更符合“调用根本没能成立”的语义——但无论选哪种，都不该让这个错误把整个循环打断。</p>
+<h3 id="3-2-校验分三层，因为三层的出口不同"><a href="#3-2-校验分三层，因为三层的出口不同" class="headerlink" title="3.2　校验分三层，因为三层的出口不同"></a>3.2　校验分三层，因为三层的出口不同</h3><p>校验不能只做一次。以 <code>get_order_status(order_id = &quot;ORD-2026-000123&quot;)</code> 为例，它至少有三层，而且每层失败之后的正确出口都不一样。</p>
+<ul>
+<li><p><strong>形状层</strong>问的是这句话能不能用：参数能不能解析成结构化数据，<code>order_id</code> 是不是字符串，必填项在不在，取值是否落在枚举里。这一层失败时模型是有能力自愈的——把“缺哪个字段、哪个取值不在允许范围内”明确回传，它下一轮通常能改对。</p>
+</li>
+<li><p><strong>语义层</strong>问的是这个值在系统里成不成立：<code>ORD-2026-000123</code> 真的存在吗。模型基本无法自愈——它编不出一个真实订单号，反复回传只会让它换着字符串继续试。</p>
+</li>
+<li><p><strong>授权层</strong>问的是发起这次调用的主体有没有权看这个订单。这一层失败尤其不能让模型反复试，因为每一次重试都是在撞权限边界。</p>
+</li>
+</ul>
+<p>三层合并成一句“参数无效”，等于把能自愈的错误和不能自愈的错误混在了一起：该改的没改，该停的没停。正确的分法是形状层回传给模型让它改，语义层与授权层回传一句稳定的说明，并停止围绕同一个参数重试。</p>
+<h3 id="3-3-执行：把参数翻译成真实调用"><a href="#3-3-执行：把参数翻译成真实调用" class="headerlink" title="3.3　执行：把参数翻译成真实调用"></a>3.3　执行：把参数翻译成真实调用</h3><p>这一步是模型盲区里最深的一段。要做的事包括取凭据、限流、设超时、翻页，以及把模型给的参数映射成上游真正接受的形状——模型说 <code>order_id</code>，订单服务可能叫 <code>order_no</code>。这一段的所有复杂性都不会出现在模型的上下文里，它看到的只有最后回填的那段内容。</p>
+<p>执行有一条不能破的原则：<strong>失败要变成结果，不要抛穿循环</strong>。抛出去的代价是三件事同时发生——模型失去纠错机会、用户看到一个技术栈报错、而这次调用之前已经完成的工作全部作废。</p>
+<h3 id="3-4-放行段的最后一步：这条错误该不该让模型看见"><a href="#3-4-放行段的最后一步：这条错误该不该让模型看见" class="headerlink" title="3.4　放行段的最后一步：这条错误该不该让模型看见"></a>3.4　放行段的最后一步：这条错误该不该让模型看见</h3><p>判断标准只有一条：模型看到这条错误之后，有没有可能做出正确的下一步。把 3.2 那三层放在一起看，这个问题在每层的答案并不相同：</p>
+<p><img src="/./%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/fig2-errors.png"></p>
+<p>能自愈的那一类要回传，而且要说清楚到能照着改。不能自愈的那一类不该把内部细节交出去——它做不了任何有用的事，只会重试从而放大故障；而且内部错误信息本身可能泄漏实现细节。</p>
+<p>MCP 规范给了这组划分一个明确的版本：未知工具、参数不合法、服务端异常归为<strong>协议错误</strong>，用 JSON-RPC 错误响应表达；而 API 失败、输入数据不合法、业务逻辑错误归为<strong>工具执行错误</strong>，写在正常结果里并用错误标记标识。规范给出的理由很直接——只有把工具自身的失败放进结果，模型才能看到它并自我修正。需要注意的是，协议层的错误最终以什么形式呈现给模型，仍然由宿主实现决定。</p>
+<p>回到订单的例子：上游返回“订单 ORD-2026-000123 不存在”，要回传给模型，因为它可能改用别的订单号，或者转去问用户；上游返回“连接订单服务超时”，只回一句稳定文案，细节进日志和告警。</p>
+<p>放行、执行都完成之后，真正要交给下一轮的是第四段的产物。</p>
+<h2 id="04、第四段-·-回填：结果以什么形态回到上下文"><a href="#04、第四段-·-回填：结果以什么形态回到上下文" class="headerlink" title="04、第四段 · 回填：结果以什么形态回到上下文"></a>04、第四段 · 回填：结果以什么形态回到上下文</h2><h3 id="4-1-两层结构，别混着看"><a href="#4-1-两层结构，别混着看" class="headerlink" title="4.1　两层结构，别混着看"></a>4.1　两层结构，别混着看</h3><p>结果消息在两个层面都有结构：</p>
+<ul>
+<li><p><strong>模型侧那一层</strong>，各家的字段名与形态并不一致（这是非完整枚举，以各家 API 参考为准）：</p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>OpenAI 系常见形态</th>
+<th>Anthropic 系常见形态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关联字段</td>
+<td>结果消息上的调用 id</td>
+<td>结果块里的调用 id</td>
+</tr>
+<tr>
+<td>载荷</td>
+<td>字符串，或文本内容块数组</td>
+<td>字符串，或内容块数组</td>
+</tr>
+<tr>
+<td>错误标记</td>
+<td>无专用字段，需在内容里自行表达</td>
+<td>结果块上的错误布尔字段</td>
+</tr>
+<tr>
+<td>多结果组织</td>
+<td>每个调用一条独立的结果消息</td>
+<td>同一批结果放在同一条消息里的多个块</td>
+</tr>
+<tr>
+<td>顺序约束</td>
+<td>靠调用 id 对应</td>
+<td>必须紧跟对应的调用声明，位置另有要求</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>另一层是客户端与工具服务之间的协议层</strong>：以 MCP 为例，一次工具调用的结果包含一个内容块数组、一个可选的结构化结果字段、以及一个错误标记；结构化结果的允许取值类型还随规范修订有过变化，以当期规范为准。这一层不会直接进入模型的上下文——宿主读完之后，再把它翻译成模型侧的格式。两层分开看，才不会以为工具返回的东西原样进了模型。</p>
+</li>
+</ul>
+<h3 id="4-2-回填的方式，以及它的两个代价"><a href="#4-2-回填的方式，以及它的两个代价" class="headerlink" title="4.2　回填的方式，以及它的两个代价"></a>4.2　回填的方式，以及它的两个代价</h3><p>回填本身很朴素：拼成一条消息、追加到历史末尾、重新发起请求。朴素之外有两个代价，而且两个都在 1.3 那条约束的下游。</p>
+<p>第一个是<strong>长度会累积</strong>。历史每轮都要重发，所以工具结果不是付一次成本，而是付每一轮。一个设计得不好的长结果，代价会随着循环轮次继续放大——这是“结果要归一化”最实际的理由。</p>
+<p>第二个是<strong>位置有约束</strong>。并行调用的多条结果通常要放在同一条消息里，位置也有明确规定；把它们拆成多条消息，轻则被拒绝，重则会明显削弱模型后续使用并行调用的倾向——因为它在历史里看到的模式就是“一条结果一条消息”。</p>
+<h3 id="4-3-失败也要显式"><a href="#4-3-失败也要显式" class="headerlink" title="4.3　失败也要显式"></a>4.3　失败也要显式</h3><p>失败必须是一种正常结果，而不是异常路径。这里有一个具体的做法值得照做：用显式的标记字段区分“执行成功但结果为空”和“执行失败”。以订单为例，“查到了订单，但没有物流记录”和“查询本身失败”是两件该采取相反行动的事：前者应该换查询条件或者直接告诉用户没有数据，后者应该改参数或者放弃这个工具。两者用同一段文本表达时，模型只能猜。</p>
+<p>错误文案也要按“模型怎么用”来写。<code>错误码 400</code> 提供不了任何行动信息，<code>缺少 order_id，或订单号格式应为 ORD- 开头</code> 能直接告诉它该怎么改。文案的读者不是人，是下一轮的模型。</p>
+<h3 id="4-4-结果太长时"><a href="#4-4-结果太长时" class="headerlink" title="4.4　结果太长时"></a>4.4　结果太长时</h3><p>订单的例子再往前一步：一个订单可能有几百条物流记录。结果太长时有一组常见做法，各有代价：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>具体做什么</th>
+<th>主要代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>截断并显式标注</td>
+<td>只保留前若干条，并明确告知还有多少条未展示</td>
+<td>模型可能基于不完整数据下结论</td>
+</tr>
+<tr>
+<td>分页</td>
+<td>把翻页参数暴露成工具的输入，由模型自己决定下一页</td>
+<td>多消耗一轮往返</td>
+</tr>
+<tr>
+<td>只回传需要的字段</td>
+<td>在工具内部裁剪，不把上游响应的原始结构整个塞回去</td>
+<td>需要提前知道模型需要哪些字段</td>
+</tr>
+<tr>
+<td>摘要</td>
+<td>先用一次模型调用把长结果压缩</td>
+<td>可能丢失细节、发生语义偏移，且多一次调用</td>
+</tr>
+<tr>
+<td>外部化</td>
+<td>把完整结果存到文件或对象存储，只回传引用与摘要</td>
+<td>模型需要有能力按引用再取回一次</td>
+</tr>
+</tbody></table>
+<p>这张表里只有一条是硬要求：<strong>截断必须显式告知</strong>。静默截断最危险的地方在于，模型会认为自己看到了全部数据，然后基于这个错误前提给出确定性的结论——它不会说“数据可能不全”，因为它不知道。反过来，显式标注“以下为前 20 条，共 348 条，可用 offset 继续”，就把一个不完整的结果变成了可用的信息。</p>
+<p>到这里，一次调用的四段路走完了。但模型一次要求的不止一条时，这四段路要同时走好几条。</p>
+<h2 id="05、一批调用：串行还是并行"><a href="#05、一批调用：串行还是并行" class="headerlink" title="05、一批调用：串行还是并行"></a>05、一批调用：串行还是并行</h2><p><img src="/./%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/fig3-multi.png"></p>
+<h3 id="5-1-串行：依赖天然正确"><a href="#5-1-串行：依赖天然正确" class="headerlink" title="5.1　串行：依赖天然正确"></a>5.1　串行：依赖天然正确</h3><p>串行是最朴素的形态：执行一条、把结果回填、让模型决定下一步。它的轮次多、延迟高，因为每一轮都是一次完整的模型往返，而工具执行的收益要等到下一次往返才能被利用。代价换来的是天然正确——依赖关系永远不会出错，因为每一步都是基于上一步的结果规划的。</p>
+<h3 id="5-2-并行：省下的是等待时间"><a href="#5-2-并行：省下的是等待时间" class="headerlink" title="5.2　并行：省下的是等待时间"></a>5.2　并行：省下的是等待时间</h3><p>并行把一轮里的多条调用同时发出去，工具执行时间从相加变成取最大值，是把“等三次”压成“等一次”最直接的办法。代价落在两处。</p>
+<p>一处是<strong>结果必须一起回传</strong>。并行批次里的每一条都要有结果，包括失败的；把同一批的结果拆开回传，会被拒绝或者削弱后续的并行行为。另一处是<strong>适用范围的限制</strong>：并行只对彼此独立的调用安全，而且不同平台对并行的支持条件并不相同——有的允许关闭并行，有的在同时启用平台自带工具时会限制函数调用的并行。</p>
+<h3 id="5-3-依赖：模型的规划里没有执行顺序"><a href="#5-3-依赖：模型的规划里没有执行顺序" class="headerlink" title="5.3　依赖：模型的规划里没有执行顺序"></a>5.3　依赖：模型的规划里没有执行顺序</h3><p>并行最实际的麻烦是依赖。模型在给出调用时是在一次性生成文本，它并不“知道”这些调用会被怎样调度，也不会给它们排序。所以它完全可能在同一批里同时发出 <code>get_order_status</code> 和 <code>cancel_order</code>——而取消订单是需要先知道订单状态的。</p>
+<p>应用侧有两种处理方式。一是串行执行整个批次，按批次内的顺序逐条做；如果前置失败，把后面的标记为未执行。这里有一个容易漏的细节：<strong>“未执行”也必须作为结果回传</strong>（4.3 那条原则的应用），否则模型会以为那些调用已经跑过，基于不存在的结果继续推理。二是提前识别依赖并据此排序，但这要求应用真的理解工具之间的因果关系，工具一多就难以维护。相对务实的做法是在描述与系统提示两侧同时收口：描述里写清前置条件，提示里明确“只把彼此独立的调用放进同一批”。</p>
+<p>四段路能走通，不等于能走稳。接下来按段看它们各自会怎么坏。</p>
+<h2 id="06、四段各自会怎么坏"><a href="#06、四段各自会怎么坏" class="headerlink" title="06、四段各自会怎么坏"></a>06、四段各自会怎么坏</h2><table>
+<thead>
+<tr>
+<th>段</th>
+<th>会怎么坏</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>决定</td>
+<td>选错工具、参数编造</td>
+<td>靠描述与 schema 治理；剩下的由放行段拦住</td>
+</tr>
+<tr>
+<td>放行</td>
+<td>越权调用被放过去；内部异常抛穿循环</td>
+<td>最小权限凭据；授权判断只在运行时做；错误分类后决定回传与否</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>卡住不动；重试放大故障；同一次意图产生两次副作用</td>
+<td>分层超时；只对幂等操作自动重试；写操作要求幂等键</td>
+</tr>
+<tr>
+<td>回填</td>
+<td>静默截断；把失败和空结果混为一谈</td>
+<td>截断显式告知；用标记字段区分</td>
+</tr>
+<tr>
+<td>横切</td>
+<td>出问题查不出坏在哪一段</td>
+<td>每次调用作为一个可观测单元，串成一条链路</td>
+</tr>
+</tbody></table>
+<p>异常分类已经在 3.4 讲过，它属于放行段，表里只占半格。下面展开三处最容易被忽略的。</p>
+<h3 id="6-1-执行段：超时、重试、幂等是同一个问题的三个面"><a href="#6-1-执行段：超时、重试、幂等是同一个问题的三个面" class="headerlink" title="6.1　执行段：超时、重试、幂等是同一个问题的三个面"></a>6.1　执行段：超时、重试、幂等是同一个问题的三个面</h3><p>超时要有层次：单次工具的超时、单轮处理的超时、整个任务的时间预算。只设一层的话，一次卡住的调用会把整个循环拖住，而模型那边还在等一个可能永远不会来的结果。</p>
+<p>超时之后不要抛异常，而要把它当成一种结果回传——但回传的内容要能阻止模型做出错误的补救。如果只回“连接超时”，模型很可能就再调一次；回“该操作在等待上限内未返回，可能已经生效，请勿重复提交”，它才会停下来。</p>
+<p>这就接到幂等。工具调用在现实里是“至少一次”的语义，原因有两个：超时之后调用可能已经在下游生效了，只是响应没回来；失败重试本身也会重发。所以写操作必须能承受同一个调用重复到达。常见做法是让调用方生成一个稳定的幂等键随参数传入，由被调方按这个键去重——模型可以重复提出同一个意图，但只应该产生一次副作用。</p>
+<p>读和写的差别在这里最明显。<code>get_order_status</code> 超时可以自动重试，因为它没有副作用；<code>cancel_order</code> 超时不能重试，因为你不知道那次取消生效没有，重试可能变成第二次取消，或者在下游产生一条互相矛盾的记录。<strong>重试是执行器按幂等性判断决定的动作，不能被提示词诱导，也不能由模型发起。</strong></p>
+<h3 id="6-2-放行段：权限与人工确认"><a href="#6-2-放行段：权限与人工确认" class="headerlink" title="6.2　放行段：权限与人工确认"></a>6.2　放行段：权限与人工确认</h3><p>凭据要最小化，并且按调用主体隔离，而不是让一组工具共用一个高权限账号。授权判断只能在运行时做：模型提出的调用是一个<strong>提议</strong>，不是一个已获授权的动作（这也是 2.2 里那条“不要用描述代替授权”的工程落点）。</p>
+<p>高风险动作还需要人工确认。MCP 规范在这里给得比较明确：工具调用应当始终有人可以拒绝，应用应当明确展示哪些工具暴露给了模型、在调用时给出可视提示、并对敏感操作弹出确认。同一份规范的客户端侧建议里还包含几条与本节直接相关的——在把工具结果传给模型之前先做校验、为工具调用实现超时、以及记录工具调用用于审计；规范也建议把调用输入先展示给用户，理由是防止数据被恶意或意外地外发。这些不是可选的美化，而是这套机制里唯一能兜住“模型被外部内容操纵”的一层。回到订单的例子：<code>get_order_status</code> 可以静默执行，<code>cancel_order</code> 应该弹出确认。</p>
+<h3 id="6-3-横切：日志与-Trace-要先能指认坏在哪一段"><a href="#6-3-横切：日志与-Trace-要先能指认坏在哪一段" class="headerlink" title="6.3　横切：日志与 Trace 要先能指认坏在哪一段"></a>6.3　横切：日志与 Trace 要先能指认坏在哪一段</h3><p>一次工具调用应该是一个可观测单元：工具名、参数摘要、耗时、结果大小与状态、错误分类，以及它属于哪个会话、哪一轮、哪个主体。关键是把这次调用与同属一轮的模型请求挂在同一条链路上——否则你只能看到“某次调用慢了”，看不出是它在拖慢整轮，还是整轮里其他环节的问题。上一节那张表的分法在这里正好用得上：先定位是哪一段坏了，再去看那一段的日志。</p>
+<p>参数与结果里经常混着个人信息与凭据。日志需要的是摘要与指纹，不是原文：记录字段名与长度足够定位问题，记录完整参数值通常只是给自己制造合规负担。</p>
+<p>四段路走稳之后，剩下的事就是把它循环起来。</p>
+<h2 id="07、循环起来：Tool-与-Agent-Loop"><a href="#07、循环起来：Tool-与-Agent-Loop" class="headerlink" title="07、循环起来：Tool 与 Agent Loop"></a>07、循环起来：Tool 与 Agent Loop</h2><h3 id="7-1-循环的形状"><a href="#7-1-循环的形状" class="headerlink" title="7.1　循环的形状"></a>7.1　循环的形状</h3><p>把一次调用放进更大的循环里，四段路就变成了循环体的一圈：</p>
+<pre><code class="language-text">理解
+↓
+规划
+↓
+Tool Call
+↓
+执行
+↓
+观察 Tool Result
+↓
+继续规划
+</code></pre>
+<p><img src="/./%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/fig4-loop.png"></p>
+<p>这个形状不新鲜——ReAct 在 2022 年就把“推理与行动交替”固定成了这种结构，今天的工具调用机制只是把其中“行动”那一步从自然语言约定升级成了协议级的结构化声明。</p>
+<p>循环里有两个特征需要留意。一是<strong>每一圈都是一次完整的模型请求</strong>，而由于历史逐轮累加，上下文长度、延迟和成本都随轮次单调增长。二是<strong>循环体本身没有内建的退出机制</strong>：协议不限制轮次，模型也不会因为“跑太久了”而主动停下，它只会继续规划。</p>
+<h3 id="7-2-停止条件由应用划"><a href="#7-2-停止条件由应用划" class="headerlink" title="7.2　停止条件由应用划"></a>7.2　停止条件由应用划</h3><p>既然循环不负责停止，停止就只能是应用侧的策略：模型不再发起调用（自然结束）、达到轮次上限、达到时间或成本预算、或者需要人工确认而挂起等待。这四个条件里只有第一个是“自然”的，其余三个都是应用主动划的线。</p>
+<h3 id="7-3-四种失控模式"><a href="#7-3-四种失控模式" class="headerlink" title="7.3　四种失控模式"></a>7.3　四种失控模式</h3><p>实践中见到的失控大多落在这四种里：反复调用同一个工具、拿着同一批参数拿到同一个结果；对不可自愈的错误反复重试，比如下游已经限流，模型还换着参数继续撞（3.4 分类错误就会直接导致这一种）；上下文随轮次持续膨胀，直到触到窗口上限或成本失控；以及工具越调越多但目标悄悄漂移，最终交付的东西和用户最初要的东西已经不是一回事。</p>
+<p>对应的控制手段都不复杂：轮次与预算上限、对相同调用做结果去重或缓存、把连续失败的工具在后续轮次里降级或禁用、把“已经做过什么”显式写进上下文而不是指望模型从历史里自己推断，以及在写操作前留一个人工介入点。这些手段全部属于运行时，不属于提示词。</p>
+<h2 id="08、小结"><a href="#08、小结" class="headerlink" title="08、小结"></a>08、小结</h2><p>模型交出的始终只是一份提议。它之后要过三道关口：放行决定这份提议允不允许发生，执行把它变成对真实系统的访问，回填决定结果以什么形态回到上下文。加上模型自己的决定，一共四段；四段里只有第一段发生在模型侧。</p>
+<p>按关口切而不是按组件列职责，好处是每道关口都对应一个明确的问题，答错的那一段就是故障发生的地方。参数校验要分三层，因为形状层回传给模型就能自愈，而语义层与授权层回传说明之后必须停止重试。一条错误该不该让模型看见，标准只有一条：它看到之后有没有可能做出正确的下一步。</p>
+<p>回填这一段有两个硬约束，都来自“历史每轮重发”：截断必须显式告知，否则模型会把不完整当完整；并行批次的结果必须一起回传，包括未执行的那些。而结果的长度不是一次性成本，是每一轮都要付的成本。</p>
+<p>最后，一次调用能走稳，靠的是执行段把超时、重试、幂等当成同一件事来设计——读工具可以重试，写工具不行，这个区别只能由执行器按幂等性判断，不能交给提示词。而循环本身不会停：轮次、预算、人工介入点，都要由应用提前划出来。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
