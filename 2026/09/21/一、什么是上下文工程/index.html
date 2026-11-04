@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>一、什么是上下文工程 | 玲洲月</title>
+  <meta name="keywords" content=" LLM , Agent , Context ">
+  <meta name="description" content="一、什么是上下文工程 | 玲洲月">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://header-files.github.io/about/index.html">
+<meta property="og:site_name" content="玲洲月">
+<meta property="og:description" content="关于本网站本网站是“玲洲月”的个人站，主要用于分享本人的作品以及记录本人的学习感悟、遇到的问题等，仅做交流学习及个人记录用。 到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages，主题 3-hexo 已经在GitHub上开源。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-08T08:58:06.000Z">
+<meta property="article:modified_time" content="2026-09-20T10:41:05.128Z">
+<meta property="article:author" content="玲洲月">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.png"/>
+</a>
+<div class="author">
+    <span>玲洲月</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/header-files"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(30)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="从LLM到Agent">
+            <i class="fold iconfont icon-right"></i>
+            从LLM到Agent
+            <small>(30)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Agent简介">
+            
+            Agent简介
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;LLM简介">
+            
+            LLM简介
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;大模型API">
+            
+            大模型API
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Prompt-Engineering">
+            
+            Prompt-Engineering
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">
+            
+            Context-Engineering
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;RAG">
+            
+            RAG
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;Tool/MCP">
+            
+            Tool/MCP
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="从LLM到Agent&lt;---&gt;SKILL">
+            
+            SKILL
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="30">
+<input type="hidden" id="yelog_site_word_count" value="168k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Agent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>coding实战</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Context</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>LLM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MCP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Prompt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RAG</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SKILL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Tool</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%BA%8C%E3%80%81SKILL%E7%9A%84%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="二、SKILL的原理">二、SKILL的原理</span>
+            <span class="post-date" title="2026-09-30 20:30:40">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent SKILL "
+           href="/2026/09/30/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFSKILL/"
+           data-tag="LLM,SKILL"
+           data-author="" >
+            <span class="post-title" title="一、什么是SKILL">一、什么是SKILL</span>
+            <span class="post-date" title="2026-09-30 15:22:48">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/30/%E5%9B%9B%E3%80%81MCP%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="四、MCP底层原理">四、MCP底层原理</span>
+            <span class="post-date" title="2026-09-30 09:58:10">2026/09/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%89%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMCP/"
+           data-tag="LLM,MCP"
+           data-author="" >
+            <span class="post-title" title="三、什么是MCP">三、什么是MCP</span>
+            <span class="post-date" title="2026-09-29 20:15:19">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%BA%8C%E3%80%81Tool-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%93%BE%E8%B7%AF/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="二、Tool 的执行链路">二、Tool 的执行链路</span>
+            <span class="post-date" title="2026-09-29 13:13:28">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Tool/MCP "
+           href="/2026/09/29/%E4%B8%80%E3%80%81Function-Calling-%E4%B8%8E-Tool/"
+           data-tag="LLM,Tool"
+           data-author="" >
+            <span class="post-title" title="一、Function Calling 与 Tool">一、Function Calling 与 Tool</span>
+            <span class="post-date" title="2026-09-29 10:14:17">2026/09/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93RAG/"
+           data-tag="LLM,RAG,coding实战"
+           data-author="" >
+            <span class="post-title" title="三、实现一个简易RAG">三、实现一个简易RAG</span>
+            <span class="post-date" title="2026-09-28 19:26:47">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%BA%8C%E3%80%81RAG%E5%85%A8%E9%93%BE%E8%B7%AF%E6%8B%86%E8%A7%A3/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="二、RAG全链路拆解">二、RAG全链路拆解</span>
+            <span class="post-date" title="2026-09-28 13:52:00">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent RAG "
+           href="/2026/09/28/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRAG/"
+           data-tag="LLM,RAG"
+           data-author="" >
+            <span class="post-title" title="一、什么是RAG">一、什么是RAG</span>
+            <span class="post-date" title="2026-09-28 09:46:57">2026/09/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/24/%E4%BA%94%E3%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8D%8F%E8%AE%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0/"
+           data-tag="LLM,Agent,coding实战"
+           data-author="" >
+            <span class="post-title" title="五、大模型协议客户端实现">五、大模型协议客户端实现</span>
+            <span class="post-date" title="2026-09-24 14:16:42">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E4%BA%94%E3%80%81Agent%E4%B8%AD%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="五、Agent中的上下文工程">五、Agent中的上下文工程</span>
+            <span class="post-date" title="2026-09-22 14:12:56">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/22/%E5%9B%9B%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="四、上下文管理与优化">四、上下文管理与优化</span>
+            <span class="post-date" title="2026-09-22 10:34:40">2026/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%89%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%BB%84%E8%A3%85/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="三、上下文组装">三、上下文组装</span>
+            <span class="post-date" title="2026-09-21 20:11:30">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%BA%8C%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="二、上下文里有什么">二、上下文里有什么</span>
+            <span class="post-date" title="2026-09-21 15:05:52">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Context-Engineering "
+           href="/2026/09/21/%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"
+           data-tag="LLM,Agent,Context"
+           data-author="" >
+            <span class="post-title" title="一、什么是上下文工程">一、什么是上下文工程</span>
+            <span class="post-date" title="2026-09-21 10:38:56">2026/09/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/20/%E5%9B%9B%E3%80%81Prompt-%E7%9A%84%E8%AF%84%E4%BC%B0/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="四、Prompt 的评估">四、Prompt 的评估</span>
+            <span class="post-date" title="2026-09-20 11:15:30">2026/09/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%B8%89%E3%80%81Prompt-%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="三、Prompt 的工程化">三、Prompt 的工程化</span>
+            <span class="post-date" title="2026-09-19 16:56:12">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/19/%E4%BA%8C%E3%80%81Prompt-%E7%9A%84%E6%8A%80%E5%B7%A7/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="二、Prompt 的技巧">二、Prompt 的技巧</span>
+            <span class="post-date" title="2026-09-19 10:27:46">2026/09/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Prompt-Engineering "
+           href="/2026/09/18/%E4%B8%80%E3%80%81Prompt-%E6%98%AF%E4%BB%80%E4%B9%88/"
+           data-tag="LLM,Agent,Prompt"
+           data-author="" >
+            <span class="post-title" title="一、Prompt 是什么">一、Prompt 是什么</span>
+            <span class="post-date" title="2026-09-18 22:24:20">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/18/%E5%9B%9B%E3%80%81Anthropic-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、Anthropic API">四、Anthropic API</span>
+            <span class="post-date" title="2026-09-18 14:26:46">2026/09/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%B8%89%E3%80%81Responses-API/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Responses API">三、Responses API</span>
+            <span class="post-date" title="2026-09-14 16:31:53">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/14/%E4%BA%8C%E3%80%81Chat-Completions/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、Chat Completions">二、Chat Completions</span>
+            <span class="post-date" title="2026-09-14 10:32:56">2026/09/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent 大模型API "
+           href="/2026/09/13/%E4%B8%80%E3%80%81LLM-API%E7%AE%80%E4%BB%8B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM API简介">一、LLM API简介</span>
+            <span class="post-date" title="2026-09-13 15:47:40">2026/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/11/%E5%9B%9B%E3%80%81LLM-%E8%A7%A3%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E6%97%8B%E9%92%AE/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="四、LLM 解码的几个旋钮">四、LLM 解码的几个旋钮</span>
+            <span class="post-date" title="2026-09-11 14:27:06">2026/09/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/10/%E4%B8%89%E3%80%81LLM-%E7%9A%84%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、LLM 的训练与推理">三、LLM 的训练与推理</span>
+            <span class="post-date" title="2026-09-10 11:07:06">2026/09/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/09/%E4%BA%8C%E3%80%81LLM-%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B1%80%E9%99%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、LLM 能力与局限">二、LLM 能力与局限</span>
+            <span class="post-date" title="2026-09-09 10:39:09">2026/09/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent LLM简介 "
+           href="/2026/09/08/%E4%B8%80%E3%80%81LLM-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、LLM 基础原理">一、LLM 基础原理</span>
+            <span class="post-date" title="2026-09-08 19:23:46">2026/09/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/07/%E4%B8%89%E3%80%81Agent-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="三、Agent 的基本组成">三、Agent 的基本组成</span>
+            <span class="post-date" title="2026-09-07 16:05:01">2026/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/05/%E4%BA%8C%E3%80%81%E4%BB%8ELLM%E5%88%B0Agent%E7%9A%84%E6%BC%94%E8%BF%9B/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="二、从LLM到Agent的演进">二、从LLM到Agent的演进</span>
+            <span class="post-date" title="2026-09-05 10:59:47">2026/09/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 从LLM到Agent Agent简介 "
+           href="/2026/09/04/%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%A0%94%E7%A9%B6-Agent/"
+           data-tag="LLM,Agent"
+           data-author="" >
+            <span class="post-title" title="一、为什么要研究 Agent">一、为什么要研究 Agent</span>
+            <span class="post-date" title="2026-09-04 16:23:46">2026/09/04</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-一、什么是上下文工程" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">一、什么是上下文工程</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="从LLM到Agent">从LLM到Agent</a> > 
+            
+            <a  data-rel="从LLM到Agent&lt;---&gt;Context-Engineering">Context-Engineering</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">LLM</a>
+            
+            <a class="color1">Agent</a>
+            
+            <a class="color3">Context</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-09-23 10:39:27'>2026-09-21 10:38</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E3%80%81%E4%BB%8E-Prompt-Engineering-%E5%88%B0-Context-Engineering"><span class="toc-text">01、从 Prompt Engineering 到 Context Engineering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02%E3%80%81Context-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">02、Context 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03%E3%80%81Context-Engineering-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">03、Context Engineering 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04%E3%80%81Context-%E4%B8%8E-Prompt-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">04、Context 与 Prompt 的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88-Agent-%E9%9C%80%E8%A6%81-Context-Engineering"><span class="toc-text">05、为什么 Agent 需要 Context Engineering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06%E3%80%81Context-Window-%E4%B8%8E%E6%9C%89%E6%95%88%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">06、Context Window 与有效上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07%E3%80%81%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A%E8%BF%87%E9%95%BF%E3%80%81%E5%99%AA%E5%A3%B0%E3%80%81%E5%86%B2%E7%AA%81"><span class="toc-text">07、长上下文的三个问题：过长、噪声、冲突</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>同一个大模型，换个上下文，表现可以判若两“人”。2023 年我们拼命打磨提示词的措辞，2025 年之后，真正拉开差距的，是谁能把“模型在每一步能看到什么”设计好。这门手艺有一个新名字：上下文工程（Context Engineering）。</p>
+</blockquote>
+<h2 id="01、从-Prompt-Engineering-到-Context-Engineering"><a href="#01、从-Prompt-Engineering-到-Context-Engineering" class="headerlink" title="01、从 Prompt Engineering 到 Context Engineering"></a>01、从 Prompt Engineering 到 Context Engineering</h2><p>大模型应用早期，工程工作的核心确实是“写提示词”。想让模型输出更好的结果，就去琢磨措辞：加一句 “Let’s think step by step”，前面垫一句 “你是一位资深专家”，给几个 few-shot 示例，甚至有人总结出各种“咒语”。这些技巧有效，但脆弱——很多措辞层面的窍门，换一代模型就失效了，行业里戏称这是“提示词考古学”。</p>
+<p>2025 年年中，Context Engineering 这个说法开始快速流行。2025 年 6 月，Shopify CEO Tobi Lütke 发推表示，他更喜欢 “context engineering” 这个说法，因为它“更准确地描述了核心技能：为任务提供全部上下文，让 LLM 有可能完成任务”。几天后，Andrej Karpathy 跟进写道：</p>
+<blockquote>
+<p>“People associate prompts with short task descriptions you’d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window with just the right information for the next step.”</p>
+</blockquote>
+<p>大意是：人们把 prompt 理解成日常给模型的一小段任务描述，但在每个工业级 LLM 应用里，真正的工作是“用恰到好处的信息填满上下文窗口”这门精细的艺术与科学。Simon Willison 也指出，“prompt engineering” 在大众语境里已经退化成“跟聊天机器人打字聊天”，需要一个新词把其中真正不平凡的工作捞回来。</p>
+<p>这不是一次简单的改名，而是一次“升级”：工作的重心，从一条消息的措辞，迁移到了“模型能看到的一切东西”的架构设计上。Anthropic 在其工程博客中把 context engineering 定义为 prompt engineering 的自然演进——提示工程关注“怎么写好一段提示”，上下文工程关注“在模型推理的每一轮，如何策划并维护最优的信息集合”。</p>
+<h2 id="02、Context-是什么"><a href="#02、Context-是什么" class="headerlink" title="02、Context 是什么"></a>02、Context 是什么</h2><p>先给一个可操作的定义：<strong>Context 是模型在某次推理时能看到的全部 token 的集合。</strong></p>
+<p>这里的关键词是“全部”和“那一次”。很多人把 context 理解成“用户输入的那段话”，这远远不够。一次典型的 LLM 调用中，进入上下文的内容至少包括：</p>
+<ul>
+<li>系统提示（System Prompt）：角色、规则、输出格式等固定指令；</li>
+<li>工具定义（Tools）：工具名称、描述、参数 schema，以及通过 MCP 等机制提供给模型的工具信息；</li>
+<li>检索到的资料：RAG 命中的文档片段、数据库查询结果；</li>
+<li>对话历史：之前所有轮次的用户消息、模型回复；</li>
+<li>工具输出：上一步工具调用返回的 JSON、代码执行结果、网页内容；</li>
+<li>长期记忆：从外部存储注入的摘要或偏好信息；</li>
+<li>用户当前输入：本轮的问题和附件。</li>
+</ul>
+<p>理解 context 还有一个更根本的角度：从 API 调用的角度看，模型不会自动继承上一轮调用的对话状态；如果上一轮的信息没有被重新放入当前请求的上下文，当前这次推理就无法直接利用这些信息。它不是“知道得少”，而是“除了上下文，什么都不知道”。这就决定了：模型能力决定了它“能做什么”，上下文很大程度决定了它“这一次能做到什么”。</p>
+<p>另外要区分两个容易混淆的概念：context（这次调用里实际放进去的信息）是内容，context window（上下文窗口，能容纳的最大 token 数）是容器。容器大小是模型的技术规格，容器里装什么，才是工程问题。</p>
+<h2 id="03、Context-Engineering-是什么"><a href="#03、Context-Engineering-是什么" class="headerlink" title="03、Context Engineering 是什么"></a>03、Context Engineering 是什么</h2><p>有了 context 的定义，context engineering 可以概括为一句话：<strong>在每一次推理之前，决定哪些信息进入上下文、以什么形式进入、以什么顺序摆放，并持续维护这个信息环境的系统化工程。</strong></p>
+<p>几个有代表性的定义可以互相印证。Karpathy 强调“为下一步填入恰到好处的信息”——注意“下一步”，说明这是一个逐步推进的过程；LangChain 给过一个流传很广的类比：LLM 是 CPU，上下文窗口是 RAM，上下文工程扮演的是操作系统的角色——决定什么时候把哪些数据加载进内存，什么时候换出去；Anthropic 则称它是“在不断演变的信息宇宙中，策划哪些内容进入有限上下文窗口的艺术与科学”。</p>
+<p>从这个定义出发，上下文工程包含四类基本操作（LangChain 归纳为 Write、Select、Compress、Isolate 四个支柱）：</p>
+<ol>
+<li><strong>写入（Write）</strong>：把状态外置。把未来可能需要的信息写到上下文之外，例如文件、笔记、数据库或状态存储，使其可以在后续按需重新加载，而不是始终占据当前上下文；</li>
+<li><strong>选择（Select）</strong>：精确检索。基于相关性、时效、权限过滤，决定哪些外部信息值得进入本轮上下文；</li>
+<li><strong>压缩（Compress）</strong>：历史太长时做摘要，只保留关键决策、未完成事项和核心发现，丢弃冗余的工具输出；</li>
+<li><strong>隔离（Isolate）</strong>：把不同子任务分给不同的上下文（如子agent），各自只看到完成自己任务所需的最小信息。</li>
+</ol>
+<p>它和“写一段好提示词”的最大区别在于<strong>迭代性</strong>：提示词是一次性写就的静态产物，而上下文是每一轮推理都要重新决策的动态配置——智能体每跑一步，环境就产生新的信息，哪些保留、哪些丢弃、哪些外置，全部要在下一轮之前重新审视。这也意味着，上下文工程本质上是一个系统设计问题，而不是文案问题。</p>
+<h2 id="04、Context-与-Prompt-的关系"><a href="#04、Context-与-Prompt-的关系" class="headerlink" title="04、Context 与 Prompt 的关系"></a>04、Context 与 Prompt 的关系</h2><p>Prompt 和 Context 不是对立关系，而是包含关系：<strong>Prompt 是 Context 的一个组成部分</strong>。</p>
+<p>具体来说，系统提示词是上下文里最稳定、优先级最高的一块，few-shot 示例、用户消息也都属于上下文。Prompt engineering 解决的是“这一小块怎么写得好”；Context engineering 解决的是“整块内存怎么组织”。用前面 CPU&#x2F;RAM 的类比：提示词工程像是优化一条指令的写法，上下文工程像是设计整个内存管理体系。</p>
+<p>两者的分野可以用一个客服场景说清楚。只做提示词工程，你可以写“当客户询问物流时，按以下流程解释查询状态的方法”——客户问一句通用问题没问题；但客户报出一个具体订单号时，模型给不出实时状态，因为订单数据根本不在上下文里。上下文工程的解法则完全不同：接入订单系统，检测到订单号时自动调用 API，把实时物流数据注入上下文，再配合提示词规定回复格式。提示词工程设计“响应的逻辑”，上下文工程设计“信息的环境”。</p>
+<p>所以“上下文工程取代提示词工程”这个说法并不准确。提示词工程没有死，它降级成了更大系统里的一部分——一个运行良好的 Agent，依然需要精心打磨的系统提示词，只不过决定成败的变量变多了。</p>
+<h2 id="05、为什么-Agent-需要-Context-Engineering"><a href="#05、为什么-Agent-需要-Context-Engineering" class="headerlink" title="05、为什么 Agent 需要 Context Engineering"></a>05、为什么 Agent 需要 Context Engineering</h2><p>如果只是单轮问答，提示词工程勉强够用。但 Agent 改变了游戏规则。Anthropic 对 Agent 有一个简洁的定义：<strong>在循环中自主使用工具的 LLM</strong>。正是“循环”和“工具”这两个词，让上下文从“背景信息”变成了系统的核心问题。</p>
+<p>第一，<strong>信息量爆炸</strong>。Agent 每调用一次工具，工具输出就进入上下文；每完成一轮对话，历史就变长。跑几十步之后，一次调用的上下文轻松达到几十甚至上百 K token，而其中“提示词”可能只占很小一部分。Karpathy 说过，在工业级应用里提示词大概只占问题的很小比例，其余全是上下文管理。</p>
+<p>第二，<strong>无状态叠加长时程</strong>。模型本身不记得任何事，Agent 却经常要执行跨越几十分钟甚至数小时的长任务。第 47 步的决策质量，取决于第 1 到 46 步的“残余物”有没有被恰当地保留、压缩或清除。Anthropic 针对需要长期运行的任务给出三个经典手段：压缩（compaction，接近窗口上限时总结历史并开新窗口）、结构化笔记（把关键状态写到外部记事本，随时取回）、子agent架构（每个子任务在干净的独立上下文中完成，只给主agent返回精炼摘要）。</p>
+<p>第三，<strong>上下文会自我污染</strong>。Agent 循环中产生的错误信息，如果留在上下文里，会被后续步骤当作事实反复引用；无关信息堆积，会稀释模型对关键信号的注意力。LangChain 总结过四类典型失败：上下文投毒（错误信息传播）、上下文分心（大量无关数据淹没关键证据）、上下文混淆（冗余信息遮蔽要点）、上下文冲突（相互矛盾的指令并存）。这些问题在单轮应用中同样存在，但在 Agent 的多轮循环中会不断累积，并进一步影响后续决策。</p>
+<p>一句话总结：<strong>Chatbot 时代，我们更关注如何写好 Prompt；Agent 时代，我们还必须关注 Prompt 之外的整个 Context。</strong></p>
+<h2 id="06、Context-Window-与有效上下文"><a href="#06、Context-Window-与有效上下文" class="headerlink" title="06、Context Window 与有效上下文"></a>06、Context Window 与有效上下文</h2><p>很多人有一个直觉假设：上下文窗口越大，问题越小——200K、1M token 的窗口不是都出来了吗，还需要什么工程？</p>
+<p>这里要引入一个关键区分：<strong>窗口大小（context window）是容器的标称容量，有效上下文（effective context）是模型在这个容器里真正能可靠利用的部分</strong>。</p>
+<p>早在 2023 年，论文 “Lost in the Middle” 就发现：当相关信息位于长上下文的开头或结尾时，模型表现较好；一旦被埋在中间，多文档问答的性能显著下降。2025 年 7 月，Chroma 的 “Context Rot” 研究测试了 18 个前沿模型，结论是：<strong>在他们测试的 18 个模型中，都观察到了随着输入长度增加而出现的性能退化</strong>，而且退化往往出现在远未达到标称上限的位置。</p>
+<p>为什么窗口标称很大，有效上下文却打折扣？Anthropic 把根因归结为“注意力预算”：</p>
+<ul>
+<li>Transformer 的注意力机制要求每个 token 与上下文中所有 token 建立两两关系，n 个 token 就是 n² 对关系，长度增长时这种能力被“摊薄”；</li>
+<li>训练数据中短序列远多于长序列，模型对跨越超长距离的依赖本来就经验不足；</li>
+<li>位置编码插值等技术让模型能处理超出训练长度的序列，但代价是位置理解的精度损失。</li>
+</ul>
+<p>这些因素叠加的效果是一个<strong>性能梯度，而非硬性悬崖</strong>：模型在长上下文下依然可用，但信息检索的精度、长程推理的可靠性会随长度下降。换句话说，窗口是“能装下”，有效上下文才是“装下还能用好”。上下文工程的第一性原则由此而来：<strong>把上下文当作一种边际收益递减的稀缺资源，追求的是最小的高信号 token 集合，而不是最大的信息量。</strong></p>
+<h2 id="07、长上下文的三个问题：过长、噪声、冲突"><a href="#07、长上下文的三个问题：过长、噪声、冲突" class="headerlink" title="07、长上下文的三个问题：过长、噪声、冲突"></a>07、长上下文的三个问题：过长、噪声、冲突</h2><p>落到工程实践里，上下文管理的敌人主要就三个。</p>
+<p>**第一个是过长。**上下文太长的危害是复合的：性能上，前面说的 context rot 让检索和长程推理精度下降；成本上，LLM 按 token 计费，Agent 循环每一轮都重发全部历史，早期累积的垃圾信息相当于复利计息；延迟上，更长的输入意味着更慢的响应。治法是压缩与外置——历史做摘要、大块数据放外部、上下文里只留轻量引用（文件路径、查询语句、链接），需要时再通过工具加载。Claude Code 分析大型数据库时，就是让模型写针对性查询、用 head&#x2F;tail 之类命令抽样，而从不把整个数据对象装进上下文。</p>
+<p>**第二个是噪声。**不等于错误，而是“语义上相关但实际无关”的干扰项。检索器命中十个文档、其中只有两个真正相关，那八个就是八份稀释注意力的毒药；一个工具调用返回五千 token 的 JSON，而真正需要的只有三个字段。有研究显示，语义连贯但无关的信息足以大幅拉低模型表现。治法是选择与修剪：检索后重排序、过滤，工具设计上尽量返回精炼结果，工具集本身也要克制——如果人类工程师都说不清该用哪个工具，就别指望模型能分清。</p>
+<p>**第三个是冲突。**上下文里同时存在相互矛盾的信息：系统提示说“输出必须是 JSON”，对话历史里模型已经输出过纯文本并被用户接受；旧版本的文档和新版本的并存；早期一次错误判断留下的结论，被后续步骤继续引用。冲突的危害在于它不报错——模型只是行为变得摇摆、不可预测。治法是隔离与治理：一个模型调用只看到完成当前任务所需的最小上下文，过时的信息要及时清除而不是层层堆积，关键事实外置到单一可信源，而不是散落在对话历史的多个角落。</p>
+<p>这三个问题指向同一个结论：上下文不是越多越好，<strong>“该让模型看到什么、不该看到什么”是每一步都要做的分配决策</strong>。在固定预算下做资源分配，这正是它被称作“工程”而不是“写作”的原因。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本文基于工程实践与公开资料整理。转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 header-files@foxmail.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23licYQYLt8UhfeibI',
+            clientSecret: 'd099c8dcb1765df47e800031f074eead90d4a7ea',
+            repo: 'header-files.github.io',
+            owner: 'header-files',
+            admin: ['header-files'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026-2026 玲洲月
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+        /* 渲染*/
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        if (window.mermaid){
+            window.mermaid = null
+        }
+        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
+            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
+            if (window.mermaid) {
+                mermaid.initialize(mermaidOptions)
+                mermaid.contentLoaded()
+            }
+        })
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
